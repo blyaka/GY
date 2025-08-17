@@ -10,11 +10,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check secrets & Dockerfile
+      - name: Check secrets & paths
         run: |
           test -n "$DOCKERHUB_USERNAME" || (echo "DOCKERHUB_USERNAME is empty" && exit 1)
           test -n "$DOCKERHUB_TOKEN" || (echo "DOCKERHUB_TOKEN is empty" && exit 1)
-          test -f ./Dockerfile || (echo "Dockerfile not found at ./Dockerfile" && ls -la && exit 1)
+          test -f ./shop/Dockerfile || (echo "Dockerfile not found at ./shop/Dockerfile" && ls -la ./shop && exit 1)
 
       - uses: docker/setup-buildx-action@v3
 
@@ -27,8 +27,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: .
-          file: ./Dockerfile
+          context: ./shop
+          file: ./shop/Dockerfile
           push: true
           tags: |
             ${{ env.DOCKERHUB_USERNAME }}/gy-web:latest
