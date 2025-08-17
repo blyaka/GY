@@ -1,0 +1,389 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-family: "Jost", sans-serif;
+    position: relative;
+    background-color: white;
+}
+
+
+.site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 40px;
+    color: white;
+    position: fixed;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 999;
+}
+
+.burger-menu {
+    cursor: pointer;
+}
+
+
+/* OFFCANVAS */
+.offcanvas {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .5);
+    backdrop-filter: blur(2px);
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s ease;
+}
+
+.offcanvas.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.offcanvas-panel {
+    position: absolute;
+    left: 0;
+    top: 0;
+    /* height: 100%; */
+    width: min(86vw, 620px);
+    background: #ffffff;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, .25);
+    transform: translateX(-100%);
+    transition: transform .32s ease;
+    overflow: hidden;
+}
+
+.offcanvas.open .offcanvas-panel {
+    transform: translateX(0);
+}
+
+.offcanvas-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px;
+}
+
+.off-close {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+.off-lang {
+    font-family: "Jost", sans-serif;
+    font-size: 18px;
+    color: #111;
+    text-decoration: none;
+    letter-spacing: .12em;
+}
+
+.off-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 50px 140px;
+}
+
+.off-nav a {
+    font-size: 30px;
+    color: #111;
+    text-decoration: none;
+    letter-spacing: .06em;
+    font-weight: 300;
+}
+
+.off-nav a:hover {
+    opacity: .7;
+}
+
+.off-icons {
+    display: flex;
+    flex-direction: row;
+    gap: 22px;
+    align-items: center;
+    justify-content: end;
+    padding: 40px;
+}
+
+.off-icons img {
+    height: 30px;
+    display: block;
+    opacity: .9;
+}
+
+.off-watermark {
+    position: absolute;
+    left: -140px;
+    top: -300px;
+    width: 1250px;
+    opacity: .2;
+    pointer-events: none;
+}
+
+.off-watermark img {
+    width: 1250px;
+}
+
+
+/* Субпанель оффканваса справа */
+.off-sub {
+  position: absolute;
+  top: 0;
+  left: min(86vw, 620px);         /* ровно после левой панели */
+  width: min(70vw, 520px);
+  height: 100%;
+  background: #fff;
+  /* по умолчанию полностью за правым краем экрана */
+  transform: translateX(calc(100vw + min(86vw, 620px)));
+  transition: transform .3s ease;
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;  
+}
+
+.offcanvas.open .off-sub.open {
+  transform: translateX(0);       /* выезд к краю левой панели */
+  pointer-events: auto;
+}
+
+.off-sub-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 20px;
+    border-bottom: 1px solid #eee;
+    background: linear-gradient(90deg, rgba(0, 0, 0, .06), rgba(0, 0, 0, 0));
+}
+
+.off-sub-back {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+.off-sub-back img {
+    width: 18px;
+    height: 18px;
+}
+
+.off-sub-title {
+    font-size: 18px;
+    letter-spacing: .08em;
+}
+
+.off-sub-body {
+    padding: 20px;
+    overflow: auto;
+}
+
+.off-sub-grid {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: 16px;
+    min-height: 100%;
+}
+
+.off-sub-list {
+    list-style: none;
+    display: grid;
+    gap: 12px;
+    padding: 0;
+    margin: 0;
+}
+
+.off-sub-list a {
+    color: #111;
+    text-decoration: none;
+    letter-spacing: .06em;
+    font-weight: 300;
+}
+
+.off-sub-list a:hover {
+    opacity: .7;
+}
+
+.off-sub-all {
+    justify-self: end;
+    color: #111;
+    text-decoration: none;
+    letter-spacing: .1em;
+    font-size: 12px;
+}
+
+.off-sub-text p {
+    margin: 0 0 12px;
+    line-height: 1.6;
+    color: #333;
+}
+
+.off-sub {
+    pointer-events: none;
+}
+
+.offcanvas.open .off-sub.open {
+    pointer-events: auto;
+}
+
+
+
+
+
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-img {
+    width: 278px;
+    /* height: 76px; */
+}
+
+.lang-switch {
+    font-family: "Jost", sans-serif;
+    font-size: 24px;
+    font-weight: 300;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.lang-switch a {
+    font-family: "Jost", sans-serif;
+    color: white;
+    text-decoration: none;
+}
+
+.lang-switch:hover {
+    opacity: 0.7;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.site-footer {
+    padding: 40px 60px;
+    background-color: black;
+    /* min-height: 735px; */
+    position: relative;
+    overflow: hidden;
+    color: white;
+}
+
+.footer-blocks {
+    display: flex;
+    flex-direction: row;
+    gap: 150px;
+}
+
+.footer-block-customer,
+.footer-block-about {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-block-customer h2,
+.footer-block-about h2 {
+    font-size: 62px;
+    font-weight: 300;
+    margin: 0px 0px 30px 0px;
+}
+
+.customer-links,
+.about-links {
+    display: flex;
+    flex-direction: column;
+    font-size: 34px;
+    font-weight: 200;
+}
+
+.customer-links a,
+.about-links a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-cp-name {
+    font-size: 18px;
+    font-weight: 200;
+    margin-top: 50px;
+}
+
+
+
+.footer-socials {
+    background: #000;
+    color: #fff;
+    padding: 24px 0 12px;
+    text-align: center;
+    position: absolute;
+    bottom: 40px;
+    right: 60px;
+}
+
+.socials-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+}
+
+.social {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .25);
+    transition: transform .18s ease, opacity .18s ease;
+}
+
+.social img {
+    width: 100%;
+    width: 100%;
+    display: block;
+}
+
+.social:hover {
+    transform: translateY(-2px);
+    opacity: .9;
+}
+
+.socials-note {
+    font-family: "Jost", sans-serif;
+    margin: 10px 0 0;
+    font-size: 12px;
+    line-height: 1.3;
+    opacity: .8;
+}
+
+
+.logo-overlay-footer {
+    position: absolute;
+    top: -520px;
+    right: 100px;
+    overflow: hidden;
+}
+
+.logo-overlay-footer img {
+    width: 723px;
+}

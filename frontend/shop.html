@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин</title>
+    <link rel="stylesheet" href="static/css/shop.css">
+    <link rel="stylesheet" href="static/css/_base.css">
+    <link rel="stylesheet" href="static/css/_base-shop.css">
+
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="burger-menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line x1="0" y1="6" x2="25" y2="6" stroke="black" stroke-width="2" />
+                <line x1="0" y1="13" x2="15" y2="13" stroke="black" stroke-width="2" />
+                <line x1="0" y1="20" x2="25" y2="20" stroke="black" stroke-width="2" />
+            </svg>
+        </div>
+
+        <!-- OFFCANVAS MENU -->
+        <div class="offcanvas" id="offcanvas" aria-hidden="true">
+            <div class="offcanvas-panel" role="dialog" aria-modal="true" aria-label="Меню">
+                <div class="offcanvas-top">
+                    <button class="off-close" aria-label="Закрыть">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <line x1="0" y1="6" x2="25" y2="6" stroke="black" stroke-width="2" />
+                            <line x1="0" y1="13" x2="25" y2="13" stroke="black" stroke-width="2" />
+                            <line x1="0" y1="20" x2="25" y2="20" stroke="black" stroke-width="2" />
+                        </svg>
+                    </button>
+                    <a href="#" class="off-lang">ENG</a>
+                </div>
+
+                <nav class="off-nav">
+                    <a href="#" data-sub="shop">МАГАЗИН</a>
+                    <a href="#" data-sub="collections">КОЛЛЕКЦИИ</a>
+                    <a href="#" data-sub="delivery">ДОСТАВКА И ОПЛАТА</a>
+                    <a href="#" data-sub="returns">ВОЗВРАТ И ОБМЕН</a>
+                    <a href="#" data-sub="contacts">КОНТАКТЫ</a>
+                    <a href="#" data-sub="blog">БЛОГ</a>
+                    <a href="#" data-sub="social">НАШИ СОЦСЕТИ</a>
+                    <a href="#" data-sub="about">О НАС</a>
+                </nav>
+
+                <div class="off-icons">
+                    <img src="static/icons/search.svg" alt="Поиск">
+                    <img src="static/icons/bookmark-header.svg" alt="Избранное">
+                    <img src="static/icons/bag.svg" alt="Корзина">
+                    <img src="static/icons/user.svg" alt="Профиль">
+                </div>
+
+                <div class="off-watermark">
+                    <img src="static/images/logo_overlay_black.png" alt="">
+                </div>
+
+            </div>
+
+            <!-- Субпанель справа -->
+            <div class="off-sub" id="offSub" aria-hidden="true">
+                <div class="off-sub-head">
+                    <button class="off-sub-back" type="button" aria-label="Назад">
+                        <img src="static/icons/arrow_back.svg" alt="">
+                    </button>
+                    <div class="off-sub-title" id="offSubTitle"></div>
+                </div>
+                <div class="off-sub-body" id="offSubBody"></div>
+            </div>
+
+            <!-- Шаблоны наполняемого контента -->
+            <template id="tpl-shop">
+                <div class="off-sub-grid">
+                    <ul class="off-sub-list">
+                        <li><a href="#">ФУТБОЛКИ</a></li>
+                        <li><a href="#">ЛОНГСЛИВЫ</a></li>
+                        <li><a href="#">КОМПЛЕКТ СПОРТИВНЫЙ</a></li>
+                        <li><a href="#">ТОЛСТОВКИ (ХУДИ)</a></li>
+                        <li><a href="#">БРЮКИ</a></li>
+                    </ul>
+                    <a class="off-sub-all" href="#">СМОТРЕТЬ ВСЕ</a>
+                </div>
+            </template>
+
+            <template id="tpl-delivery">
+                <div class="off-sub-text">
+                    <p>Доставка по РФ: курьером и в пункты выдачи. Оплата: картой онлайн/при получении.</p>
+                    <a class="off-sub-all" href="#">Подробнее</a>
+                </div>
+            </template>
+
+            <script>
+                (() => {
+                    const offcanvas = document.getElementById('offcanvas');
+                    const closeBtn = offcanvas.querySelector('.off-close');
+
+                    const sub = document.getElementById('offSub');
+                    const subBody = document.getElementById('offSubBody');
+                    const subTitle = document.getElementById('offSubTitle');
+
+                    function openSub(key, title) {
+                        const tpl = document.getElementById('tpl-' + key);
+                        subBody.innerHTML = tpl ? tpl.innerHTML :
+                            '<div class="off-sub-text"><p>Скоро тут будет контент.</p></div>';
+                        subTitle.textContent = title || '';
+                        sub.classList.add('open');
+                    }
+                    function closeSub() { sub.classList.remove('open'); }
+
+                    offcanvas.querySelectorAll('.off-nav a[data-sub]').forEach(a => {
+                        a.addEventListener('click', e => {
+                            e.preventDefault();
+                            openSub(a.dataset.sub, a.textContent.trim());
+                        });
+                    });
+
+                    offcanvas.querySelector('.off-sub-back')?.addEventListener('click', closeSub);
+                    closeBtn?.addEventListener('click', closeSub);
+                    offcanvas.addEventListener('click', (e) => { if (e.target === offcanvas) closeSub(); });
+                })();
+            </script>
+
+
+        </div>
+
+
+        <script>
+            const burger = document.querySelector('.burger-menu');
+            const panel = document.getElementById('offcanvas');
+            const closeBtn = document.querySelector('.off-close');
+
+            function openMenu() {
+                panel.classList.add('open');
+                document.getElementById('offSub')?.classList.remove('open'); // сброс субпанели
+                document.body.style.overflow = 'hidden';
+            }
+            function closeMenu() {
+                panel.classList.remove('open');
+                document.getElementById('offSub')?.classList.remove('open'); // на всякий
+                document.body.style.overflow = '';
+            }
+
+            burger?.addEventListener('click', openMenu);
+            closeBtn?.addEventListener('click', closeMenu);
+            panel?.addEventListener('click', (e) => { if (e.target === panel) closeMenu(); });
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
+        </script>
+
+
+
+
+
+        <div class="logo">
+            <img src="static/images/GY_header_logo_black.svg" alt="Gabriel Yusubov" class="logo-img">
+        </div>
+
+        <div class="lang-switch" id="langSwitch">
+            <a href="">ENG</a>
+        </div>
+    </header>
+
+
+    <div class="status-bar" role="navigation" aria-label="Статус-бар">
+        <div class="sb-inner">
+            <img class="sb-logo" src="static/images/GY.svg" alt="GY">
+            <span class="sb-dot" aria-hidden="true"></span>
+            <a class="sb-link" href="/shop/">МАГАЗИН</a>
+        </div>
+    </div>
+
+
+    <main>
+
+        <div class="serch-container">
+            <h2 class="shop-title">МАГАЗИН</h2>
+
+            <form class="shop-search" role="search">
+                <button class="shop-search-btn" aria-label="Поиск">
+                    <img src="static/icons/search.svg" alt="">
+                </button>
+                <input class="shop-search-input" type="search" placeholder="">
+            </form>
+        </div>
+
+
+        <!-- FILTERS BAR -->
+        <div class="filters-bar" role="region" aria-label="Фильтры каталога">
+            <div class="fb-top">
+                <button class="fb-menu" aria-label="Открыть панель фильтров">
+                    <svg width="38" height="38" viewBox="0 0 18 18" aria-hidden="true" focusable="false">
+                        <rect width="18" height="18" rx="1" fill="#111" />
+                        <path d="M3 5.5H15" stroke="#fff" stroke-width="1.2" stroke-linecap="round" />
+                        <path d="M5 9H13" stroke="#fff" stroke-width="1.2" stroke-linecap="round" />
+                        <path d="M6.5 12.5H11.5" stroke="#fff" stroke-width="1.2" stroke-linecap="round" />
+                    </svg>
+
+
+                </button>
+            </div>
+
+            <div class="fb-row">
+                <div class="fb-dd" data-dd="category">
+                    <button class="fb-item" type="button">КАТЕГОРИЯ ТОВАРА
+                        <svg class="chev" width="10" height="16" viewBox="0 0 8 12">
+                            <path d="M1 1 L7 6 L1 11" fill="none" stroke="currentColor" stroke-width="1.4"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                    <div class="fb-popover w260">
+                        <ul class="dd-list">
+                            <li><a href="#">Футболки</a></li>
+                            <li><a href="#">Лонгсливы</a></li>
+                            <li><a href="#">Комплект спортивный</a></li>
+                            <li><a href="#">Толстовки (худи)</a></li>
+                            <li><a href="#">Брюки</a></li>
+                            <li class="dd-all"><a href="#">Показать все</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- РАЗМЕР -->
+                <div class="fb-dd" data-dd="size">
+                    <button class="fb-item" type="button">РАЗМЕР ОДЕЖДЫ
+                        <svg class="chev" width="10" height="16" viewBox="0 0 8 12">
+                            <path d="M1 1 L7 6 L1 11" fill="none" stroke="currentColor" stroke-width="1.4"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                    <div class="fb-popover w220">
+                        <div class="dd-sizes">
+                            <button class="sz">XS</button>
+                            <button class="sz">S</button>
+                            <button class="sz">M</button>
+                            <button class="sz">L</button>
+                        </div>
+                        <a href="#" class="dd-link muted">РАЗМЕРНАЯ СЕТКА</a>
+                    </div>
+                </div>
+
+                <!-- ЦЕНА -->
+                <div class="fb-dd" data-dd="price">
+                    <button class="fb-item is-active" type="button">ЦЕНА
+                        <svg class="chev" width="10" height="16" viewBox="0 0 8 12">
+                            <path d="M1 1 L7 6 L1 11" fill="none" stroke="currentColor" stroke-width="1.4"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                    <div class="fb-popover w320">
+                        <div class="dd-price">
+                            <div class="row">
+                                <input type="number" class="price-min" value="0" min="0" max="100000" step="100">
+                                <input type="number" class="price-max" value="100000" min="0" max="100000" step="100">
+                            </div>
+                            <div class="range-wrap" data-min="0" data-max="100000">
+                                <input type="range" class="range-min" min="0" max="100000" value="0" step="100">
+                                <input type="range" class="range-max" min="0" max="100000" value="100000" step="100">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ЦВЕТ -->
+                <div class="fb-dd" data-dd="color">
+                    <button class="fb-item" type="button">ЦВЕТ
+                        <svg class="chev" width="10" height="16" viewBox="0 0 8 12">
+                            <path d="M1 1 L7 6 L1 11" fill="none" stroke="currentColor" stroke-width="1.4"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                    <div class="fb-popover w160">
+                        <div class="dd-colors">
+                            <button class="dot" style="--c:#000"></button>
+                            <button class="dot" style="--c:#e9e9e9"></button>
+                            <button class="dot" style="--c:#9e9e9e"></button>
+                        </div>
+                    </div>
+                </div>
+                </nav>
+
+                <div class="fb-sort">
+                    <div class="fb-dd" data-dd="sort">
+                        <button class="fb-item fb-sortby" type="button">ПО СТОИМОСТИ
+                            <svg class="chev" width="10" height="16" viewBox="0 0 8 12">
+                                <path d="M1 1 L7 6 L1 11" fill="none" stroke="currentColor" stroke-width="1.4"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                        <div class="fb-popover w260">
+                            <ul class="dd-list">
+                                <li><button class="dd-option" data-sort="asc">Цена по возрастанию</button></li>
+                                <li><button class="dd-option" data-sort="desc">Цена по убыванию</button></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                (() => {
+                    const dds = document.querySelectorAll('.fb-dd');
+
+                    // открыть/закрыть поповеры
+                    dds.forEach(dd => {
+                        const btn = dd.querySelector('.fb-item');
+                        btn?.addEventListener('click', e => {
+                            e.stopPropagation();
+                            const opened = dd.classList.contains('open');
+                            dds.forEach(x => x.classList.remove('open'));
+                            if (!opened) dd.classList.add('open');
+                        });
+                    });
+                    document.addEventListener('click', () => dds.forEach(x => x.classList.remove('open')));
+                    document.addEventListener('keydown', e => { if (e.key === 'Escape') dds.forEach(x => x.classList.remove('open')); });
+
+                    const ddCat = document.querySelector('.fb-dd[data-dd="category"]');
+                    const ddSize = document.querySelector('.fb-dd[data-dd="size"]');
+                    const ddColor = document.querySelector('.fb-dd[data-dd="color"]');
+                    const ddPrice = document.querySelector('.fb-dd[data-dd="price"]');
+
+                    const setActive = (dd, on) => dd?.querySelector('.fb-item')?.classList.toggle('is-active', !!on);
+                    const any = (root, sel) => !!(root && root.querySelector(sel));
+
+                    // выбор цвета
+                    document.querySelectorAll('.dd-colors .dot').forEach(dot => {
+                        dot.addEventListener('click', () => {
+                            dot.classList.toggle('active');
+                            updateActives();
+                        });
+                    });
+
+                    // выбор размера
+                    document.querySelectorAll('.dd-sizes .sz').forEach(sz => {
+                        sz.addEventListener('click', () => {
+                            sz.classList.toggle('active');
+                            updateActives();
+                        });
+                    });
+
+                    // выбор категории (пока заглушки-ссылки)
+                    ddCat?.querySelectorAll('.dd-list li:not(.dd-all) a').forEach(a => {
+                        a.addEventListener('click', e => {
+                            e.preventDefault();
+                            ddCat.dataset.selected = '1';
+                            updateActives();
+                        });
+                    });
+                    ddCat?.querySelector('.dd-all a')?.addEventListener('click', e => {
+                        e.preventDefault();
+                        delete ddCat.dataset.selected;
+                        updateActives();
+                    });
+
+                    // цена: двойной ползунок
+                    let rMin, rMax, iMin, iMax, wrap;
+                    const minGap = 100;
+                    if (ddPrice) {
+                        wrap = ddPrice.querySelector('.range-wrap');
+                        rMin = ddPrice.querySelector('.range-min');
+                        rMax = ddPrice.querySelector('.range-max');
+                        iMin = ddPrice.querySelector('.price-min');
+                        iMax = ddPrice.querySelector('.price-max');
+
+                        function paint() {
+                            const min = +rMin.min, max = +rMax.max;
+                            const a = ((+rMin.value - min) / (max - min)) * 100;
+                            const b = ((+rMax.value - min) / (max - min)) * 100;
+                            wrap.style.background = `linear-gradient(to right,#ddd ${a}%, #111 ${a}%, #111 ${b}%, #ddd ${b}%)`;
+                        }
+                        function clampFromRange(changed) {
+                            let a = +rMin.value, b = +rMax.value;
+                            if (b - a < minGap) {
+                                if (changed === rMin) a = b - minGap; else b = a + minGap;
+                                rMin.value = a; rMax.value = b;
+                            }
+                            iMin.value = rMin.value; iMax.value = rMax.value;
+                            paint(); updateActives();
+                        }
+                        function clampFromInput() {
+                            let a = Math.max(+iMin.min || 0, +iMin.value || 0);
+                            let b = Math.min(+iMax.max || 100000, +iMax.value || 0);
+                            if (b - a < minGap) b = a + minGap;
+                            rMin.value = a; rMax.value = b; iMin.value = a; iMax.value = b;
+                            paint(); updateActives();
+                        }
+                        rMin.addEventListener('input', () => clampFromRange(rMin));
+                        rMax.addEventListener('input', () => clampFromRange(rMax));
+                        iMin.addEventListener('change', clampFromInput);
+                        iMax.addEventListener('change', clampFromInput);
+                        paint();
+                    }
+
+                    // сброс всех фильтров
+                    document.querySelector('.fb-clear')?.addEventListener('click', () => {
+                        delete ddCat?.dataset.selected;
+                        ddSize?.querySelectorAll('.sz.active').forEach(x => x.classList.remove('active'));
+                        ddColor?.querySelectorAll('.dot.active').forEach(x => x.classList.remove('active'));
+                        if (ddPrice) {
+                            rMin.value = rMin.min; rMax.value = rMax.max;
+                            iMin.value = rMin.value; iMax.value = rMax.value;
+                            wrap && (wrap.style.background = '');
+                        }
+                        updateActives();
+                    });
+
+                    function updateActives() {
+                        setActive(ddCat, ddCat?.dataset.selected === '1');
+                        setActive(ddSize, any(ddSize, '.sz.active'));
+                        setActive(ddColor, any(ddColor, '.dot.active'));
+                        if (ddPrice) {
+                            const active = (+rMin.value > +rMin.min) || (+rMax.value < +rMax.max);
+                            setActive(ddPrice, active);
+                        }
+                    }
+
+                    updateActives(); // стартовое состояние
+                })();
+            </script>
+
+
+
+            <script>
+                (() => {
+                    const bar = document.querySelector('.filters-bar');
+                    const btn = bar?.querySelector('.fb-menu');
+                    const row = bar?.querySelector('.fb-row');
+                    if (!bar || !btn || !row) return;
+
+                    // закрываем поповеры при сворачивании
+                    const closePopovers = () => bar.querySelectorAll('.fb-dd.open').forEach(x => x.classList.remove('open'));
+
+                    const collapse = () => {
+                        closePopovers();
+                        const h = row.scrollHeight;
+                        row.style.height = h + 'px';
+                        bar.classList.add('is-collapsing');
+                        requestAnimationFrame(() => {
+                            row.style.opacity = '0';
+                            row.style.height = '0px';
+                        });
+                        row.addEventListener('transitionend', function onEnd(e) {
+                            if (e.propertyName !== 'height') return;
+                            row.removeEventListener('transitionend', onEnd);
+                            row.style.display = 'none';
+                            row.style.height = '';
+                            bar.classList.remove('is-collapsing');
+                            bar.classList.add('is-collapsed');
+                            btn.setAttribute('aria-expanded', 'false');
+                        });
+                    };
+
+                    const expand = () => {
+                        row.style.display = '';
+                        // сразу ставим 0, затем плавно до фактической высоты
+                        row.style.opacity = '0';
+                        row.style.height = '0px';
+                        const h = row.scrollHeight;
+                        bar.classList.add('is-expanding');
+                        requestAnimationFrame(() => {
+                            row.style.opacity = '1';
+                            row.style.height = h + 'px';
+                        });
+                        row.addEventListener('transitionend', function onEnd(e) {
+                            if (e.propertyName !== 'height') return;
+                            row.removeEventListener('transitionend', onEnd);
+                            row.style.height = '';
+                            bar.classList.remove('is-expanding');
+                            bar.classList.remove('is-collapsed');
+                            btn.setAttribute('aria-expanded', 'true');
+                        });
+                    };
+
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        if (bar.classList.contains('is-collapsed')) expand(); else collapse();
+                    });
+
+                    // при ресайзе правим авто-высоту, если блок открыт
+                    window.addEventListener('resize', () => {
+                        if (!bar.classList.contains('is-collapsed') && row.style.height) {
+                            row.style.height = row.scrollHeight + 'px';
+                        }
+                    });
+                })();
+            </script>
+
+
+
+        </div>
+
+
+
+
+
+        <section class="catalog">
+            <div class="catalog-grid">
+                <!-- Карточка товара -->
+                <a class="p-card" href="#">
+                    <div class="p-media" aria-label="Изображение товара">
+                        <button class="p-flag-btn" type="button" aria-label="В избранное" aria-pressed="false">
+                            <svg width="30" height="35" viewBox="0 0 18 22" aria-hidden="true">
+                                <path d="M3 2.5H15a1 1 0 0 1 1 1V20.5L9 16.5l-7 4V3.5a1 1 0 0 1 1-1Z" fill="none"
+                                    stroke="#fff" stroke-width="2" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+
+                        <button class="p-eye-btn" type="button" aria-label="Быстрый просмотр">
+                            <img src="static/icons/eye.svg" alt="" width="18" height="18">
+                        </button>
+                    </div>
+                    <div class="p-info">
+                        <div class="p-title">ПЛАТЬЕ XXXX</div>
+                        <div class="p-meta">
+                            <span class="p-price">5&nbsp;999&nbsp;₽</span>
+                            <span class="p-art">АРТ. 098088</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- продублируй карточку нужное количество раз -->
+                <a class="p-card" href="#">
+                    <div class="p-media"></div>
+                    <div class="p-info">
+                        <div class="p-title">ПЛАТЬЕ XXXX</div>
+                        <div class="p-meta"><span class="p-price">5&nbsp;999&nbsp;₽</span><span class="p-art">АРТ.
+                                098088</span></div>
+                    </div>
+                </a>
+                <a class="p-card" href="#">
+                    <div class="p-media"></div>
+                    <div class="p-info">
+                        <div class="p-title">ПЛАТЬЕ XXXX</div>
+                        <div class="p-meta"><span class="p-price">5&nbsp;999&nbsp;₽</span><span class="p-art">АРТ.
+                                098088</span></div>
+                    </div>
+                </a>
+                <a class="p-card" href="#">
+                    <div class="p-media"></div>
+                    <div class="p-info">
+                        <div class="p-title">ПЛАТЬЕ XXXX</div>
+                        <div class="p-meta"><span class="p-price">5&nbsp;999&nbsp;₽</span><span class="p-art">АРТ.
+                                098088</span></div>
+                    </div>
+                </a>
+                <a class="p-card" href="#">
+                    <div class="p-media"></div>
+                    <div class="p-info">
+                        <div class="p-title">ПЛАТЬЕ XXXX</div>
+                        <div class="p-meta"><span class="p-price">5&nbsp;999&nbsp;₽</span><span class="p-art">АРТ.
+                                098088</span></div>
+                    </div>
+                </a>
+                <a class="p-card" href="#">
+                    <div class="p-media"></div>
+                    <div class="p-info">
+                        <div class="p-title">ПЛАТЬЕ XXXX</div>
+                        <div class="p-meta"><span class="p-price">5&nbsp;999&nbsp;₽</span><span class="p-art">АРТ.
+                                098088</span></div>
+                    </div>
+                </a>
+                <a class="p-card" href="#">
+                    <div class="p-media"></div>
+                    <div class="p-info">
+                        <div class="p-title">ПЛАТЬЕ XXXX</div>
+                        <div class="p-meta"><span class="p-price">5&nbsp;999&nbsp;₽</span><span class="p-art">АРТ.
+                                098088</span></div>
+                    </div>
+                </a>
+                <a class="p-card" href="#">
+                    <div class="p-media"></div>
+                    <div class="p-info">
+                        <div class="p-title">ПЛАТЬЕ XXXX</div>
+                        <div class="p-meta"><span class="p-price">5&nbsp;999&nbsp;₽</span><span class="p-art">АРТ.
+                                098088</span></div>
+                    </div>
+                </a>
+                <a class="p-card" href="#">
+                    <div class="p-media"></div>
+                    <div class="p-info">
+                        <div class="p-title">ПЛАТЬЕ XXXX</div>
+                        <div class="p-meta"><span class="p-price">5&nbsp;999&nbsp;₽</span><span class="p-art">АРТ.
+                                098088</span></div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- PAGINATION -->
+        <nav class="pager" role="navigation" aria-label="Пагинация">
+            <button class="pg-btn pg-prev" aria-label="Предыдущая" type="button">
+                <img src="static/icons/arrow.svg" alt="">
+            </button>
+
+            <ul class="pg-list">
+                <li><a class="pg-link" href="#">1</a></li>
+                <li><a class="pg-link" href="#">2</a></li>
+                <li><a class="pg-link" href="#">3</a></li>
+                <li><a class="pg-link" href="#">4</a></li>
+                <li><span class="pg-link is-current">5</span></li>
+                <li><a class="pg-link" href="#">6</a></li>
+                <li><a class="pg-link" href="#">7</a></li>
+                <li><a class="pg-link" href="#">8</a></li>
+                <li class="pg-ellipsis">…</li>
+                <li><a class="pg-link" href="#">X</a></li>
+            </ul>
+
+            <button class="pg-btn pg-next" aria-label="Следующая" type="button">
+                <img src="static/icons/arrow.svg" alt="">
+            </button>
+        </nav>
+
+
+
+        <script>
+            (() => {
+                let qv, qvPhoto, qvTitle, qvPrice, qvArt, qvBookmark, currentCard = null;
+
+                function cacheQv() {
+                    if (qv) return;
+                    qv = document.getElementById('qv');
+                    qvPhoto = document.getElementById('qvPhoto');
+                    qvTitle = document.getElementById('qvTitle');
+                    qvPrice = document.getElementById('qvPrice');
+                    qvArt = document.getElementById('qvArt');
+                    qvBookmark = document.getElementById('qvBookmark');
+
+                    qv?.addEventListener('click', e => { if (e.target.hasAttribute('data-qv-close')) closeQuickView(); });
+                    qvBookmark?.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const on = !qvBookmark.classList.contains('active');
+                        qvBookmark.classList.toggle('active', on);
+                        qvBookmark.setAttribute('aria-pressed', on);
+                        const flag = currentCard?.querySelector('.p-flag-btn');
+                        if (flag) { flag.classList.toggle('active', on); flag.setAttribute('aria-pressed', on); }
+                    });
+                }
+
+                function syncBookmarkFromCard(card) {
+                    const flag = card?.querySelector('.p-flag-btn');
+                    const on = !!flag && flag.classList.contains('active');
+                    qvBookmark?.classList.toggle('active', on);
+                    qvBookmark?.setAttribute('aria-pressed', on);
+                }
+
+                function openQuickView(card) {
+                    cacheQv();
+                    currentCard = card;
+                    const title = card.querySelector('.p-title')?.textContent?.trim() || 'Товар';
+                    const price = card.querySelector('.p-price')?.innerHTML || '';
+                    const art = card.querySelector('.p-art')?.textContent?.trim() || '';
+                    const img = card.dataset.img || card.querySelector('.p-media img')?.getAttribute('src');
+
+                    qvTitle.textContent = title;
+                    qvPrice.innerHTML = price;
+                    qvArt.textContent = art;
+                    qvPhoto.style.background = img ? `url('${img}') center/cover no-repeat` : '#e2e2e2';
+
+                    syncBookmarkFromCard(card);
+
+                    qv.classList.add('open');
+                    document.body.style.overflow = 'hidden';
+                }
+                function closeQuickView() {
+                    qv?.classList.remove('open');
+                    document.body.style.overflow = '';
+                    currentCard = null;
+                }
+
+                document.addEventListener('click', (e) => {
+                    const eye = e.target.closest('.p-eye-btn');
+                    if (!eye) return;
+                    e.preventDefault(); e.stopPropagation();
+                    const card = eye.closest('.p-card');
+                    openQuickView(card);
+                });
+
+                document.addEventListener('click', (e) => {
+                    const flag = e.target.closest('.p-flag-btn');
+                    if (!flag) return;
+                    e.preventDefault(); e.stopPropagation();
+                    const on = !flag.classList.contains('active');
+                    flag.classList.toggle('active', on);
+                    flag.setAttribute('aria-pressed', on);
+                    if (currentCard && flag.closest('.p-card') === currentCard) {
+                        cacheQv();
+                        qvBookmark.classList.toggle('active', on);
+                        qvBookmark.setAttribute('aria-pressed', on);
+                    }
+                });
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && qv?.classList.contains('open')) closeQuickView();
+                });
+            })();
+        </script>
+
+
+
+
+
+
+
+        <!-- MODAL QUICK VIEW MODAL -->
+        <div class="qv" id="qv" aria-hidden="true">
+            <div class="qv-overlay" data-qv-close></div>
+
+            <div class="qv-panel" role="dialog" aria-modal="true" aria-label="Быстрый просмотр">
+                <button class="qv-x" type="button" aria-label="Закрыть" data-qv-close>×</button>
+
+                <div class="qv-left">
+                    <div class="qv-photo" id="qvPhoto" role="img" aria-label="Фото товара"></div>
+                </div>
+
+                <div class="qv-right">
+                    <div class="qv-top">
+                        <h3 class="qv-title" id="qvTitle">ПЛАТЬЕ XXXX</h3>
+                        <button class="qv-bookmark" type="button" aria-label="В избранное" id="qvBookmark"
+                            aria-pressed="false">
+                            <svg width="22" height="26" viewBox="0 0 18 22" aria-hidden="true" focusable="false">
+                                <path d="M3 2.5H15a1 1 0 0 1 1 1V20.5L9 16.5l-7 4V3.5a1 1 0 0 1 1-1Z" fill="none"
+                                    stroke="#111" stroke-width="2" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="qv-price" id="qvPrice">5&nbsp;999&nbsp;₽</div>
+                    <div class="qv-art" id="qvArt">АРТ. 098088</div>
+                </div>
+            </div>
+        </div>
+
+
+    </main>
+
+
+
+
+
+    <footer class="site-footer">
+
+        <div class="footer-blocks">
+            <div class="footer-block-customer">
+                <h2>Покупателю:</h2>
+
+                <div class="customer-links">
+                    <a href="">Магазин</a>
+                    <a href="">Избранное</a>
+                    <a href="">Корзина</a>
+                    <a href="">Личный кабинет</a>
+                    <a href="">Возвраат и обмен</a>
+                    <a href="">Доставка и оплата</a>
+                    <a href="">Публичная оферта</a>
+                    <a href="">Политиа конфиденциальности</a>
+                </div>
+
+                <div class="footer-cp-name">
+                    <p>© 2025 Gabriel Yusubov </p>
+                </div>
+            </div>
+
+            <div class="footer-block-about">
+                <h2>О нас:</h2>
+
+                <div class="about-links">
+                    <a href="">Контакты</a>
+                    <a href="">Блог</a>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="footer-socials">
+            <ul class="socials-list">
+                <li>
+                    <a class="social" href="https://instagram.com/username" target="_blank" rel="noopener nofollow"
+                        aria-label="Instagram">
+                        <img src="static/icons/instagram.svg" alt="">
+                    </a>
+                </li>
+                <li>
+                    <a class="social" href="https://vk.com/username" target="_blank" rel="noopener nofollow"
+                        aria-label="VK">
+                        <img src="static/icons/vk.svg" alt="">
+                    </a>
+                </li>
+                <li>
+                    <a class="social" href="https://t.me/username" target="_blank" rel="noopener nofollow"
+                        aria-label="Telegram">
+                        <img src="static/icons/telegram.svg" alt="">
+                    </a>
+                </li>
+                <li>
+                    <a class="social" href="https://www.tiktok.com/@username" target="_blank" rel="noopener nofollow"
+                        aria-label="TikTok">
+                        <img src="static/icons/tiktok.svg" alt="">
+                    </a>
+                </li>
+                <li>
+                    <a class="social" href="https://youtube.com/@username" target="_blank" rel="noopener nofollow"
+                        aria-label="YouTube">
+                        <img src="static/icons/youtube.svg" alt="">
+                    </a>
+                </li>
+            </ul>
+
+            <p class="socials-note">*проект Meta Platforms Inc., запрещена в РФ</p>
+        </div>
+
+
+
+
+        <div class="logo-overlay-footer">
+            <img src="static/images/logo_overlay.svg" alt="">
+        </div>
+    </footer>
+
+
+
+</body>
+
+</html>

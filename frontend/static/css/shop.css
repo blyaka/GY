@@ -1,0 +1,749 @@
+main {
+    padding: 70px 90px;
+    ;
+}
+
+
+.serch-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 0 10px;
+}
+
+.shop-title {
+    margin: 0;
+    font-size: 34px;
+    letter-spacing: .18em;
+    font-weight: 400;
+}
+
+.shop-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.shop-search-btn {
+    background: none;
+    border: 0;
+    padding: 4px;
+    line-height: 0;
+    cursor: pointer;
+    color: #111;
+    /* поставь #fff, если фон тёмный */
+}
+
+.shop-search-input {
+    width: 260px;
+    font-family: "Jost", sans-serif;
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid #111;
+    padding: 6px 0 4px;
+    outline: none;
+    font-size: 16px;
+    color: #111;
+}
+
+.shop-search-input:focus {
+    border-bottom-width: 3px;
+}
+
+
+
+/* FILTERS BAR */
+.filters-bar {
+    display: flex;
+    /* align-items: center; */
+    flex-direction: column;
+    gap: 28px;
+    padding: 25px 0px;
+}
+
+.fb-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 10px;
+}
+
+.fb-row {
+    display: flex;
+    gap: 70px;
+}
+
+.fb-menu {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    line-height: 0;
+}
+
+.fb-clear,
+.fb-sortreset {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    font-size: 38px;
+    line-height: 1;
+    color: #111;
+}
+
+.fb-clear:hover,
+.fb-sortreset:hover {
+    opacity: 1;
+}
+
+.fb-list {
+    display: flex;
+    align-items: center;
+    gap: 70px;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.fb-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    font-size: 20px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #111;
+    font-weight: 300;
+}
+
+.fb-item .chev {
+    flex: 0 0 auto;
+    opacity: .9;
+}
+
+.fb-item:hover {
+    opacity: .75;
+}
+
+.fb-item.is-active {
+    background: #111;
+    color: #fff;
+    border-radius: 2px;
+}
+
+.fb-item.is-active .chev path {
+    stroke: #fff;
+}
+
+/* сортировка справа */
+.fb-sort {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+}
+
+.fb-sortdir {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.fb-sortby {
+    padding: 8px 22px;
+}
+
+
+/* POPovers */
+.fb-dd {
+    position: relative;
+}
+
+.fb-dd .chev {
+    transition: transform .2s ease;
+}
+
+.fb-dd.open .chev {
+    transform: rotate(90deg);
+}
+
+.fb-popover {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 10px;
+    background: #fff;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, .15);
+    border-radius: 2px;
+    padding: 40px;
+    display: none;
+    z-index: 20;
+}
+
+.fb-dd.open .fb-popover {
+    display: block;
+}
+
+.fb-popover.w160 {
+    /* min-width: 160px; */
+}
+
+.fb-popover.w220 {
+    min-width: 220px;
+}
+
+.fb-popover.w260 {
+    min-width: 260px;
+}
+
+.fb-popover.w320 {
+    min-width: 320px;
+}
+
+.dd-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+li.dd-all {
+    margin-top: 20px;
+}
+
+
+.dd-list a,
+.dd-option {
+    text-decoration: none;
+    color: #111;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    font: 400 16px/1.4 "Jost", sans-serif;
+    text-align: left;
+}
+
+.dd-list a:hover,
+.dd-option:hover {
+    text-decoration: underline;
+}
+
+.dd-all a {
+    font-weight: 500;
+}
+
+.dd-sizes {
+    display: flex;
+    flex-direction: column;
+    /* gap: 16px; */
+    justify-content: center;
+    margin: 4px 0 10px;
+}
+
+.sz {
+    min-width: 36px;
+    padding: 6px 10px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    font: 300 20px "Jost", sans-serif;
+}
+
+.sz:hover,
+.sz.active {
+    text-decoration: underline;
+}
+
+.dd-link.muted {
+    display: block;
+    text-align: left;
+    font-size: 16px;
+    letter-spacing: .12em;
+    color: #888;
+    text-decoration: none;
+}
+
+.dd-link.muted::after {
+    content: " ›";
+}
+
+.dd-colors {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 6px 4px;
+    justify-content: center;
+    align-items: center;
+}
+
+.dot {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: var(--c, #000);
+    border: none;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, .22);
+    cursor: pointer;
+}
+
+.dot.active {
+    /* outline: 2px solid #111; */
+    width: 45px;
+    height: 45px;
+}
+
+.dd-price .row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+    justify-content: space-between;
+}
+
+.dd-price input[type="number"] {
+    width: 120px;
+    padding: 8px 10px;
+    border: 1px solid #111;
+    background: #fff;
+    font: 400 14px "Jost", sans-serif;
+}
+
+/* двуручный слайдер */
+.range-wrap {
+    position: relative;
+    height: 5px;
+    border-radius: 2px;
+    background:
+        linear-gradient(to right, #ddd 0%, #111 0%, #111 0%, #ddd 0%);
+}
+
+.range-wrap input[type="range"] {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -3px;
+    width: 100%;
+    height: 0px;
+    margin: 0;
+    -webkit-appearance: none;
+    background: transparent;
+    pointer-events: none;
+}
+
+.range-wrap input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    pointer-events: auto;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #111;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1px #111;
+}
+
+.range-wrap input[type="range"]::-moz-range-thumb {
+    pointer-events: auto;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #111;
+    border: 2px solid #fff;
+}
+
+.range-wrap input[type="range"]::-webkit-slider-runnable-track {
+    height: 2px;
+}
+
+.range-wrap input[type="range"]::-moz-range-track {
+    height: 2px;
+}
+
+
+
+
+/* иконки меню: при развернутых фильтрах показываем X, при свернутых — бургер */
+.filters-bar .ic-burger {
+    display: none;
+}
+
+.filters-bar.is-collapsed .ic-burger {
+    display: block;
+}
+
+.filters-bar.is-collapsed .ic-close {
+    display: none;
+}
+
+/* анимация сворачивания/разворачивания блока с фильтрами */
+.fb-row {
+    overflow: visible;
+    transition: height .28s ease, opacity .22s ease;
+}
+
+.filters-bar.is-collapsing .fb-row,
+.filters-bar.is-expanding .fb-row {
+    overflow: hidden;
+    /* скрываем только во время анимации */
+    will-change: height;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* CATALOG */
+.catalog {
+    max-width: 1140px;
+    /* центрируем общий контейнер */
+    margin: 40px auto 100px;
+    padding: 0 10px;
+}
+
+.catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(260px, 1fr));
+    gap: 50px 0px;
+    /* вертикальный / горизонтальный */
+    justify-items: center;
+    /* чтобы карточки ровно сидели в колонках */
+}
+
+/* карточка */
+.p-card {
+    width: 100%;
+    max-width: 300px;
+    /* ограничим ширину, чтобы было как в макете */
+    text-decoration: none;
+    color: #111;
+}
+
+.p-media {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    /* одинаковая высота превью */
+    background: #e6e6e6;
+    border: 1px solid #e9e9e9;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, .06);
+    overflow: hidden;
+}
+
+.p-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* уголок-закладка */
+/* позиционирование кнопок внутри превью */
+.p-media {
+    position: relative;
+}
+
+/* закладка (outline -> filled при активе) */
+.p-flag-btn {
+    position: absolute;
+    top: -6px;
+    right: 8px;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    line-height: 0;
+}
+
+.p-flag-btn.active path {
+    fill: #fff;
+}
+
+/* закрашиваем при клике */
+.p-flag-btn:focus-visible {
+    outline: 2px solid #000;
+    outline-offset: 2px;
+}
+
+/* глаз — круглая плашка снизу слева */
+.p-eye-btn {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    line-height: 0;
+}
+
+.p-eye-btn img {
+    width: 38px;
+    height: 38px;
+    display: block;
+}
+
+
+.p-eye-btn:focus-visible {
+    outline: 2px solid #000;
+    outline-offset: 2px;
+}
+
+
+/* подписи под карточкой */
+.p-info {
+    margin-top: 10px;
+}
+
+.p-title {
+    font-weight: 400;
+    font-size: 20px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.p-meta {
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.p-price {
+    font-weight: 300;
+    font-size: 22px;
+}
+
+.p-art {
+    font-size: 20px;
+    font-weight: 200;
+    color: rgba(177, 177, 177, 1);
+}
+
+/* ховер-эффект как лёгкая тень */
+.p-card:hover .p-media {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 24px rgba(0, 0, 0, .12);
+    transition: .2s ease-in-out;
+}
+
+
+
+
+
+
+/* PAGINATION */
+.pager {
+    max-width: 980px;
+    margin: 40px auto 90px;
+    display: grid;
+    grid-template-columns: 40px 1fr 40px;
+    /* стрелка — центр — стрелка */
+    align-items: center;
+}
+
+.pg-btn {
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 0;
+    display: grid;
+    place-items: center;
+}
+
+.pg-btn img {
+    width: 26px;
+    height: 26px;
+    display: block;
+}
+
+.pg-next img {
+    transform: scaleX(-1);
+}
+
+/* разворот правой стрелки */
+
+.pg-list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    align-items: center;
+}
+
+.pg-link {
+    font-size: 22px;
+    letter-spacing: .1em;
+    color: #bdbdbd;
+    text-decoration: none;
+    padding: 6px 6px;
+    display: inline-block;
+}
+
+.pg-link:hover {
+    color: #111;
+}
+
+.pg-link.is-current {
+    background: #111;
+    color: #fff;
+    border-radius: 2px;
+    padding: 6px 10px;
+}
+
+.pg-ellipsis {
+    color: #bdbdbd;
+    font-size: 22px;
+    letter-spacing: .1em;
+}
+
+/* неактивные стрелки (если нужно) */
+.pg-btn.is-disabled {
+    opacity: .35;
+    pointer-events: none;
+}
+
+
+
+
+/* QUICK VIEW */
+.qv {
+    position: fixed;
+    inset: 0;
+    display: none;
+    z-index: 1000;
+}
+
+.qv.open {
+    display: block;
+}
+
+.qv-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .45);
+}
+
+.qv-panel {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: min(980px, calc(100% - 40px));
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 28px 60px rgba(0, 0, 0, .35);
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 28px;
+    padding: 26px 26px 22px;
+}
+
+.qv-x {
+    position: absolute;
+    right: 16px;
+    top: 12px;
+    background: transparent;
+    border: 0;
+    font-size: 26px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.qv-left .qv-photo {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: #e2e2e2;
+    box-shadow: 0 10px 18px rgba(0, 0, 0, .12);
+}
+
+.qv-right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.qv-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.qv-title {
+    margin: 0;
+    font: 400 22px "Jost", sans-serif;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #111;
+}
+
+.qv-bookmark {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    line-height: 0;
+}
+
+.qv-price {
+    margin-top: 6px;
+    font: 300 20px "Jost", sans-serif;
+}
+
+.qv-art {
+    position: absolute;
+    right: 4px;
+    bottom: 0;
+    color: #c7c7c7;
+    font: 300 12px "Jost", sans-serif;
+}
+
+.qv-bookmark.active path {
+    fill: #111;
+}
+
+
+
+
+
+/* адаптив: 2 и 1 колонка */
+@media (max-width: 1100px) {
+    .catalog-grid {
+        grid-template-columns: repeat(2, minmax(240px, 1fr));
+    }
+
+    .qv-panel {
+        grid-template-columns: 1fr;
+        padding: 18px;
+    }
+
+    .qv-art {
+        position: static;
+        margin-top: 12px;
+    }
+}
+
+@media (max-width: 620px) {
+    .catalog-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .p-card {
+        max-width: 360px;
+        margin: 0 auto;
+    }
+}
