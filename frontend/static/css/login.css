@@ -1,0 +1,213 @@
+:root {
+    --black: #111;
+    --gray: #8a8a8a;
+    --label-w: 140px;
+    --gap: 24px;
+    --field-w: 360px;
+}
+
+html,
+body {
+    height: 100%
+}
+
+body {
+    font-family: "Jost", sans-serif
+}
+
+/* центр */
+.auth {
+    min-height: calc(100vh - 180px);
+    display: grid;
+    place-items: center;
+    padding: 48px 16px
+}
+
+.auth-wrap {
+    width: calc(var(--label-w) + var(--gap) + var(--field-w));
+    max-width: 92vw
+}
+
+.auth-logo {
+    width: 230px;
+    height: auto;
+    display: block;
+    margin: 0 auto 14px
+}
+
+.auth-title {
+    font-size: 24px;
+    font-weight: 200;
+    color: var(--gray);
+    text-align: center;
+    margin: 20px 0 30px
+}
+
+/* ряды формы — сетка 140 | 360 */
+.form-row {
+    display: grid;
+    grid-template-columns: var(--label-w) var(--field-w);
+    column-gap: var(--gap);
+    align-items: center;
+    margin: 0 0 25px
+}
+
+.form-row label {
+    font-size: 36px;
+    font-weight: 300;
+    text-align: right;
+    color: var(--black)
+}
+
+.auth-form input[type="email"],
+.auth-form input[type="password"] {
+    width: 100%;
+    height: 42px;
+    border: 1px solid var(--black);
+    background: #fff;
+    padding: 0 12px;
+    font-size: 14px;
+    outline: none;
+    box-sizing: border-box
+}
+
+.auth-form input:focus {
+    box-shadow: 0 0 0 1px var(--black) inset
+}
+
+/* забыли пароль — под правым столбцом, по правому краю */
+.forgot-wrap {
+    display: flex;
+    justify-content: flex-end;
+    margin: 4px 0 12px
+}
+
+.forgot {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--black);
+    text-decoration: none;
+    border-bottom: 1px solid var(--black);
+    line-height: 1
+}
+
+.forgot:hover {
+    opacity: .7
+}
+
+/* чекбокс — на линии правого столбца */
+.remember-row {
+    display: flex;
+    margin: 0 0 18px
+}
+
+.remember {
+    grid-column: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 30px;
+    font-size: 24px;
+    font-weight: 200;
+    color: var(--black);
+    cursor: pointer;
+    user-select: none
+}
+
+.remember input {
+    position: absolute;
+    opacity: 0
+}
+
+.remember .check {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    border: 1px solid #111;
+    background: #fff;
+    display: inline-block;
+    transition: background .15s ease, border-color .15s ease;
+}
+
+/* белая галка поверх */
+.remember .check::after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 1px;
+    width: 7px;
+    height: 13px;
+    border: 2px solid #fff;
+    border-top: 0;
+    border-left: 0;
+    transform: rotate(45deg);
+    opacity: 0;
+    transition: opacity .15s ease;
+}
+
+.remember input:checked+.check {
+    background: #000;
+    border-color: #000
+}
+
+.remember input:checked+.check::after {
+    opacity: 1
+}
+
+/* кнопка — шириной как поле */
+.btn-row {
+    display: flex;
+}
+
+.auth-btn {
+    font-family: "Jost", sans-serif;
+    width: 100%;
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 10px 0px;
+    letter-spacing: 1px;
+    font-size: 28px;
+    font-weight: 300;
+    cursor: pointer
+}
+
+.auth-btn:hover {
+    filter: brightness(.92)
+}
+
+/* низ */
+.auth-note {
+    margin: 18px 0 0;
+    font-size: 18px;
+    font-weight: 200;
+    color: #000000;
+    text-align: center
+}
+
+.auth-note .reg-link {
+    font-weight: 400;
+    color: var(--black);
+    text-decoration: none;
+    border-bottom: 1px solid var(--black)
+}
+
+.auth-note .reg-link:hover {
+    opacity: .7
+}
+
+/* мобильные */
+@media (max-width:480px) {
+    :root {
+        --label-w: 110px;
+        --gap: 16px;
+        --field-w: min(300px, 72vw)
+    }
+
+    .auth-logo {
+        width: 120px
+    }
+
+    .auth-title {
+        margin-bottom: 24px
+    }
+}

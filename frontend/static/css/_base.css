@@ -52,10 +52,10 @@ body {
     /* height: 100%; */
     width: min(86vw, 620px);
     background: #ffffff;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, .25);
     transform: translateX(-100%);
     transition: transform .32s ease;
     overflow: hidden;
+    z-index: 2;
 }
 
 .offcanvas.open .offcanvas-panel {
@@ -131,34 +131,36 @@ body {
 }
 
 
-/* Субпанель оффканваса справа */
 .off-sub {
-  position: absolute;
-  top: 0;
-  left: min(86vw, 620px);         /* ровно после левой панели */
-  width: min(70vw, 520px);
-  height: 100%;
-  background: #fff;
-  /* по умолчанию полностью за правым краем экрана */
-  transform: translateX(calc(100vw + min(86vw, 620px)));
-  transition: transform .3s ease;
-  display: flex;
-  flex-direction: column;
-  pointer-events: none;  
+    position: absolute;
+    top: 145px;
+    left: min(86vw, 619px);
+    /* край основной панели */
+    width: min(70vw, 420px);
+    height: 600px;
+    background: #fff;
+    transform: translateX(-250%);
+    /* спрятана слева, под основной панелью */
+    transition: transform .3s ease;
+    display: flex;
+    flex-direction: column;
+    pointer-events: none;
 }
 
 .offcanvas.open .off-sub.open {
-  transform: translateX(0);       /* выезд к краю левой панели */
-  pointer-events: auto;
+    transform: translateX(0);
+    /* выезд вправо на место */
+    pointer-events: auto;
 }
 
 .off-sub-head {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 12px;
     padding: 18px 20px;
     border-bottom: 1px solid #eee;
-    background: linear-gradient(90deg, rgba(0, 0, 0, .06), rgba(0, 0, 0, 0));
+    background: linear-gradient(90deg, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0));
 }
 
 .off-sub-back {
@@ -176,11 +178,13 @@ body {
 .off-sub-title {
     font-size: 18px;
     letter-spacing: .08em;
+    display: none;
 }
 
 .off-sub-body {
-    padding: 20px;
+    padding: 80px 40px 40px 40px;
     overflow: auto;
+    height: 100%;
 }
 
 .off-sub-grid {
@@ -192,7 +196,8 @@ body {
 
 .off-sub-list {
     list-style: none;
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: 12px;
     padding: 0;
     margin: 0;
@@ -230,6 +235,10 @@ body {
 .offcanvas.open .off-sub.open {
     pointer-events: auto;
 }
+
+
+
+
 
 
 
