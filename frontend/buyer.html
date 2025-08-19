@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Магазин</title>
-    <link rel="stylesheet" href="static/css/shop.css">
+    <link rel="stylesheet" href="static/css/buyer.css">
     <link rel="stylesheet" href="static/css/_base.css">
     <link rel="stylesheet" href="static/css/_base-shop.css">
 
@@ -174,13 +174,102 @@
         <div class="sb-inner">
             <img class="sb-logo" src="static/images/GY.svg" alt="GY">
             <span class="sb-dot" aria-hidden="true"></span>
-            <a class="sb-link" href="/shop/">МАГАЗИН</a>
+            <a class="sb-link" href="/shop/">ПОКУПАТЕЛЮ</a>
         </div>
     </div>
 
-    <main>
-        
+
+
+
+
+    <main class="customer">
+        <div class="customer__head">
+            <h1 class="customer__title">ПОКУПАТЕЛЮ</h1>
+
+            <p class="customer__lead">
+                Мы стремимся к тому, чтобы каждый человек нашёл свою вещь и ответ на свой вопрос, поэтому стараемся
+                сделать доступной навигацию на нашем сайте.
+            </p>
+        </div>
+
+        <section class="customer__links">
+            <h2>Здесь вы найдете все самое необходимое:</h2>
+            <p><a href="/shop/">МАГАЗИН</a></p>
+            <p><a href="/account/">ЛИЧНЫЙ КАБИНЕТ</a></p>
+            <p><a href="/favorites/">ИЗБРАННОЕ</a></p>
+            <p><a href="/cart/">КОРЗИНА</a></p>
+            <p><a href="/returns/">ВОЗВРАТ И ОБМЕН</a></p>
+            <p><a href="/delivery/">ДОСТАВКА И ОПЛАТА</a></p>
+        </section>
+
+        <section class="customer__form-block">
+            <p class="customer__note">
+                Если у вас остались вопросы, вы можете заполнить форму обратной связи, и мы вам обязательно ответим!
+            </p>
+
+            <form class="customer-form" action="#" method="post">
+                <label class="f-label">Имя:
+                    <input class="f-input" type="text" name="name" placeholder="ГАВРИИЛЬ" required>
+                </label>
+
+                <label class="f-label">Email:
+                    <input class="f-input" type="email" name="email" placeholder="NAME@GMAIL.COM" required>
+                </label>
+
+                <label class="f-label">Телефон:
+                    <input class="f-input" type="tel" name="phone" placeholder="+7 XXX XXX XX XX">
+                </label>
+
+                <label class="f-label">Тематика обращения:
+                    <div class="f-select">
+                        <select name="topic" aria-label="Тематика обращения">
+                            <option value="order">ОФОРМЛЕНИЕ ЗАКАЗА</option>
+                            <option value="payment">ОПЛАТА</option>
+                            <option value="delivery">ДОСТАВКА</option>
+                            <option value="exchange">ВОЗВРАТ И ОБМЕН</option>
+                            <option value="other">ДРУГОЕ</option>
+                        </select>
+                        <span class="f-caret" aria-hidden="true">▾</span>
+                    </div>
+                </label>
+
+                <label class="f-label">Комментарий:
+                    <textarea class="f-textarea" name="message" placeholder="НАПИШИТЕ ЗДЕСЬ ЧТО-НИБУДЬ…"></textarea>
+                </label>
+
+                <div class="agree">
+                    <label class="remember">
+                        <input type="checkbox" name="policy" required>
+                        <span class="check"></span>
+                        <span>
+                            Нажимая кнопку «Отправить», я даю своё согласие на обработку моих персональных данных в
+                            соответствии с Федеральным законом
+                            от 27.07.2006 №152-ФЗ «О персональных данных», с условиями
+                            <a href="/offer/" target="_blank">публичной оферты</a> и
+                            <a href="/privacy/" target="_blank">политикой конфиденциальности</a>.
+                        </span>
+                    </label>
+
+                    <label class="remember">
+                        <input type="checkbox" name="marketing">
+                        <span class="check"></span>
+                        <span>
+                            Я согласен(на) на получение рекламной информации, новостей, предложений и опросов на
+                            e-mail/телефон,
+                            указанные при отправке формы.
+                        </span>
+                    </label>
+                </div>
+
+
+                <div class="f-actions">
+                    <button class="f-submit" type="submit">ОТПРАВИТЬ</button>
+                </div>
+            </form>
+        </section>
     </main>
+
+
 
 
     <footer class="site-footer">
