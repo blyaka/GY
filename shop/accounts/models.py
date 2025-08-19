@@ -1,22 +1,16 @@
-import random
-from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
-import uuid
-from django.db.models import F
+
+from django.conf import settings
 
 
+class Profile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile')
+    full_name = models.CharField('ФИО', max_length=150, blank=True)
 
-class CustomUser(AbstractUser):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    avatar = models.ImageField(verbose_name='avatar', upload_to="profile/", null=True, blank=True, default=f'profile/d{random.randint(1,8)}.jpg')
-    
+    class Meta:
+        verbose_name = 'Профиль'
+        verbose_name_plural = 'Профили'
 
     def __str__(self):
-        return self.username
-
-    def get_absolute_url(self):
-        return reverse('community:profile', args=[str(self.id)])
-
-    def get_avatar(self):
-        return self.avatar.url
+        return self.full_name or self.user.email

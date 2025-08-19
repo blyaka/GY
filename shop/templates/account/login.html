@@ -1,0 +1,18 @@
+
+
+<h1 style="text-align:center;">Вход</h1>
+
+<form method="post" action="{% url 'account_login' %}">
+  {% csrf_token %}
+  <label for="id_login">Email:</label>
+  <input type="email" name="login" id="id_login" required>
+
+  <label for="id_password">Пароль:</label>
+  <input type="password" name="password" id="id_password" required>
+
+  <button type="submit">Войти</button>
+</form>
+
+<p><a href="{% url 'account_reset_password' %}">Забыли пароль?</a></p>
+<p>Нет аккаунта? <a href="{% url 'account_signup' %}">Регистрация</a></p>
+

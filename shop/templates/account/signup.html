@@ -1,0 +1,24 @@
+
+
+<h1 style="text-align:center;">Регистрационная форма</h1>
+
+<form method="post" action="{% url 'account_signup' %}">
+  {% csrf_token %}
+
+  <label for="id_full_name">ФИО:</label>
+  <input type="text" name="full_name" id="id_full_name" value="{{ form.full_name.value|default:'' }}">
+
+  <label for="id_email">Email:</label>
+  <input type="email" name="email" id="id_email" value="{{ form.email.value|default:'' }}" required>
+
+  <label for="id_password1">Пароль:</label>
+  <input type="password" name="password1" id="id_password1" required>
+
+  <label for="id_password2">Повторите пароль:</label>
+  <input type="password" name="password2" id="id_password2" required>
+
+  <button type="submit">Зарегистрироваться</button>
+</form>
+
+<p>Уже есть аккаунт? <a href="{% url 'account_login' %}">Войти</a></p>
+

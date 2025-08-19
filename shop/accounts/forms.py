@@ -1,24 +1,13 @@
-from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from allauth.account.forms import SignupForm
+from django import forms
 
+class SignupForm(SignupForm):
+    full_name = forms.CharField(label='ФИО', max_length=150, required=False)
 
-class CustomUserCreationForm(UserCreationForm):
-    class Meta:
-        model = get_user_model()
-        fields = ('email', 'username', 'avatar')
-
-class CustomUserChangeForm(UserChangeForm):
-    class Meta:
-        model = get_user_model()
-        fields = ('email', 'username')
-
-
-
-class CustomSignupForm(SignupForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields.pop('password2', None)  # Убираем второй пароль
-
-    def clean_password2(self):
-        return self.cleaned_data.get('password1')  # Отключаем проверку
+    def save(self, request):
+        user = super().save(request)
+        fio = self.cleaned_data.get('full_name', '')
+        if hasattr(user, 'profile'):
+            user.profile.full_name = fio
+            user.profile.save()
+        return user

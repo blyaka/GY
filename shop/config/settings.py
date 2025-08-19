@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'pages',
+    'products',
 ]
 
 
@@ -122,28 +123,45 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = str(BASE_DIR.joinpath('media'))
 
-AUTH_USER_MODEL = 'accounts.CustomUser'
-
-ACCOUNT_FORMS = {
-    'signup': 'accounts.forms.CustomSignupForm',
-}
 
 
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-
-
-ACCOUNT_SIGNUP_LOGIN_REDIRECT_URL = 'home'
 LOGIN_REDIRECT_URL = 'home'
 ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_SESSION_REMEMBER = True
 SITE_ID = 1
+
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
+
+ACCOUNT_LOGIN_METHODS = {'email'}
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
+
+
+ACCOUNT_SIGNUP_LOGIN_REDIRECT_URL = 'home'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+
+ACCOUNT_FORMS = {
+    'signup': 'accounts.forms.SignupForm', 
+}
+
+# почта (dev)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-DEFAULT_FROM_EMAIL = 'admin@tuyana.ru'
+DEFAULT_FROM_EMAIL = 'noreply@your-domain.tld'
+
+# в проде через env:
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = os.getenv("EMAIL_HOST", "smtp.yandex.ru")  # свой
+# EMAIL_PORT = int(os.getenv("EMAIL_PORT", "587"))
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+# EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+# DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "noreply@yourdomain.tld")
+# ACCOUNT_EMAIL_SUBJECT_PREFIX = "[GY Shop] "
