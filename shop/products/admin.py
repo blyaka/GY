@@ -141,11 +141,11 @@ class CollectionAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ("name", "article", "collection", "price", "featured_thumb")
-    list_select_related = ("collection",)
-    search_fields = ("name", "article", "collection__name")
-    list_filter = ("collection", "colors", "sizes")
-    autocomplete_fields = ("collection",)
+    list_display = ("name", "article", "collection", "category", "price", "featured_thumb")
+    list_select_related = ("collection", "category")
+    search_fields = ("name", "article", "collection__name", "category__name")
+    list_filter = ("collection", "category", "colors", "sizes")
+    autocomplete_fields = ("collection", "category")
     filter_horizontal = ("colors", "sizes")
     inlines = (ProductImageInline, ProductFabricInline)
     save_as = True
@@ -153,7 +153,7 @@ class ProductAdmin(admin.ModelAdmin):
     readonly_fields = ("article", "featured_thumb")
 
     base_fieldsets = (
-        ("Основное", {"fields": ("collection", "name", "description")}),
+        ("Основное", {"fields": ("collection", "category", "name", "description")}),
         ("Параметры", {"fields": ("price", "colors", "sizes")}),
     )
 
@@ -166,7 +166,7 @@ class ProductAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
-        return qs.prefetch_related("images", "colors", "sizes")
+        return qs.prefetch_related("images", "colors", "sizes", "category")
 
     def featured_thumb(self, obj):
         img = obj.get_featured_image()
@@ -179,4 +179,5 @@ class ProductAdmin(admin.ModelAdmin):
         from django.utils.safestring import mark_safe
         return mark_safe(f'<img src="{url}" style="height:45px;border-radius:4px;">')
     featured_thumb.short_description = "Обложка"
+
 
