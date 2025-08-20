@@ -9,3 +9,8 @@ urlpatterns = [
     path('shop/', include('products.urls')),
     path('', include('pages.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
+from django.http import HttpResponse
+urlpatterns += [ path("healthz", lambda r: HttpResponse("ok")) ]
