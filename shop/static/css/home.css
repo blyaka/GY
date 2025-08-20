@@ -1,0 +1,218 @@
+.hero {
+    display: flex;
+    max-height: 1638px;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.hero-bg-ph {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    /* align-items: center; */
+}
+
+.hero-bg-ph img {
+    width: 100%;
+    height: 100%;
+}
+
+.logo-overlay {
+    position: absolute;
+    bottom: -400px;
+    right: -20px;
+    overflow: hidden;
+}
+
+.logo-overlay img {
+    width: 1182px;
+    height: 1471px;
+}
+
+
+
+.about-signature {
+    padding: 40px 60px;
+    min-height: 800px;
+}
+
+.signature {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.main-text {
+    font-size: 30px;
+    font-weight: 200;
+    max-width: 800px;
+}
+
+
+
+
+.divider {
+    width: 95%;
+    height: 3px;
+    background-color: #000;
+    margin: 60px auto;
+}
+
+
+
+
+.shop {
+    padding: 40px 60px;
+}
+
+.shop h2 {
+    font-size: 62px;
+    font-weight: 300;
+    margin-left: 100px;
+}
+
+
+.catalog {
+    position: relative;
+    padding: 24px 28px;
+    background: #fff;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    justify-content: center;
+}
+
+.card {
+    text-decoration: none;
+    color: #111;
+    display: block;
+    max-width: 500px;
+    width: 100%;
+}
+
+.card-media {
+    position: relative;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    background: #e9e6e3;
+}
+
+.card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: saturate(.85);
+}
+
+.card-eye {
+    position: absolute;
+    left: 30px;
+    bottom: 30px;
+    width: 60px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    backdrop-filter: blur(2px);
+}
+
+
+.card-bookmark {
+    position: absolute;
+    right: 10px;
+    top: 0px;
+    width: 50px;
+    height: 60px;
+    display: block;
+}
+
+.card-bookmark svg {
+    width: 100%;
+    height: 100%;
+    fill: #fff;
+    opacity: .9;
+}
+
+.card-info {
+    padding-top: 14px;
+}
+
+.card-title {
+    font-size: 34px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-weight: 300;
+    margin: 0 0 10px;
+}
+
+.card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-price {
+    font-size: 30px;
+    font-weight: 200;
+    letter-spacing: .06em;
+}
+
+.card-art {
+    font-size: 20px;
+    font-weight: 200;
+    color: rgba(177, 177, 177, 1);
+    letter-spacing: .12em;
+}
+
+/* стрелки как на сетке (по бокам контейнера) */
+
+.cat-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cat-nav img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.cat-nav.prev {
+    left: -10px;
+}
+
+.cat-nav.next {
+    transform: rotate(180deg);
+    right: -10px;
+}
+
+/* ховер-микроанимации */
+.card:hover .card-media img {
+    transform: scale(1.02);
+    transition: transform .3s ease;
+}
+
+
+
+
+
+
+
+
+
+

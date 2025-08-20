@@ -1,0 +1,137 @@
+.blog-page-title h2{
+    font-size: 36px;
+    font-weight: 400;
+    margin: 50px 0px;
+}
+
+.blog-list {
+    margin: 60px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 0 120px;
+}
+
+.blog-link {
+    text-decoration: none;
+}
+
+.blog-item {
+    display: grid;
+    grid-template-columns: 480px 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+.blog-thumb {
+    width: 468px;
+    height: 332px;
+    background: #dcdcdc;
+    /* заглушка */
+}
+
+.blog-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+}
+
+.blog-title {
+    font-weight: 400;
+    font-size: 40px;
+    color: #111;
+}
+
+.blog-excerpt {
+    font-size: 30px;
+    font-weight: 300;
+    color: #444;
+    line-height: 1.6;
+    /* max-width: 600px; */
+}
+
+.blog-date {
+    margin-top: auto; 
+    font-size: 30px;
+    font-weight: 300;
+    color: #999;
+    text-align: right;
+}
+
+
+
+
+
+/* PAGINATION */
+.pager {
+    /* max-width: 980px; */
+    margin: 40px 120px 90px;    
+    display: grid;
+    grid-template-columns: 40px 1fr 40px;
+    /* стрелка — центр — стрелка */
+    align-items: center;
+}
+
+.pg-btn {
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 0;
+    display: grid;
+    place-items: center;
+}
+
+.pg-btn img {
+    width: 26px;
+    height: 26px;
+    display: block;
+}
+
+.pg-next img {
+    transform: scaleX(-1);
+}
+
+/* разворот правой стрелки */
+
+.pg-list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    align-items: center;
+}
+
+.pg-link {
+    font-size: 22px;
+    letter-spacing: .1em;
+    color: #bdbdbd;
+    text-decoration: none;
+    padding: 6px 6px;
+    display: inline-block;
+}
+
+.pg-link:hover {
+    color: #111;
+}
+
+.pg-link.is-current {
+    background: #111;
+    color: #fff;
+    border-radius: 2px;
+    padding: 6px 10px;
+}
+
+.pg-ellipsis {
+    color: #bdbdbd;
+    font-size: 22px;
+    letter-spacing: .1em;
+}
+
+/* неактивные стрелки (если нужно) */
+.pg-btn.is-disabled {
+    opacity: .35;
+    pointer-events: none;
+}

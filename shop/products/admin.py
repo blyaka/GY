@@ -7,7 +7,7 @@ from django.utils.safestring import mark_safe
 
 from .models import (
     Collection, Color, Size, Fabric,
-    Product, ProductImage, ProductFabric
+    Product, ProductImage, ProductFabric, Category
 )
 
 
@@ -54,6 +54,11 @@ class ProductImageInlineForm(forms.ModelForm):
 
 
 
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("name",)}
+    list_display = ("name", "slug")
+    search_fields = ("name",)
 
 
 @admin.register(ProductImage)

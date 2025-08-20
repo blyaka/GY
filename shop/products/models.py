@@ -75,12 +75,25 @@ class Fabric(models.Model):
         return self.name
 
 
+class Category(models.Model):
+    name = models.CharField("Название категории", max_length=100, unique=True)
+    slug = models.SlugField("Слаг", max_length=120, unique=True)
 
+    class Meta:
+        verbose_name = "Категория"
+        verbose_name_plural = "Категории"
+        ordering = ("name",)
+
+    def __str__(self):
+        return self.name
 
 
 class Product(models.Model):
     collection = models.ForeignKey(
         Collection, on_delete=models.CASCADE, related_name="products", verbose_name="Коллекция"
+    )
+    category = models.ForeignKey(
+        Category, on_delete=models.CASCADE, related_name="products", verbose_name="Категория", null=True, blank=True
     )
     name = models.CharField("Название", max_length=100, db_index=True)
     article = models.CharField(
@@ -112,8 +125,12 @@ class Product(models.Model):
     def get_featured_image(self):
         return self.images.filter(is_featured=True).first() or self.images.order_by("order", "id").first()
 
+    def formatted_price(self):
+        return f"{self.price:,}".replace(",", " ")
+
     def __str__(self) -> str:
         return f"{self.name} ({self.article})"
+    
 
 
 class ProductFabric(models.Model):

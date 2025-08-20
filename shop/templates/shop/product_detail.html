@@ -1,0 +1,122 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}Product detail{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/product_details.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+
+    <div class="status-bar" role="navigation" aria-label="Статус-бар">
+        <div class="sb-inner">
+            <img class="sb-logo" src="{% static 'images/GY.svg' %}" alt="GY">
+            <span class="sb-dot" aria-hidden="true"></span>
+            <a class="sb-link" href="{% url 'shop' %}">МАГАЗИН</a>
+            <span class="sb-dot" aria-hidden="true"></span>
+            <a class="sb-link" href="{% url 'product_detail' product.pk %}">{{product.name}}</a>
+        </div>
+    </div>
+
+
+
+
+    <main class="pd">
+        <section class="pd-head">
+            <div class="pd-grid">
+                <div class="pd-media">
+                    <div class="pd-photo">
+                        <span class="pd-eye" aria-hidden="true">
+                            <svg width="22" height="22" viewBox="0 0 24 24">
+                                <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z" fill="none" stroke="currentColor"
+                                    stroke-width="1.5" />
+                                <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.5" />
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="pd-info">
+                    <div class="pd-top">
+                        <h1 class="pd-title">{{product.name}}</h1>
+                        <div class="pd-icons">
+                            <img src="{% static 'icons/bookmark-header.svg' %}" alt="Избранное" class="pd-ic">
+                            <img src="{% static 'icons/bag.svg' %}" alt="Корзина" class="pd-ic">
+                        </div>
+                    </div>
+
+                    <div class="pd-art">АРТ. {{product.article}}</div>
+                    <div class="pd-price">{{product.formatted_price}}₽</div>
+
+                    <div class="pd-opts">
+                        {% if product.colors.exists %}
+                        <div class="pd-row">
+                            <span class="pd-label">Цвет:</span>
+                            <div class="pd-colors">
+                                {% for color in product.colors.all %}
+                                    <button class="pd-color {% if forloop.first %}is-active{% endif %}" 
+                                            style="--c:{{ c.hex }}" 
+                                            aria-label="{{ c.name }}"></button>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if product.sizes.exists %}
+                        <div class="pd-row">
+                            <span class="pd-label">Размер:</span>
+                            <div class="pd-sizes">
+                                {% for s in product.sizes.all %}
+                                    <button class="pd-size {% if forloop.first %}is-active{% endif %}">{{ s.name }}</button>
+                                {% endfor %}
+                            </div>
+                            <button class="pd-cart">В КОРЗИНУ</button>
+                        </div>
+                        {% endif %}
+                    </div>
+
+
+                    {% if product.images.exists %}
+                    <div class="pd-thumbs">
+                        {% for img in product.images.all %}
+                            <div class="pd-thumb">
+                                <img src="{{ img.image.url }}" alt="{{ product.name }}">
+                            </div>
+                        {% endfor %}
+                        <button class="pd-thumbs-next" type="button" aria-label="Далее">
+                            <img src="{% static 'icons/arrow.svg' %}" alt="">
+                        </button>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+
+        {% if product.description %}
+        <section class="pd-block">
+            <div class="pd-block-title">ОПИСАНИЕ</div>
+            <div class="pd-text">
+                <p>{{ product.description }}</p>
+            </div>
+        </section>
+        {% endif %}
+
+        {% if product.fabrics.exists %}
+        <section class="pd-block">
+            <div class="pd-block-title">СОСТАВ</div>
+            <div class="pd-comp">
+                {% for pf in product.fabrics.all %}
+                <div class="pd-comp-item">
+                    <div class="pd-comp-val">{{ pf.percentage }}%</div>
+                    <div class="pd-comp-name">{{ pf.fabric.name }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+    </main>
+
+{% endblock content %}

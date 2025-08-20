@@ -1,0 +1,60 @@
+main {
+    padding: 60px 100px;
+}
+
+h2 {
+    font-size: 64px;
+    font-weight: 400;
+    margin: 100px 0px;
+}
+
+
+.page-info {
+    padding: 0 100px;
+}
+
+h3 {
+    font-size: 48px;
+    font-weight: 500;
+    margin: 20px 0px;
+}
+
+p {
+    font-size: 36px;
+    font-weight: 200;
+    line-height: 1.3;
+}
+
+
+.page-contacts {
+    margin-top: 100px;
+}
+
+.contacts_stack {
+    margin-left: 100px;
+    margin-top: 50px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.contact-item img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.contact-item a {
+    font-size: 24px;
+    font-weight: 400;
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.contact-item a:hover {
+    color: #007bff;
+}

@@ -1,0 +1,61 @@
+body {
+    font-family: "Jost", sans-serif;
+    position: relative;
+    background-color: white;
+}
+
+.site-header {
+    background-color: white;
+}
+
+.lang-switch a {
+    color: black !important;
+}
+
+
+.status-bar {
+    padding-top: 106px;
+    background-color: black;
+    color: white;
+
+}
+
+
+.sb-inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding: 20px 40px;
+}
+
+
+.sb-logo {
+    width: 48px;
+    height: 42px;
+    object-fit: contain;
+    filter: invert(1);
+    /* делаем логотип белым на чёрном фоне */
+    opacity: .9;
+}
+
+
+.sb-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #fff;
+    opacity: .8;
+}
+
+.sb-link {
+    font-size: 24px;
+    letter-spacing: .12em;
+    font-weight: 300;
+    color: #cfcfcf;
+    text-decoration: none;
+}
+
+.sb-link:hover {
+    color: #fff;
+}

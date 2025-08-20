@@ -1,0 +1,252 @@
+a {}
+
+
+/* ========== PRODUCT DETAILS ========== */
+.pd {
+    --g: 40px;
+    --black: #111;
+    --gray: #e6e6e6;
+    --muted: #8b8b8b;
+    max-width: 1180px;
+    margin: 40px auto 100px;
+    font-family: "Jost", sans-serif;
+}
+
+/* верхний блок */
+.pd-grid {
+    display: grid;
+    grid-template-columns: minmax(280px, 520px) 1fr;
+    gap: var(--g);
+    align-items: start;
+}
+
+/* левая колонка */
+.pd-media {
+    display: grid;
+    gap: 24px;
+}
+
+.pd-photo {
+    background: #d9d9d9;
+    aspect-ratio: 3/4;
+    position: relative;
+    overflow: hidden;
+}
+
+.pd-eye {
+    position: absolute;
+    left: 14px;
+    bottom: 12px;
+    opacity: .6;
+}
+
+.pd-thumbs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) 44px;
+    gap: 16px;
+    align-items: center;
+    margin-top: auto;
+}
+
+.pd-thumb {
+    background: #d9d9d9;
+    aspect-ratio: 1/1;
+}
+
+.pd-thumbs-next {
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: #fff;
+    display: grid;
+    place-items: center;
+    transform: rotate(180deg);
+    /* стрелка вправо из левого svg */
+}
+
+/* правая колонка */
+.pd-info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 100%;
+}
+
+.pd-top {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 12px;
+}
+
+.pd-title {
+    font-size: 48px;
+    letter-spacing: .08em;
+    font-weight: 300;
+}
+
+.pd-icons {
+    display: inline-flex;
+    gap: 14px;
+}
+
+.pd-ic {
+    width: 20px;
+    height: 20px;
+}
+
+.pd-art {
+    color: var(--muted);
+    letter-spacing: .12em;
+    font-size: 24px;
+    font-weight: 200;
+    text-transform: uppercase;
+}
+
+.pd-price {
+    font-size: 64px;
+    letter-spacing: .12em;
+    font-weight: 400;
+}
+
+.pd-opts {
+    display: grid;
+    gap: 18px;
+    margin-top: 6px;
+}
+
+.pd-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.pd-label {
+    color: #666;
+    min-width: 60px;
+}
+
+.pd-colors {
+    display: inline-flex;
+    gap: 10px;
+}
+
+.pd-color {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1px solid #bdbdbd;
+    background: var(--c, #000);
+}
+
+.pd-color.is-active {
+    outline: 2px solid #000;
+    outline-offset: 2px;
+}
+
+.pd-sizes {
+    display: inline-flex;
+    gap: 8px;
+}
+
+.pd-size {
+    min-width: 44px;
+    height: 36px;
+    border: 1px solid #cfcfcf;
+    background: #fff;
+    color: #000;
+    display: grid;
+    place-items: center;
+    letter-spacing: .06em;
+}
+
+.pd-size.is-active {
+    background: #000;
+    color: #fff;
+}
+
+.pd-cart {
+    font-family: "Jost", sans-serif;
+    margin-left: auto;
+    height: 40px;
+    font-size: 30px;
+    font-weight: 300;
+    padding: 28px 24px;
+    background: #000;
+    color: #fff;
+    border: none;
+    letter-spacing: .08em;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.pd-cart:hover {
+    background: #242424;
+}
+
+/* секции ниже */
+.pd-block {
+    margin-top: 56px;
+}
+
+.pd-block-title {
+    background: #000;
+    color: #fff;
+    padding: 12px 46px;
+    letter-spacing: .12em;
+    font-size: 44px;
+    font-weight: 400;
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.pd-text {
+    padding: 0 40px;
+    margin-top: 18px;
+    font-size: 30px;
+    line-height: 12%;
+    font-weight: 300;
+    color: #333;
+    letter-spacing: 3%;
+    line-height: 1.6;
+}
+
+.pd-comp-item {
+    text-align: center;
+    padding: 0 20px;
+}
+
+/* состав */
+.pd-comp {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    margin-top: 26px;
+}
+
+.pd-comp-val {
+    font-size: clamp(26px, 3.2vw, 64px);
+    font-weight: 300;
+}
+
+.pd-comp-name {
+    font-size: 30px;
+    font-weight: 300;
+    color: #5e5e5e;
+    text-transform: lowercase;
+}
+
+/* адаптив */
+@media (max-width: 900px) {
+    .pd-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pd-cart {
+        margin-left: 0;
+    }
+}
