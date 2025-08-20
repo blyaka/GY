@@ -1,10 +1,8 @@
-version: "3.9"
-
 services:
   db:
     image: postgres:14
     container_name: gy_postgres
-    restart: always
+    restart: unless-stopped
     environment:
       POSTGRES_DB: gy_db
       POSTGRES_USER: gy_user
@@ -15,25 +13,25 @@ services:
   web:
     image: ${DOCKERHUB_USERNAME}/gy-web:latest
     container_name: gy_web
-    restart: always
+    restart: unless-stopped
     env_file: .env
     depends_on:
       - db
+    ports:
+      - "8000:8000"
     volumes:
-      - static_data:/app/static
-      - media_data:/app/media
-      - /var/www/east-mosaic/gunicorn.sock:/gunicorn.sock
+      - /var/www/gy/static:/app/static
+      - /var/www/gy/media:/app/media
     command: >
-      sh -c "python manage.py migrate &&
-             python manage.py collectstatic --noinput &&
-             gunicorn config.wsgi:application
-             --bind unix:/gunicorn.sock
-             --workers 4
-             --timeout 120
-             --access-logfile - 
-             --error-logfile -"
+      sh -c "
+        python manage.py migrate &&
+        python manage.py collectstatic --noinput &&
+        gunicorn config.wsgi:application
+          --bind 0.0.0.0:8000
+          --workers 4
+          --timeout 120
+          --access-logfile - 
+          --error-logfile -"
 
 volumes:
   postgres_data:
-  static_data:
-  media_data:
