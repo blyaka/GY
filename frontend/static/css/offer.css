@@ -1,0 +1,50 @@
+main {
+    padding: 100px;
+}
+
+.page_name {
+    font-size: 64px;
+    font-weight: 400;
+
+}
+
+.offer-info {
+    padding: 0 100px;
+}
+
+.offer-info h3 {
+    font-size: 48px;
+    font-weight: 500;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+.offer-info p {
+    font-size: 36px;
+    font-weight: 200;
+}
+
+.subcl {
+    display: block;
+    margin-left: 28px
+}
+
+.date {
+    margin-top: 100px;
+    font-size: 36px;
+    font-weight: 200;
+}
+
+
+
+.requisites h3 {
+    margin-top: 200px;
+    margin-bottom: 20px;
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.requisites p {
+    font-size: 36px;
+    font-weight: 200;
+}
