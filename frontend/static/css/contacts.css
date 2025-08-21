@@ -1,0 +1,87 @@
+main {
+    padding: 100px;
+}
+
+.phones {
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+    margin-left: 100px;
+    gap: 50px;
+}
+
+.phones h3 {
+    font-size: 48px;
+    font-weight: 500;
+    line-height: 48px
+}
+
+.phone-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.phone-stack a {
+    font-weight: 200;
+    font-size: 36px;
+    text-decoration: none;
+    color: black;
+    line-height: 48px
+}
+
+.phone-stack p {
+    font-weight: 200;
+    font-size: 24px;
+}
+
+
+.page-contacts {
+    margin-top: 100px;
+}
+
+
+h2 {
+    font-size: 64px;
+    font-weight: 400;
+}
+
+.contacts_stack {
+    margin-left: 200px;
+    margin-top: 50px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.contact-item img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.contact-item a {
+    font-size: 24px;
+    font-weight: 400;
+    color: #000000;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.contact-item a:hover {
+    color: #505050;
+}
+
+
+
+.company-info {
+    margin-top: 200px;
+}
+
+.company-info p {
+    font-size: 36px;
+    font-weight: 200;
+}
