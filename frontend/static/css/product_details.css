@@ -33,6 +33,12 @@ a {}
     overflow: hidden;
 }
 
+.pd-photo img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
 .pd-eye {
     position: absolute;
     left: 14px;
@@ -51,6 +57,12 @@ a {}
 .pd-thumb {
     background: #d9d9d9;
     aspect-ratio: 1/1;
+}
+
+.pd-thumb img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
 .pd-thumbs-next {
