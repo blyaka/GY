@@ -1,0 +1,237 @@
+main {
+    padding: 100px 200px;
+}
+
+.page_name {
+    font-size: 64px;
+    font-weight: 400;
+
+}
+
+
+/* Страница "Доставка и оплата" */
+:root {
+    --black: #111;
+    --muted: #7b7b7b;
+    --gap: 42px;
+}
+
+
+.block {
+    margin-top: 40px;
+    padding: 0 200px;
+}
+
+.h3 {
+    font-size: 48px;
+    letter-spacing: .18em;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin: 0 0 18px;
+}
+
+.h4 {
+    font-size: 36px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    margin: 50px 0 50px;
+}
+
+.lead {
+    font-size: 36px;
+    font-weight: 200;
+    line-height: 1.25;
+    color: #333;
+}
+
+.lead strong {
+    font-weight: 400;
+}
+
+/* Нумерованный список 1, 2 как в макете */
+.numlist {
+    counter-reset: i;
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 0;
+}
+
+.numlist>li {
+    counter-increment: i;
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 50px;
+    align-items: flex-start;
+    padding: 10px 0;
+    font-size: 36px;
+    font-weight: 200;
+    line-height: 1.3;
+}
+
+.numlist>li::before {
+    content: counter(i) ".";
+    font-size: 96px;
+    line-height: 1;
+    color: #000;
+    font-weight: 200;
+    transform: translateY(-2px);
+}
+
+.numlist>li>div {
+    font-size: 16px;
+    line-height: 1.65;
+    color: #333;
+}
+
+/* Доставка — две карточки с чёрными шапками */
+.tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 10px;
+}
+
+
+.tab-head {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #000;
+    color: #fff;
+    border: 0;
+    padding: 24px 36px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-size: 38px;
+    font-weight: 500;
+    cursor: default;
+}
+
+.tab-head .chev {
+    transform: rotate(0deg);
+    opacity: .9;
+}
+
+.tab-body {
+    padding: 18px 16px 22px;
+    border: none;
+}
+
+.tab-body p {
+    font-size: 30px;
+    font-weight: 200;
+    line-height: 1.3;
+    color: #000000;
+    margin: 0 0 14px;
+}
+
+.tab-body p:last-child {
+    margin-bottom: 0;
+}
+
+/* Контакты снизу */
+.contact {
+    margin-top: 34px;
+}
+
+.small-note {
+    font-size: 14px;
+    color: #333;
+    margin: 0 0 12px;
+}
+
+.contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0;
+    display: grid;
+    gap: 10px;
+    max-width: 420px;
+}
+
+.contact-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+}
+
+.contact-list .ic {
+    width: 22px;
+    height: 22px;
+    display: grid;
+    place-items: center;
+}
+
+
+/* Аккордеон для доставки */
+.tab-head {
+    cursor: pointer;
+}
+
+.tab .chev {
+    transition: transform .2s ease;
+}
+
+.tab-body {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 16px;
+    /* как в твоём файле */
+    transition: max-height .35s ease, padding .25s ease;
+}
+
+.tab.open .tab-body {
+    max-height: 1000px;
+    /* достаточно большое значение */
+    padding: 18px 16px 22px;
+}
+
+.tab.open .tab-head .chev {
+    transform: rotate(180deg);
+}
+
+
+
+
+.page-contacts {
+    margin-top: 100px;
+    padding: 0 200px;
+}
+
+
+h2 {
+    font-size: 36px;
+    font-weight: 200;
+}
+
+.contacts_stack {
+    margin-left: 200px;
+    margin-top: 50px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.contact-item img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.contact-item a {
+    font-size: 24px;
+    font-weight: 400;
+    color: #000000;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.contact-item a:hover {
+    color: #505050;
+}

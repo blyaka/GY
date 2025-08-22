@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин</title>
+    <link rel="stylesheet" href="static/css/offer.css">
+    <link rel="stylesheet" href="static/css/_base.css">
+    <link rel="stylesheet" href="static/css/_base-shop.css">
+
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="burger-menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line x1="0" y1="6" x2="25" y2="6" stroke="black" stroke-width="2" />
+                <line x1="0" y1="13" x2="15" y2="13" stroke="black" stroke-width="2" />
+                <line x1="0" y1="20" x2="25" y2="20" stroke="black" stroke-width="2" />
+            </svg>
+        </div>
+
+        <!-- OFFCANVAS MENU -->
+        <div class="offcanvas" id="offcanvas" aria-hidden="true">
+            <div class="offcanvas-panel" role="dialog" aria-modal="true" aria-label="Меню">
+                <div class="offcanvas-top">
+                    <button class="off-close" aria-label="Закрыть">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <line x1="0" y1="6" x2="25" y2="6" stroke="black" stroke-width="2" />
+                            <line x1="0" y1="13" x2="25" y2="13" stroke="black" stroke-width="2" />
+                            <line x1="0" y1="20" x2="25" y2="20" stroke="black" stroke-width="2" />
+                        </svg>
+                    </button>
+                    <a href="#" class="off-lang">ENG</a>
+                </div>
+
+                <nav class="off-nav">
+                    <a href="#" data-sub="shop">МАГАЗИН</a>
+                    <a href="#" data-sub="collections">КОЛЛЕКЦИИ</a>
+                    <a href="#" data-sub="delivery">ДОСТАВКА И ОПЛАТА</a>
+                    <a href="#" data-sub="returns">ВОЗВРАТ И ОБМЕН</a>
+                    <a href="#" data-sub="contacts">КОНТАКТЫ</a>
+                    <a href="#" data-sub="blog">БЛОГ</a>
+                    <a href="#" data-sub="social">НАШИ СОЦСЕТИ</a>
+                    <a href="#" data-sub="about">О НАС</a>
+                </nav>
+
+                <div class="off-icons">
+                    <img src="static/icons/search.svg" alt="Поиск">
+                    <img src="static/icons/bookmark-header.svg" alt="Избранное">
+                    <img src="static/icons/bag.svg" alt="Корзина">
+                    <img src="static/icons/user.svg" alt="Профиль">
+                </div>
+
+                <div class="off-watermark">
+                    <img src="static/images/logo_overlay_black.png" alt="">
+                </div>
+
+            </div>
+
+            <!-- Субпанель справа -->
+            <div class="off-sub" id="offSub" aria-hidden="true">
+                <div class="off-sub-head">
+                    <button class="off-sub-back" type="button" aria-label="Назад">
+                        <img src="static/icons/arrow.svg" alt="">
+                    </button>
+                    <div class="off-sub-title" id="offSubTitle"></div>
+                </div>
+                <div class="off-sub-body" id="offSubBody"></div>
+            </div>
+
+            <!-- Шаблоны наполняемого контента -->
+            <template id="tpl-shop">
+                <div class="off-sub-grid">
+                    <ul class="off-sub-list">
+                        <li><a href="#">ФУТБОЛКИ</a></li>
+                        <li><a href="#">ЛОНГСЛИВЫ</a></li>
+                        <li><a href="#">КОМПЛЕКТ СПОРТИВНЫЙ</a></li>
+                        <li><a href="#">ТОЛСТОВКИ (ХУДИ)</a></li>
+                        <li><a href="#">БРЮКИ</a></li>
+                    </ul>
+                    <a class="off-sub-all" href="#">СМОТРЕТЬ ВСЕ</a>
+                </div>
+            </template>
+
+            <template id="tpl-delivery">
+                <div class="off-sub-text">
+                    <p>Доставка по РФ: курьером и в пункты выдачи. Оплата: картой онлайн/при получении.</p>
+                    <a class="off-sub-all" href="#">Подробнее</a>
+                </div>
+            </template>
+
+            <script>
+                (() => {
+                    const offcanvas = document.getElementById('offcanvas');
+                    const closeBtn = offcanvas.querySelector('.off-close');
+
+                    const sub = document.getElementById('offSub');
+                    const subBody = document.getElementById('offSubBody');
+                    const subTitle = document.getElementById('offSubTitle');
+
+                    function openSub(key, title) {
+                        const tpl = document.getElementById('tpl-' + key);
+                        subBody.innerHTML = tpl ? tpl.innerHTML :
+                            '<div class="off-sub-text"><p>Скоро тут будет контент.</p></div>';
+                        subTitle.textContent = title || '';
+                        sub.classList.add('open');
+                    }
+                    function closeSub() { sub.classList.remove('open'); }
+
+                    offcanvas.querySelectorAll('.off-nav a[data-sub]').forEach(a => {
+                        a.addEventListener('click', e => {
+                            e.preventDefault();
+                            openSub(a.dataset.sub, a.textContent.trim());
+                        });
+                    });
+
+                    offcanvas.querySelector('.off-sub-back')?.addEventListener('click', closeSub);
+                    closeBtn?.addEventListener('click', closeSub);
+                    offcanvas.addEventListener('click', (e) => { if (e.target === offcanvas) closeSub(); });
+                })();
+            </script>
+
+
+        </div>
+
+
+        <script>
+            const burger = document.querySelector('.burger-menu');
+            const panel = document.getElementById('offcanvas');
+            const closeBtn = document.querySelector('.off-close');
+
+            function openMenu() {
+                panel.classList.add('open');
+                document.getElementById('offSub')?.classList.remove('open'); // сброс субпанели
+                document.body.style.overflow = 'hidden';
+            }
+            function closeMenu() {
+                panel.classList.remove('open');
+                document.getElementById('offSub')?.classList.remove('open'); // на всякий
+                document.body.style.overflow = '';
+            }
+
+            burger?.addEventListener('click', openMenu);
+            closeBtn?.addEventListener('click', closeMenu);
+            panel?.addEventListener('click', (e) => { if (e.target === panel) closeMenu(); });
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
+        </script>
+
+
+
+
+
+        <div class="logo">
+            <img src="static/images/GY_header_logo_black.svg" alt="Gabriel Yusubov" class="logo-img">
+        </div>
+
+        <div class="lang-switch" id="langSwitch">
+            <a href="">ENG</a>
+        </div>
+    </header>
+
+
+    <div class="status-bar" role="navigation" aria-label="Статус-бар">
+        <div class="sb-inner">
+            <img class="sb-logo" src="static/images/GY.svg" alt="GY">
+            <span class="sb-dot" aria-hidden="true"></span>
+            <a class="sb-link" href="/shop/">ДОГОВОР ОФЕРТЫ</a>
+        </div>
+    </div>
+
+    <main>
+        <h2 class="page_name">ДОГОВОР ОФЕРТЫ</h2>
+
+
+        <div class="offer-info">
+            <h3>ПУБЛИЧНАЯ ОФЕТРА</h3>
+            <p>
+                Интернет-магазин GABRIEL YUSUBOV, ИП Юсубов Габриэль Яшарович, ИНН _____________, именуемое в дальнейшем
+                «Продавец», публикует Публичную оферту о продаже Товара дистанционным способом.
+            </p>
+
+
+            <h3>1. ОПРЕДЕЛЕНИЕ ТЕРМИНОВ</h3>
+            <p>
+                1.1. Публичная оферта (далее – «Оферта») - публичное предложение Продавца, адресованное неопределённому
+                кругу лиц, заключить с Продавцом договор купли-продажи товара дистанционным способом (далее - «Договор»)
+                на условиях, содержащихся в настоящей Оферте, включая все приложения. <br><br>
+
+                1.2. Заказ Товара на сайте Интернет-магазина — позиции указанные Покупателем из ассортимента Товара,
+                предложенного к продаже, при оформлении заявки на приобретение Товара на сайте Интернет-магазина
+                или через Оператора.
+            </p>
+
+
+            <h3>2. ОСНОВНЫЕ ПОЛОЖЕНИЯ</h3>
+            <p>
+                2.1. Заказ Покупателем Товара, размещённого на сайте Интернет-магазина означает, что Покупатель согласен
+                со всеми условиями настоящей Оферты.<br><br>
+
+                2.2. Администрация сайта Интернет-магазина имеет право вносить изменения в Оферту без уведомления
+                Покупателя.<br><br>
+
+                2.3. Срок действия Оферты не ограничен, если иное не указано на сайте Интернет-магазина.<br><br>
+
+                2.4. Продавец предоставляет Покупателю полную и достоверную информацию о Товаре в разделе «Каталог».
+            </p>
+
+
+            <h3>3. ЦЕНА И ОПЛАТА ТОВАРА</h3>
+            <p>
+                3.1. Цена на каждую позицию Товара указана на сайте Интернет-магазина.<br><br>
+
+                3.2. Продавец имеет право в одностороннем порядке изменить цену на любую позицию Товара.<br><br>
+
+                3.3. Покупатель вправе подтвердить либо аннулировать Заказ на приобретение Товара, если цена изменена
+                Продавцом после оформления Заказа.<br><br>
+
+                3.4. Изменение Продавцом цены на оплаченный Покупателем Товар не допускается.<br><br>
+
+                3.5. Продавец указывает стоимость доставки Товара на сайте Интернет-магазина либо сообщает Покупателю
+                при оформлении заказа Оператором.<br><br>
+
+                3.6. Обязательства Покупателя по оплате Товара считаются исполненными с момента поступления Продавцу
+                денежных средств.<br><br>
+
+                3.7. Расчёты между Продавцом и Покупателем за Товар производятся способами, указанными на сайте
+                Интернет-магазина во время оформления заказа.
+            </p>
+
+
+            <h3>4. ОФОРМЛЕНИЕ ЗАКАЗА</h3>
+            <p>
+                4.1. Заказ Товара осуществляется Покупателем через сервис сайта Интернет-магазина
+                https://gabrielyusubov.com.<br><br>
+
+                4.2. При оформлении заказа на сайте Интернет-магазина Покупатель обязуется предоставить следующую
+                регистрационную информацию: <br>
+
+                <span class="subcl">4.2.1. фамилия, имя, отчество Покупателя или указанного им лица (получателя);</span>
+                <span class="subcl">4.2.2. адрес, по которому следует доставить Товар (если доставка до адреса
+                    Покупателя);</span>
+                <span class="subcl">4.2.3. адрес электронной почты;</span>
+                <span class="subcl">4.2.4. контактный телефон.</span><br><br>
+
+                4.3. Факт введения персональной информации на сайте
+                https://gabrielyusubov.com, а также сообщение их Оператору, является соглашением Покупателя на обработку
+                персональных данных.<br><br>
+
+                4.4. В случае доставки заказа курьерской службой или Почтой России Продавец передаёт логистической
+                компании необходимые личные данные Покупателя, к ним относятся фамилия, имя, отчество, контактный
+                телефон и адрес доставки (при необходимости).<br><br>
+
+                4.5. Наименование, количество, ассортимент, артикул, цена выбранного Покупателем Товара указываются
+                в корзине Покупателя на сайте Интернет-магазина.<br><br>
+
+                4.6. Если Продавцу необходима дополнительная информация, он вправе запросить её у Покупателя. В случае
+                непредоставления необходимой информации Покупателем, Продавец не несёт ответственности за выбранный
+                Покупателем Товар.<br><br>
+
+                4.7. При оформлении Заказа через Оператора (п. 4.1. настоящей Оферты) Покупатель обязуется предоставить
+                информацию, указанную в п. 4.2. настоящей Оферты.<br><br>
+
+                4.8. Принятие Покупателем условий настоящей Оферты осуществляется посредством внесения Покупателем
+                соответствующих данных в регистрационную форму на сайте Интернет-магазина или при оформлении Заказа
+                через Оператора. После оформления Заказа через Оператора данные о Покупателе регистрируются в базе
+                данных Продавца. Утвердив Заказ выбранного Товара, Покупатель предоставляет Оператору необходимую
+                информацию в соответствии с порядком, указанном в п. 4.2. настоящей Оферты.<br><br>
+
+                4.9. Продавец не несёт ответственности за содержание и достоверность информации, предоставленной
+                Покупателем при оформлении Заказа.<br><br>
+
+                4.10. Покупатель несёт ответственность за достоверность предоставленной информации при оформлении
+                Заказа.<br><br>
+
+                4.11. Договор купли-продажи считается заключённым в надлежащей форме с момента получения заказа
+                Продавцом от Покупателя. Факт осуществления заказа означает присоединение Покупателя к данным условиям
+                заказа в целом.
+            </p>
+
+
+            <h3>5. ДОСТАВКА И ПЕРЕДАЧА ТОВАРА ПОКУПАТЕЛЮ</h3>
+            <p>
+                5.1. Продавец оказывает Покупателю услуги по доставке Товара одним из способов указанных на сайте
+                Интернет-магазина во время оформления заказа.<br><br>
+
+                5.2. Место доставки Товара Покупатель указывает при оформлении Заказа.<br><br>
+
+                5.3. Срок доставки Товара Покупателю состоит из срока обработки заказа и срока доставки.<br><br>
+
+                5.4. Доставленный Товар передаётся Покупателю, а при отсутствии Покупателя — любому лицу, предъявившему
+                квитанцию или иной документ, подтверждающий заключение Договора или оформление доставки Товара.
+            </p>
+
+
+            <h3>6. ВОЗРВАТ И ОБМЕН</h3>
+            <p>
+                6.1 Потребитель вправе обменять непродовольственный товар надлежащего качества на аналогичный товар
+                у продавца, у которого этот товар был приобретён, если указанный товар не подошёл по форме, габаритам,
+                фасону, расцветке, размеру или комплектации. Потребитель имеет право на обмен непродовольственного
+                товара надлежащего качества в течение четырнадцати дней, не считая дня его покупки.<br><br>
+
+                6.2 Для обмена продукции надлежащего качества необходимо сохранение всех заводских бирок и этикеток,
+                упаковки и самого товара в неизменном виде, в котором он поступил потребителю. В противном случае
+                продавец в праве в обмене отказать.<br><br>
+
+                6.3. При обнаружении заводского брака товара, позиции ненадлежащего качества подлежат обмену.<br><br>
+
+                6.4. Для обмена продукции ненадлежащего качества необходимо предоставить фото — или видео-фиксацию
+                некачественного товара.
+            </p>
+
+
+            <h3>7. ВОЗВРАТ ДЕНЕЖНЫХ СРЕДСТВ</h3>
+            <p>
+                7.1. Возврат денежных средств происходит в течение 10 рабочих дней со дня предъявления Покупателем
+                соответствующего требования (при условии полноты необходимой для осуществления возврата
+                информации).<br><br>
+
+                7.1.1. При отказе Покупателя от оплаченного заказа, который ещё не был отправлен, денежные средства
+                возвращаются в полном объёме.<br><br>
+
+                7.1.2. При отказе Покупателя от оплаченного заказа, который уже в пути, Продавец вправе возвратить
+                всю сумму, за исключением расходов на доставку от потребителя возвращённого товара.
+            </p>
+
+
+            <h3>8. АВТОРСКИЕ ПРАВА</h3>
+            <p>
+                8.1. Весь контент сайта является собственностью Продавца и охраняется государством (в соответствии
+                с частью четвёртой Гражданского кодекса Российской Федерации).<br><br>
+
+                8.1.1. К контенту сайта относится следующая информация: статьи, текстовая информация, рисунки,
+                фотографии, видеоматериалы, аудиоматериалы, архитектура сайта.<br><br>
+
+                8.2. В случае несанкционированного использования информации, Продавец имеет право обратится
+                в соответствующие судебные органы Российской Федерации для защиты своей интеллектуальной собственности.
+            </p>
+
+
+            <h3>9. ОСОБЫЕ ПОЛОЖЕНИЯ</h3>
+            <p>
+                9.1. Все спорные ситуации между Продавцом и Покупателем решаются в досудебном порядке путём переговоров.
+                В случае невозможности достижения консенсуса конфликтные ситуации решаются в судебном порядке.
+            </p>
+
+
+            <div class="requisites">
+                <h3>РЕКВИЗИТЫ:</h3>
+                <p>
+                    ИНДИВИДУАЛЬНЫЙ ПРЕДПРИНИМАТЕЛЬ Юсубов Габриэль Яшарович,<br>
+                    ИНН _________________,<br>
+                    ОГРН/ОГРНИП __________________,<br>
+                    Расчетный счет ________________,<br>
+                    Банк АО «ТБанк»,<br>
+                    ИНН банка __________________,<br>
+                    БИК банка __________________,<br>
+                    Корреспондентский счет банка ____________________________,<br>
+                    Юридический адрес банка:________________________________<br>
+                    Адрес электронной почты: yusubov-gabriel@mail.ru.
+                </p>
+            </div>
+
+        </div>
+
+        <p class="date">Дата публикации: ___. ___. 2025 г.</p>
+
+
+    </main>
+
+
+    <footer class="site-footer">
+
+        <div class="footer-blocks">
+            <div class="footer-block-customer">
+                <h2>Покупателю:</h2>
+
+                <div class="customer-links">
+                    <a href="">Магазин</a>
+                    <a href="">Избранное</a>
+                    <a href="">Корзина</a>
+                    <a href="">Личный кабинет</a>
+                    <a href="">Возвраат и обмен</a>
+                    <a href="">Доставка и оплата</a>
+                    <a href="">Публичная оферта</a>
+                    <a href="">Политиа конфиденциальности</a>
+                </div>
+
+                <div class="footer-cp-name">
+                    <p>© 2025 Gabriel Yusubov </p>
+                </div>
+            </div>
+
+            <div class="footer-block-about">
+                <h2>О нас:</h2>
+
+                <div class="about-links">
+                    <a href="">Контакты</a>
+                    <a href="">Блог</a>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="footer-socials">
+            <ul class="socials-list">
+                <li>
+                    <a class="social" href="https://instagram.com/username" target="_blank" rel="noopener nofollow"
+                        aria-label="Instagram">
+                        <img src="static/icons/instagram.svg" alt="">
+                    </a>
+                </li>
+                <li>
+                    <a class="social" href="https://vk.com/username" target="_blank" rel="noopener nofollow"
+                        aria-label="VK">
+                        <img src="static/icons/vk.svg" alt="">
+                    </a>
+                </li>
+                <li>
+                    <a class="social" href="https://t.me/username" target="_blank" rel="noopener nofollow"
+                        aria-label="Telegram">
+                        <img src="static/icons/telegram.svg" alt="">
+                    </a>
+                </li>
+                <li>
+                    <a class="social" href="https://www.tiktok.com/@username" target="_blank" rel="noopener nofollow"
+                        aria-label="TikTok">
+                        <img src="static/icons/tiktok.svg" alt="">
+                    </a>
+                </li>
+                <li>
+                    <a class="social" href="https://youtube.com/@username" target="_blank" rel="noopener nofollow"
+                        aria-label="YouTube">
+                        <img src="static/icons/youtube.svg" alt="">
+                    </a>
+                </li>
+            </ul>
+
+            <p class="socials-note">*проект Meta Platforms Inc., запрещена в РФ</p>
+        </div>
+
+
+
+
+        <div class="logo-overlay-footer">
+            <img src="static/images/logo_overlay.svg" alt="">
+        </div>
+    </footer>
+
+
+</body>
+
+</html>

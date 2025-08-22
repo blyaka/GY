@@ -1,0 +1,97 @@
+main {
+    padding: 100px;
+}
+
+.page_name {
+    font-size: 64px;
+    font-weight: 400;
+
+}
+
+.privacy-info {
+    padding: 0 100px;
+}
+
+.privacy-info h3 {
+    font-size: 48px;
+    font-weight: 500;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+.privacy-info p {
+    font-size: 36px;
+    font-weight: 200;
+}
+
+.date {
+    margin-top: 100px;
+    font-size: 36px;
+    font-weight: 200;
+}
+
+
+
+.pp-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 40px 0 10px;
+    font-family: "Jost", sans-serif;
+}
+
+.pp-table td {
+    vertical-align: top;
+    padding: 100px 54px;
+    font-size: 36px;
+    line-height: 1.6;
+}
+
+.pp-table td.pp-label {
+    width: 45%;
+    font-weight: 200;
+}
+
+.pp-table td.pp-text {
+    width: 55%;
+    font-weight: 200;
+}
+
+.pp-table tr+tr td {
+    border-top: 1px solid #dadada;
+}
+
+
+.pp-table td:nth-child(2) {
+    border-left: 1px solid #dadada;
+}
+
+
+@media (max-width: 720px) {
+    .pp-table td {
+        display: block;
+        width: 100%;
+        padding: 14px 0;
+    }
+
+    .pp-table tr+tr td {
+        border-top: 1px solid #dadada;
+    }
+
+    .pp-table td:nth-child(2) {
+        border-left: none;
+        padding-top: 0;
+    }
+
+    .pp-table td.pp-label {
+        color: #000;
+        font-weight: 500;
+        padding-bottom: 6px;
+    }
+
+    .privacy-info {
+        padding: 0 20px;
+    }
+
+    /* чтобы не упиралось в края */
+}
