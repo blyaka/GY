@@ -48,7 +48,7 @@
                     <a href="#">КОЛЛЕКЦИИ</a>
                     <a href="#">ДОСТАВКА И ОПЛАТА</a>
                     <a href="#">ВОЗВРАТ И ОБМЕН</a>
-                    <a href="#">КОНТАКТЫ</a>
+                    <a href="{% url 'contacts' %}">КОНТАКТЫ</a>
                     <a href="#">БЛОГ</a>
                     <a href="#">НАШИ СОЦСЕТИ</a>
                     <a href="#">О НАС</a>
@@ -166,44 +166,7 @@
                         </div>
                     </a>
 
-                    <!-- Скопируй карточку под свои товары -->
-                    <a href="#" class="card">
-                        <div class="card-media">
-                            <img src="{% static 'images/product1.jpg' %}" alt="Платье YYYY">
-                            <span class="card-eye" aria-hidden="true">
-                                <img src="{% static 'icons/eye.svg' %}" alt="">
-                            </span>
-                            <span class="card-bookmark" aria-hidden="true">
-                                <img src="{% static 'icons/bookmark.svg' %}" alt="">
-                            </span>
-                        </div>
-                        <div class="card-info">
-                            <h3 class="card-title">ПЛАТЬЕ YYYY</h3>
-                            <div class="card-meta">
-                                <span class="card-price">7&nbsp;490&nbsp;₽</span>
-                                <span class="card-art">АРТ. 081245</span>
-                            </div>
-                        </div>
-                    </a>
 
-                    <a href="#" class="card">
-                        <div class="card-media">
-                            <img src="{% static 'images/product1.jpg' %}" alt="Платье ZZZZ">
-                            <span class="card-eye" aria-hidden="true">
-                                <img src="{% static 'icons/eye.svg' %}" alt="">
-                            </span>
-                            <span class="card-bookmark" aria-hidden="true">
-                                <img src="{% static 'icons/bookmark.svg' %}" alt="">
-                            </span>
-                        </div>
-                        <div class="card-info">
-                            <h3 class="card-title">ПЛАТЬЕ ZZZZ</h3>
-                            <div class="card-meta">
-                                <span class="card-price">5&nbsp;999&nbsp;₽</span>
-                                <span class="card-art">АРТ. 090838</span>
-                            </div>
-                        </div>
-                    </a>
                 </div>
 
                 <button class="cat-nav next" aria-label="Вперёд">
@@ -249,7 +212,7 @@
                 <h2>О нас:</h2>
 
                 <div class="about-links">
-                    <a href="">Контакты</a>
+                    <a href="{% url 'contacts' %}">Контакты</a>
                     <a href="">Блог</a>
                 </div>
             </div>
