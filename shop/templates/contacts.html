@@ -1,35 +1,25 @@
 {% extends '_base.html' %}
 {% load static %}
 
-{% block title %}
-  Контакты
-{% endblock %}
+{% block title %}Контакты{% endblock %}
 
 {% block styles %}
   <link rel="stylesheet" href="{% static 'css/contacts.css' %}" />
 {% endblock %}
 
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/contacts.css' %}">
+{% endblock %}
+
+
 {% block content %}
-  <div class="status-bar" role="navigation" aria-label="Статус-бар">
-    <div class="sb-inner">
-      <img class="sb-logo" src="static/images/GY.svg" alt="GY" />
-      <span class="sb-dot" aria-hidden="true"></span>
-      <a class="sb-link" href="/shop/">КОНТАКТЫ</a>
-    </div>
-  </div>
 
-  <main>
-    <h2>КОНТАКТЫ</h2>
-
-    <div class="phones">
-      <h3>ТЕЛЕФОН</h3>
-
-      <div class="phone-stack">
-        <a href="tel:+7XXX XXX XX XX">+7 XXX XXX XX XX</a>
-        <a href="tel:+7XXX XXX XX XX">+7 XXX XXX XX XX</a>
-
-        <p>Ежедневно с XX:XX до ХХ:ХХ</p>
-      </div>
+    <div class="status-bar" role="navigation" aria-label="Статус-бар">
+        <div class="sb-inner">
+            <img class="sb-logo" src="{% static 'images/GY.svg' %}" alt="GY">
+            <span class="sb-dot" aria-hidden="true"></span>
+            <a class="sb-link" href="{% url 'contacts' %}">КОНТАКТЫ</a>
+        </div>
     </div>
 
     <div class="page-contacts">
@@ -40,9 +30,26 @@
           <img src="{% static 'icons/mail_icon.svg' %}" alt="Email" />
           <a href="mailto:example@example.com">example@example.com</a>
         </div>
-        <div class="contact-item">
-          <img src="{% static 'icons/phone_icon.svg' %}" alt="Email" />
-          <a href="tel:+7XXX XXX XX XX">+7 XXX XXX XX XX</a>
+
+
+        <div class="page-contacts">
+            <h2>Нужна помощь с оформлением заказа?</h2>
+
+            <div class="contacts_stack">
+                <div class="contact-item">
+                    <img src="{% static 'icons/mail_icon.svg' %}" alt="Email">
+                    <a href="mailto:example@example.com">example@example.com</a>
+                </div>
+                <div class="contact-item">
+                    <img src="{% static 'icons/phone_icon.svg' %}" alt="Phone">
+                    <a href="tel:+7XXX XXX XX XX">+7 XXX XXX XX XX</a>
+                </div>
+                <div class="contact-item">
+                    <img src="{% static 'icons/telegram_icon.svg' %}" alt="Telegram">
+                    <a href="https://t.me/GABRIEL_YUSUBOV" target="_blank">@GABRIEL_YUSUBOV</a>
+                </div>
+            </div>
+
         </div>
         <div class="contact-item">
           <img src="{% static 'icons/telegram_icon.svg' %}" alt="Email" />
@@ -51,12 +58,5 @@
       </div>
     </div>
 
-    <div class="company-info">
-      <p>ИП Юсубов Габриэль Яшарович</p>
-
-      <p>ИНН XXXXXXXXXXXX</p>
-
-      <p>ОРГН</p>
-    </div>
-  </main>
-{% endblock %}
+    </main>
+{% endblock content %}
