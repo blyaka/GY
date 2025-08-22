@@ -11,3 +11,13 @@ def ContactsPage(request):
 
 def DeliveryPage(request):
     return render(request, 'delivery.html')
+
+def RefundPage(request):
+    return render(request, 'refund_exchange.html')
+
+
+def PrivacyPage(request):
+    return render(request, 'privacy_policy.html')
+
+def OfferPage(request):
+    return render(request, 'offer.html')

@@ -47,7 +47,7 @@
                     <a href="{% url 'shop' %}">МАГАЗИН</a>
                     <a href="#">КОЛЛЕКЦИИ</a>
                     <a href="{% url 'delivery' %}">ДОСТАВКА И ОПЛАТА</a>
-                    <a href="#">ВОЗВРАТ И ОБМЕН</a>
+                    <a href="{% url 'refund' %}">ВОЗВРАТ И ОБМЕН</a>
                     <a href="{% url 'contacts' %}">КОНТАКТЫ</a>
                     <a href="#">БЛОГ</a>
                     <a href="#">НАШИ СОЦСЕТИ</a>
@@ -197,10 +197,10 @@
                     <a href="">Избранное</a>
                     <a href="">Корзина</a>
                     <a href="">Личный кабинет</a>
-                    <a href="">Возвраат и обмен</a>
+                    <a href="{% url 'refund' %}">Возврат и обмен</a>
                     <a href="{% url 'delivery' %}">Доставка и оплата</a>
-                    <a href="">Публичная оферта</a>
-                    <a href="">Политиа конфиденциальности</a>
+                    <a href="{% url 'offer' %}">Публичная оферта</a>
+                    <a href="{% url 'privacy' %}">Политика конфиденциальности</a>
                 </div>
 
                 <div class="footer-cp-name">
