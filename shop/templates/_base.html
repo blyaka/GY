@@ -49,7 +49,7 @@
                 <nav class="off-nav">
                     <a href="#" data-sub="shop">МАГАЗИН</a>
                     <a href="#" data-sub="collections">КОЛЛЕКЦИИ</a>
-                    <a href="#" data-sub="delivery">ДОСТАВКА И ОПЛАТА</a>
+                    <a href="{% url 'delivery' %}" data-sub="delivery">ДОСТАВКА И ОПЛАТА</a>
                     <a href="#" data-sub="returns">ВОЗВРАТ И ОБМЕН</a>
                     <a href="{% url 'contacts' %}" data-sub="contacts">КОНТАКТЫ</a>
                     <a href="#" data-sub="blog">БЛОГ</a>
@@ -98,7 +98,7 @@
             <template id="tpl-delivery">
                 <div class="off-sub-text">
                     <p>Доставка по РФ: курьером и в пункты выдачи. Оплата: картой онлайн/при получении.</p>
-                    <a class="off-sub-all" href="#">Подробнее</a>
+                    <a class="off-sub-all" href="{% url 'delivery' %}">Подробнее</a>
                 </div>
             </template>
 
@@ -188,7 +188,7 @@
                     <a href="">Корзина</a>
                     <a href="">Личный кабинет</a>
                     <a href="">Возвраат и обмен</a>
-                    <a href="">Доставка и оплата</a>
+                    <a href="{% url 'delivery' %}">Доставка и оплата</a>
                     <a href="">Публичная оферта</a>
                     <a href="">Политиа конфиденциальности</a>
                 </div>

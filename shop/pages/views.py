@@ -8,3 +8,6 @@ def HomePage(request):
 
 def ContactsPage(request):
     return render(request, 'contacts.html')
+
+def DeliveryPage(request):
+    return render(request, 'delivery.html')
