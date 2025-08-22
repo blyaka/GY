@@ -1,0 +1,49 @@
+main {
+    padding: 100px;
+    position: relative;
+}
+
+.lk-section-name {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.lk-section-name p {
+    font-size: 36px;
+    font-weight: 300;
+}
+
+.lk-links {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+    margin: 100px 0px;
+}
+
+.lk-links a {
+    font-size: 48px;
+    font-weight: 400;
+    text-decoration: none;
+    color: black;
+}
+
+.lk-links .logout {
+    font-weight: 200;
+}
+
+
+.background-logo {
+    position: absolute;
+    bottom: -250px;
+    left: -200px;
+    z-index: -1;
+    opacity: 0.2;
+}
+
+.background-logo img {
+    width: 1000px;
+}
+
