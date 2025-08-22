@@ -30,6 +30,10 @@
 
                 <div class="pd-media">
                     <div class="pd-photo">
+                        {% if featured_image %}
+                            <img src="{{ featured_image.image.url }}" alt="{{ product.name }}">
+                        {% endif %}
+
                         <span class="pd-eye" aria-hidden="true">
                             <svg width="22" height="22" viewBox="0 0 24 24">
                                 <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z" fill="none" stroke="currentColor"
@@ -38,6 +42,7 @@
                             </svg>
                         </span>
                     </div>
+
                 </div>
 
                 <div class="pd-info">

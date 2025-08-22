@@ -154,3 +154,10 @@ class ProductDetailView(DetailView):
     model = Product
     template_name = "shop/product_detail.html"
     context_object_name = "product"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        product = self.object
+        featured = product.images.filter(is_featured=True).first() or product.images.first()
+        context["featured_image"] = featured
+        return context
