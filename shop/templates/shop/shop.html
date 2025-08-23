@@ -35,7 +35,7 @@
         <div class="filters-bar" role="region" aria-label="Фильтры каталога">
             <div class="fb-top">
                 <button class="fb-menu" aria-label="Открыть панель фильтров">
-                    <svg width="38" height="38" viewBox="0 0 18 18" aria-hidden="true" focusable="false">
+                    <svg width="30" height="30" viewBox="0 0 18 18" aria-hidden="true" focusable="false">
                         <rect width="18" height="18" rx="1" fill="#111" />
                         <path d="M3 5.5H15" stroke="#fff" stroke-width="1.2" stroke-linecap="round" />
                         <path d="M5 9H13" stroke="#fff" stroke-width="1.2" stroke-linecap="round" />
@@ -145,199 +145,6 @@
                     </div>
                 </div>
             </div>
-
-            <script>
-                (() => {
-                    const dds = document.querySelectorAll('.fb-dd');
-
-                    // открыть/закрыть поповеры
-                    dds.forEach(dd => {
-                        const btn = dd.querySelector('.fb-item');
-                        btn?.addEventListener('click', e => {
-                            e.stopPropagation();
-                            const opened = dd.classList.contains('open');
-                            dds.forEach(x => x.classList.remove('open'));
-                            if (!opened) dd.classList.add('open');
-                        });
-                    });
-                    document.addEventListener('click', () => dds.forEach(x => x.classList.remove('open')));
-                    document.addEventListener('keydown', e => { if (e.key === 'Escape') dds.forEach(x => x.classList.remove('open')); });
-
-                    const ddCat = document.querySelector('.fb-dd[data-dd="category"]');
-                    const ddSize = document.querySelector('.fb-dd[data-dd="size"]');
-                    const ddColor = document.querySelector('.fb-dd[data-dd="color"]');
-                    const ddPrice = document.querySelector('.fb-dd[data-dd="price"]');
-
-                    const setActive = (dd, on) => dd?.querySelector('.fb-item')?.classList.toggle('is-active', !!on);
-                    const any = (root, sel) => !!(root && root.querySelector(sel));
-
-                    // выбор цвета
-                    // document.querySelectorAll('.dd-colors .dot').forEach(dot => {
-                    //     dot.addEventListener('click', () => {
-                    //         dot.classList.toggle('active');
-                    //         updateActives();
-                    //     });
-                    // });
-
-                    // // выбор размера
-                    // document.querySelectorAll('.dd-sizes .sz').forEach(sz => {
-                    //     sz.addEventListener('click', () => {
-                    //         sz.classList.toggle('active');
-                    //         updateActives();
-                    //     });
-                    // });
-
-                    // // выбор категории (пока заглушки-ссылки)
-                    // ddCat?.querySelectorAll('.dd-list li:not(.dd-all) a').forEach(a => {
-                    //     a.addEventListener('click', e => {
-                    //         e.preventDefault();
-                    //         ddCat.dataset.selected = '1';
-                    //         updateActives();
-                    //     });
-                    // });
-
-
-                    ddCat?.querySelector('.dd-all a')?.addEventListener('click', e => {
-                        e.preventDefault();
-                        delete ddCat.dataset.selected;
-                        updateActives();
-                    });
-
-                    // цена: двойной ползунок
-                    let rMin, rMax, iMin, iMax, wrap;
-                    const minGap = 100;
-                    if (ddPrice) {
-                        wrap = ddPrice.querySelector('.range-wrap');
-                        rMin = ddPrice.querySelector('.range-min');
-                        rMax = ddPrice.querySelector('.range-max');
-                        iMin = ddPrice.querySelector('.price-min');
-                        iMax = ddPrice.querySelector('.price-max');
-
-                        function paint() {
-                            const min = +rMin.min, max = +rMax.max;
-                            const a = ((+rMin.value - min) / (max - min)) * 100;
-                            const b = ((+rMax.value - min) / (max - min)) * 100;
-                            wrap.style.background = `linear-gradient(to right,#ddd ${a}%, #111 ${a}%, #111 ${b}%, #ddd ${b}%)`;
-                        }
-                        function clampFromRange(changed) {
-                            let a = +rMin.value, b = +rMax.value;
-                            if (b - a < minGap) {
-                                if (changed === rMin) a = b - minGap; else b = a + minGap;
-                                rMin.value = a; rMax.value = b;
-                            }
-                            iMin.value = rMin.value; iMax.value = rMax.value;
-                            paint(); updateActives();
-                        }
-                        function clampFromInput() {
-                            let a = Math.max(+iMin.min || 0, +iMin.value || 0);
-                            let b = Math.min(+iMax.max || 100000, +iMax.value || 0);
-                            if (b - a < minGap) b = a + minGap;
-                            rMin.value = a; rMax.value = b; iMin.value = a; iMax.value = b;
-                            paint(); updateActives();
-                        }
-                        rMin.addEventListener('input', () => clampFromRange(rMin));
-                        rMax.addEventListener('input', () => clampFromRange(rMax));
-                        iMin.addEventListener('change', clampFromInput);
-                        iMax.addEventListener('change', clampFromInput);
-                        paint();
-                    }
-
-                    // сброс всех фильтров
-                    document.querySelector('.fb-clear')?.addEventListener('click', () => {
-                        delete ddCat?.dataset.selected;
-                        ddSize?.querySelectorAll('.sz.active').forEach(x => x.classList.remove('active'));
-                        ddColor?.querySelectorAll('.dot.active').forEach(x => x.classList.remove('active'));
-                        if (ddPrice) {
-                            rMin.value = rMin.min; rMax.value = rMax.max;
-                            iMin.value = rMin.value; iMax.value = rMax.value;
-                            wrap && (wrap.style.background = '');
-                        }
-                        updateActives();
-                    });
-
-                    function updateActives() {
-                        setActive(ddCat, ddCat?.dataset.selected === '1');
-                        setActive(ddSize, any(ddSize, '.sz.active'));
-                        setActive(ddColor, any(ddColor, '.dot.active'));
-                        if (ddPrice) {
-                            const active = (+rMin.value > +rMin.min) || (+rMax.value < +rMax.max);
-                            setActive(ddPrice, active);
-                        }
-                    }
-
-                    updateActives(); // стартовое состояние
-                })();
-            </script>
-
-
-
-            <script>
-                (() => {
-                    const bar = document.querySelector('.filters-bar');
-                    const btn = bar?.querySelector('.fb-menu');
-                    const row = bar?.querySelector('.fb-row');
-                    if (!bar || !btn || !row) return;
-
-                    // закрываем поповеры при сворачивании
-                    const closePopovers = () => bar.querySelectorAll('.fb-dd.open').forEach(x => x.classList.remove('open'));
-
-                    const collapse = () => {
-                        closePopovers();
-                        const h = row.scrollHeight;
-                        row.style.height = h + 'px';
-                        bar.classList.add('is-collapsing');
-                        requestAnimationFrame(() => {
-                            row.style.opacity = '0';
-                            row.style.height = '0px';
-                        });
-                        row.addEventListener('transitionend', function onEnd(e) {
-                            if (e.propertyName !== 'height') return;
-                            row.removeEventListener('transitionend', onEnd);
-                            row.style.display = 'none';
-                            row.style.height = '';
-                            bar.classList.remove('is-collapsing');
-                            bar.classList.add('is-collapsed');
-                            btn.setAttribute('aria-expanded', 'false');
-                        });
-                    };
-
-                    const expand = () => {
-                        row.style.display = '';
-                        // сразу ставим 0, затем плавно до фактической высоты
-                        row.style.opacity = '0';
-                        row.style.height = '0px';
-                        const h = row.scrollHeight;
-                        bar.classList.add('is-expanding');
-                        requestAnimationFrame(() => {
-                            row.style.opacity = '1';
-                            row.style.height = h + 'px';
-                        });
-                        row.addEventListener('transitionend', function onEnd(e) {
-                            if (e.propertyName !== 'height') return;
-                            row.removeEventListener('transitionend', onEnd);
-                            row.style.height = '';
-                            bar.classList.remove('is-expanding');
-                            bar.classList.remove('is-collapsed');
-                            btn.setAttribute('aria-expanded', 'true');
-                        });
-                    };
-
-                    btn.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        if (bar.classList.contains('is-collapsed')) expand(); else collapse();
-                    });
-
-                    // при ресайзе правим авто-высоту, если блок открыт
-                    window.addEventListener('resize', () => {
-                        if (!bar.classList.contains('is-collapsed') && row.style.height) {
-                            row.style.height = row.scrollHeight + 'px';
-                        }
-                    });
-                })();
-            </script>
-
-
-
         </div>
 
 
@@ -385,143 +192,48 @@
         </section>
 
         <!-- PAGINATION -->
-{% if is_paginated %}
-<nav class="pager" role="navigation" aria-label="Пагинация">
+        {% if is_paginated %}
+        <nav class="pager" role="navigation" aria-label="Пагинация">
 
-    {# Кнопка "назад" #}
-    {% if page_obj.has_previous %}
-        <a class="pg-btn pg-prev"
-           href="?page={{ page_obj.previous_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">
-            <img src="{% static 'icons/arrow.svg' %}" alt="">
-        </a>
-    {% else %}
-        <button class="pg-btn pg-prev" aria-disabled="true" disabled>
-            <img src="{% static 'icons/arrow.svg' %}" alt="">
-        </button>
-    {% endif %}
-
-    <ul class="pg-list">
-        {% for num in paginator.page_range %}
-            {% if num == page_obj.number %}
-                <li><span class="pg-link is-current">{{ num }}</span></li>
+            {# Кнопка "назад" #}
+            {% if page_obj.has_previous %}
+                <a class="pg-btn pg-prev"
+                href="?page={{ page_obj.previous_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">
+                    <img src="{% static 'icons/arrow.svg' %}" alt="">
+                </a>
             {% else %}
-                <li>
-                    <a class="pg-link"
-                       href="?page={{ num }}{% if querystring %}&{{ querystring }}{% endif %}">{{ num }}</a>
-                </li>
+                <button class="pg-btn pg-prev" aria-disabled="true" disabled>
+                    <img src="{% static 'icons/arrow.svg' %}" alt="">
+                </button>
             {% endif %}
-        {% endfor %}
-    </ul>
 
-    {# Кнопка "вперёд" #}
-    {% if page_obj.has_next %}
-        <a class="pg-btn pg-next"
-           href="?page={{ page_obj.next_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">
-            <img src="{% static 'icons/arrow.svg' %}" alt="">
-        </a>
-    {% else %}
-        <button class="pg-btn pg-next" aria-disabled="true" disabled>
-            <img src="{% static 'icons/arrow.svg' %}" alt="">
-        </button>
-    {% endif %}
+            <ul class="pg-list">
+                {% for num in paginator.page_range %}
+                    {% if num == page_obj.number %}
+                        <li><span class="pg-link is-current">{{ num }}</span></li>
+                    {% else %}
+                        <li>
+                            <a class="pg-link"
+                            href="?page={{ num }}{% if querystring %}&{{ querystring }}{% endif %}">{{ num }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
 
-</nav>
-{% endif %}
+            {# Кнопка "вперёд" #}
+            {% if page_obj.has_next %}
+                <a class="pg-btn pg-next"
+                href="?page={{ page_obj.next_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">
+                    <img src="{% static 'icons/arrow.svg' %}" alt="">
+                </a>
+            {% else %}
+                <button class="pg-btn pg-next" aria-disabled="true" disabled>
+                    <img src="{% static 'icons/arrow.svg' %}" alt="">
+                </button>
+            {% endif %}
 
-
-
-
-
-
-
-        <script>
-            (() => {
-                let qv, qvPhoto, qvTitle, qvPrice, qvArt, qvBookmark, currentCard = null;
-
-                function cacheQv() {
-                    if (qv) return;
-                    qv = document.getElementById('qv');
-                    qvPhoto = document.getElementById('qvPhoto');
-                    qvTitle = document.getElementById('qvTitle');
-                    qvPrice = document.getElementById('qvPrice');
-                    qvArt = document.getElementById('qvArt');
-                    qvBookmark = document.getElementById('qvBookmark');
-
-                    qv?.addEventListener('click', e => { if (e.target.hasAttribute('data-qv-close')) closeQuickView(); });
-                    qvBookmark?.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const on = !qvBookmark.classList.contains('active');
-                        qvBookmark.classList.toggle('active', on);
-                        qvBookmark.setAttribute('aria-pressed', on);
-                        const flag = currentCard?.querySelector('.p-flag-btn');
-                        if (flag) { flag.classList.toggle('active', on); flag.setAttribute('aria-pressed', on); }
-                    });
-                }
-
-                function syncBookmarkFromCard(card) {
-                    const flag = card?.querySelector('.p-flag-btn');
-                    const on = !!flag && flag.classList.contains('active');
-                    qvBookmark?.classList.toggle('active', on);
-                    qvBookmark?.setAttribute('aria-pressed', on);
-                }
-
-                function openQuickView(card) {
-                    cacheQv();
-                    currentCard = card;
-                    const title = card.querySelector('.p-title')?.textContent?.trim() || 'Товар';
-                    const price = card.querySelector('.p-price')?.innerHTML || '';
-                    const art = card.querySelector('.p-art')?.textContent?.trim() || '';
-                    const img = card.dataset.img || card.querySelector('.p-media img')?.getAttribute('src');
-
-                    qvTitle.textContent = title;
-                    qvPrice.innerHTML = price;
-                    qvArt.textContent = art;
-                    qvPhoto.style.background = img ? `url('${img}') center/cover no-repeat` : '#e2e2e2';
-
-                    syncBookmarkFromCard(card);
-
-                    qv.classList.add('open');
-                    document.body.style.overflow = 'hidden';
-                }
-                function closeQuickView() {
-                    qv?.classList.remove('open');
-                    document.body.style.overflow = '';
-                    currentCard = null;
-                }
-
-                document.addEventListener('click', (e) => {
-                    const eye = e.target.closest('.p-eye-btn');
-                    if (!eye) return;
-                    e.preventDefault(); e.stopPropagation();
-                    const card = eye.closest('.p-card');
-                    openQuickView(card);
-                });
-
-                document.addEventListener('click', (e) => {
-                    const flag = e.target.closest('.p-flag-btn');
-                    if (!flag) return;
-                    e.preventDefault(); e.stopPropagation();
-                    const on = !flag.classList.contains('active');
-                    flag.classList.toggle('active', on);
-                    flag.setAttribute('aria-pressed', on);
-                    if (currentCard && flag.closest('.p-card') === currentCard) {
-                        cacheQv();
-                        qvBookmark.classList.toggle('active', on);
-                        qvBookmark.setAttribute('aria-pressed', on);
-                    }
-                });
-
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape' && qv?.classList.contains('open')) closeQuickView();
-                });
-            })();
-        </script>
-
-
-
-
-
-
+        </nav>
+        {% endif %}
 
         <!-- MODAL QUICK VIEW MODAL -->
         <div class="qv" id="qv" aria-hidden="true">
@@ -566,273 +278,386 @@
 
 
 <script>
-(() => {
-  const fmt = new Intl.NumberFormat('ru-RU');
+    (() => {
+    // ===== утилиты
+    const $  = (s, r=document) => r.querySelector(s);
+    const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+    const fmt = new Intl.NumberFormat('ru-RU');
 
-  let qv, qvPhoto, qvTitle, qvPrice, qvArt, qvBookmark, qvColors, qvSizes, qvFabrics, currentCard = null;
-  function cacheQv() {
-    if (qv) return;
-    qv = document.getElementById('qv');
-    qvPhoto = document.getElementById('qvPhoto');
-    qvTitle = document.getElementById('qvTitle');
-    qvPrice = document.getElementById('qvPrice');
-    qvArt   = document.getElementById('qvArt');
-    qvBookmark = document.getElementById('qvBookmark');
-    qvColors = document.getElementById('qvColors');
-    qvSizes  = document.getElementById('qvSizes');
-    qvFabrics= document.getElementById('qvFabrics');
+    // ====== POPover’ы
+    const dds = $$('.fb-dd');
+    dds.forEach(dd => {
+        const btn = dd.querySelector('.fb-item');
+        btn?.addEventListener('click', e => {
+        e.stopPropagation();
+        const opened = dd.classList.contains('open');
+        dds.forEach(x => x.classList.remove('open'));
+        if (!opened) dd.classList.add('open');
+        });
+    });
+    document.addEventListener('click', () => dds.forEach(x => x.classList.remove('open')));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') dds.forEach(x => x.classList.remove('open')); });
+
+    // ====== элементы фильтров
+    const bar   = $('.filters-bar');
+    const btnM  = bar?.querySelector('.fb-menu');
+    const row   = bar?.querySelector('.fb-row');
+
+    const ddCat   = $('.fb-dd[data-dd="category"]');
+    const ddSize  = $('.fb-dd[data-dd="size"]');
+    const ddColor = $('.fb-dd[data-dd="color"]');
+    const ddPrice = $('.fb-dd[data-dd="price"]');
+    const ddSort  = $('.fb-dd[data-dd="sort"]');
+
+    const btnCats     = $$('.dd-category');           // <button class="dd-category" data-category="...">
+    const btnCatClear = $('.dd-category-clear');      // <button class="dd-category-clear">
+    const sizeBtns    = $$('.dd-sizes .sz');          // <button class="sz" data-size="...">
+    const colorBtns   = $$('.dd-colors .dot');        // <button class="dot" data-color="...">
+
+    const rMin = ddPrice?.querySelector('.range-min');
+    const rMax = ddPrice?.querySelector('.range-max');
+    const iMin = ddPrice?.querySelector('.price-min');
+    const iMax = ddPrice?.querySelector('.price-max');
+    const wrap = ddPrice?.querySelector('.range-wrap');
+    const minGap = 100;
+
+    // ====== сворачивание/разворачивание панели фильтров
+    if (bar && btnM && row) {
+        const closePopovers = () => bar.querySelectorAll('.fb-dd.open').forEach(x => x.classList.remove('open'));
+        const collapse = () => {
+        closePopovers();
+        const h = row.scrollHeight;
+        row.style.height = h + 'px';
+        bar.classList.add('is-collapsing');
+        requestAnimationFrame(() => {
+            row.style.opacity = '0';
+            row.style.height = '0px';
+        });
+        row.addEventListener('transitionend', function onEnd(e) {
+            if (e.propertyName !== 'height') return;
+            row.removeEventListener('transitionend', onEnd);
+            row.style.display = 'none';
+            row.style.opacity = '';
+            row.style.height = '';
+            bar.classList.remove('is-collapsing');
+            bar.classList.add('is-collapsed');
+            btnM.setAttribute('aria-expanded', 'false');
+        });
+        };
+        const expand = () => {
+        row.style.display = '';
+        row.style.opacity = '0';
+        row.style.height = '0px';
+        const h = row.scrollHeight;
+        bar.classList.add('is-expanding');
+        requestAnimationFrame(() => {
+            row.style.opacity = '1';
+            row.style.height = h + 'px';
+        });
+        row.addEventListener('transitionend', function onEnd(e) {
+            if (e.propertyName !== 'height') return;
+            row.removeEventListener('transitionend', onEnd);
+            row.style.opacity = '';
+            row.style.height = '';
+            bar.classList.remove('is-expanding');
+            bar.classList.remove('is-collapsed');
+            btnM.setAttribute('aria-expanded', 'true');
+        });
+        };
+        btnM.addEventListener('click', e => {
+        e.preventDefault();
+        if (bar.classList.contains('is-collapsed')) expand(); else collapse();
+        });
+        window.addEventListener('resize', () => {
+        if (!bar.classList.contains('is-collapsed') && row.style.height) {
+            row.style.height = row.scrollHeight + 'px';
+        }
+        });
+    }
+
+    // ====== helpers активностей
+    const setActiveBadge = (dd, on) => dd?.querySelector('.fb-item')?.classList.toggle('is-active', !!on);
+    function updateBadges() {
+        const catOn   = !!$('.dd-category[aria-current="true"]');
+        const szOn    = !!$('.dd-sizes .sz.active');
+        const clrOn   = !!$('.dd-colors .dot.active');
+        let priceOn = false;
+        if (rMin && rMax) priceOn = (+rMin.value > +rMin.min) || (+rMax.value < +rMax.max);
+        setActiveBadge(ddCat,   catOn);
+        setActiveBadge(ddSize,  szOn);
+        setActiveBadge(ddColor, clrOn);
+        setActiveBadge(ddPrice, priceOn);
+    }
+
+    // ====== восстановление из URL
+    const params = new URLSearchParams(location.search);
+    const DEF_MIN = (rMin?.min ? +rMin.min : null) ?? 0;
+    const DEF_MAX = (rMax?.max ? +rMax.max : null) ?? 100000;
+
+    const curCat = params.get('category');
+    btnCats.forEach(b => {
+        if (b.dataset.category === curCat) {
+        b.setAttribute('aria-current','true');
+        ddCat?.setAttribute('data-selected','1');
+        }
+    });
+
+    params.getAll('size').forEach(v => sizeBtns.forEach(b => b.dataset.size === v && b.classList.add('active')));
+    params.getAll('color').forEach(v => colorBtns.forEach(b => b.dataset.color === v && b.classList.add('active')));
+
+    if (rMin && rMax && iMin && iMax) {
+        const curMin = +(params.get('price_min') ?? DEF_MIN);
+        const curMax = +(params.get('price_max') ?? DEF_MAX);
+        rMin.value = iMin.value = curMin;
+        rMax.value = iMax.value = curMax;
+        paintRange();
+    }
+
+    updateBadges();
+
+    // ====== сбор параметров и переход
+    function applyFilters(extra={}) {
+        const p = new URLSearchParams();
+
+        const q = $('.shop-search-input')?.value?.trim();
+        if (q) p.set('q', q);
+
+        const activeCat = $('.dd-category[aria-current="true"]')?.dataset.category;
+        if (activeCat) p.set('category', activeCat);
+
+        $$('.dd-sizes .sz.active').forEach(b => p.append('size', b.dataset.size));
+        $$('.dd-colors .dot.active').forEach(b => p.append('color', b.dataset.color));
+
+        if (rMin && rMax) {
+        const a = +rMin.value, b = +rMax.value;
+        if (a !== DEF_MIN) p.set('price_min', a);
+        if (b !== DEF_MAX) p.set('price_max', b);
+        }
+
+        const order = params.get('order'); // текущий, если не меняли
+        if (order && !extra.order) p.set('order', order);
+        if (extra.order) p.set('order', extra.order);
+
+        // если сортировка по возрастанию/убыванию – оставим для шаблона
+        const qs = p.toString();
+        location.search = qs ? `?${qs}` : '';
+    }
+
+    // ====== обработчики фильтров
+    $('.shop-search')?.addEventListener('submit', e => { e.preventDefault(); applyFilters(); });
+
+    btnCats.forEach(b => b.addEventListener('click', e => {
+        e.preventDefault(); e.stopImmediatePropagation();
+        $$('.dd-category[aria-current="true"]').forEach(x => x.removeAttribute('aria-current'));
+        b.setAttribute('aria-current', 'true');
+        ddCat?.setAttribute('data-selected','1');
+        updateBadges();
+        applyFilters();
+    }));
+
+    btnCatClear?.addEventListener('click', e => {
+        e.preventDefault(); e.stopImmediatePropagation();
+        $$('.dd-category[aria-current="true"]').forEach(x => x.removeAttribute('aria-current'));
+        ddCat?.removeAttribute('data-selected');
+        updateBadges();
+        applyFilters();
+    });
+
+    colorBtns.forEach(b => b.addEventListener('click', e => {
+        e.preventDefault(); e.stopImmediatePropagation();
+        b.classList.toggle('active');
+        updateBadges();
+        applyFilters();
+    }));
+    sizeBtns.forEach(b => b.addEventListener('click', e => {
+        e.preventDefault(); e.stopImmediatePropagation();
+        b.classList.toggle('active');
+        updateBadges();
+        applyFilters();
+    }));
+
+    // ====== двойной ползунок цены
+    function paintRange() {
+        if (!wrap || !rMin || !rMax) return;
+        const min = +rMin.min || DEF_MIN, max = +rMax.max || DEF_MAX;
+        const a = (+rMin.value - min) / (max - min) * 100;
+        const b = (+rMax.value - min) / (max - min) * 100;
+        wrap.style.background =
+        `linear-gradient(to right,#d9d9d9 ${a}% ,#111 ${a}%, #111 ${b}%, #d9d9d9 ${b}%)`;
+    }
+    function clampFromRange(changed) {
+        if (!rMin || !rMax || !iMin || !iMax) return;
+        let a = +rMin.value, b = +rMax.value;
+        if (b - a < minGap) {
+        if (changed === rMin) a = b - minGap; else b = a + minGap;
+        rMin.value = a; rMax.value = b;
+        }
+        iMin.value = rMin.value; iMax.value = rMax.value;
+        paintRange(); updateBadges();
+    }
+    function clampFromInput() {
+        if (!rMin || !rMax || !iMin || !iMax) return;
+        let a = Math.max(+iMin.min || DEF_MIN, +iMin.value || DEF_MIN);
+        let b = Math.min(+iMax.max || DEF_MAX, +iMax.value || DEF_MAX);
+        if (b - a < minGap) b = a + minGap;
+        rMin.value = a; rMax.value = b;
+        iMin.value = a; iMax.value = b;
+        paintRange(); updateBadges();
+    }
+    rMin?.addEventListener('input', () => clampFromRange(rMin));
+    rMax?.addEventListener('input', () => clampFromRange(rMax));
+    iMin?.addEventListener('change', clampFromInput);
+    iMax?.addEventListener('change', clampFromInput);
+
+    // ====== сброс всех фильтров
+    $('.fb-clear')?.addEventListener('click', () => {
+        $$('.dd-category[aria-current="true"]').forEach(x => x.removeAttribute('aria-current'));
+        ddCat?.removeAttribute('data-selected');
+        sizeBtns.forEach(x => x.classList.remove('active'));
+        colorBtns.forEach(x => x.classList.remove('active'));
+        if (rMin && rMax && iMin && iMax) {
+        rMin.value = rMin.min; rMax.value = rMax.max;
+        iMin.value = rMin.value; iMax.value = rMax.value;
+        wrap && (wrap.style.background = '');
+        }
+        updateBadges();
+        location.search = ''; // полный сброс
+    });
+
+    // ====== сортировка
+    $$('.dd-option[data-sort]').forEach(btn => {
+        btn.addEventListener('click', () => {
+        const v = btn.dataset.sort === 'asc' ? 'price_asc' : 'price_desc';
+        applyFilters({order: v});
+        });
+    });
+
+    // ====== Quick View (синх с карточкой и загрузкой данных)
+    const qv               = $('#qv');
+    const qvPhoto          = $('#qvPhoto');
+    const qvTitle          = $('#qvTitle');
+    const qvPrice          = $('#qvPrice');
+    const qvArt            = $('#qvArt');
+    const qvBookmark       = $('#qvBookmark');
+    const qvColors         = $('#qvColors');
+    const qvSizes          = $('#qvSizes');
+    const qvFabrics        = $('#qvFabrics');
+    let currentCard = null;
+
+    function closeQuickView() {
+        qv?.classList.remove('open');
+        document.body.style.overflow = '';
+        currentCard = null;
+    }
+
+    document.addEventListener('click', (e) => {
+        const eye = e.target.closest('.p-eye-btn');
+        if (!eye) return;
+        e.preventDefault(); e.stopPropagation();
+        const card = eye.closest('.p-card');
+        if (!card) return;
+        currentCard = card;
+
+        qvTitle.textContent = 'Загрузка...';
+        qvPrice.textContent = '';
+        qvArt.textContent = '';
+        qvPhoto.style.background = '#e2e2e2';
+        qvColors.innerHTML = '';
+        qvSizes.innerHTML = '';
+        qvFabrics.innerHTML = '';
+
+        const pid = card.getAttribute('data-pid');
+        const qvUrl = "{% url 'product_quick_view' 0 %}".replace('/0/', `/${pid}/`);
+
+        fetch(qvUrl)
+        .then(r => r.ok ? r.json() : Promise.reject(r))
+        .then(data => {
+            qvTitle.textContent = data.name;
+            qvPrice.textContent = `${fmt.format(data.price)} ₽`;
+            qvArt.textContent = `АРТ. ${data.article}`;
+            qvPhoto.style.background = data.image
+            ? `url('${data.image}') center/cover no-repeat`
+            : '#e2e2e2';
+
+            // цвета
+            (data.colors || []).forEach(c => {
+            const b = document.createElement('span');
+            b.className = 'dot';
+            b.title = c.name;
+            b.style.cssText = 'display:inline-block;width:18px;height:18px;border-radius:50%;vertical-align:middle;border:1px solid #ccc;';
+            b.style.background = c.hex || '#000';
+            qvColors.appendChild(b);
+            });
+
+            // размеры
+            (data.sizes || []).forEach(s => {
+            const b = document.createElement('span');
+            b.className = 'sz';
+            b.textContent = s.name || s;
+            qvSizes.appendChild(b);
+            });
+
+            // состав
+            (data.fabrics || []).forEach(f => {
+            const span = document.createElement('span');
+            span.textContent = `${f.name} ${f.pct}%`;
+            span.style.cssText = 'margin-right:8px;';
+            qvFabrics.appendChild(span);
+            });
+        })
+        .catch(() => {
+            qvTitle.textContent = 'Ошибка загрузки';
+            qvPhoto.style.background = '#f5c2c7';
+        });
+
+        // синк закладки с карточки
+        const flag = card.querySelector('.p-flag-btn');
+        const on = !!flag && flag.classList.contains('active');
+        qvBookmark?.classList.toggle('active', on);
+        qvBookmark?.setAttribute('aria-pressed', on);
+
+        qv?.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    });
 
     qv?.addEventListener('click', e => { if (e.target.hasAttribute('data-qv-close')) closeQuickView(); });
-  }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && qv?.classList.contains('open')) closeQuickView(); });
 
-  function fillList(el, items, render) {
-    el.innerHTML = '';
-    if (!items || !items.length) { el.textContent = '—'; return; }
-    const frag = document.createDocumentFragment();
-    items.forEach(x => frag.appendChild(render(x)));
-    el.appendChild(frag);
-  }
-
-  function openQuickView(card) {
-    cacheQv();
-    currentCard = card;
-
-    // прелоадер/скелетон
-    qvTitle.textContent = 'Загрузка...';
-    qvPrice.textContent = '';
-    qvArt.textContent = '';
-    qvPhoto.style.background = '#e2e2e2';
-    qvColors.innerHTML = '';
-    qvSizes.innerHTML = '';
-    qvFabrics.innerHTML = '';
-
-    const pid = card.getAttribute('data-pid');
-    const qvUrl = "{% url 'product_quick_view' 0 %}".replace('/0/', `/${pid}/`);
-
-    fetch(qvUrl)
-      .then(r => r.ok ? r.json() : Promise.reject(r))
-      .then(data => {
-        qvTitle.textContent = data.name;
-        qvPrice.textContent = `${fmt.format(data.price)} ₽`;
-        qvArt.textContent = `АРТ. ${data.article}`;
-        qvPhoto.style.background = data.image
-          ? `url('${data.image}') center/cover no-repeat`
-          : '#e2e2e2';
-
-        fillList(qvColors, data.colors, (c) => {
-          const b = document.createElement('span');
-          b.className = 'dot';
-          b.title = c.name;
-          b.style.cssText = `display:inline-block;width:18px;height:18px;border-radius:50%;margin:2px;vertical-align:middle;background:${c.hex};border:1px solid #ccc;`;
-          return b;
-        });
-
-        fillList(qvSizes, data.sizes, (s) => {
-          const b = document.createElement('span');
-          b.className = 'sz';
-          b.textContent = s.name;
-          b.style.cssText = 'display:inline-block;border:1px solid #ccc;border-radius:4px;padding:2px 6px;margin:2px;font-size:12px;';
-          return b;
-        });
-
-        fillList(qvFabrics, data.fabrics, (f) => {
-          const span = document.createElement('span');
-          span.textContent = `${f.name} ${f.pct}%`;
-          span.style.cssText = 'margin-right:8px;';
-          return span;
-        });
-      })
-      .catch(() => {
-        qvTitle.textContent = 'Ошибка загрузки';
-        qvPhoto.style.background = '#f5c2c7';
-      });
-
-    qv.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeQuickView() {
-    qv?.classList.remove('open');
-    document.body.style.overflow = '';
-    currentCard = null;
-  }
-
-  // клики на глазике карточки
-  document.addEventListener('click', (e) => {
-    const eye = e.target.closest('.p-eye-btn');
-    if (!eye) return;
-    e.preventDefault(); e.stopPropagation();
-    const card = eye.closest('.p-card');
-    if (!card) return;
-    openQuickView(card);
-  });
-
-  // ESC чтобы закрыть
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && qv?.classList.contains('open')) closeQuickView();
-  });
-})();
-</script>
-
-
-
-
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const $  = (s, r=document) => r.querySelector(s);
-  const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
-
-  // элементы
-  const formSearch = $('.shop-search');
-  const inputSearch = $('.shop-search-input');
-
-  const ddCat = $('.fb-dd[data-dd="category"]');
-  const btnCats = $$('.dd-category');           // если делаешь <button class="dd-category" data-category="id">
-  const btnCatClear = $('.dd-category-clear');  // если есть кнопка "Показать все"
-
-  const colorBtns = $$('.dd-colors .dot');      // <button class="dot" data-color="id">
-  const sizeBtns  = $$('.dd-sizes .sz');        // <button class="sz" data-size="id">
-
-  const wrap = $('.fb-dd[data-dd="price"] .range-wrap');
-  const rMin = $('.range-min'), rMax = $('.range-max');
-  const iMin = $('.price-min'), iMax = $('.price-max');
-
-  // дефолты цены из data-атрибутов
-  const DEF_MIN = wrap ? +wrap.dataset.min || 0 : 0;
-  const DEF_MAX = wrap ? +wrap.dataset.max || 0 : 0;
-
-  // Инициализация UI из текущего URL
-  const url = new URL(window.location.href);
-  const params = url.searchParams;
-
-  // поиск
-  if (inputSearch) inputSearch.value = params.get('q') || '';
-
-  // категория
-  const curCat = params.get('category');
-  if (curCat && ddCat) ddCat.dataset.selected = '1';
-  btnCats.forEach(b => {
-    if (b.dataset.category === curCat) b.setAttribute('aria-current','true');
-  });
-
-  // цвета
-  const curColors = params.getAll('color');
-  colorBtns.forEach(b => {
-    if (curColors.includes(b.dataset.color)) b.classList.add('active');
-  });
-
-  // размеры
-  const curSizes = params.getAll('size');
-  sizeBtns.forEach(b => {
-    if (curSizes.includes(b.dataset.size)) b.classList.add('active');
-  });
-
-  // цена
-  const curMin = params.get('price_min');
-  const curMax = params.get('price_max');
-  if (rMin && rMax && iMin && iMax) {
-    rMin.value = iMin.value = curMin ?? DEF_MIN;
-    rMax.value = iMax.value = curMax ?? DEF_MAX;
-  }
-
-  // helper: собрать параметры из UI и перейти
-  function applyFilters(extra={}) {
-    const p = new URLSearchParams();
-
-    // поиск
-    const q = inputSearch?.value.trim();
-    if (q) p.set('q', q);
-
-    // категория
-    const chosenCat = $('.dd-category[aria-current="true"]')?.dataset.category;
-    if (chosenCat) p.set('category', chosenCat);
-
-    // размеры
-    $$('.dd-sizes .sz.active').forEach(b => p.append('size', b.dataset.size));
-
-    // цвета
-    $$('.dd-colors .dot.active').forEach(b => p.append('color', b.dataset.color));
-
-    // цена — ТОЛЬКО если отличается от дефолта
-    if (rMin && rMax && iMin && iMax) {
-      const vMin = +iMin.value || DEF_MIN;
-      const vMax = +iMax.value || DEF_MAX;
-      if (vMin !== DEF_MIN) p.set('price_min', String(vMin));
-      if (vMax !== DEF_MAX) p.set('price_max', String(vMax));
-    }
-
-    // сортировка
-    const order = extra.order || params.get('order') || 'new';
-    if (order) p.set('order', order);
-
-    // сбрасываем пагинацию
-    p.delete('page');
-
-    // доп. ключи
-    for (const [k,v] of Object.entries(extra)) {
-      if (v === null) p.delete(k); else p.set(k, v);
-    }
-
-    const qs = p.toString();
-    window.location.search = qs ? `?${qs}` : '';
-  }
-
-  // обработчики
-
-  // поиск
-  formSearch?.addEventListener('submit', e => { e.preventDefault(); applyFilters(); });
-
-// категория
-btnCats.forEach(b => {
-  b.addEventListener('click', e => {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    document.querySelectorAll('.dd-category[aria-current="true"]').forEach(x => x.removeAttribute('aria-current'));
-    b.setAttribute('aria-current', 'true');
-    ddCat?.setAttribute('data-selected','1');
-    applyFilters();
-  });
-});
-btnCatClear?.addEventListener('click', e => {
-  e.preventDefault();
-  e.stopImmediatePropagation();
-  document.querySelectorAll('.dd-category[aria-current="true"]').forEach(x => x.removeAttribute('aria-current'));
-  ddCat?.removeAttribute('data-selected');
-  applyFilters();
-});
-
-// цвета/размеры
-colorBtns.forEach(b => b.addEventListener('click', e => {
-  e.preventDefault();
-  e.stopImmediatePropagation();
-  b.classList.toggle('active');
-  applyFilters();
-}));
-sizeBtns.forEach(b => b.addEventListener('click', e => {
-  e.preventDefault();
-  e.stopImmediatePropagation();
-  b.classList.toggle('active');
-  applyFilters();
-}));
-
-// цена
-rMin?.addEventListener('change', e => { e.stopImmediatePropagation(); iMin.value = rMin.value; applyFilters(); });
-rMax?.addEventListener('change', e => { e.stopImmediatePropagation(); iMax.value = rMax.value; applyFilters(); });
-iMin?.addEventListener('blur',  e => { e.stopImmediatePropagation(); rMin.value = iMin.value || DEF_MIN; applyFilters(); });
-iMax?.addEventListener('blur',  e => { e.stopImmediatePropagation(); rMax.value = iMax.value || DEF_MAX; applyFilters(); });
-
-
-  // сортировка (твои кнопки)
-  $$('.dd-option[data-sort]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const v = btn.dataset.sort === 'asc' ? 'price_asc' : 'price_desc';
-      applyFilters({order: v});
+    // клик по закладке в квик-вью синхнет карточку
+    qvBookmark?.addEventListener('click', e => {
+        e.preventDefault();
+        const on = !qvBookmark.classList.contains('active');
+        qvBookmark.classList.toggle('active', on);
+        qvBookmark.setAttribute('aria-pressed', on);
+        const flag = currentCard?.querySelector('.p-flag-btn');
+        if (flag) { flag.classList.toggle('active', on); flag.setAttribute('aria-pressed', on); }
     });
-  });
+    })();
 
-});
+
+      // клик по "закладке" на карточке
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.p-flag-btn');
+    if (!btn) return;
+    e.preventDefault();
+    e.stopPropagation();
+    const on = !btn.classList.contains('active');
+    btn.classList.toggle('active', on);
+    btn.setAttribute('aria-pressed', on);
+
+    // если открыт квик-вью — синхнём там иконку
+    if (document.querySelector('#qv.open')) {
+      const qvBookmark = document.querySelector('#qvBookmark');
+      if (qvBookmark) {
+        qvBookmark.classList.toggle('active', on);
+        qvBookmark.setAttribute('aria-pressed', on);
+      }
+    }
+  });
 </script>
+
+
+
 
 
 

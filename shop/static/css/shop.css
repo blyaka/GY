@@ -1,5 +1,5 @@
 main {
-    padding: 70px 90px;
+    padding: 40px 60px;
 }
 
 
@@ -7,12 +7,12 @@ main {
     display: flex;
     align-items: center;
     gap: 16px;
-    padding: 0 10px;
+    padding: 0 4px;
 }
 
 .shop-title {
     margin: 0;
-    font-size: 34px;
+    font-size: 24px;
     letter-spacing: .18em;
     font-weight: 400;
 }
@@ -20,7 +20,7 @@ main {
 .shop-search {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
 }
 
 .shop-search-btn {
@@ -31,6 +31,12 @@ main {
     cursor: pointer;
     color: #111;
     /* поставь #fff, если фон тёмный */
+}
+
+
+.shop-search-btn img {
+    width: 30px;
+    height: 30px;
 }
 
 .shop-search-input {
@@ -64,7 +70,6 @@ main {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 0 10px;
 }
 
 .fb-row {
@@ -113,7 +118,7 @@ main {
     border: 0;
     background: transparent;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 16px;
     letter-spacing: .14em;
     text-transform: uppercase;
     color: #111;
@@ -224,7 +229,7 @@ li.dd-all {
     background: transparent;
     border: 0;
     cursor: pointer;
-    font: 400 16px/1.4 "Jost", sans-serif;
+    font: 400 16px "Jost", sans-serif;
     text-align: left;
 }
 
@@ -233,9 +238,36 @@ li.dd-all {
     text-decoration: underline;
 }
 
-.dd-all a {
-    font-weight: 500;
+.dd-category-clear {
+    text-decoration: none;
+    color: #111;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    font: 400 16px "Jost", sans-serif;
+    text-align: left;
 }
+
+.dd-category {
+    text-decoration: none;
+    color: #111;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    font: 400 16px "Jost", sans-serif;
+    text-align: left;
+}
+
+.dd-category:hover {
+    text-decoration: underline;
+}
+
+.dd-category[aria-current="true"] {
+    text-decoration: underline;
+}
+
+
+
 
 .dd-sizes {
     display: flex;
@@ -422,9 +454,9 @@ li.dd-all {
 .p-card {
     width: 100%;
     max-width: 300px;
-    /* ограничим ширину, чтобы было как в макете */
     text-decoration: none;
     color: #111;
+    position: relative;
 }
 
 .p-media {
@@ -460,6 +492,7 @@ li.dd-all {
     padding: 0;
     cursor: pointer;
     line-height: 0;
+    z-index: 2;
 }
 
 .p-flag-btn.active path {
