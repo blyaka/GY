@@ -10,7 +10,10 @@
       {% endblock %}
     </title>
     <link rel="stylesheet" href="{% static 'css/_base.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/_base-shop.css' %}" />
+    
+    {% block shop_css %}
+      <link rel="stylesheet" href="{% static 'css/_base-shop.css' %}" />
+    {% endblock %}
 
     {% block styles %}
 

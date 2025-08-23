@@ -1,6 +1,6 @@
 .hero {
     display: flex;
-    max-height: 1638px;
+    max-height: 950px;
     justify-content: center;
     overflow: hidden;
     position: relative;
@@ -10,12 +10,15 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    /* align-items: center; */
+    align-items: center;
 }
 
 .hero-bg-ph img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    object-position: center calc(0% - 150px);
+    /* transform: translateY(-100px); */
 }
 
 .logo-overlay {
@@ -33,8 +36,7 @@
 
 
 .about-signature {
-    padding: 40px 60px;
-    min-height: 800px;
+    padding: 40px 160px;
 }
 
 .signature {
@@ -43,8 +45,8 @@
 }
 
 .main-text {
-    font-size: 30px;
-    font-weight: 200;
+    font-size: 16px;
+    font-weight: 300;
     max-width: 800px;
 }
 
@@ -53,7 +55,7 @@
 
 .divider {
     width: 95%;
-    height: 3px;
+    height: 2px;
     background-color: #000;
     margin: 60px auto;
 }
@@ -66,8 +68,8 @@
 }
 
 .shop h2 {
-    font-size: 62px;
-    font-weight: 300;
+    font-size: 36px;
+    font-weight: 400;
     margin-left: 100px;
 }
 
@@ -85,89 +87,73 @@
     justify-content: center;
 }
 
-.card {
-    text-decoration: none;
-    color: #111;
-    display: block;
-    max-width: 500px;
-    width: 100%;
+/* === карточка из магазина === */
+.p-card {
+  width: 100%;
+  max-width: 300px;
+  text-decoration: none;
+  color: #111;
+  position: relative;
 }
 
-.card-media {
-    position: relative;
-    aspect-ratio: 3/4;
-    overflow: hidden;
-    background: #e9e6e3;
+.p-media {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  background: #e6e6e6;
+  border: 1px solid #e9e9e9;
+  box-shadow: 0 8px 18px rgba(0,0,0,.06);
+  overflow: hidden;
 }
 
-.card-media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    filter: saturate(.85);
+.p-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-.card-eye {
-    position: absolute;
-    left: 30px;
-    bottom: 30px;
-    width: 60px;
-    height: 40px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    backdrop-filter: blur(2px);
+/* избранное */
+.p-flag-btn {
+  position: absolute;
+  top: -6px;
+  right: 8px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  line-height: 0;
+  z-index: 2;
+}
+.p-flag-btn.active path { fill: #fff; }
+.p-flag-btn:focus-visible { outline: 2px solid #000; outline-offset: 2px; }
+
+/* глаз */
+.p-eye-btn {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  background: transparent; border: none; cursor: pointer; line-height: 0;
+}
+.p-eye-btn img { width: 38px; height: 38px; display: block; }
+.p-eye-btn:focus-visible { outline: 2px solid #000; outline-offset: 2px; }
+
+/* подписи */
+.p-info { margin-top: 10px; }
+.p-title { font-weight: 400; font-size: 20px; letter-spacing: .08em; text-transform: uppercase; }
+.p-meta { display: flex; gap: 14px; align-items: baseline; justify-content: space-between; }
+.p-price { font-weight: 300; font-size: 22px; }
+.p-art { font-size: 20px; font-weight: 200; color: rgba(177,177,177,1); }
+
+/* hover */
+.p-card:hover .p-media {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 24px rgba(0,0,0,.12);
+  transition: .2s ease-in-out;
 }
 
-
-.card-bookmark {
-    position: absolute;
-    right: 10px;
-    top: 0px;
-    width: 50px;
-    height: 60px;
-    display: block;
-}
-
-.card-bookmark svg {
-    width: 100%;
-    height: 100%;
-    fill: #fff;
-    opacity: .9;
-}
-
-.card-info {
-    padding-top: 14px;
-}
-
-.card-title {
-    font-size: 34px;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    font-weight: 300;
-    margin: 0 0 10px;
-}
-
-.card-meta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.card-price {
-    font-size: 30px;
-    font-weight: 200;
-    letter-spacing: .06em;
-}
-
-.card-art {
-    font-size: 20px;
-    font-weight: 200;
-    color: rgba(177, 177, 177, 1);
-    letter-spacing: .12em;
-}
 
 /* стрелки как на сетке (по бокам контейнера) */
 
@@ -206,13 +192,3 @@
     transform: scale(1.02);
     transition: transform .3s ease;
 }
-
-
-
-
-
-
-
-
-
-

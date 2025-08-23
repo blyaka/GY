@@ -8,6 +8,10 @@ body {
     background-color: white;
 }
 
+.logo {
+    filter: invert(0) !important;
+}
+
 .lang-switch a {
     color: black !important;
 }
@@ -35,7 +39,6 @@ body {
     height: 32px;
     object-fit: contain;
     filter: invert(1);
-    /* делаем логотип белым на чёрном фоне */
     opacity: .9;
 }
 
