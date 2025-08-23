@@ -1,7 +1,7 @@
 /* ABOUT — секция как на макете */
 
 .about-hero {
-    padding: 80px;
+    padding: 80px 300px;
 }
 
 .about-grid {
@@ -23,7 +23,7 @@
 
 .about-text p {
     margin: 0 0 28px;
-    font-size: 32px;
+    font-size: 16px;
     font-weight: 300;
     line-height: 1.4;
     color: #2e2e2e;
@@ -58,7 +58,7 @@
 /* правая верхняя — большая */
 .about-photo--hero {
     grid-area: hero;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 5 / 3;
 }
 
 /* нижние две */
@@ -69,25 +69,25 @@
 
 .about-photo--right {
     grid-area: right;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 5 / 3;
 }
 
 
 
 .history {
-    padding: 80px;
+    padding: 40px 300px;
 }
 
 
 .history h3 {
-    font-size: 64px;
+    font-size: 36px;
     font-weight: 400;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 
 
 .history p {
-    font-size: 32px;
+    font-size: 16px;
     font-weight: 300;
 }
 
@@ -95,14 +95,14 @@
 
 
 .values {
-    padding: 80px;
+    padding: 40px 300px;
 }
 
 
 .values h3 {
-    font-size: 64px;
+    font-size: 36px;
     font-weight: 400;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 
 
@@ -113,7 +113,7 @@
 }
 
 .values-text p {
-    font-size: 32px;
+    font-size: 16px;
     font-weight: 300;
 }
 
@@ -155,7 +155,7 @@
     align-items: center;
     justify-content: center;
     padding: 100px;
-    gap: 50px;
+    gap: 20px;
 }
 
 .socials a {
@@ -170,6 +170,7 @@
     display: flex;
     justify-content: center;
 }
+
 
 
 
