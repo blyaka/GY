@@ -1,11 +1,11 @@
 main {
-    padding: 60px 100px;
+    padding: 30px 100px;
 }
 
 h2 {
-    font-size: 64px;
+    font-size: 28px;
     font-weight: 400;
-    margin: 100px 0px;
+    margin: 50px 0px;
 }
 
 
@@ -14,20 +14,20 @@ h2 {
 }
 
 h3 {
-    font-size: 48px;
+    font-size: 22px;
     font-weight: 500;
     margin: 20px 0px;
 }
 
 p {
-    font-size: 36px;
-    font-weight: 200;
+    font-size: 18px;
+    font-weight: 300;
     line-height: 1.3;
 }
 
 
 .page-contacts {
-    margin-top: 100px;
+    margin-top: 70px;
 }
 
 .contacts_stack {
@@ -42,13 +42,13 @@ p {
 }
 
 .contact-item img {
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 24px;
     margin-right: 10px;
 }
 
 .contact-item a {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 400;
     color: #333;
     text-decoration: none;
