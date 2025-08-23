@@ -37,7 +37,7 @@ def _get_thumb_subq():
 class ShopView(ListView):
     template_name = 'shop/shop.html'
     context_object_name = 'items'
-    paginate_by = 12
+    paginate_by = 9
 
     def get_queryset(self):
         p = self.request.GET
@@ -86,9 +86,12 @@ class ShopView(ListView):
 
         return qs
 
+    from django.utils.http import urlencode
+
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        p = self.request.GET
+        p = self.request.GET.copy()
+
         ctx['categories'] = Category.objects.only('id', 'name').order_by('name')
         ctx['colors'] = Color.objects.only('id', 'name', 'hex_code').order_by('name')
         ctx['sizes'] = Size.objects.only('id', 'name').order_by('name')
@@ -102,7 +105,13 @@ class ShopView(ListView):
             'colors': p.getlist('color'),
             'sizes': p.getlist('size'),
         }
+
+        if 'page' in p:
+            p.pop('page')
+        ctx['querystring'] = p.urlencode()
+
         return ctx
+
 
 
 

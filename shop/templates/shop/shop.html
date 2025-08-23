@@ -385,27 +385,51 @@
         </section>
 
         <!-- PAGINATION -->
-        {% if is_paginated %}
-        <nav class="pager" role="navigation" aria-label="Пагинация">
-            {% if page_obj.has_previous %}
-                <a class="pg-btn pg-prev" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
-            {% endif %}
+{% if is_paginated %}
+<nav class="pager" role="navigation" aria-label="Пагинация">
 
-            <ul class="pg-list">
-                {% for num in paginator.page_range %}
-                    {% if num == page_obj.number %}
-                        <li><span class="pg-link is-current">{{ num }}</span></li>
-                    {% else %}
-                        <li><a class="pg-link" href="?page={{ num }}">{{ num }}</a></li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
+    {# Кнопка "назад" #}
+    {% if page_obj.has_previous %}
+        <a class="pg-btn pg-prev"
+           href="?page={{ page_obj.previous_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">
+            <img src="{% static 'icons/arrow.svg' %}" alt="">
+        </a>
+    {% else %}
+        <button class="pg-btn pg-prev" aria-disabled="true" disabled>
+            <img src="{% static 'icons/arrow.svg' %}" alt="">
+        </button>
+    {% endif %}
 
-            {% if page_obj.has_next %}
-                <a class="pg-btn pg-next" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+    <ul class="pg-list">
+        {% for num in paginator.page_range %}
+            {% if num == page_obj.number %}
+                <li><span class="pg-link is-current">{{ num }}</span></li>
+            {% else %}
+                <li>
+                    <a class="pg-link"
+                       href="?page={{ num }}{% if querystring %}&{{ querystring }}{% endif %}">{{ num }}</a>
+                </li>
             {% endif %}
-        </nav>
-        {% endif %}
+        {% endfor %}
+    </ul>
+
+    {# Кнопка "вперёд" #}
+    {% if page_obj.has_next %}
+        <a class="pg-btn pg-next"
+           href="?page={{ page_obj.next_page_number }}{% if querystring %}&{{ querystring }}{% endif %}">
+            <img src="{% static 'icons/arrow.svg' %}" alt="">
+        </a>
+    {% else %}
+        <button class="pg-btn pg-next" aria-disabled="true" disabled>
+            <img src="{% static 'icons/arrow.svg' %}" alt="">
+        </button>
+    {% endif %}
+
+</nav>
+{% endif %}
+
+
+
 
 
 

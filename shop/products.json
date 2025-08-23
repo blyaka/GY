@@ -1,0 +1,182 @@
+[
+{
+  "model": "products.product",
+  "pk": 1,
+  "fields": {
+    "collection": 1,
+    "category": 1,
+    "name": "product1",
+    "article": "86403",
+    "description": "desc",
+    "price": 10000,
+    "colors": [
+      1
+    ],
+    "sizes": [
+      1
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 2,
+  "fields": {
+    "collection": 1,
+    "category": 1,
+    "name": "product1",
+    "article": "86404",
+    "description": "desc",
+    "price": 10000,
+    "colors": [
+      1
+    ],
+    "sizes": [
+      1
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 3,
+  "fields": {
+    "collection": 1,
+    "category": 1,
+    "name": "product1",
+    "article": "86405",
+    "description": "desc",
+    "price": 10000,
+    "colors": [
+      1
+    ],
+    "sizes": [
+      1
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 4,
+  "fields": {
+    "collection": 1,
+    "category": 1,
+    "name": "product1",
+    "article": "86406",
+    "description": "desc",
+    "price": 10000,
+    "colors": [
+      1
+    ],
+    "sizes": [
+      1
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 5,
+  "fields": {
+    "collection": 1,
+    "category": 1,
+    "name": "product1",
+    "article": "86407",
+    "description": "desc",
+    "price": 10000,
+    "colors": [
+      1
+    ],
+    "sizes": [
+      1
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 6,
+  "fields": {
+    "collection": 1,
+    "category": 1,
+    "name": "product1",
+    "article": "86408",
+    "description": "desc",
+    "price": 10000,
+    "colors": [
+      1
+    ],
+    "sizes": [
+      1
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 7,
+  "fields": {
+    "collection": 1,
+    "category": 1,
+    "name": "product1",
+    "article": "86409",
+    "description": "desc",
+    "price": 10000,
+    "colors": [
+      1
+    ],
+    "sizes": [
+      1
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 8,
+  "fields": {
+    "collection": 1,
+    "category": 1,
+    "name": "product1",
+    "article": "86410",
+    "description": "desc",
+    "price": 10000,
+    "colors": [
+      1
+    ],
+    "sizes": [
+      1
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 9,
+  "fields": {
+    "collection": 1,
+    "category": 1,
+    "name": "product1",
+    "article": "86411",
+    "description": "desc",
+    "price": 10000,
+    "colors": [
+      1
+    ],
+    "sizes": [
+      1
+    ]
+  }
+},
+{
+  "model": "products.product",
+  "pk": 10,
+  "fields": {
+    "collection": 1,
+    "category": 1,
+    "name": "product1",
+    "article": "86412",
+    "description": "desc",
+    "price": 10000,
+    "colors": [
+      1
+    ],
+    "sizes": [
+      1
+    ]
+  }
+}
+]
