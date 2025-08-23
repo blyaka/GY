@@ -3,7 +3,7 @@ main {
 }
 
 .page_name {
-    font-size: 64px;
+    font-size: 36px;
     font-weight: 400;
 
 }
@@ -19,11 +19,11 @@ main {
 
 .block {
     margin-top: 40px;
-    padding: 0 200px;
+    padding: 0 100px;
 }
 
 .h3 {
-    font-size: 48px;
+    font-size: 24px;
     letter-spacing: .18em;
     font-weight: 500;
     text-transform: uppercase;
@@ -31,7 +31,7 @@ main {
 }
 
 .h4 {
-    font-size: 36px;
+    font-size: 24px;
     font-weight: 600;
     letter-spacing: .14em;
     text-transform: uppercase;
@@ -39,8 +39,8 @@ main {
 }
 
 .lead {
-    font-size: 36px;
-    font-weight: 200;
+    font-size: 16px;
+    font-weight: 300;
     line-height: 1.25;
     color: #333;
 }
@@ -61,17 +61,17 @@ main {
     counter-increment: i;
     display: grid;
     grid-template-columns: 32px 1fr;
-    gap: 50px;
+    gap: 20px;
     align-items: flex-start;
     padding: 10px 0;
-    font-size: 36px;
-    font-weight: 200;
+    font-size: 16px;
+    font-weight: 300;
     line-height: 1.3;
 }
 
 .numlist>li::before {
     content: counter(i) ".";
-    font-size: 96px;
+    font-size: 46px;
     line-height: 1;
     color: #000;
     font-weight: 200;
@@ -101,10 +101,10 @@ main {
     background: #000;
     color: #fff;
     border: 0;
-    padding: 24px 36px;
+    padding: 0px 26px;
     letter-spacing: .12em;
     text-transform: uppercase;
-    font-size: 38px;
+    font-size: 24px;
     font-weight: 500;
     cursor: default;
 }
@@ -120,8 +120,8 @@ main {
 }
 
 .tab-body p {
-    font-size: 30px;
-    font-weight: 200;
+    font-size: 16px;
+    font-weight: 300;
     line-height: 1.3;
     color: #000000;
     margin: 0 0 14px;
@@ -198,13 +198,13 @@ main {
 
 .page-contacts {
     margin-top: 100px;
-    padding: 0 200px;
+    padding: 0 100px;
 }
 
 
 h2 {
-    font-size: 36px;
-    font-weight: 200;
+    font-size: 24px;
+    font-weight: 300;
 }
 
 .contacts_stack {
@@ -219,13 +219,13 @@ h2 {
 }
 
 .contact-item img {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     margin-right: 10px;
 }
 
 .contact-item a {
-    font-size: 24px;
+    font-size: 16px;
     font-weight: 400;
     color: #000000;
     text-decoration: none;

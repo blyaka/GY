@@ -3,7 +3,7 @@ main {
 }
 
 .page_name {
-    font-size: 48px;
+    font-size: 36px;
     font-weight: 400;
 
 }
@@ -13,21 +13,21 @@ main {
 }
 
 .privacy-info h3 {
-    font-size: 36px;
+    font-size: 24px;
     font-weight: 500;
     margin-top: 50px;
     margin-bottom: 50px;
 }
 
 .privacy-info p {
-    font-size: 24px;
-    font-weight: 200;
+    font-size: 16px;
+    font-weight: 300;
 }
 
 .date {
     margin-top: 100px;
-    font-size: 36px;
-    font-weight: 200;
+    font-size: 24px;
+    font-weight: 300;
 }
 
 
@@ -42,14 +42,14 @@ main {
 
 .pp-table td {
     vertical-align: top;
-    padding: 100px 54px;
-    font-size: 24px;
+    padding: 50px 54px;
+    font-size: 16px;
     line-height: 1.6;
 }
 
 .pp-table td.pp-label {
     width: 45%;
-    font-weight: 200;
+    font-weight: 300;
 }
 
 .pp-table td.pp-text {

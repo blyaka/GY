@@ -308,7 +308,7 @@ body {
 
 .footer-block-customer h2,
 .footer-block-about h2 {
-    font-size: 62px;
+    font-size: 36px;
     font-weight: 300;
     margin: 0px 0px 30px 0px;
 }
@@ -323,7 +323,7 @@ body {
 .about-links {
     display: flex;
     flex-direction: column;
-    font-size: 34px;
+    font-size: 24px;
     font-weight: 200;
 }
 
@@ -334,7 +334,7 @@ body {
 }
 
 .footer-cp-name {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 200;
     margin-top: 50px;
 }
@@ -362,8 +362,8 @@ body {
 }
 
 .social {
-    width: 58px;
-    height: 58px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     display: inline-flex;
     align-items: center;

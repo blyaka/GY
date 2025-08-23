@@ -1,7 +1,6 @@
 .blog-page-title h2 {
     font-size: 36px;
     font-weight: 400;
-    margin: 50px 0px;
 }
 
 .blog-list {
@@ -21,13 +20,13 @@
     grid-template-columns: 480px 1fr;
     gap: 30px;
     align-items: start;
+    padding: 0px 200px;
 }
 
 .blog-thumb {
     width: 468px;
     height: 332px;
     background: #dcdcdc;
-    /* заглушка */
 }
 
 .blog-thumb img {
@@ -45,12 +44,13 @@
 
 .blog-title {
     font-weight: 400;
-    font-size: 40px;
+    font-size: 36px;
     color: #111;
+    line-height: 1;
 }
 
-.blog-excerpt {
-    font-size: 30px;
+.blog-content p{
+    font-size: 24px;
     font-weight: 300;
     color: #444;
     line-height: 1.6;
@@ -59,8 +59,9 @@
 
 .blog-date {
     margin-top: auto;
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 300;
+    line-height: 1;
     color: #999;
     text-align: right;
 }
@@ -80,8 +81,8 @@
 }
 
 .pg-btn {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     background: transparent;
     border: 0;
     cursor: pointer;
@@ -91,8 +92,8 @@
 }
 
 .pg-btn img {
-    width: 26px;
-    height: 26px;
+    width: 20px;
+    height: 20px;
     display: block;
 }
 
@@ -111,7 +112,7 @@
 }
 
 .pg-link {
-    font-size: 22px;
+    font-size: 16px;
     letter-spacing: .1em;
     color: #bdbdbd;
     text-decoration: none;

@@ -209,7 +209,7 @@ a {}
     color: #fff;
     padding: 12px 46px;
     letter-spacing: .12em;
-    font-size: 44px;
+    font-size: 24px;
     font-weight: 400;
     display: inline-block;
     width: 100%;
@@ -219,7 +219,7 @@ a {}
 .pd-text {
     padding: 0 40px;
     margin-top: 18px;
-    font-size: 30px;
+    font-size: 16px;
     line-height: 12%;
     font-weight: 300;
     color: #333;
@@ -235,18 +235,18 @@ a {}
 /* состав */
 .pd-comp {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     gap: 40px;
     margin-top: 26px;
 }
 
 .pd-comp-val {
-    font-size: clamp(26px, 3.2vw, 64px);
+    font-size: clamp(16px, 3.2vw, 36px);
     font-weight: 300;
 }
 
 .pd-comp-name {
-    font-size: 30px;
+    font-size: 16px;
     font-weight: 300;
     color: #5e5e5e;
     text-transform: lowercase;
