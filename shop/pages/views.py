@@ -21,3 +21,9 @@ def PrivacyPage(request):
 
 def OfferPage(request):
     return render(request, 'offer.html')
+
+def AboutPage(request):
+    return render(request, 'about.html')
+
+def BuyerPage(request):
+    return render(request, 'buyer.html')
