@@ -1,0 +1,87 @@
+
+
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}{{post.title}}{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/blog_article_details.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="status-bar" role="navigation" aria-label="Статус-бар">
+        <div class="sb-inner">
+            <img class="sb-logo" src="{% static 'images/GY.svg' %}" alt="GY">
+            <span class="sb-dot" aria-hidden="true"></span>
+            <a class="sb-link" href="{% url 'blog' %}">БЛОГ</a>
+            <span class="sb-dot" aria-hidden="true"></span>
+            <a class="sb-link" href="{% url 'post' post.slug %}">{{post.title}}</a>
+        </div>
+    </div>
+
+    <main>
+        <section class="article">
+
+            <!-- Заглушка под обложку -->
+                <div class="article-cover">
+                {% if post.preview %}
+                    <img src="{{ post.preview.url }}" alt="{{ post.title }}">
+                {% endif %}
+                </div>
+
+            <div class="article-inner">
+                <header class="article-head">
+
+                    <a href="{% url 'blog' %}" class="article-back">
+                        <img src="{% static 'icons/arrow_back.svg' %}" alt="Назад">
+                    </a>
+
+                    <h1 class="article-title">{{ post.title }}</h1>
+                    <time class="article-date" datetime="{{ post.created_at|date:'Y-m-d' }}">
+                        {{ post.created_at|date:"d / m / Y" }}
+                    </time>
+                </header>
+
+                <div class="article-body">
+                    {{ post.content|safe }}
+                </div>
+
+                <div class="article-divider"></div>
+
+            </div>
+
+            <section class="article-more">
+            <button class="more-btn prev" aria-label="Предыдущая">
+                <img src="{% static 'icons/arrow.svg' %}" alt="">
+            </button>
+
+            <div class="more-track">
+                {% for p in more_posts %}
+                <a class="more-card" href="{{ p.get_absolute_url }}">
+                <div class="more-thumb">
+                    {% if p.preview %}
+                    <img src="{{ p.preview.url }}" alt="{{ p.title }}">
+                    {% endif %}
+                </div>
+                <div class="more-info">
+                    <div class="more-title">{{ p.title }}</div>
+                    <time class="more-date" datetime="{{ p.created_at|date:'Y-m-d' }}">
+                    {{ p.created_at|date:"d / m / Y" }}
+                    </time>
+                </div>
+                </a>
+                {% empty %}
+                <div class="more-empty">Других постов пока нет</div>
+                {% endfor %}
+            </div>
+
+            <button class="more-btn next" aria-label="Следующая">
+                <img src="{% static 'icons/arrow.svg' %}" alt="">
+            </button>
+            </section>
+        </section>
+    </main>
+{% endblock content %}

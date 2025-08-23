@@ -3,3 +3,4 @@ psycopg2-binary
 django-allauth
 pillow
 gunicorn
+django-ckeditor-5

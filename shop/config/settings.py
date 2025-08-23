@@ -28,8 +28,10 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'allauth',
     'allauth.account',
+    'django_ckeditor_5',
     'pages',
     'products',
+    'blog',
 ]
 
 
@@ -123,6 +125,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = str(BASE_DIR.joinpath('media'))
 
+
+CKEDITOR_5_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
+
+CKEDITOR_5_CONFIGS = {
+    "default": {
+        "toolbar": ["heading", "|", "bold", "italic", "link", "bulletedList",
+                    "numberedList", "blockQuote", "insertTable", "imageUpload", "undo", "redo"],
+        "image": {"toolbar": ["imageTextAlternative", "imageStyle:full", "imageStyle:side"]},
+    }
+}
 
 
 
