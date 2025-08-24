@@ -1,18 +1,62 @@
+{% extends '_base.html' %}
+{% load static %}
 
+{% block title %}Вход{% endblock %}
 
-<h1 style="text-align:center;">Вход</h1>
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
 
-<form method="post" action="{% url 'account_login' %}">
-  {% csrf_token %}
-  <label for="id_login">Email:</label>
-  <input type="email" name="login" id="id_login" required>
+{% block content %}
+<div class="status-bar" role="navigation" aria-label="Статус-бар">
+    <div class="sb-inner">
+        <img class="sb-logo" src="{% static 'images/GY.svg' %}" alt="GY">
+        <span class="sb-dot" aria-hidden="true"></span>
+        <a class="sb-link" href="{% url 'account_login' %}">Вход</a>
+    </div>
+</div>
 
-  <label for="id_password">Пароль:</label>
-  <input type="password" name="password" id="id_password" required>
+<main>
+    <section class="auth">
+        <div class="auth-wrap">
+            <img class="auth-logo" src="{% static 'images/GY.svg' %}" alt="GY">
+            <h1 class="auth-title">Вход в личный кабинет</h1>
 
-  <button type="submit">Войти</button>
-</form>
+            <form class="auth-form" method="post" action="{% url 'account_login' %}" novalidate>
+                {% csrf_token %}
 
-<p><a href="{% url 'account_reset_password' %}">Забыли пароль?</a></p>
-<p>Нет аккаунта? <a href="{% url 'account_signup' %}">Регистрация</a></p>
+                <div class="form-row">
+                    <label for="id_login">Email:</label>
+                    <input type="email" id="id_login" name="login" required>
+                </div>
 
+                <div class="form-row">
+                    <label for="id_password">Пароль:</label>
+                    <input type="password" id="id_password" name="password" required>
+                </div>
+
+                <div class="forgot-wrap">
+                    <a class="forgot" href="{% url 'account_reset_password' %}">Забыли пароль?</a>
+                </div>
+
+                <div class="remember-row">
+                    <label class="remember">
+                        <input type="checkbox" name="remember" checked>
+                        <span class="check"></span>
+                        <span>Запомнить меня</span>
+                    </label>
+                </div>
+
+                <div class="btn-row">
+                    <button type="submit" class="auth-btn">ВОЙТИ</button>
+                </div>
+
+                <p class="auth-note">
+                    Если вы впервые на сайте — заполните
+                    <a class="reg-link" href="{% url 'account_signup' %}">регистрационную форму</a>.
+                </p>
+            </form>
+        </div>
+    </section>
+</main>
+{% endblock content %}
