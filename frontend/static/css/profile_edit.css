@@ -1,0 +1,126 @@
+main {
+    padding: 100px;
+    position: relative;
+}
+
+.lk-section-name {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.left-side {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.lk-section-name p {
+    font-size: 36px;
+    font-weight: 300;
+}
+
+
+
+
+.profile {
+    max-width: 560px;
+    margin: 28px auto 0px;
+    position: relative;
+    font-family: "Jost", sans-serif;
+}
+
+
+.profile-close {
+    background: transparent;
+    border: 0;
+    font-size: 24px;
+    line-height: 1;
+    color: #000;
+    cursor: pointer;
+}
+
+.profile-form {
+    width: 100%;
+}
+
+.pf-row {
+    display: block;
+    margin: 14px 0;
+}
+
+.pf-label {
+    display: block;
+    font-size: 14px;
+    color: #525252;
+    margin-bottom: 6px;
+}
+
+.pf-field {
+    font-family: "Jost", sans-serif;
+    width: 100%;
+    height: 36px;
+    padding: 8px 10px;
+    border: 1px solid #cfcfcf;
+    outline: none;
+    font-size: 14px;
+    color: #111;
+    background: #fff;
+    transition: border-color .2s ease;
+    box-sizing: border-box;
+}
+
+.pf-field::placeholder {
+    color: #b0b0b0;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+}
+
+.pf-field:focus {
+    border-color: #000;
+}
+
+.pf-area {
+    height: auto;
+    min-height: 72px;
+    resize: vertical;
+}
+
+.pf-submit {
+    font-family: "Jost", sans-serif;
+    width: 100%;
+    height: 36px;
+    margin-top: 10px;
+    border: none;
+    background: #000;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: .02em;
+    cursor: pointer;
+}
+
+.pf-submit:hover {
+    opacity: .92;
+}
+
+.lk-section-name {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.lk-section-name img {
+    width: 20px;
+    height: 20px;
+}
+
+.lk-section-name p {
+    font-size: 24px;
+    font-weight: 300;
+}
+
+.pf-field.is-error {
+    border-color: #e53935 !important;
+}

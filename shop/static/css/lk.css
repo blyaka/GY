@@ -17,14 +17,14 @@ main {
 .lk-links {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 20px;
     justify-content: center;
     align-items: center;
     margin: 100px 0px;
 }
 
 .lk-links a {
-    font-size: 48px;
+    font-size: 24px;
     font-weight: 400;
     text-decoration: none;
     color: black;
@@ -44,6 +44,29 @@ main {
 }
 
 .background-logo img {
-    width: 1000px;
+    width: 900px;
+}
+
+
+.unauthorized {
+    min-height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.login-btn {
+    background-color: black;
+    text-decoration: none;
+    color: white;
+    padding: 6px 48px;
+    font-size: 24px;
+    font-weight: 300;
+    transition: all 0.2s ease-in-out;
+}
+
+.login-btn:hover {
+    background-color: rgb(43, 43, 43);
 }
 

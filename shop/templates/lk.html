@@ -1,9 +1,7 @@
-
-
 {% extends '_base.html' %}
 {% load static %}
 
-{% block title %}Возврат и обмен{% endblock %}
+{% block title %}ЛИЧНЫЙ КАБИНЕТ{% endblock %}
 
 {% block styles %}
     <link rel="stylesheet" href="{% static 'css/lk.css' %}">
@@ -27,16 +25,25 @@
             <p>ЛИЧНЫЙ КАБИНЕТ</p>
         </div>
 
-        <section class="lk-links">
-            <a href="">МОИ ЗАКАЗЫ</a>
-            <a href="">ИЗБРАННОЕ</a>
-            <a href="">КОРЗИНА</a>
-            <a href="">ПРОФИЛЬ</a>
-            <a href="{% url 'account_logout' %}" class="logout">ВЫЙТИ</a>
+        <section class="authorized" style="display: none;">
+            <section class="lk-links">
+                <a href="">МОИ ЗАКАЗЫ</a>
+                <a href="">ИЗБРАННОЕ</a>
+                <a href="">КОРЗИНА</a>
+                <a href="">ПРОФИЛЬ</a>
+                <a href="{% url 'account_logout' %}" class="logout">ВЫЙТИ</a>
+            </section>
+    
+            <div class="background-logo">
+                <img src="{% static 'images/GY.svg' %}" alt="">
+            </div>
         </section>
 
-        <div class="background-logo">
-            <img src="{% static 'images/GY.svg' %}" alt="">
-        </div>
+
+        <section class="unauthorized">
+
+            <a href=""class="login-btn">Войти</a>
+
+        </section>
     </main>
 {% endblock content %}
