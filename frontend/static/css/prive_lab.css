@@ -1,0 +1,254 @@
+.prive-lab {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    font-family: "Jost", sans-serif;
+    color: #111;
+}
+
+.prive-title {
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.prive-subtitle {
+    font-size: 24px;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+.prive-intro {
+    border-left: 4px solid #000;
+    padding-left: 12px;
+    margin-bottom: 60px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.prive-note-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.prive-note {
+    max-width: 500px;
+    text-align: right;
+    font-size: 16px;
+    color: #000000;
+    margin-bottom: 60px;
+}
+
+.prive-steps-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.prive-steps-intro {
+    border-left: 4px solid #000;
+    padding-left: 12px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+
+
+
+
+
+
+/* === PRIVE Accordion === */
+.prive-accordion {
+    max-width: 1000px;
+    margin: 40px auto 80px;
+    padding: 0 20px;
+}
+
+.acc {
+    margin: 18px 0;
+}
+
+
+.acc-head {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 36px;
+    background: #000;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+    font-weight: 400;
+    font-size: 24px;
+    font-family: "Jost", sans-serif;
+    border: none;
+    cursor: pointer;
+}
+
+.acc-title {
+    pointer-events: none;
+}
+
+/* Шеврон (V), при открытии разворачивается вверх */
+.acc-icon {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    flex: 0 0 22px;
+    transition: transform .25s ease;
+}
+
+.acc-icon::before,
+.acc-icon::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 2px;
+    background: #fff;
+    transform-origin: center;
+}
+
+/* рисуем "V" */
+.acc-icon::before {
+    transform: translate(-80%, -20%) rotate(45deg);
+}
+
+.acc-icon::after {
+    transform: translate(-20%, -20%) rotate(-45deg);
+}
+
+/* при открытии шеврон переворачивается на "∧" */
+.acc.open .acc-icon {
+    transform: rotate(180deg);
+}
+
+
+/* Панель */
+.acc-panel {
+    background: #ffffff;
+    color: #000000;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .3s ease, padding .3s ease, opacity .25s ease;
+    padding: 0 22px;
+    opacity: 0;
+}
+
+.acc.open .acc-panel {
+    padding: 18px 22px 22px;
+    max-height: 400px;
+    opacity: 1;
+}
+
+.request {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.acc .request {
+    padding: 0 22px;
+    max-height: 0px;
+}
+
+/* закрыта */
+.acc.open .request {
+    padding: 18px 22px 22px;
+    max-height: 300px !important;
+}
+
+
+
+
+.acc-panel p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #000000;
+}
+
+/* Разделитель */
+.prive-sep {
+    height: 1px;
+    background: #1a1a1a;
+    opacity: .35;
+    margin: 48px 0;
+}
+
+/* Форма заявки */
+.prive-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 400px;
+    padding: 18px 22px 22px;
+    justify-content: center;
+    align-items: center;
+}
+
+.prive-form label {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    align-items: center;
+    font-size: 16px;
+    color: #000000;
+}
+
+.prive-form input {
+    height: 32px;
+    width: 300px;
+    border: 1px solid #cfcfcf;
+    outline: none;
+    padding: 0 10px;
+    background: #fff;
+    font-family: inherit;
+    font-size: 14px;
+    transition: border-color .2s ease;
+}
+
+.prive-form input:focus {
+    border-color: #000;
+}
+
+.prive-submit {
+    font-family: "Jost", sans-serif;
+    margin-top: 6px;
+    width: 160px;
+    height: 40px;
+    border: none;
+    background: #000;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: .02em;
+}
+
+.prive-submit:hover {
+    opacity: .9;
+}
+
+/* Адаптив */
+@media (max-width: 600px) {
+    .acc-head {
+        padding: 14px 14px;
+        font-size: 15px;
+    }
+
+    .acc-panel {
+        padding: 0 14px;
+    }
+
+    .acc.open .acc-panel {
+        padding: 14px;
+    }
+
+    .prive-form {
+        max-width: 100%;
+    }
+
+}
