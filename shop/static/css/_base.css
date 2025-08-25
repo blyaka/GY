@@ -4,7 +4,7 @@
 }
 
 html {
-  scrollbar-gutter: stable;
+    scrollbar-gutter: stable;
 }
 
 
@@ -347,7 +347,6 @@ body {
 
 
 .footer-socials {
-    background: #000;
     color: #fff;
     padding: 24px 0 12px;
     text-align: center;
@@ -425,7 +424,43 @@ body {
     }
 
     .lang-switch {
-        font-size: 18px;
-        font-weight: 300;
+        font-size: 16px;
+        font-weight: 400;
+    }
+
+
+
+    .site-footer {
+        padding: 40px 20px;
+    }
+
+    .footer-blocks {
+        flex-direction: column;
+        gap: 20px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .footer-block-customer h2,
+    .footer-block-about h2 {
+        font-size: 24px;
+        margin: 0px 0px 15px 0px;
+    }
+
+    .customer-links,
+    .about-links {
+        font-size: 16px;
+    }
+
+
+    .logo-overlay-footer {
+        top: -200px;
+        left: 150px;
+        width: 300px;
+    }
+
+    .logo-overlay-footer img {
+        width: 100%;
+        object-fit: cover;
     }
 }

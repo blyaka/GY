@@ -10,7 +10,7 @@
       {% endblock %}
     </title>
     <link rel="stylesheet" href="{% static 'css/_base.css' %}" />
-    
+
     {% block shop_css %}
       <link rel="stylesheet" href="{% static 'css/_base-shop.css' %}" />
     {% endblock %}
@@ -222,10 +222,6 @@
             <a href="{% url 'offer' %}">Публичная оферта</a>
             <a href="{% url 'privacy' %}">Политика конфиденциальности</a>
           </div>
-
-          <div class="footer-cp-name">
-            <p>© 2025 Gabriel Yusubov</p>
-          </div>
         </div>
 
         <div class="footer-block-about">
@@ -236,6 +232,10 @@
             <a href="{% url 'blog' %}">Блог</a>
           </div>
         </div>
+      </div>
+
+      <div class="footer-cp-name">
+        <p>© 2025 Gabriel Yusubov</p>
       </div>
 
       <div class="footer-socials">
