@@ -50,8 +50,9 @@
           </div>
 
           <nav class="off-nav">
-            <a href="#" data-sub="shop">МАГАЗИН</a>
-            <a href="#" data-sub="collections">КОЛЛЕКЦИИ</a>
+            <!-- <a href="#" data-sub="shop">МАГАЗИН</a> -->
+            <!-- <a href="#" data-sub="collections">КОЛЛЕКЦИИ</a> -->
+            <a href="{% url 'prive-lab' %}" data-sub="prive-lab">PRIVE Labaratory</a>
             <a href="{% url 'delivery' %}" data-sub="delivery">ДОСТАВКА И ОПЛАТА</a>
             <a href="{% url 'refund' %}" data-sub="returns">ВОЗВРАТ И ОБМЕН</a>
             <a href="{% url 'contacts' %}" data-sub="contacts">КОНТАКТЫ</a>
@@ -213,10 +214,11 @@
           <h2><a href="{% url 'buyer' %}">Покупателю:</a></h2>
 
           <div class="customer-links">
-            <a href="{% url 'shop' %}">Магазин</a>
-            <a href="{% url 'favorites' %}">Избранное</a>
-            <a href="">Корзина</a>
-            <a href="">Личный кабинет</a>
+            <!-- <a href="{% url 'shop' %}">Магазин</a> -->
+            <a href="{% url 'prive-lab' %}">PRIVE Labaratory</a>
+            <!-- <a href="{% url 'favorites' %}">Избранное</a> -->
+            <!-- <a href="">Корзина</a> -->
+            <a href="{% url 'lk' %}">Личный кабинет</a>
             <a href="{% url 'refund' %}">Возврат и обмен</a>
             <a href="{% url 'delivery' %}">Доставка и оплата</a>
             <a href="{% url 'offer' %}">Публичная оферта</a>
