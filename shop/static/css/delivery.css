@@ -235,3 +235,48 @@ h2 {
 .contact-item a:hover {
     color: #505050;
 }
+
+
+
+
+
+
+@media (max-width:720px) {
+    main {
+        padding: 20px 20px;
+    }
+
+
+    .block {
+        padding: 0px 10px;
+    }
+
+    .h4 {
+        margin: 50px 0 10px;
+    }
+
+    .tab-head {
+        font-size: 16px;
+    }
+
+    .tabs {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+
+    .page-contacts {
+        margin-top: 40px;
+        padding: 0 10px;
+    }
+
+    h2 {
+        font-size: 16px;
+    }
+
+    .contacts_stack {
+        margin-left: 20px;
+        margin-top: 20px;
+    }
+}

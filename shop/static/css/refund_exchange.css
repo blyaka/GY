@@ -58,3 +58,28 @@ p {
 .contact-item a:hover {
     color: #007bff;
 }
+
+
+
+@media (max-width: 720px) {
+    main {
+        padding: 30px 20px;
+    }
+
+    h2 {
+        margin: 0px 0px 10px;
+    }
+
+    .page-info {
+        padding: 0 20px;
+    }
+
+    .contacts_stack {
+        margin-left: 20px;
+        margin-top: 20px;
+    }
+
+    .contact-item {
+        margin: 10px 0;
+    }
+}

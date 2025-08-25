@@ -404,7 +404,7 @@ body {
 }
 
 .logo-overlay-footer img {
-    width: 723px;
+    width: 700px;
 }
 
 
@@ -462,5 +462,14 @@ body {
     .logo-overlay-footer img {
         width: 100%;
         object-fit: cover;
+    }
+
+    .footer-cp-name {
+        margin-top: 20px;
+    }
+
+    .footer-socials {
+        position: unset;
+        padding: 24px 0 0px;
     }
 }

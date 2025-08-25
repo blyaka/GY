@@ -85,3 +85,31 @@ h2 {
     font-size: 24px;
     font-weight: 200;
 }
+
+
+
+@media (max-width: 720px) {
+    main {
+        padding: 30px 20px;
+    }
+
+    .phones {
+        margin-top: 10px;
+        margin-left: 20px;
+        gap: 20px;
+    }
+
+    h2 {
+        line-height: 1.1;
+    }
+
+    .contacts_stack {
+        margin-left: 20px;
+        margin-top: 10px;
+    }
+
+
+    .company-info p {
+        font-size: 16px;
+    }
+}

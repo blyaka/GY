@@ -62,3 +62,16 @@ body {
 .sb-link:hover {
     color: #fff;
 }
+
+
+@media (max-width:720px) {
+
+    .status-bar {
+        padding-top: 67px;
+    }
+
+    .sb-inner {
+        padding: 20px 20px;
+    }
+
+}

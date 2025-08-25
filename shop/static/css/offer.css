@@ -48,3 +48,16 @@ main {
     font-size: 16px;
     font-weight: 300;
 }
+
+
+
+
+@media (max-width:720px) {
+    main {
+        padding: 20px;
+    }
+
+    .offer-info {
+        padding: 0 20px;
+    }
+}
