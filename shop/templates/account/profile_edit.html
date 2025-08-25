@@ -1,0 +1,162 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}ПРОФИЛЬ{% endblock %}
+{% block styles %}<link rel="stylesheet" href="{% static 'css/profile_edit.css' %}">{% endblock %}
+
+{% block content %}
+<div class="status-bar"><div class="sb-inner">
+  <img class="sb-logo" src="{% static 'images/GY.svg' %}" alt="GY">
+  <span class="sb-dot"></span><a class="sb-link" href="{% url 'lk' %}">ЛИЧНЫЙ КАБИНЕТ</a>
+  <span class="sb-dot"></span><a class="sb-link" href="{% url 'lk_edit' %}">ПРОФИЛЬ</a>
+</div></div>
+
+<main>
+  <div class="lk-section-name">
+    <div class="left-side">
+      <img src="{% static 'icons/user.svg' %}" alt=""><p>ПРОФИЛЬ</p>
+    </div>
+    <div class="right-side"><button class="profile-close" type="button" aria-label="Закрыть">×</button></div>
+    <script>
+        document.querySelector('.profile-close').addEventListener('click', () => {
+            window.location.href = "{% url 'lk' %}";
+        });
+    </script>
+  </div>
+  {% if messages %}
+    <div id="flash" class="alert success">{% for m in messages %}{{ m }}{% endfor %}</div>
+  {% endif %}
+
+  <section class="profile" id="profile-wrap">
+    <form class="profile-form" method="post" novalidate>
+      {% csrf_token %}
+
+      <label class="pf-row">
+        <span class="pf-label">ФИО:</span>
+        {{ pform.full_name }}
+        {% for e in pform.full_name.errors %}<div class="err">{{ e }}</div>{% endfor %}
+      </label>
+
+      <label class="pf-row">
+        <span class="pf-label">Email:</span>
+        {{ uform.email }}
+        {% for e in uform.email.errors %}<div class="err">{{ e }}</div>{% endfor %}
+      </label>
+
+      <label class="pf-row">
+        <span class="pf-label">Телефон:</span>
+        {{ pform.phone }}
+        {% for e in pform.phone.errors %}<div class="err">{{ e }}</div>{% endfor %}
+      </label>
+
+      <label class="pf-row">
+        <span class="pf-label">Постоянный адрес доставки:</span>
+        {{ pform.address }}
+        {% for e in pform.address.errors %}<div class="err">{{ e }}</div>{% endfor %}
+      </label>
+
+      {# карту не храним. если нужно — только masked + last4 и без POST в базу #}
+
+      <button class="pf-submit" type="submit">СОХРАНИТЬ ИЗМЕНЕНИЯ</button>
+    </form>
+  </section>
+
+  <script>
+    (() => {
+      const f = document.querySelector('.profile-form');
+      const fio = f.querySelector('input[name="fio"]') || f.querySelector('input[name="full_name"]');
+      const email = f.querySelector('input[name="email"]');
+      const phone = f.querySelector('input[name="phone"]');
+      if (fio) fio.addEventListener('input', () => {
+        const clean = fio.value.replace(/[^A-Za-zА-Яа-яЁё \-]/g, '');
+        if (clean !== fio.value) fio.value = clean;
+      });
+      if (phone) phone.addEventListener('input', () => {
+        let d = phone.value.replace(/\D/g, '');
+        if (d.startsWith('8')) d = '7' + d.slice(1);
+        if (d && !d.startsWith('7')) d = '7' + d;
+        d = d.slice(0, 11);
+        const r = d.replace(/^7/,'');
+        let v = '+7';
+        if (r.length>0) v += ' ' + r.slice(0,3);
+        if (r.length>3) v += ' ' + r.slice(3,6);
+        if (r.length>6) v += ' ' + r.slice(6,8);
+        if (r.length>8) v += ' ' + r.slice(8,10);
+        phone.value = v;
+      });
+    })();
+  </script>
+
+<script>
+(() => {
+  const f = document.querySelector('.profile-form');
+  if (!f) return;
+
+  const fio = f.querySelector('input[name="full_name"]');
+  const email = f.querySelector('input[name="email"]');
+  const phone = f.querySelector('input[name="phone"]');
+
+  // ФИО: только буквы
+  if (fio) fio.addEventListener('input', () => {
+    const clean = fio.value.replace(/[^A-Za-zА-Яа-яЁё \-]/g, '');
+    if (clean !== fio.value) fio.value = clean;
+    fio.classList.toggle('is-error', !!fio.value && !/^[A-Za-zА-Яа-яЁё \-]+$/.test(fio.value));
+  });
+
+  // Email: regexp
+  if (email) {
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    const check = () => {
+      const v = email.value.trim();
+      email.classList.toggle('is-error', v.length && !emailRe.test(v));
+    };
+    email.addEventListener('input', check);
+    email.addEventListener('blur', check);
+  }
+
+  // Телефон: маска + валидация
+  if (phone) {
+    phone.addEventListener('input', () => {
+      let d = phone.value.replace(/\D/g, '');
+      if (d.startsWith('8')) d = '7' + d.slice(1);
+      if (d && !d.startsWith('7')) d = '7' + d;
+      d = d.slice(0, 11);
+      const r = d.replace(/^7/, '');
+      let v = '+7';
+      if (r.length>0) v += ' ' + r.slice(0,3);
+      if (r.length>3) v += ' ' + r.slice(3,6);
+      if (r.length>6) v += ' ' + r.slice(6,8);
+      if (r.length>8) v += ' ' + r.slice(8,10);
+      phone.value = v;
+      phone.classList.toggle('is-error', d.length && d.length < 11);
+    });
+  }
+})();
+</script>
+
+
+
+<style>
+  .alert.success{
+    color:#fff;background:#28a745;padding:10px 15px;border-radius:4px;
+    text-align:center;margin:10px 0;
+  }
+  .hidden{display:none;}
+</style>
+
+<script>
+(() => {
+  const flash = document.getElementById('flash');
+  const wrap  = document.getElementById('profile-wrap');
+  if (flash && wrap) {
+    wrap.classList.add('hidden');
+    setTimeout(() => {
+      flash.remove();
+      wrap.classList.remove('hidden');
+    }, 2000);
+  }
+})();
+</script>
+
+</main>
+{% endblock %}

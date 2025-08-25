@@ -1,0 +1,293 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}Магазин{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'css/shop.css' %}">
+  <link rel="stylesheet" href="{% static 'css/lk.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="status-bar" role="navigation" aria-label="Статус-бар">
+    <div class="sb-inner">
+      <img class="sb-logo" src="{% static 'images/GY.svg' %}" alt="GY">
+      <span class="sb-dot" aria-hidden="true"></span>
+      <a class="sb-link" href="{% url 'favorites' %}">ИЗБРАННОЕ</a>
+    </div>
+  </div>
+
+  <main>
+
+    <div class="lk-section-name">
+      <img src="{% static 'icons/user.svg' %}" alt="">
+      <p>ИЗБРАННОЕ</p>
+    </div>
+
+{% static 'images/no-photo.png' as NO_PHOTO %}
+
+<section class="catalog">
+  <div class="catalog-grid">
+    {% for p in items %}
+
+      {% with img=p.get_featured_image %}
+        {% if img %}
+          {% with img.image.url as preview %}
+            <a class="p-card" href="{% url 'product_detail' p.pk %}" data-pid="{{ p.id }}" data-img="{{ preview }}">
+              <div class="p-media" aria-label="Изображение товара">
+                <button class="p-flag-btn" type="button" aria-label="В избранное" aria-pressed="false">
+                  <svg width="30" height="35" viewBox="0 0 18 22" aria-hidden="true">
+                    <path d="M3 2.5H15a1 1 0 0 1 1 1V20.5L9 16.5l-7 4V3.5a1 1 0 0 1 1-1Z"
+                          fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round" />
+                  </svg>
+                </button>
+                <button class="p-eye-btn" type="button" aria-label="Быстрый просмотр">
+                  <img src="{% static 'icons/eye.svg' %}" alt="" width="18" height="18">
+                </button>
+                <img src="{{ preview }}" alt="{{ p.name }}">
+              </div>
+              <div class="p-info">
+                <div class="p-title">{{ p.name }}</div>
+                <div class="p-meta">
+                  <span class="p-price">{{ p.formatted_price }} ₽</span>
+                  <span class="p-art">АРТ. {{ p.article }}</span>
+                </div>
+              </div>
+            </a>
+          {% endwith %}
+        {% else %}
+          {% with NO_PHOTO as preview %}
+            <a class="p-card" href="{% url 'product_detail' p.pk %}" data-pid="{{ p.id }}" data-img="{{ preview }}">
+              <div class="p-media" aria-label="Изображение товара">
+                <button class="p-flag-btn" type="button" aria-label="В избранное" aria-pressed="false">
+                  <svg width="30" height="35" viewBox="0 0 18 22" aria-hidden="true">
+                    <path d="M3 2.5H15a1 1 0 0 1 1 1V20.5L9 16.5l-7 4V3.5a1 1 0 0 1 1-1Z"
+                          fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round" />
+                  </svg>
+                </button>
+                <button class="p-eye-btn" type="button" aria-label="Быстрый просмотр">
+                  <img src="{% static 'icons/eye.svg' %}" alt="" width="18" height="18">
+                </button>
+                <img src="{{ preview }}" alt="Нет фото">
+              </div>
+              <div class="p-info">
+                <div class="p-title">{{ p.name }}</div>
+                <div class="p-meta">
+                  <span class="p-price">{{ p.formatted_price }} ₽</span>
+                  <span class="p-art">АРТ. {{ p.article }}</span>
+                </div>
+              </div>
+            </a>
+          {% endwith %}
+        {% endif %}
+      {% endwith %}
+
+    {% empty %}
+      <p>Нет товаров</p>
+    {% endfor %}
+  </div>
+</section>
+
+    {% if is_paginated %}
+      <nav class="pager" role="navigation" aria-label="Пагинация">
+        {% if page_obj.has_previous %}
+          <a class="pg-btn pg-prev" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+        {% endif %}
+
+        <ul class="pg-list">
+          {% for num in paginator.page_range %}
+            {% if num == page_obj.number %}
+              <li><span class="pg-link is-current">{{ num }}</span></li>
+            {% else %}
+              <li><a class="pg-link" href="?page={{ num }}">{{ num }}</a></li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+
+        {% if page_obj.has_next %}
+          <a class="pg-btn pg-next" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+        {% endif %}
+      </nav>
+    {% endif %}
+
+    {# прокинем fav_ids с сервера #}
+    {{ fav_ids|json_script:"fav-ids-json" }}
+
+    <script>
+      (() => {
+        // ===== helpers =====
+        const favSet = new Set(JSON.parse(document.getElementById('fav-ids-json').textContent || '[]'));
+
+        function getCookie(name){
+          const m = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+          return m ? m.pop() : '';
+        }
+        const csrftoken = getCookie('csrftoken');
+
+        async function toggleFavorite(pid){
+          const res = await fetch("{% url 'toggle_fv' %}", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRFToken': csrftoken
+            },
+            body: JSON.stringify({product_id: pid})
+          });
+          if (!res.ok) throw new Error('toggle failed');
+          return res.json();
+        }
+
+        // ===== init buttons from favSet =====
+        document.querySelectorAll('.p-card').forEach(card => {
+          const pid = Number(card.dataset.pid);
+          const btn = card.querySelector('.p-flag-btn');
+          if (!btn) return;
+          const on = favSet.has(pid);
+          btn.classList.toggle('active', on);
+          btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+
+        // ===== Quick View cache =====
+        let qv, qvPhoto, qvTitle, qvPrice, qvArt, qvBookmark, currentCard = null;
+
+        function cacheQv() {
+          if (qv) return;
+          qv = document.getElementById('qv');
+          qvPhoto = document.getElementById('qvPhoto');
+          qvTitle = document.getElementById('qvTitle');
+          qvPrice = document.getElementById('qvPrice');
+          qvArt = document.getElementById('qvArt');
+          qvBookmark = document.getElementById('qvBookmark');
+
+          qv?.addEventListener('click', e => {
+            if (e.target.hasAttribute('data-qv-close')) closeQuickView();
+          });
+
+          // серверный тоггл из модалки
+          qvBookmark?.addEventListener('click', async (e) => {
+            e.preventDefault();
+            if (!currentCard) return;
+            const pid = Number(currentCard.dataset.pid);
+            try{
+              const data = await toggleFavorite(pid);
+              const on = !!data.on;
+              qvBookmark.classList.toggle('active', on);
+              qvBookmark.setAttribute('aria-pressed', on);
+              const flag = currentCard.querySelector('.p-flag-btn');
+              if (flag){
+                flag.classList.toggle('active', on);
+                flag.setAttribute('aria-pressed', on);
+              }
+              if (on) favSet.add(pid); else favSet.delete(pid);
+            }catch(err){ console.error(err); }
+          });
+        }
+
+        function syncBookmarkFromCard(card) {
+          const flag = card?.querySelector('.p-flag-btn');
+          const on = !!flag && flag.classList.contains('active');
+          qvBookmark?.classList.toggle('active', on);
+          qvBookmark?.setAttribute('aria-pressed', on);
+        }
+
+        function openQuickView(card) {
+          cacheQv();
+          document.querySelectorAll('.p-card.qv-current').forEach(x => x.classList.remove('qv-current'));
+          currentCard = card;
+          card.classList.add('qv-current');
+
+          const title = card.querySelector('.p-title')?.textContent?.trim() || 'Товар';
+          const price = card.querySelector('.p-price')?.innerHTML || '';
+          const art = card.querySelector('.p-art')?.textContent?.trim() || '';
+          const img = card.dataset.img || card.querySelector('.p-media img')?.getAttribute('src');
+
+          qvTitle.textContent = title;
+          qvPrice.innerHTML = price;
+          qvArt.textContent = art;
+          qvPhoto.style.background = img ? `url('${img}') center/cover no-repeat` : '#e2e2e2';
+
+          syncBookmarkFromCard(card);
+
+          qv.classList.add('open');
+          document.body.style.overflow = 'hidden';
+        }
+
+        function closeQuickView() {
+          qv?.classList.remove('open');
+          document.body.style.overflow = '';
+          if (currentCard) currentCard.classList.remove('qv-current');
+          currentCard = null;
+        }
+
+        // открыть модалку
+        document.addEventListener('click', (e) => {
+          const eye = e.target.closest('.p-eye-btn');
+          if (!eye) return;
+          e.preventDefault(); e.stopPropagation();
+          const card = eye.closest('.p-card');
+          openQuickView(card);
+        });
+
+        // клик по «флажку» на карточке — серверный тоггл
+        document.addEventListener('click', async (e) => {
+          const flag = e.target.closest('.p-flag-btn');
+          if (!flag) return;
+          e.preventDefault(); e.stopPropagation();
+          const card = flag.closest('.p-card');
+          const pid = Number(card?.dataset.pid);
+          try{
+            const data = await toggleFavorite(pid);
+            const on = !!data.on;
+            flag.classList.toggle('active', on);
+            flag.setAttribute('aria-pressed', on);
+            if (qv?.classList.contains('open') && currentCard === card) {
+              qvBookmark.classList.toggle('active', on);
+              qvBookmark.setAttribute('aria-pressed', on);
+            }
+            if (on) favSet.add(pid); else favSet.delete(pid);
+          }catch(err){ console.error(err); }
+        });
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && document.getElementById('qv')?.classList.contains('open')) closeQuickView();
+        });
+      })();
+    </script>
+
+    <!-- QUICK VIEW MODAL -->
+    <div class="qv" id="qv" aria-hidden="true">
+      <div class="qv-overlay" data-qv-close></div>
+
+      <div class="qv-panel" role="dialog" aria-modal="true" aria-label="Быстрый просмотр">
+        <button class="qv-x" type="button" aria-label="Закрыть" data-qv-close>×</button>
+
+        <div class="qv-left">
+          <div class="qv-photo" id="qvPhoto" role="img" aria-label="Фото товара"></div>
+        </div>
+
+        <div class="qv-right">
+          <div class="qv-top">
+            <h3 class="qv-title" id="qvTitle"></h3>
+            <button class="qv-bookmark" type="button" aria-label="В избранное" id="qvBookmark" aria-pressed="false">
+              <svg width="22" height="26" viewBox="0 0 18 22" aria-hidden="true" focusable="false">
+                <path d="M3 2.5H15a1 1 0 0 1 1 1V20.5L9 16.5l-7 4V3.5a1 1 0 0 1 1-1Z" fill="none"
+                      stroke="#111" stroke-width="2" stroke-linejoin="round" />
+              </svg>
+            </button>
+          </div>
+
+          <div class="qv-price" id="qvPrice"></div>
+          <div class="qv-art" id="qvArt"></div>
+
+          <div class="qv-opts">
+            <div class="qv-row"><span class="qv-label">Цвета:</span> <div id="qvColors" class="qv-colors"></div></div>
+            <div class="qv-row"><span class="qv-label">Размеры:</span> <div id="qvSizes" class="qv-sizes"></div></div>
+            <div class="qv-row"><span class="qv-label">Состав:</span> <div id="qvFabrics" class="qv-fabrics"></div></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+{% endblock content %}

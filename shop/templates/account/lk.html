@@ -14,23 +14,23 @@
         <div class="sb-inner">
             <img class="sb-logo" src="{% static 'images/GY.svg' %}" alt="GY">
             <span class="sb-dot" aria-hidden="true"></span>
-            <a class="sb-link" href="/shop/">ЛИЧНЫЙ КАБИНЕТ</a>
+            <a class="sb-link" href="{% url 'lk' %}">ЛИЧНЫЙ КАБИНЕТ</a>
         </div>
     </div>
 
     <main>
-
+        {% if user.is_authenticated %}
         <div class="lk-section-name">
             <img src="{% static 'icons/user.svg' %}" alt="">
-            <p>ЛИЧНЫЙ КАБИНЕТ</p>
+            <p>{{ user.profile.full_name|default:user.get_full_name|default:user.email|upper }}</p>
         </div>
-
-        <section class="authorized" style="display: none;">
+        
+        <section class="authorized">
             <section class="lk-links">
                 <a href="">МОИ ЗАКАЗЫ</a>
-                <a href="">ИЗБРАННОЕ</a>
+                <a href="{% url 'favorites' %}">ИЗБРАННОЕ</a>
                 <a href="">КОРЗИНА</a>
-                <a href="">ПРОФИЛЬ</a>
+                <a href="{% url 'lk_edit' %}">ПРОФИЛЬ</a>
                 <a href="{% url 'account_logout' %}" class="logout">ВЫЙТИ</a>
             </section>
     
@@ -39,11 +39,17 @@
             </div>
         </section>
 
+        {% else %}
+        <div class="lk-section-name">
+            <img src="{% static 'icons/user.svg' %}" alt="">
+            <p>ЛИЧНЫЙ КАБИНЕТ</p>
+        </div>
 
         <section class="unauthorized">
 
-            <a href=""class="login-btn">Войти</a>
+            <a href="{% url 'account_login' %}"class="login-btn">Войти</a>
 
         </section>
+        {% endif %}
     </main>
 {% endblock content %}
