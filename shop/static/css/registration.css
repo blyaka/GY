@@ -17,7 +17,7 @@ body {
 
 /* центр */
 .auth {
-    min-height: calc(100vh - 180px);
+    min-height: calc(100vh - 250px);
     display: grid;
     place-items: center;
     padding: 100px 16px
@@ -36,9 +36,9 @@ body {
 }
 
 .auth-title {
-    font-size: 24px;
-    font-weight: 200;
-    color: var(--gray);
+    font-size: 16px;
+    font-weight: 300;
+    color: black;
     text-align: center;
     margin: 20px 0 30px
 }
@@ -49,11 +49,11 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    margin: 0 0 25px
+    margin: 0 0 15px
 }
 
 .form-row label {
-    font-size: 34px;
+    font-size: 24px;
     font-weight: 300;
     text-align: right;
     color: var(--black)
@@ -108,7 +108,7 @@ body {
     align-items: center;
     gap: 30px;
     font-size: 14px;
-    font-weight: 200;
+    font-weight: 300;
     color: var(--black);
     cursor: pointer;
     user-select: none
@@ -168,7 +168,7 @@ body {
     border: none;
     padding: 10px 0px;
     letter-spacing: 1px;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 300;
     cursor: pointer
 }
@@ -180,8 +180,8 @@ body {
 /* низ */
 .auth-note {
     margin: 18px 0 0;
-    font-size: 18px;
-    font-weight: 200;
+    font-size: 16px;
+    font-weight: 300;
     color: #000000;
     text-align: center
 }
