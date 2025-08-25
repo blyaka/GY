@@ -274,390 +274,392 @@
 
     </main>
 
-
-
+{{ fav_ids|json_script:"fav-ids-json" }}
 
 <script>
-    (() => {
-    // ===== утилиты
-    const $  = (s, r=document) => r.querySelector(s);
-    const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
-    const fmt = new Intl.NumberFormat('ru-RU');
+(() => {
+  // ===== утилиты
+  const $  = (s, r=document) => r.querySelector(s);
+  const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+  const fmt = new Intl.NumberFormat('ru-RU');
 
-    // ====== POPover’ы
-    const dds = $$('.fb-dd');
-    dds.forEach(dd => {
-        const btn = dd.querySelector('.fb-item');
-        btn?.addEventListener('click', e => {
-        e.stopPropagation();
-        const opened = dd.classList.contains('open');
-        dds.forEach(x => x.classList.remove('open'));
-        if (!opened) dd.classList.add('open');
-        });
+  // ===== fav ids из сервера
+  const favSet = new Set(JSON.parse(document.getElementById('fav-ids-json')?.textContent || '[]'));
+
+  // CSRF
+  function getCookie(name){
+    const m = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+    return m ? m.pop() : '';
+  }
+  const csrftoken = getCookie('csrftoken');
+
+  async function toggleFavorite(pid){
+    const res = await fetch("{% url 'toggle_fv' %}", {
+      method: 'POST',
+      headers: {'Content-Type':'application/json','X-CSRFToken': csrftoken},
+      body: JSON.stringify({product_id: Number(pid)})
     });
-    document.addEventListener('click', () => dds.forEach(x => x.classList.remove('open')));
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') dds.forEach(x => x.classList.remove('open')); });
+    if(!res.ok) throw new Error('toggle failed');
+    return res.json();
+  }
 
-    // ====== элементы фильтров
-    const bar   = $('.filters-bar');
-    const btnM  = bar?.querySelector('.fb-menu');
-    const row   = bar?.querySelector('.fb-row');
+  // ===== POPover’ы (твои фильтры) — оставил без изменений
+  const dds = $$('.fb-dd');
+  dds.forEach(dd => {
+    const btn = dd.querySelector('.fb-item');
+    btn?.addEventListener('click', e => {
+      e.stopPropagation();
+      const opened = dd.classList.contains('open');
+      dds.forEach(x => x.classList.remove('open'));
+      if (!opened) dd.classList.add('open');
+    });
+  });
+  document.addEventListener('click', () => dds.forEach(x => x.classList.remove('open')));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') dds.forEach(x => x.classList.remove('open')); });
 
-    const ddCat   = $('.fb-dd[data-dd="category"]');
-    const ddSize  = $('.fb-dd[data-dd="size"]');
-    const ddColor = $('.fb-dd[data-dd="color"]');
-    const ddPrice = $('.fb-dd[data-dd="price"]');
-    const ddSort  = $('.fb-dd[data-dd="sort"]');
+  const bar   = $('.filters-bar');
+  const btnM  = bar?.querySelector('.fb-menu');
+  const row   = bar?.querySelector('.fb-row');
 
-    const btnCats     = $$('.dd-category');           // <button class="dd-category" data-category="...">
-    const btnCatClear = $('.dd-category-clear');      // <button class="dd-category-clear">
-    const sizeBtns    = $$('.dd-sizes .sz');          // <button class="sz" data-size="...">
-    const colorBtns   = $$('.dd-colors .dot');        // <button class="dot" data-color="...">
+  const ddCat   = $('.fb-dd[data-dd="category"]');
+  const ddSize  = $('.fb-dd[data-dd="size"]');
+  const ddColor = $('.fb-dd[data-dd="color"]');
+  const ddPrice = $('.fb-dd[data-dd="price"]');
+  const ddSort  = $('.fb-dd[data-dd="sort"]');
 
-    const rMin = ddPrice?.querySelector('.range-min');
-    const rMax = ddPrice?.querySelector('.range-max');
-    const iMin = ddPrice?.querySelector('.price-min');
-    const iMax = ddPrice?.querySelector('.price-max');
-    const wrap = ddPrice?.querySelector('.range-wrap');
-    const minGap = 100;
+  const btnCats     = $$('.dd-category');
+  const btnCatClear = $('.dd-category-clear');
+  const sizeBtns    = $$('.dd-sizes .sz');
+  const colorBtns   = $$('.dd-colors .dot');
 
-    // ====== сворачивание/разворачивание панели фильтров
-    if (bar && btnM && row) {
-        const closePopovers = () => bar.querySelectorAll('.fb-dd.open').forEach(x => x.classList.remove('open'));
-        const collapse = () => {
-        closePopovers();
-        const h = row.scrollHeight;
-        row.style.height = h + 'px';
-        bar.classList.add('is-collapsing');
-        requestAnimationFrame(() => {
-            row.style.opacity = '0';
-            row.style.height = '0px';
-        });
-        row.addEventListener('transitionend', function onEnd(e) {
-            if (e.propertyName !== 'height') return;
-            row.removeEventListener('transitionend', onEnd);
-            row.style.display = 'none';
-            row.style.opacity = '';
-            row.style.height = '';
-            bar.classList.remove('is-collapsing');
-            bar.classList.add('is-collapsed');
-            btnM.setAttribute('aria-expanded', 'false');
-        });
-        };
-        const expand = () => {
-        row.style.display = '';
+  const rMin = ddPrice?.querySelector('.range-min');
+  const rMax = ddPrice?.querySelector('.range-max');
+  const iMin = ddPrice?.querySelector('.price-min');
+  const iMax = ddPrice?.querySelector('.price-max');
+  const wrap = ddPrice?.querySelector('.range-wrap');
+  const minGap = 100;
+
+  if (bar && btnM && row) {
+    const closePopovers = () => bar.querySelectorAll('.fb-dd.open').forEach(x => x.classList.remove('open'));
+    const collapse = () => {
+      closePopovers();
+      const h = row.scrollHeight;
+      row.style.height = h + 'px';
+      bar.classList.add('is-collapsing');
+      requestAnimationFrame(() => {
         row.style.opacity = '0';
         row.style.height = '0px';
-        const h = row.scrollHeight;
-        bar.classList.add('is-expanding');
-        requestAnimationFrame(() => {
-            row.style.opacity = '1';
-            row.style.height = h + 'px';
-        });
-        row.addEventListener('transitionend', function onEnd(e) {
-            if (e.propertyName !== 'height') return;
-            row.removeEventListener('transitionend', onEnd);
-            row.style.opacity = '';
-            row.style.height = '';
-            bar.classList.remove('is-expanding');
-            bar.classList.remove('is-collapsed');
-            btnM.setAttribute('aria-expanded', 'true');
-        });
-        };
-        btnM.addEventListener('click', e => {
-        e.preventDefault();
-        if (bar.classList.contains('is-collapsed')) expand(); else collapse();
-        });
-        window.addEventListener('resize', () => {
-        if (!bar.classList.contains('is-collapsed') && row.style.height) {
-            row.style.height = row.scrollHeight + 'px';
-        }
-        });
-    }
-
-    // ====== helpers активностей
-    const setActiveBadge = (dd, on) => dd?.querySelector('.fb-item')?.classList.toggle('is-active', !!on);
-    function updateBadges() {
-        const catOn   = !!$('.dd-category[aria-current="true"]');
-        const szOn    = !!$('.dd-sizes .sz.active');
-        const clrOn   = !!$('.dd-colors .dot.active');
-        let priceOn = false;
-        if (rMin && rMax) priceOn = (+rMin.value > +rMin.min) || (+rMax.value < +rMax.max);
-        setActiveBadge(ddCat,   catOn);
-        setActiveBadge(ddSize,  szOn);
-        setActiveBadge(ddColor, clrOn);
-        setActiveBadge(ddPrice, priceOn);
-    }
-
-    // ====== восстановление из URL
-    const params = new URLSearchParams(location.search);
-    const DEF_MIN = (rMin?.min ? +rMin.min : null) ?? 0;
-    const DEF_MAX = (rMax?.max ? +rMax.max : null) ?? 100000;
-
-    const curCat = params.get('category');
-    btnCats.forEach(b => {
-        if (b.dataset.category === curCat) {
-        b.setAttribute('aria-current','true');
-        ddCat?.setAttribute('data-selected','1');
-        }
+      });
+      row.addEventListener('transitionend', function onEnd(e) {
+        if (e.propertyName !== 'height') return;
+        row.removeEventListener('transitionend', onEnd);
+        row.style.display = 'none';
+        row.style.opacity = '';
+        row.style.height = '';
+        bar.classList.remove('is-collapsing');
+        bar.classList.add('is-collapsed');
+        btnM.setAttribute('aria-expanded', 'false');
+      });
+    };
+    const expand = () => {
+      row.style.display = '';
+      row.style.opacity = '0';
+      row.style.height = '0px';
+      const h = row.scrollHeight;
+      bar.classList.add('is-expanding');
+      requestAnimationFrame(() => {
+        row.style.opacity = '1';
+        row.style.height = h + 'px';
+      });
+      row.addEventListener('transitionend', function onEnd(e) {
+        if (e.propertyName !== 'height') return;
+        row.removeEventListener('transitionend', onEnd);
+        row.style.opacity = '';
+        row.style.height = '';
+        bar.classList.remove('is-expanding');
+        bar.classList.remove('is-collapsed');
+        btnM.setAttribute('aria-expanded', 'true');
+      });
+    };
+    btnM.addEventListener('click', e => {
+      e.preventDefault();
+      if (bar.classList.contains('is-collapsed')) expand(); else collapse();
     });
-
-    params.getAll('size').forEach(v => sizeBtns.forEach(b => b.dataset.size === v && b.classList.add('active')));
-    params.getAll('color').forEach(v => colorBtns.forEach(b => b.dataset.color === v && b.classList.add('active')));
-
-    if (rMin && rMax && iMin && iMax) {
-        const curMin = +(params.get('price_min') ?? DEF_MIN);
-        const curMax = +(params.get('price_max') ?? DEF_MAX);
-        rMin.value = iMin.value = curMin;
-        rMax.value = iMax.value = curMax;
-        paintRange();
-    }
-
-    updateBadges();
-
-    // ====== сбор параметров и переход
-    function applyFilters(extra={}) {
-        const p = new URLSearchParams();
-
-        const q = $('.shop-search-input')?.value?.trim();
-        if (q) p.set('q', q);
-
-        const activeCat = $('.dd-category[aria-current="true"]')?.dataset.category;
-        if (activeCat) p.set('category', activeCat);
-
-        $$('.dd-sizes .sz.active').forEach(b => p.append('size', b.dataset.size));
-        $$('.dd-colors .dot.active').forEach(b => p.append('color', b.dataset.color));
-
-        if (rMin && rMax) {
-        const a = +rMin.value, b = +rMax.value;
-        if (a !== DEF_MIN) p.set('price_min', a);
-        if (b !== DEF_MAX) p.set('price_max', b);
-        }
-
-        const order = params.get('order'); // текущий, если не меняли
-        if (order && !extra.order) p.set('order', order);
-        if (extra.order) p.set('order', extra.order);
-
-        // если сортировка по возрастанию/убыванию – оставим для шаблона
-        const qs = p.toString();
-        location.search = qs ? `?${qs}` : '';
-    }
-
-    // ====== обработчики фильтров
-    $('.shop-search')?.addEventListener('submit', e => { e.preventDefault(); applyFilters(); });
-
-    btnCats.forEach(b => b.addEventListener('click', e => {
-        e.preventDefault(); e.stopImmediatePropagation();
-        $$('.dd-category[aria-current="true"]').forEach(x => x.removeAttribute('aria-current'));
-        b.setAttribute('aria-current', 'true');
-        ddCat?.setAttribute('data-selected','1');
-        updateBadges();
-        applyFilters();
-    }));
-
-    btnCatClear?.addEventListener('click', e => {
-        e.preventDefault(); e.stopImmediatePropagation();
-        $$('.dd-category[aria-current="true"]').forEach(x => x.removeAttribute('aria-current'));
-        ddCat?.removeAttribute('data-selected');
-        updateBadges();
-        applyFilters();
-    });
-
-    colorBtns.forEach(b => b.addEventListener('click', e => {
-        e.preventDefault(); e.stopImmediatePropagation();
-        b.classList.toggle('active');
-        updateBadges();
-        applyFilters();
-    }));
-    sizeBtns.forEach(b => b.addEventListener('click', e => {
-        e.preventDefault(); e.stopImmediatePropagation();
-        b.classList.toggle('active');
-        updateBadges();
-        applyFilters();
-    }));
-
-    // ====== двойной ползунок цены
-    function paintRange() {
-        if (!wrap || !rMin || !rMax) return;
-        const min = +rMin.min || DEF_MIN, max = +rMax.max || DEF_MAX;
-        const a = (+rMin.value - min) / (max - min) * 100;
-        const b = (+rMax.value - min) / (max - min) * 100;
-        wrap.style.background =
-        `linear-gradient(to right,#d9d9d9 ${a}% ,#111 ${a}%, #111 ${b}%, #d9d9d9 ${b}%)`;
-    }
-    function clampFromRange(changed) {
-        if (!rMin || !rMax || !iMin || !iMax) return;
-        let a = +rMin.value, b = +rMax.value;
-        if (b - a < minGap) {
-        if (changed === rMin) a = b - minGap; else b = a + minGap;
-        rMin.value = a; rMax.value = b;
-        }
-        iMin.value = rMin.value; iMax.value = rMax.value;
-        paintRange(); updateBadges();
-    }
-    function clampFromInput() {
-        if (!rMin || !rMax || !iMin || !iMax) return;
-        let a = Math.max(+iMin.min || DEF_MIN, +iMin.value || DEF_MIN);
-        let b = Math.min(+iMax.max || DEF_MAX, +iMax.value || DEF_MAX);
-        if (b - a < minGap) b = a + minGap;
-        rMin.value = a; rMax.value = b;
-        iMin.value = a; iMax.value = b;
-        paintRange(); updateBadges();
-    }
-    rMin?.addEventListener('input', () => clampFromRange(rMin));
-    rMax?.addEventListener('input', () => clampFromRange(rMax));
-    iMin?.addEventListener('change', clampFromInput);
-    iMax?.addEventListener('change', clampFromInput);
-
-    // ====== сброс всех фильтров
-    $('.fb-clear')?.addEventListener('click', () => {
-        $$('.dd-category[aria-current="true"]').forEach(x => x.removeAttribute('aria-current'));
-        ddCat?.removeAttribute('data-selected');
-        sizeBtns.forEach(x => x.classList.remove('active'));
-        colorBtns.forEach(x => x.classList.remove('active'));
-        if (rMin && rMax && iMin && iMax) {
-        rMin.value = rMin.min; rMax.value = rMax.max;
-        iMin.value = rMin.value; iMax.value = rMax.value;
-        wrap && (wrap.style.background = '');
-        }
-        updateBadges();
-        location.search = ''; // полный сброс
-    });
-
-    // ====== сортировка
-    $$('.dd-option[data-sort]').forEach(btn => {
-        btn.addEventListener('click', () => {
-        const v = btn.dataset.sort === 'asc' ? 'price_asc' : 'price_desc';
-        applyFilters({order: v});
-        });
-    });
-
-    // ====== Quick View (синх с карточкой и загрузкой данных)
-    const qv               = $('#qv');
-    const qvPhoto          = $('#qvPhoto');
-    const qvTitle          = $('#qvTitle');
-    const qvPrice          = $('#qvPrice');
-    const qvArt            = $('#qvArt');
-    const qvBookmark       = $('#qvBookmark');
-    const qvColors         = $('#qvColors');
-    const qvSizes          = $('#qvSizes');
-    const qvFabrics        = $('#qvFabrics');
-    let currentCard = null;
-
-    function closeQuickView() {
-        qv?.classList.remove('open');
-        document.body.style.overflow = '';
-        currentCard = null;
-    }
-
-    document.addEventListener('click', (e) => {
-        const eye = e.target.closest('.p-eye-btn');
-        if (!eye) return;
-        e.preventDefault(); e.stopPropagation();
-        const card = eye.closest('.p-card');
-        if (!card) return;
-        currentCard = card;
-
-        qvTitle.textContent = 'Загрузка...';
-        qvPrice.textContent = '';
-        qvArt.textContent = '';
-        qvPhoto.style.background = '#e2e2e2';
-        qvColors.innerHTML = '';
-        qvSizes.innerHTML = '';
-        qvFabrics.innerHTML = '';
-
-        const pid = card.getAttribute('data-pid');
-        const qvUrl = "{% url 'product_quick_view' 0 %}".replace('/0/', `/${pid}/`);
-
-        fetch(qvUrl)
-        .then(r => r.ok ? r.json() : Promise.reject(r))
-        .then(data => {
-            qvTitle.textContent = data.name;
-            qvPrice.textContent = `${fmt.format(data.price)} ₽`;
-            qvArt.textContent = `АРТ. ${data.article}`;
-            qvPhoto.style.background = data.image
-            ? `url('${data.image}') center/cover no-repeat`
-            : '#e2e2e2';
-
-            // цвета
-            (data.colors || []).forEach(c => {
-            const b = document.createElement('span');
-            b.className = 'dot';
-            b.title = c.name;
-            b.style.cssText = 'display:inline-block;width:18px;height:18px;border-radius:50%;vertical-align:middle;border:1px solid #ccc;';
-            b.style.background = c.hex || '#000';
-            qvColors.appendChild(b);
-            });
-
-            // размеры
-            (data.sizes || []).forEach(s => {
-            const b = document.createElement('span');
-            b.className = 'sz';
-            b.textContent = s.name || s;
-            qvSizes.appendChild(b);
-            });
-
-            // состав
-            (data.fabrics || []).forEach(f => {
-            const span = document.createElement('span');
-            span.textContent = `${f.name} ${f.pct}%`;
-            span.style.cssText = 'margin-right:8px;';
-            qvFabrics.appendChild(span);
-            });
-        })
-        .catch(() => {
-            qvTitle.textContent = 'Ошибка загрузки';
-            qvPhoto.style.background = '#f5c2c7';
-        });
-
-        // синк закладки с карточки
-        const flag = card.querySelector('.p-flag-btn');
-        const on = !!flag && flag.classList.contains('active');
-        qvBookmark?.classList.toggle('active', on);
-        qvBookmark?.setAttribute('aria-pressed', on);
-
-        qv?.classList.add('open');
-        document.body.style.overflow = 'hidden';
-    });
-
-    qv?.addEventListener('click', e => { if (e.target.hasAttribute('data-qv-close')) closeQuickView(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape' && qv?.classList.contains('open')) closeQuickView(); });
-
-    // клик по закладке в квик-вью синхнет карточку
-    qvBookmark?.addEventListener('click', e => {
-        e.preventDefault();
-        const on = !qvBookmark.classList.contains('active');
-        qvBookmark.classList.toggle('active', on);
-        qvBookmark.setAttribute('aria-pressed', on);
-        const flag = currentCard?.querySelector('.p-flag-btn');
-        if (flag) { flag.classList.toggle('active', on); flag.setAttribute('aria-pressed', on); }
-    });
-    })();
-
-
-      // клик по "закладке" на карточке
-  document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.p-flag-btn');
-    if (!btn) return;
-    e.preventDefault();
-    e.stopPropagation();
-    const on = !btn.classList.contains('active');
-    btn.classList.toggle('active', on);
-    btn.setAttribute('aria-pressed', on);
-
-    // если открыт квик-вью — синхнём там иконку
-    if (document.querySelector('#qv.open')) {
-      const qvBookmark = document.querySelector('#qvBookmark');
-      if (qvBookmark) {
-        qvBookmark.classList.toggle('active', on);
-        qvBookmark.setAttribute('aria-pressed', on);
+    window.addEventListener('resize', () => {
+      if (!bar.classList.contains('is-collapsed') && row.style.height) {
+        row.style.height = row.scrollHeight + 'px';
       }
+    });
+  }
+
+  const setActiveBadge = (dd, on) => dd?.querySelector('.fb-item')?.classList.toggle('is-active', !!on);
+  function updateBadges() {
+    const catOn = !!$('.dd-category[aria-current="true"]');
+    const szOn  = !!$('.dd-sizes .sz.active');
+    const clrOn = !!$('.dd-colors .dot.active');
+    let priceOn = false;
+    if (rMin && rMax) priceOn = (+rMin.value > +rMin.min) || (+rMax.value < +rMax.max);
+    setActiveBadge(ddCat,   catOn);
+    setActiveBadge(ddSize,  szOn);
+    setActiveBadge(ddColor, clrOn);
+    setActiveBadge(ddPrice, priceOn);
+  }
+
+  const params = new URLSearchParams(location.search);
+  const DEF_MIN = (rMin?.min ? +rMin.min : null) ?? 0;
+  const DEF_MAX = (rMax?.max ? +rMax.max : null) ?? 100000;
+
+  const curCat = params.get('category');
+  btnCats.forEach(b => {
+    if (b.dataset.category === curCat) {
+      b.setAttribute('aria-current','true');
+      ddCat?.setAttribute('data-selected','1');
     }
   });
-</script>
+  params.getAll('size').forEach(v => sizeBtns.forEach(b => b.dataset.size === v && b.classList.add('active')));
+  params.getAll('color').forEach(v => colorBtns.forEach(b => b.dataset.color === v && b.classList.add('active')));
+  if (rMin && rMax && iMin && iMax) {
+    const curMin = +(params.get('price_min') ?? DEF_MIN);
+    const curMax = +(params.get('price_max') ?? DEF_MAX);
+    rMin.value = iMin.value = curMin;
+    rMax.value = iMax.value = curMax;
+    paintRange();
+  }
+  updateBadges();
 
+  function applyFilters(extra={}) {
+    const p = new URLSearchParams();
+    const q = $('.shop-search-input')?.value?.trim();
+    if (q) p.set('q', q);
+    const activeCat = $('.dd-category[aria-current="true"]')?.dataset.category;
+    if (activeCat) p.set('category', activeCat);
+    $$('.dd-sizes .sz.active').forEach(b => p.append('size', b.dataset.size));
+    $$('.dd-colors .dot.active').forEach(b => p.append('color', b.dataset.color));
+    if (rMin && rMax) {
+      const a = +rMin.value, b = +rMax.value;
+      if (a !== DEF_MIN) p.set('price_min', a);
+      if (b !== DEF_MAX) p.set('price_max', b);
+    }
+    const order = params.get('order');
+    if (order && !extra.order) p.set('order', order);
+    if (extra.order) p.set('order', extra.order);
+    const qs = p.toString();
+    location.search = qs ? `?${qs}` : '';
+  }
 
+  $('.shop-search')?.addEventListener('submit', e => { e.preventDefault(); applyFilters(); });
+  btnCats.forEach(b => b.addEventListener('click', e => {
+    e.preventDefault(); e.stopImmediatePropagation();
+    $$('.dd-category[aria-current="true"]').forEach(x => x.removeAttribute('aria-current'));
+    b.setAttribute('aria-current', 'true');
+    ddCat?.setAttribute('data-selected','1');
+    updateBadges();
+    applyFilters();
+  }));
+  btnCatClear?.addEventListener('click', e => {
+    e.preventDefault(); e.stopImmediatePropagation();
+    $$('.dd-category[aria-current="true"]').forEach(x => x.removeAttribute('aria-current'));
+    ddCat?.removeAttribute('data-selected');
+    updateBadges();
+    applyFilters();
+  });
+  colorBtns.forEach(b => b.addEventListener('click', e => {
+    e.preventDefault(); e.stopImmediatePropagation();
+    b.classList.toggle('active');
+    updateBadges();
+    applyFilters();
+  }));
+  sizeBtns.forEach(b => b.addEventListener('click', e => {
+    e.preventDefault(); e.stopImmediatePropagation();
+    b.classList.toggle('active');
+    updateBadges();
+    applyFilters();
+  }));
 
+  function paintRange() {
+    if (!wrap || !rMin || !rMax) return;
+    const min = +rMin.min || DEF_MIN, max = +rMax.max || DEF_MAX;
+    const a = (+rMin.value - min) / (max - min) * 100;
+    const b = (+rMax.value - min) / (max - min) * 100;
+    wrap.style.background =
+      `linear-gradient(to right,#d9d9d9 ${a}% ,#111 ${a}%, #111 ${b}%, #d9d9d9 ${b}%)`;
+  }
+  function clampFromRange(changed) {
+    if (!rMin || !rMax || !iMin || !iMax) return;
+    let a = +rMin.value, b = +rMax.value;
+    if (b - a < minGap) {
+      if (changed === rMin) a = b - minGap; else b = a + minGap;
+      rMin.value = a; rMax.value = b;
+    }
+    iMin.value = rMin.value; iMax.value = rMax.value;
+    paintRange(); updateBadges();
+  }
+  function clampFromInput() {
+    if (!rMin || !rMax || !iMin || !iMax) return;
+    let a = Math.max(+iMin.min || DEF_MIN, +iMin.value || DEF_MIN);
+    let b = Math.min(+iMax.max || DEF_MAX, +iMax.value || DEF_MAX);
+    if (b - a < minGap) b = a + minGap;
+    rMin.value = a; rMax.value = b;
+    iMin.value = a; iMax.value = b;
+    paintRange(); updateBadges();
+  }
+  rMin?.addEventListener('input', () => clampFromRange(rMin));
+  rMax?.addEventListener('input', () => clampFromRange(rMax));
+  iMin?.addEventListener('change', clampFromInput);
+  iMax?.addEventListener('change', clampFromInput);
+
+  $('.fb-clear')?.addEventListener('click', () => {
+    $$('.dd-category[aria-current="true"]').forEach(x => x.removeAttribute('aria-current'));
+    ddCat?.removeAttribute('data-selected');
+    sizeBtns.forEach(x => x.classList.remove('active'));
+    colorBtns.forEach(x => x.classList.remove('active'));
+    if (rMin && rMax && iMin && iMax) {
+      rMin.value = rMin.min; rMax.value = rMax.max;
+      iMin.value = rMin.value; iMax.value = rMax.value;
+      wrap && (wrap.style.background = '');
+    }
+    updateBadges();
+    location.search = '';
+  });
+
+  $$('.dd-option[data-sort]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const v = btn.dataset.sort === 'asc' ? 'price_asc' : 'price_desc';
+      applyFilters({order: v});
+    });
+  });
+
+  // ===== Проставляем активное избранное при загрузке
+  $$('.p-card').forEach(card => {
+    const pid = Number(card.dataset.pid);
+    const btn = card.querySelector('.p-flag-btn');
+    if (!btn) return;
+    const on = favSet.has(pid);
+    btn.classList.toggle('active', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+  });
+
+  // ===== Quick View (с твоим fetch), плюс синк закладки
+  const qv         = $('#qv');
+  const qvPhoto    = $('#qvPhoto');
+  const qvTitle    = $('#qvTitle');
+  const qvPrice    = $('#qvPrice');
+  const qvArt      = $('#qvArt');
+  const qvBookmark = $('#qvBookmark');
+  const qvColors   = $('#qvColors');
+  const qvSizes    = $('#qvSizes');
+  const qvFabrics  = $('#qvFabrics');
+  let currentCard = null;
+
+  function closeQuickView() {
+    qv?.classList.remove('open');
+    document.body.style.overflow = '';
+    currentCard = null;
+  }
+
+  document.addEventListener('click', (e) => {
+    const eye = e.target.closest('.p-eye-btn');
+    if (!eye) return;
+    e.preventDefault(); e.stopPropagation();
+    const card = eye.closest('.p-card');
+    if (!card) return;
+    currentCard = card;
+
+    qvTitle.textContent = 'Загрузка...';
+    qvPrice.textContent = '';
+    qvArt.textContent = '';
+    qvPhoto.style.background = '#e2e2e2';
+    qvColors.innerHTML = '';
+    qvSizes.innerHTML = '';
+    qvFabrics.innerHTML = '';
+
+    const pid = card.getAttribute('data-pid');
+    const qvUrl = "{% url 'product_quick_view' 0 %}".replace('/0/', `/${pid}/`);
+
+    fetch(qvUrl)
+      .then(r => r.ok ? r.json() : Promise.reject(r))
+      .then(data => {
+        qvTitle.textContent = data.name;
+        qvPrice.textContent = `${fmt.format(data.price)} ₽`;
+        qvArt.textContent = `АРТ. ${data.article}`;
+        qvPhoto.style.background = data.image
+          ? `url('${data.image}') center/cover no-repeat` : '#e2e2e2';
+        (data.colors || []).forEach(c => {
+          const b = document.createElement('span');
+          b.className = 'dot'; b.title = c.name;
+          b.style.cssText = 'display:inline-block;width:18px;height:18px;border-radius:50%;vertical-align:middle;border:1px solid #ccc;';
+          b.style.background = c.hex || '#000';
+          qvColors.appendChild(b);
+        });
+        (data.sizes || []).forEach(s => {
+          const b = document.createElement('span');
+          b.className = 'sz'; b.textContent = s.name || s;
+          qvSizes.appendChild(b);
+        });
+        (data.fabrics || []).forEach(f => {
+          const span = document.createElement('span');
+          span.textContent = `${f.name} ${f.pct}%`;
+          span.style.cssText = 'margin-right:8px;';
+          qvFabrics.appendChild(span);
+        });
+      })
+      .catch(() => {
+        qvTitle.textContent = 'Ошибка загрузки';
+        qvPhoto.style.background = '#f5c2c7';
+      });
+
+    // синк иконки
+    const pidNum = Number(pid);
+    const on = favSet.has(pidNum);
+    qvBookmark?.classList.toggle('active', on);
+    qvBookmark?.setAttribute('aria-pressed', on ? 'true' : 'false');
+
+    qv?.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+
+  qv?.addEventListener('click', e => { if (e.target.hasAttribute('data-qv-close')) closeQuickView(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && qv?.classList.contains('open')) closeQuickView(); });
+
+  // ===== Тоггл избранного из модалки (с сервером)
+  qvBookmark?.addEventListener('click', async e => {
+    e.preventDefault();
+    if (!currentCard) return;
+    const pid = Number(currentCard.dataset.pid);
+    try{
+      const data = await toggleFavorite(pid);
+      const on = !!data.on;
+      qvBookmark.classList.toggle('active', on);
+      qvBookmark.setAttribute('aria-pressed', on ? 'true' : 'false');
+
+      const flag = currentCard.querySelector('.p-flag-btn');
+      if (flag){ flag.classList.toggle('active', on); flag.setAttribute('aria-pressed', on ? 'true' : 'false'); }
+      if (on) favSet.add(pid); else favSet.delete(pid);
+    }catch(e){ console.error(e); }
+  });
+
+  // ===== Тоггл избранного с карточки (с сервером)
+  document.addEventListener('click', async (e) => {
+    const btn = e.target.closest('.p-flag-btn');
+    if (!btn) return;
+    e.preventDefault(); e.stopPropagation();
+    const card = btn.closest('.p-card');
+    const pid = Number(card?.dataset.pid);
+    try{
+      const data = await toggleFavorite(pid);
+      const on = !!data.on;
+      btn.classList.toggle('active', on);
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+
+      if (qv?.classList.contains('open') && currentCard === card){
+        qvBookmark.classList.toggle('active', on);
+        qvBookmark.setAttribute('aria-pressed', on ? 'true' : 'false');
+      }
+      if (on) favSet.add(pid); else favSet.delete(pid);
+    }catch(err){ console.error(err); }
+  });
+
+})();</script>
 
 
 

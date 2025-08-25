@@ -110,9 +110,14 @@ class ShopView(ListView):
             p.pop('page')
         ctx['querystring'] = p.urlencode()
 
+        fav_ids = []
+        if self.request.user.is_authenticated:
+            from accounts.models import Profile
+            profile, _ = Profile.objects.get_or_create(user=self.request.user)
+            fav_ids = list(profile.favorite_links.values_list('product_id', flat=True))
+        ctx['fav_ids'] = fav_ids
+
         return ctx
-
-
 
 
 

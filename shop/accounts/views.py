@@ -69,7 +69,7 @@ def _thumb_subquery():
             .values('id')[:1])
 
 class FavoriteListView(LoginRequiredMixin, View):
-    template_name = 'account/favorites.html'  # твой шаблон из сообщения
+    template_name = 'account/favorites.html'
     per_page = 6
 
     def get(self, request):
@@ -92,11 +92,11 @@ class FavoriteListView(LoginRequiredMixin, View):
 
         fav_ids = set(profile.favorite_links.values_list('product_id', flat=True))
         ctx = {
-            'items': items,                   # у тебя в шаблоне так и называется
+            'items': items,
             'is_paginated': items.has_other_pages(),
             'paginator': paginator,
             'page_obj': items,
-            'fav_ids': list(fav_ids),         # для инициализации кнопок
+            'fav_ids': list(fav_ids),
         }
         return render(request, self.template_name, ctx)
 
