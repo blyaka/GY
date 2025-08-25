@@ -27,3 +27,6 @@ def AboutPage(request):
 
 def BuyerPage(request):
     return render(request, 'buyer.html')
+
+def PrivaLabPage(request):
+    return render(request, 'prive_lab.html')

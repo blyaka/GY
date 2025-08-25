@@ -36,12 +36,12 @@
 
         <section class="customer__links">
             <h2>Здесь вы найдете все самое необходимое:</h2>
-            <p><a href="/shop/">МАГАЗИН</a></p>
-            <p><a href="/account/">ЛИЧНЫЙ КАБИНЕТ</a></p>
-            <p><a href="/favorites/">ИЗБРАННОЕ</a></p>
-            <p><a href="/cart/">КОРЗИНА</a></p>
-            <p><a href="/returns/">ВОЗВРАТ И ОБМЕН</a></p>
-            <p><a href="/delivery/">ДОСТАВКА И ОПЛАТА</a></p>
+            <p><a href="{% url 'prive-lab' %}">PRIVE Labaratory</a></p>
+            <p><a href="{% url 'lk' %}">ЛИЧНЫЙ КАБИНЕТ</a></p>
+            <p><a href="{% url 'favorites' %}">ИЗБРАННОЕ</a></p>
+            <!-- <p><a href="/cart/">КОРЗИНА</a></p> -->
+            <p><a href="{% url 'refund' %}">ВОЗВРАТ И ОБМЕН</a></p>
+            <p><a href="{% url 'delivery' %}">ДОСТАВКА И ОПЛАТА</a></p>
         </section>
 
         <section class="customer__form-block">

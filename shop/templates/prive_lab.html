@@ -13,9 +13,9 @@
 
     <div class="status-bar" role="navigation" aria-label="Статус-бар">
         <div class="sb-inner">
-            <img class="sb-logo" src="static/images/GY.svg" alt="GY">
+            <img class="sb-logo" src="{% static 'images/GY.svg' %}" alt="GY">
             <span class="sb-dot" aria-hidden="true"></span>
-            <a class="sb-link" href="/shop/">PRIVE Laboratory</a>
+            <a class="sb-link" href="{% url 'prive-lab' %}">PRIVE Laboratory</a>
         </div>
     </div>
 
