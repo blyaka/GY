@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   db:
     image: postgres:14
@@ -10,13 +12,29 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  redis:
+    image: redis:7-alpine
+    container_name: gy_redis
+    restart: always
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
   web:
     image: ${DOCKERHUB_USERNAME}/gy-web:latest
     container_name: gy_web
     restart: always
     env_file: .env
+    environment:
+      REDIS_URL: redis://redis:6379/1
     depends_on:
       - db
+      - redis
     volumes:
       - /var/www/gy/staticfiles:/app/staticfiles
       - /var/www/gy/media:/app/media
@@ -34,5 +52,4 @@ services:
 
 volumes:
   postgres_data:
-  static_data:
-  media_data:
+  redis_data:

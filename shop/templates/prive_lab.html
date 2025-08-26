@@ -1,7 +1,7 @@
 {% extends '_base.html' %}
 {% load static %}
 
-{% block title %}Контакты{% endblock %}
+{% block title %}PRIVE Labaratory{% endblock %}
 
 {% block styles %}
   <link rel="stylesheet" href="{% static 'css/prive_lab.css' %}" />
@@ -105,29 +105,93 @@
             <div class="prive-sep" role="separator" aria-hidden="true"></div>
 
             <div class="acc">
-                <button class="acc-head" type="button">
-                    <span class="acc-title">ОСТАВИТЬ ЗАЯВКУ</span>
-                    <span class="acc-icon" aria-hidden="true"></span>
-                </button>
-                <div class="acc-panel request">
-                    <form class="prive-form" action="#" method="post">
-                        <label>
-                            <p>ФИО:</p>
-                            <input type="text" name="fio" required>
-                        </label>
-                        <label>
-                            <span>Email:</span>
-                            <input type="email" name="email" required>
-                        </label>
-                        <!-- при желании добавишь телефон и т.д. -->
-                        <button class="prive-submit" type="submit">Отправить</button>
-                    </form>
-                </div>
+            <button class="acc-head" type="button">
+                <span class="acc-title">ОСТАВИТЬ ЗАЯВКУ</span>
+                <span class="acc-icon" aria-hidden="true"></span>
+            </button>
+
+            <div class="acc-panel request">
+                <form class="prive-form" id="reqForm">
+                {% csrf_token %}
+                <label>
+                    <p>ФИО:</p>
+                    <input type="text" name="full_name" required>
+                </label>
+                <label>
+                    <span>Email:</span>
+                    <input type="email" name="email" placeholder="you@example.com">
+                </label>
+                <label>
+                    <span>Телефон:</span>
+                    <input type="tel" name="phone" inputmode="tel"
+                        placeholder="+79991234567"
+                        pattern="^\+?\d{10,15}$"
+                        title="Формат: +79991234567">
+                </label>
+
+                <input type="text" name="website" autocomplete="off"
+                    tabindex="-1" aria-hidden="true"
+                    style="position:absolute;left:-5000px;width:1px;height:1px;opacity:0">
+                <input type="hidden" name="ts" value="{% now 'U' %}">
+
+                <button class="prive-submit" type="submit">Отправить</button>
+                <p class="req-msg" aria-live="polite" style="display:none;"></p>
+                </form>
             </div>
+            </div>
+
         </section>
 
     </main>
 
+
+<script>
+(() => {
+  const form = document.getElementById('reqForm');
+  const msg  = form.querySelector('.req-msg');
+
+  function show(t, ok=false){ msg.style.display='block'; msg.textContent=t; msg.style.color= ok ? '#2e7d32' : '#b00020'; }
+  function setDisabled(on){ form.querySelector('.prive-submit').disabled = on; }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const fd = new FormData(form);
+    const full_name = (fd.get('full_name')||fd.get('fio')||'').trim();
+    const email = (fd.get('email')||'').trim();
+    const phone = (fd.get('phone')||'').trim();
+    const ts = form.querySelector('input[name=ts]')?.value || '';
+    const website = form.querySelector('input[name=website]')?.value || '';
+    
+    if (!email && !phone) return show('Укажи телефон или email.');
+
+    const csrf = form.querySelector('input[name=csrfmiddlewaretoken]')?.value || '';
+    setDisabled(true);
+    try{
+      const r = await fetch("{% url 'reqs:submit' %}", {
+        method: 'POST',
+        headers: {
+          'Content-Type':'application/json',
+          'X-CSRFToken': csrf
+        },
+        credentials: 'same-origin',
+        body: JSON.stringify({ full_name, email, phone, ts, website })
+      });
+
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok || data.ok === false){
+        const err = data.errors ? Object.values(data.errors).flat().join(' ') : 'Ошибка отправки.';
+        return show(err);
+      }
+      show('Заявка отправлена. Мы свяжемся с тобой!', true);
+      form.reset();
+    } catch {
+      show('Сеть недоступна. Попробуй ещё раз.');
+    } finally {
+      setDisabled(false);
+    }
+  });
+})();
+</script>
 
 
     <script>

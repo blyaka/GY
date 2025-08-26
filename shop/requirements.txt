@@ -4,3 +4,5 @@ django-allauth
 pillow
 gunicorn
 django-ckeditor-5
+requests
+django-redis
