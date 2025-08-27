@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   db:
     image: postgres:14
@@ -49,6 +47,13 @@ services:
         exec gunicorn config.wsgi:application
         --bind 0.0.0.0:8000 --workers 4 --timeout 120
         --access-logfile - --error-logfile -
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+    dns_opt:
+      - use-vc
+      - attempts:2
+      - timeout:2
 
 volumes:
   postgres_data:
