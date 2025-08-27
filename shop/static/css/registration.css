@@ -277,4 +277,17 @@ body {
     .auth-title {
         margin-bottom: 24px
     }
+
+    .auth {
+        min-height: unset;
+        padding: 50px 16px;
+    }
+
+
+    .auth-form input[type="email"],
+    .auth-form input[type="text"],
+    .auth-form input[type="password"] {
+        border-radius: 0px;
+    }   
+
 }

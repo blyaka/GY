@@ -141,7 +141,7 @@ body {
     left: min(86vw, 619px);
     /* край основной панели */
     width: min(70vw, 420px);
-    height: 600px;
+    height: 545px;
     background: #fff;
     transform: translateX(-250%);
     /* спрятана слева, под основной панелью */
@@ -256,6 +256,10 @@ body {
     filter: invert(1);
 }
 
+.logo a {
+    display: flex;
+}
+
 .logo-img {
     width: 278px;
     /* height: 76px; */
@@ -322,6 +326,13 @@ body {
 .footer-block-about h2 a {
     text-decoration: none;
     color: white;
+    transition: all 0.1s ease-in-out;
+}
+
+
+.footer-block-customer h2 a:hover,
+.footer-block-about h2 a:hover {
+    color: rgb(214, 214, 214);
 }
 
 .customer-links,
@@ -336,6 +347,12 @@ body {
 .about-links a {
     color: white;
     text-decoration: none;
+    transition: all 0.1s ease-in-out;
+}
+
+.customer-links a:hover,
+.about-links a:hover {
+    color: rgb(214, 214, 214);
 }
 
 .footer-cp-name {
@@ -353,6 +370,7 @@ body {
     position: absolute;
     bottom: 40px;
     right: 60px;
+    z-index: 10;
 }
 
 .socials-list {
@@ -426,6 +444,70 @@ body {
     .lang-switch {
         font-size: 16px;
         font-weight: 400;
+    }
+
+
+
+
+    .offcanvas-panel {
+        height: 408px;
+    }
+
+    .offcanvas-top {
+        padding: 25px;
+    }
+
+    .off-lang {
+        font-size: 16px;
+    }
+
+    .off-nav {
+        padding: 20px 50px;
+        gap: 10px;
+    }
+
+    .off-nav a {
+        font-size: 16px;
+    }
+
+    .off-icons {
+        padding: 25px;
+    }
+
+    .off-icons img {
+        height: 20px;
+        display: block;
+        opacity: .9;
+    }
+
+
+
+
+    .off-sub {
+        top: unset;
+        left: unset;
+        width: min(86vw, 620px);
+        height: 408px;
+        z-index: 2;
+    }
+
+    .off-sub-head {
+        padding: 15px 20px;
+    }
+
+    .off-sub-back img {
+        width: 15px;
+        height: 15px;
+    }
+
+    .off-sub-body {
+        padding: 40px;
+    }
+
+    .off-sub-text p {
+        color: #000000;
+        font-size: 16px;
+        font-weight: 300;
     }
 
 

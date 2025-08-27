@@ -161,28 +161,31 @@
     pointer-events: none;
 }
 
-/* Адаптив */
-@media (max-width: 1200px) {
-    .article {
-        padding: 0 60px;
-    }
 
-    .more-track {
-        gap: 20px;
-    }
-}
+@media (max-width: 720px) {
 
-@media (max-width: 920px) {
-    .article {
-        padding: 0 24px;
+    .article-cover {
+        height: 250px;
     }
 
     .article-head {
         align-items: center;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .article-back {
+        left: 0px;
+        top: 0;
     }
 
     .article-title {
-        font-size: 18px;
+        font-size: 24px;
+    }
+
+    .article-date {
+        text-align: left;
+        width: 100%;
     }
 
     .more-track {
@@ -192,5 +195,10 @@
     .more-card.is-dimmed {
         opacity: 1;
         pointer-events: auto;
+    }
+
+    .article-inner {
+        padding: 0 20px;
+        margin: unset;
     }
 }

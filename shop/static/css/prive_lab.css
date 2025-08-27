@@ -233,7 +233,7 @@
 }
 
 /* Адаптив */
-@media (max-width: 600px) {
+@media (max-width:720px) {
     .acc-head {
         padding: 14px 14px;
         font-size: 15px;
@@ -249,6 +249,17 @@
 
     .prive-form {
         max-width: 100%;
+        width: 100%;
+    }
+
+    .prive-form label {
+        width: 100%;
+    }
+
+    .prive-form input {
+        border-radius: 0px;
+        width: 100%;
+        box-sizing: border-box;
     }
 
 }

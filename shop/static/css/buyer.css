@@ -272,16 +272,36 @@
 
 
 /* адаптив */
-@media (max-width:600px) {
-    .customer__title {
-        font-size: 28px
+@media (max-width:720px) {
+    .customer {
+        padding: 30px 20px;
     }
 
-    .customer__line {
-        width: 90px
+    .customer__lead {
+        max-width: unset;
+        font-size: 16px;
     }
 
-    .customer-form {
-        max-width: 100%
+    .customer__links h2 {
+        margin-top: 50px;
+    }
+
+
+    .customer__note {
+        max-width: unset;
+        font-size: 16px;
+    }
+
+    .f-label {
+        width: 100%;
+    }
+
+    .f-input, .f-textarea, .f-select select {
+        border-radius: 0px;
+    }
+
+    .agree {
+        width: unset;
+        max-width: unset;
     }
 }

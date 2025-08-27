@@ -89,69 +89,113 @@
 
 /* === карточка из магазина === */
 .p-card {
-  width: 100%;
-  max-width: 300px;
-  text-decoration: none;
-  color: #111;
-  position: relative;
+    width: 100%;
+    max-width: 300px;
+    text-decoration: none;
+    color: #111;
+    position: relative;
 }
 
 .p-media {
-  position: relative;
-  aspect-ratio: 3 / 4;
-  background: #e6e6e6;
-  border: 1px solid #e9e9e9;
-  box-shadow: 0 8px 18px rgba(0,0,0,.06);
-  overflow: hidden;
+    position: relative;
+    aspect-ratio: 3 / 4;
+    background: #e6e6e6;
+    border: 1px solid #e9e9e9;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, .06);
+    overflow: hidden;
 }
 
 .p-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 /* избранное */
 .p-flag-btn {
-  position: absolute;
-  top: -6px;
-  right: 8px;
-  background: transparent;
-  border: 0;
-  padding: 0;
-  cursor: pointer;
-  line-height: 0;
-  z-index: 2;
+    position: absolute;
+    top: -6px;
+    right: 8px;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    line-height: 0;
+    z-index: 2;
 }
-.p-flag-btn.active path { fill: #fff; }
-.p-flag-btn:focus-visible { outline: 2px solid #000; outline-offset: 2px; }
+
+.p-flag-btn.active path {
+    fill: #fff;
+}
+
+.p-flag-btn:focus-visible {
+    outline: 2px solid #000;
+    outline-offset: 2px;
+}
 
 /* глаз */
 .p-eye-btn {
-  position: absolute;
-  left: 10px;
-  bottom: 10px;
-  width: 38px; height: 38px;
-  border-radius: 50%;
-  display: grid; place-items: center;
-  background: transparent; border: none; cursor: pointer; line-height: 0;
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    line-height: 0;
 }
-.p-eye-btn img { width: 38px; height: 38px; display: block; }
-.p-eye-btn:focus-visible { outline: 2px solid #000; outline-offset: 2px; }
+
+.p-eye-btn img {
+    width: 38px;
+    height: 38px;
+    display: block;
+}
+
+.p-eye-btn:focus-visible {
+    outline: 2px solid #000;
+    outline-offset: 2px;
+}
 
 /* подписи */
-.p-info { margin-top: 10px; }
-.p-title { font-weight: 400; font-size: 20px; letter-spacing: .08em; text-transform: uppercase; }
-.p-meta { display: flex; gap: 14px; align-items: baseline; justify-content: space-between; }
-.p-price { font-weight: 300; font-size: 22px; }
-.p-art { font-size: 20px; font-weight: 200; color: rgba(177,177,177,1); }
+.p-info {
+    margin-top: 10px;
+}
+
+.p-title {
+    font-weight: 400;
+    font-size: 20px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.p-meta {
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.p-price {
+    font-weight: 300;
+    font-size: 22px;
+}
+
+.p-art {
+    font-size: 20px;
+    font-weight: 200;
+    color: rgba(177, 177, 177, 1);
+}
 
 /* hover */
 .p-card:hover .p-media {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 24px rgba(0,0,0,.12);
-  transition: .2s ease-in-out;
+    transform: translateY(-2px);
+    box-shadow: 0 14px 24px rgba(0, 0, 0, .12);
+    transition: .2s ease-in-out;
 }
 
 
@@ -191,4 +235,46 @@
 .card:hover .card-media img {
     transform: scale(1.02);
     transition: transform .3s ease;
+}
+
+
+
+
+
+@media (max-width:720px) {
+
+    .hero {
+        height: 500px;
+    }
+
+    .hero-bg-ph img {
+        object-position: unset;
+    }
+
+    .logo-overlay {
+        bottom: -130px;
+        right: 20px;
+        width: 300px;
+    }
+
+    .logo-overlay img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .about-signature {
+        padding: 30px 20px;
+    }
+
+    .signature {
+        width: 100%;
+        margin-top: 40px;
+    }
+
+    .signature img {
+        width: 80%;
+        height: 80%;
+        object-fit: cover;
+    }
 }

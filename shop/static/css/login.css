@@ -285,4 +285,30 @@ body {
     .auth-title {
         margin-bottom: 24px
     }
+
+    .auth {
+        min-height: unset;
+        padding: 50px 16px;
+    }
+
+    .form-row {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+    }
+
+    .form-row label {
+        min-width: 90px;
+    }
+
+    label.pw-toggle {
+        width: 30px !important;
+        min-width: unset;
+    }
+
+    .auth-form input[type="email"],
+    .auth-form input[type="password"],
+    .auth-form input[type="text"] {
+        border-radius: 0px;
+    }
 }

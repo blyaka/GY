@@ -124,3 +124,29 @@ main {
 .pf-field.is-error {
     border-color: #e53935 !important;
 }
+
+
+
+
+.alert.success {
+    color: #000000;
+    text-align: center;
+    padding: 200px 0px;
+    font-size: 36px;
+    font-weight: 400;
+}
+
+.hidden {
+    display: none;
+}
+
+
+@media (max-width:720px) {
+    main {
+        padding: 30px 20px;
+    }
+
+    .pf-field {
+        border-radius: 0px;
+    }
+}
