@@ -22,6 +22,7 @@
    docker compose exec web python manage.py migrate
    docker compose exec web python manage.py createsuperuser
    ```
+Адрес - [127.0.0.1:8000](127.0.0.1:8000)
 
 ## CI/CD
 CI/CD реализован на GitHub Actions:
