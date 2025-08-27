@@ -480,6 +480,16 @@ body {
         opacity: .9;
     }
 
+    .off-watermark {
+        left: -140px;
+        top: -150px;
+    }
+
+
+    .off-watermark img {
+        width: 850px;
+    }
+
 
 
 
