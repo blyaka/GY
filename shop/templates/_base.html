@@ -1,4 +1,6 @@
 {% load static %}
+{% load site_settings %}
+{% get_site_contacts as s %}
 <!DOCTYPE html>
 <html lang="ru">
   <head>
@@ -241,19 +243,19 @@
       <div class="footer-socials">
         <ul class="socials-list">
           <li>
-            <a class="social" href="https://instagram.com/username" target="_blank" rel="noopener nofollow" aria-label="Instagram"><img src="{% static 'icons/instagram.svg' %}" alt="" /></a>
+            {% if s.instagram %}<a class="social" href="{{ s.instagram }}" target="_blank" rel="noopener nofollow" aria-label="Instagram"><img src="{% static 'icons/instagram.svg' %}" alt="" /></a>{% endif %}
           </li>
           <li>
-            <a class="social" href="https://vk.com/username" target="_blank" rel="noopener nofollow" aria-label="VK"><img src="{% static 'icons/vk.svg' %}" alt="" /></a>
+            {% if s.vk %}<a class="social" href="{{ s.vk }}" target="_blank" rel="noopener nofollow" aria-label="VK"><img src="{% static 'icons/vk.svg' %}" alt="" /></a>{% endif %}
           </li>
           <li>
-            <a class="social" href="https://t.me/username" target="_blank" rel="noopener nofollow" aria-label="Telegram"><img src="{% static 'icons/telegram.svg' %}" alt="" /></a>
+            {% if s.telegram %}<a class="social" href="{{ s.telegram }}" target="_blank" rel="noopener nofollow" aria-label="Telegram"><img src="{% static 'icons/telegram.svg' %}" alt="" /></a>{% endif %}
           </li>
           <li>
-            <a class="social" href="https://www.tiktok.com/@username" target="_blank" rel="noopener nofollow" aria-label="TikTok"><img src="{% static 'icons/tiktok.svg' %}" alt="" /></a>
+            {% if s.tiktok %}<a class="social" href="{{ s.tiktok }}" target="_blank" rel="noopener nofollow" aria-label="TikTok"><img src="{% static 'icons/tiktok.svg' %}" alt="" /></a>{% endif %}
           </li>
           <li>
-            <a class="social" href="https://youtube.com/@username" target="_blank" rel="noopener nofollow" aria-label="YouTube"><img src="{% static 'icons/youtube.svg' %}" alt="" /></a>
+            {% if s.youtube %}<a class="social" href="{{ s.youtube }}" target="_blank" rel="noopener nofollow" aria-label="YouTube"><img src="{% static 'icons/youtube.svg' %}" alt="" /></a>{% endif %}
           </li>
         </ul>
 

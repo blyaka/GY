@@ -1,5 +1,7 @@
 {% extends '_base.html' %}
 {% load static %}
+{% load site_settings %}
+{% get_site_contacts as s %}
 
 {% block title %}О нас{% endblock %}
 
@@ -131,34 +133,34 @@
             <div class="socials-container">
                 <ul class="socials-list-main">
                     <li>
-                        <a class="social-link" href="https://instagram.com/username" target="_blank" rel="noopener nofollow"
+                        {% if s.instagram %}<a class="social-link" href="{{ s.instagram }}" target="_blank" rel="noopener nofollow"
                             aria-label="Instagram">
                             <img src="{% static 'icons/instagram.svg' %}" alt="">
-                        </a>
+                        </a>{% endif %}
                     </li>
                     <li>
-                        <a class="social-link" href="https://vk.com/username" target="_blank" rel="noopener nofollow"
+                        {% if s.vk %}<a class="social-link" href="{{ s.vk }}" target="_blank" rel="noopener nofollow"
                             aria-label="VK">
                             <img src="{% static 'icons/vk.svg' %}" alt="">
-                        </a>
+                        </a>{% endif %}
                     </li>
                     <li>
-                        <a class="social-link" href="https://t.me/username" target="_blank" rel="noopener nofollow"
+                        {% if s.telegram %}<a class="social-link" href="{{ s.telegram }}" target="_blank" rel="noopener nofollow"
                             aria-label="Telegram">
                             <img src="{% static 'icons/telegram.svg' %}" alt="">
-                        </a>
+                        </a>{% endif %}
                     </li>
                     <li>
-                        <a class="social-link" href="https://www.tiktok.com/@username" target="_blank"
+                        {% if s.tiktok %}<a class="social-link" href="{{ s.tiktok }}" target="_blank"
                             rel="noopener nofollow" aria-label="TikTok">
                             <img src="{% static 'icons/tiktok.svg' %}" alt="">
-                        </a>
+                        </a>{% endif %}
                     </li>
                     <li>
-                        <a class="social-link" href="https://youtube.com/@username" target="_blank" rel="noopener nofollow"
+                        {% if s.youtube %}<a class="social-link" href="{{ s.youtube }}" target="_blank" rel="noopener nofollow"
                             aria-label="YouTube">
                             <img src="{% static 'icons/youtube.svg' %}" alt="">
-                        </a>
+                        </a>{% endif %}
                     </li>
                 </ul>
 

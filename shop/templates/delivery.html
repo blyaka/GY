@@ -1,5 +1,7 @@
 {% extends '_base.html' %}
 {% load static %}
+{% load site_settings %}
+{% get_site_contacts as s %}
 
 {% block title %}Доставка и оплата{% endblock %}
 
@@ -92,15 +94,15 @@
             <div class="contacts_stack">
                 <div class="contact-item">
                     <img src="{% static 'icons/mail_icon.svg' %}" alt="Email">
-                    <a href="mailto:example@example.com">example@example.com</a>
+                    {% if s.email %}<a href="mailto:{{s.email}}">{{s.email}}</a>{% endif %}
                 </div>
                 <div class="contact-item">
                     <img src="{% static 'icons/phone_icon.svg' %}" alt="Phone">
-                    <a href="tel:+7XXX XXX XX XX">+7 XXX XXX XX XX</a>
+                    {% if s.phone %}<a href="tel:{{s.phone}}">{{s.phone}}</a>{% endif %}
                 </div>
                 <div class="contact-item">
                     <img src="{% static 'icons/telegram_icon.svg' %}" alt="Telegram">
-                    <a href="https://t.me/GABRIEL_YUSUBOV" target="_blank">@GABRIEL_YUSUBOV</a>
+                    {% if s.telegram %}<a href="{{s.telegram}}" target="_blank">@GABRIEL_YUSUBOV</a>{% endif %}
                 </div>
             </div>
 
