@@ -19,7 +19,7 @@
   <main>
     <div class="hero">
       <div class="hero-bg-ph">
-        <img src="{% static 'images/F-26.png' %}" alt="" />
+        <img src="{% static 'images/hero-ph.jpg' %}" alt="" />
       </div>
 
       <div class="logo-overlay">
@@ -29,14 +29,16 @@
 
     <div class="about-signature">
       <div class="main-text">
-        <p>Lorem ipsum dolor sit amet consectetur. Commodo purus faucibus turpis vestibulum egestas. Scelerisque eu ultrices nunc orci. Suscipit in nunc sem elementum ut massa convallis. Ipsum gravida a porttitor fermentum sodales vitae quam ullamcorper tristique. Odio convallis aliquet purus sit id tellus quis. Egestas vitae tincidunt adipiscing morbi metus. Turpis risus nisi quis laoreet tempor tempus turpis sed consequat. Ullamcorper velit tincidunt viverra phasellus duis volutpat. In vitae blandit proin viverra id facilisi amet.</p>
+        <p>Gabriel Yusubov — это я и моё творчество, а в мире моды — молодой fashion-бренд моего имени. <br><br>
+
+          Идея создать свой бренд — это всегда выход мысли в масштаб, что находит продолжение в тех вещах, которые создаются мной и моей командой. Думаю, что все должно называться «своими именами» и оставаться честным с собой и миром, где нет масок.</p>
       </div>
 
       <div class="signature">
         <img src="{% static 'images/signature.svg' %}" alt="" />
       </div>
     </div>
-<!-- 
+    <!--   
     <div class="divider"></div>
 
     <div class="shop">
@@ -71,7 +73,7 @@
 
         <button class="cat-nav next" aria-label="Вперёд"><img src="{% static 'icons/arrow.svg' %}" alt="" /></button>
       </section>
-    </div> -->
+    </div>   -->
   </main>
 
   <script>
@@ -99,10 +101,10 @@
         } else {
           // НАД hero
           header.style.background = 'transparent'
-          header.style.color = '#fff'
-          lines.forEach((l) => l.setAttribute('stroke', '#fff'))
-          if (logo) logo.style.filter = 'invert(0)' // ← без инверта над hero
-          langLinks.forEach((a) => (a.style.color = '#fff'))
+          header.style.color = '#000000ff'
+          lines.forEach((l) => l.setAttribute('stroke', '#000000ff'))
+          if (logo) logo.style.filter = 'invert(1)' // ← без инверта над hero
+          langLinks.forEach((a) => (a.style.color = '#000000ff'))
         }
       }
     

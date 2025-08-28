@@ -6,107 +6,130 @@
 {% block title %}PRIVE Labaratory{% endblock %}
 
 {% block styles %}
-  <link rel="stylesheet" href="{% static 'css/prive_lab.css' %}" />
+<link rel="stylesheet" href="{% static 'css/prive_lab.css' %}" />
 {% endblock %}
 
 
 {% block content %}
 
 
-    <div class="status-bar" role="navigation" aria-label="Статус-бар">
-        <div class="sb-inner">
-            <img class="sb-logo" src="{% static 'images/GY.svg' %}" alt="GY">
-            <span class="sb-dot" aria-hidden="true"></span>
-            <a class="sb-link" href="{% url 'prive-lab' %}">PRIVE Laboratory</a>
-        </div>
+<div class="status-bar" role="navigation" aria-label="Статус-бар">
+    <div class="sb-inner">
+        <img class="sb-logo" src="{% static 'images/GY.svg' %}" alt="GY">
+        <span class="sb-dot" aria-hidden="true"></span>
+        <a class="sb-link" href="{% url 'prive-lab' %}">PRIVE Laboratory</a>
     </div>
+</div>
 
-    <main>
-        <section class="prive-lab">
-            <h1 class="prive-title">PRIVE Laboratory</h1>
-            <p class="prive-subtitle">of GABRIEL YUSUBOV</p>
+<main>
+    <section class="prive-lab">
+        <h1 class="prive-title">PRIVE Laboratory</h1>
+        <p class="prive-subtitle">of GABRIEL YUSUBOV</p>
 
-            <div class="prive-intro">
-                <p>Услуга премиального и индивидуального пошива под заказ.</p>
-            </div>
+        <div class="prive-intro">
+            <p>Услуга премиального и индивидуального пошива под заказ.</p>
+        </div>
 
-            <div class="prive-note-container">
-                <div class="prive-note">
-                    <p>
-                        Изделия выполняются в единственном экземпляре, с гарантией того, что не будут более пошиты ни
-                        для
-                        кого,
-                        а также их невозможно будет приобрести в магазине.
-                    </p>
-                </div>
-            </div>
-
-            <h2 class="prive-steps-title">ЭТАПЫ ВЗАИМОДЕЙСТВИЯ С КЛИЕНТОМ:</h2>
-
-            <div class="prive-steps-intro">
-                <p>
-                    Индивидуальный пошив изделия на заказ — это комплексный процесс, требующий особого внимания к
-                    деталям на каждом этапе.
+        <div class="prive-note-container left-side">
+            <div class="prive-note">
+                <p class="left">
+                    Творчество моей линии <strong>Prive laboratory</strong> имеет свое начало в пошиве одежды по
+                    индивидуальным меркам.
+                    Со временем мы перейдем к изготовлению других предметов, которые будут участвовать в уточнении
+                    вашего комфортного образа.
                 </p>
             </div>
-        </section>
+        </div>
 
-
-        <section class="prive-accordion">
-            <div class="acc open">
-                <button class="acc-head" type="button">
-                    <span class="acc-title">СОГЛАСОВАНИЕ С КЛИЕНТОМ</span>
-                    <span class="acc-icon" aria-hidden="true"></span>
-                </button>
-                <div class="acc-panel">
-                    <p>На первом этапе дизайнер обсуждает с клиентом его пожелания: фасон, стиль, особенности фигуры и
-                        цель изделия. Выбираются подходящие ткани и фурнитура.</p>
-                </div>
+        <div class="prive-note-container">
+            <div class="prive-note">
+                <p class="right">
+                    Все, что мы выпускаем в <strong>Prive laboratory</strong>, создается совместно с вами и с учетом
+                    вашего видения.
+                    <br><br>
+                    Мы даем гарантию, что изготовленные <strong>изделия производятся в единственном экземпляре.</strong>
+                    Повторное
+                    воспроизведение вещи исключено, а также все заказы, полученные в рамках услуги индивидуального
+                    пошива, не будут представлены в качестве моделей, доступных для приобретения в нашем магазине,
+                    открытие которого вы также будете наблюдать в скором времени.
+                </p>
             </div>
+        </div>
 
-            <div class="acc">
-                <button class="acc-head" type="button">
-                    <span class="acc-title">СНЯТИЕ МЕРОК</span>
-                    <span class="acc-icon" aria-hidden="true"></span>
-                </button>
-                <div class="acc-panel">
-                    <p>Индивидуальные мерки и посадка по фигуре для точной выкройки.</p>
-                </div>
+        <h2 class="prive-steps-title">ЭТАПЫ ВЗАИМОДЕЙСТВИЯ С КЛИЕНТОМ:</h2>
+
+        <div class="prive-steps-intro">
+            <p>
+                Индивидуальный пошив изделия на заказ — это комплексный процесс, требующий особого внимания к деталям на
+                каждом этапе. Расскажем, как мы строим совместную работу с вами.
+            </p>
+        </div>
+    </section>
+
+
+    <section class="prive-accordion">
+        <div class="acc open">
+            <button class="acc-head" type="button">
+                <span class="acc-title">СОГЛАСОВАНИЕ С КЛИЕНТОМ</span>
+                <span class="acc-icon" aria-hidden="true"></span>
+            </button>
+            <div class="acc-panel">
+                <p>На первом этапе дизайнер обсуждает с клиентом его пожелания: фасон, стиль, особенности фигуры и цель
+                    изделия. Выбираются подходящие ткани и фурнитура.
+                    На основе пожеланий клиента и предложений дизайнера создаётся эскиз. Это визуализация будущего
+                    изделия, где учитываются его общий вид, силуэт и основные элементы. Эскиз позволяет представить,
+                    каким будет конечный результат.</p>
             </div>
+        </div>
 
-            <div class="acc">
-                <button class="acc-head" type="button">
-                    <span class="acc-title">ПРОМЕЖУТОЧНЫЕ ПРИМЕРКИ</span>
-                    <span class="acc-icon" aria-hidden="true"></span>
-                </button>
-                <div class="acc-panel">
-                    <p>Проверяем посадку, корректируем длину, пропорции и детали отделки.</p>
-                </div>
+        <div class="acc">
+            <button class="acc-head" type="button">
+                <span class="acc-title">СНЯТИЕ МЕРОК</span>
+                <span class="acc-icon" aria-hidden="true"></span>
+            </button>
+            <div class="acc-panel">
+                <p>Снятие точных мерок — важный этап, обеспечивающий идеальную посадку. Портной-закройщик учитывает все
+                    параметры фигуры клиента, и другие нюансы, чтобы учесть все особенности клиента.</p>
             </div>
+        </div>
 
-            <div class="acc">
-                <button class="acc-head" type="button">
-                    <span class="acc-title">ФИНАЛЬНАЯ ПРИМЕРКА</span>
-                    <span class="acc-icon" aria-hidden="true"></span>
-                </button>
-                <div class="acc-panel">
-                    <p>Фиксируем финальные правки перед сдачей изделия.</p>
-                </div>
+        <div class="acc">
+            <button class="acc-head" type="button">
+                <span class="acc-title">ПРОМЕЖУТОЧНЫЕ ПРИМЕРКИ</span>
+                <span class="acc-icon" aria-hidden="true"></span>
+            </button>
+            <div class="acc-panel">
+                <p>Клиент приглашается на промежуточные примерки для корректировки изделия.
+                    На первой примерке клиент надевает полуготовое изделие, и портной-закройщик вносит корректировки по
+                    посадке и длине. Самая главная задача — добиться идеального соответствия фигуре.</p>
             </div>
+        </div>
 
-            <div class="acc">
-                <button class="acc-head" type="button">
-                    <span class="acc-title">ПЕРЕДАЧА ИЗДЕЛИЯ ЗАКАЗЧИКУ</span>
-                    <span class="acc-icon" aria-hidden="true"></span>
-                </button>
-                <div class="acc-panel">
-                    <p>Выдача, рекомендации по уходу, опциональный сервис пост-коррекции.</p>
-                </div>
+        <div class="acc">
+            <button class="acc-head" type="button">
+                <span class="acc-title">ФИНАЛЬНАЯ ПРИМЕРКА</span>
+                <span class="acc-icon" aria-hidden="true"></span>
+            </button>
+            <div class="acc-panel">
+                <p>На финальной примерке клиент проверяет готовое изделие. При необходимости вносятся последние правки,
+                    после чего портной-закройщик завершает окончательную отделку.</p>
             </div>
+        </div>
 
-            <div class="prive-sep" role="separator" aria-hidden="true"></div>
+        <div class="acc">
+            <button class="acc-head" type="button">
+                <span class="acc-title">ПЕРЕДАЧА ИЗДЕЛИЯ ЗАКАЗЧИКУ</span>
+                <span class="acc-icon" aria-hidden="true"></span>
+            </button>
+            <div class="acc-panel">
+                <p>На этом этапе мы сообщаем клиенту о готовности изделия и договариваемся о способе получения изделия.
+                </p>
+            </div>
+        </div>
 
-            <div class="acc">
+        <div class="prive-sep" role="separator" aria-hidden="true"></div>
+
+        <div class="acc">
             <button class="acc-head" type="button">
                 <span class="acc-title">ОСТАВИТЬ ЗАЯВКУ</span>
                 <span class="acc-icon" aria-hidden="true"></span>
@@ -114,103 +137,100 @@
 
             <div class="acc-panel request">
                 <form class="prive-form" id="reqForm">
-                {% csrf_token %}
-                <label>
-                    <p>ФИО:</p>
-                    <input type="text" name="full_name" required>
-                </label>
-                <label>
-                    <span>Email:</span>
-                    <input type="email" name="email" placeholder="you@example.com">
-                </label>
-                <label>
-                    <span>Телефон:</span>
-                    <input type="tel" name="phone" inputmode="tel"
-                        placeholder="+79991234567"
-                        pattern="^\+?\d{10,15}$"
-                        title="Формат: +79991234567">
-                </label>
+                    {% csrf_token %}
+                    <label>
+                        <p>ФИО:</p>
+                        <input type="text" name="full_name" required>
+                    </label>
+                    <label>
+                        <span>Email:</span>
+                        <input type="email" name="email" placeholder="you@example.com">
+                    </label>
+                    <label>
+                        <span>Телефон:</span>
+                        <input type="tel" name="phone" inputmode="tel" placeholder="+79991234567"
+                            pattern="^\+?\d{10,15}$" title="Формат: +79991234567">
+                    </label>
 
-                <input type="text" name="website" autocomplete="off"
-                    tabindex="-1" aria-hidden="true"
-                    style="position:absolute;left:-5000px;width:1px;height:1px;opacity:0">
-                <input type="hidden" name="ts" value="{% now 'U' %}">
+                    <input type="text" name="website" autocomplete="off" tabindex="-1" aria-hidden="true"
+                        style="position:absolute;left:-5000px;width:1px;height:1px;opacity:0">
+                    <input type="hidden" name="ts" value="{% now 'U' %}">
 
-                <button class="prive-submit" type="submit">Отправить</button>
-                <p class="req-msg" aria-live="polite" style="display:none;"></p>
+                    <button class="prive-submit" type="submit">Отправить</button>
+                    <p class="req-msg" aria-live="polite" style="display:none;"></p>
                 </form>
             </div>
-            </div>
+        </div>
 
-        </section>
+    </section>
 
-    </main>
+</main>
 
 
 <script>
-(() => {
-  const form = document.getElementById('reqForm');
-  const msg  = form.querySelector('.req-msg');
+    (() => {
+        const form = document.getElementById('reqForm');
+        const msg = form.querySelector('.req-msg');
 
-  function show(t, ok=false){ msg.style.display='block'; msg.textContent=t; msg.style.color= ok ? '#2e7d32' : '#b00020'; }
-  function setDisabled(on){ form.querySelector('.prive-submit').disabled = on; }
+        function show(t, ok = false) { msg.style.display = 'block'; msg.textContent = t; msg.style.color = ok ? '#2e7d32' : '#b00020'; }
+        function setDisabled(on) { form.querySelector('.prive-submit').disabled = on; }
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const fd = new FormData(form);
-    const full_name = (fd.get('full_name')||fd.get('fio')||'').trim();
-    const email = (fd.get('email')||'').trim();
-    const phone = (fd.get('phone')||'').trim();
-    const ts = form.querySelector('input[name=ts]')?.value || '';
-    const website = form.querySelector('input[name=website]')?.value || '';
-    
-    if (!email && !phone) return show('Укажи телефон или email.');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const fd = new FormData(form);
+            const full_name = (fd.get('full_name') || fd.get('fio') || '').trim();
+            const email = (fd.get('email') || '').trim();
+            const phone = (fd.get('phone') || '').trim();
+            const ts = form.querySelector('input[name=ts]')?.value || '';
+            const website = form.querySelector('input[name=website]')?.value || '';
 
-    const csrf = form.querySelector('input[name=csrfmiddlewaretoken]')?.value || '';
-    setDisabled(true);
-    try{
-      const r = await fetch("{% url 'reqs:submit' %}", {
-        method: 'POST',
-        headers: {
-          'Content-Type':'application/json',
-          'X-CSRFToken': csrf
-        },
-        credentials: 'same-origin',
-        body: JSON.stringify({ full_name, email, phone, ts, website })
-      });
+            if (!email && !phone) return show('Укажи телефон или email.');
 
-      const data = await r.json().catch(() => ({}));
-      if (!r.ok || data.ok === false){
-        const err = data.errors ? Object.values(data.errors).flat().join(' ') : 'Ошибка отправки.';
-        return show(err);
-      }
-      show('Заявка отправлена. Мы свяжемся с тобой!', true);
-      form.reset();
-    } catch {
-      show('Сеть недоступна. Попробуй ещё раз.');
-    } finally {
-      setDisabled(false);
-    }
-  });
-})();
+            const csrf = form.querySelector('input[name=csrfmiddlewaretoken]')?.value || '';
+            setDisabled(true);
+            try {
+                const r = await fetch("{% url 'reqs:submit' %}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrf
+                    },
+                    credentials: 'same-origin',
+                    body: JSON.stringify({ full_name, email, phone, ts, website })
+                });
+
+                const data = await r.json().catch(() => ({}));
+                if (!r.ok || data.ok === false) {
+                    const err = data.errors ? Object.values(data.errors).flat().join(' ') : 'Ошибка отправки.';
+                    return show(err);
+                }
+                show('Заявка отправлена. Мы свяжемся с тобой!', true);
+                form.reset();
+            } catch {
+                show('Сеть недоступна. Попробуй ещё раз.');
+            } finally {
+                setDisabled(false);
+            }
+        });
+    })();
 </script>
 
 
-    <script>
-        document.querySelectorAll('.prive-accordion .acc-head').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const wrap = btn.closest('.acc');
-                const panel = wrap.querySelector('.acc-panel');
+<script>
+    document.querySelectorAll('.prive-accordion .acc-head').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const wrap = btn.closest('.acc');
+            const panel = wrap.querySelector('.acc-panel');
 
-                if (wrap.classList.contains('open')) {
-                    wrap.classList.remove('open');
-                    panel.style.maxHeight = null;
-                } else {
-                    wrap.classList.add('open');
-                    panel.style.maxHeight = panel.scrollHeight + 'px';
-                }
-            });
+            if (wrap.classList.contains('open')) {
+                wrap.classList.remove('open');
+                panel.style.maxHeight = null;
+            } else {
+                wrap.classList.add('open');
+                panel.style.maxHeight = panel.scrollHeight + 'px';
+            }
         });
-    </script>
+    });
+</script>
 
 {% endblock content %}

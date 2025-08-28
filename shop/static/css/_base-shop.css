@@ -79,7 +79,6 @@ body {
     .sb-link {
         display: inline-block;
         max-width: 180px;
-        ;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -102,7 +101,6 @@ body {
     .sb-link {
         display: inline-block;
         max-width: 250px;
-        ;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;

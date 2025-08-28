@@ -3,172 +3,122 @@
 {% load site_settings %}
 {% get_site_contacts as s %}
 
-{% block title %}О нас{% endblock %}
-
-{% block styles %}
-    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% block title %}
+  О нас
 {% endblock %}
 
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'css/about.css' %}" />
+{% endblock %}
 
 {% block content %}
-
-
-    
-    <div class="status-bar" role="navigation" aria-label="Статус-бар">
-        <div class="sb-inner">
-            <img class="sb-logo" src="{% static 'images/GY.svg' %}" alt="GY">
-            <span class="sb-dot" aria-hidden="true"></span>
-            <a class="sb-link" href="{% url 'about' %}">О НАС</a>
-        </div>
+  <div class="status-bar" role="navigation" aria-label="Статус-бар">
+    <div class="sb-inner">
+      <img class="sb-logo" src="{% static 'images/GY.svg' %}" alt="GY" />
+      <span class="sb-dot" aria-hidden="true"></span>
+      <a class="sb-link" href="{% url 'about' %}">О НАС</a>
     </div>
+  </div>
 
+  <main>
+    <section class="about-hero">
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            Gabriel Yusubov — это я и мое творчество, а в мире моды — молодой fashion-бренд моего имени. <br /><br />
 
+            Идея создать свой бренд — это всегда выход мысли в масштаб, что находит продолжение в тех вещах, которые создаются мной и моей командой. Думаю, что все должно называться «своими именами» и оставаться честным с собой и миром, где нет масок.
+          </p>
 
+          <div class="signature">
+            <img class="about-sign" src="{% static 'images/signature.svg' %}" alt="Подпись G. Yusubov" />
+          </div>
+        </div>
 
-    <main>
-        <section class="about-hero">
-            <div class="about-grid">
-                <div class="about-text">
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur. Commodo purus faucibus turpis vestibulum egestas.
-                        Scelerisque eu ultrices nunc orci. Suscipit in nunc sem elementum ut massa convallis. Ipsum
-                        gravida a
-                        porttitor fermentum sodales vitae quam ullamcorper tristique. Odio convallis aliquet purus sit
-                        id tellus
-                        quis. Egestas vitae tincidunt adipiscing morbi metus. Turpis risus nisi quis laoreet tempor
-                        tempus turpis
-                        sed consequat. Ullamcorper velit tincidunt viverra phasellus duis volutpat. In vitae blandit
-                        proin viverra
-                        id facilisi amet.
-                    </p>
+        <figure class="about-photo about-photo--hero">
+          <img src="{% static 'images/about1.jpg' %}" alt="" />
+        </figure>
 
-                    <div class="signature">
-                        <img class="about-sign" src="{% static 'images/signature.svg' %}" alt="Подпись G. Yusubov">
-                    </div>
-                </div>
+        <figure class="about-photo about-photo--left">
+          <img src="{% static 'images/about2.jpg' %}" alt="" />
+        </figure>
 
-                <figure class="about-photo about-photo--hero">
-                    <img src="{% static 'images/photo.jpg' %}" alt="">
-                </figure>
+        <figure class="about-photo about-photo--right">
+          <img src="{% static 'images/about3.jpg' %}" alt="" />
+        </figure>
+      </div>
+    </section>
 
-                <figure class="about-photo about-photo--left">
-                    <img src="{% static 'images/photo.jpg' %}" alt="">
-                </figure>
+    <section class="history">
+      <h3>МИССИЯ</h3>
 
-                <figure class="about-photo about-photo--right">
-                    <img src="{% static 'images/photo.jpg' %}" alt="">
-                </figure>
-            </div>
-        </section>
+      <p>Я чувствую, что мода — это связь прошлого и современных предпочтений людей, которые формируются через их самовыражение и восприятие самих себя. Моя миссия — выразить свое видение моды через творчество и индивидуальный подход к работе. </p>
+    </section>
 
+    <section class="values">
+      <h3>ЦЕННОСТИ</h3>
 
-        <section class="history">
-            <h3>НАША ИСТОРИЯ</h3>
+      <div class="values-text">
+        <p>Мы повторяем ваши формы, чтобы дать свободу движению, которое вы дарите пространствам своим перемещением. Наша задача — четко понимать ваш запрос. При пошиве изделий учитываются индивидуально снятые мерки, особенности фигуры и характер активности. Так нам удается узнать ваши предпочтения и предназначение изготавливаемой вещи.</p>
 
-            <p>
-                Lorem ipsum dolor sit amet consectetur. Commodo purus faucibus turpis vestibulum egestas. Scelerisque eu
-                ultrices nunc orci. Suscipit in nunc sem elementum ut massa convallis. Ipsum gravida a porttitor
-                fermentum sodales vitae quam ullamcorper tristique. Odio convallis aliquet purus sit id tellus quis.
-                Egestas vitae tincidunt adipiscing morbi metus. Turpis risus nisi quis laoreet tempor tempus turpis sed
-                consequat. Ullamcorper velit tincidunt viverra phasellus duis volutpat. In vitae blandit proin viverra
-                id facilisi amet.
-            </p>
-        </section>
+        <p>При создании изделий мы не только стремимся обеспечить комфорт, а создаем его совместно с вами, учитывая те детали, которые могут быть ключами, открывающими вас для самих себя. Создание нового образа и его детализация — это путь к более глубинному и точному контакту с собой.</p>
 
+        <p>Наша цель — быть в контакте и начать говорить. Ваше выражение — ваш язык, а вещь — слово, которое расскажет о вас вашу историю, которую мы создаем ежедневно вместе.</p>
+      </div>
+    </section>
 
+    <section class="gallery">
+      <div class="gallery-inner">
+        <figure class="gallery-item">
+          <img src="{% static 'images/gallery1.jpg' %}" alt="" />
+        </figure>
+        <figure class="gallery-item">
+          <img src="{% static 'images/gallery2.jpg' %}" alt="" />
+        </figure>
+        <figure class="gallery-item">
+          <img src="{% static 'images/gallery3.jpg' %}" alt="" />
+        </figure>
+      </div>
+    </section>
 
-        <section class="values">
-            <h3>ЦЕННОСТИ</h3>
+    <section class="socials">
+      <div class="sign-note">
+        <img src="{% static 'images/weinsoc.png' %}" alt="" />
+      </div>
 
-            <div class="values-text">
-                <p>
-                    Lorem ipsum dolor sit amet consectetur. Commodo purus faucibus turpis vestibulum egestas.
-                    Scelerisque eu
-                    ultrices nunc orci. Suscipit in nunc sem elementum ut massa convallis. Ipsum gravida a porttitor
-                    fermentum sodales vitae quam ullamcorper tristique.
-                </p>
+      <a href="">@GABRIEL_YUSUBOV</a>
 
-                <p>
-                    Lorem ipsum dolor sit amet consectetur. Commodo purus faucibus turpis vestibulum egestas.
-                    Scelerisque eu
-                    ultrices nunc orci. Suscipit in nunc sem elementum ut massa convallis. Ipsum gravida a porttitor
-                    fermentum sodales vitae quam ullamcorper tristique.
-                </p>
+      <div class="socials-container">
+        <ul class="socials-list-main">
+          <li>
+            {% if s.instagram %}
+              <a class="social-link" href="{{ s.instagram }}" target="_blank" rel="noopener nofollow" aria-label="Instagram"><img src="{% static 'icons/instagram.svg' %}" alt="" /></a>
+            {% endif %}
+          </li>
+          <li>
+            {% if s.vk %}
+              <a class="social-link" href="{{ s.vk }}" target="_blank" rel="noopener nofollow" aria-label="VK"><img src="{% static 'icons/vk.svg' %}" alt="" /></a>
+            {% endif %}
+          </li>
+          <li>
+            {% if s.telegram %}
+              <a class="social-link" href="{{ s.telegram }}" target="_blank" rel="noopener nofollow" aria-label="Telegram"><img src="{% static 'icons/telegram.svg' %}" alt="" /></a>
+            {% endif %}
+          </li>
+          <li>
+            {% if s.tiktok %}
+              <a class="social-link" href="{{ s.tiktok }}" target="_blank" rel="noopener nofollow" aria-label="TikTok"><img src="{% static 'icons/tiktok.svg' %}" alt="" /></a>
+            {% endif %}
+          </li>
+          <li>
+            {% if s.youtube %}
+              <a class="social-link" href="{{ s.youtube }}" target="_blank" rel="noopener nofollow" aria-label="YouTube"><img src="{% static 'icons/youtube.svg' %}" alt="" /></a>
+            {% endif %}
+          </li>
+        </ul>
 
-                <p>
-                    Lorem ipsum dolor sit amet consectetur. Commodo purus faucibus turpis vestibulum egestas.
-                    Scelerisque eu
-                    ultrices nunc orci. Suscipit in nunc sem elementum ut massa convallis. Ipsum gravida a porttitor
-                    fermentum sodales vitae quam ullamcorper tristique.
-                </p>
-            </div>
-        </section>
-
-
-        <section class="gallery">
-            <div class="gallery-inner">
-                <figure class="gallery-item">
-                    <img src="{% static 'images/photo.jpg' %}" alt="">
-                </figure>
-                <figure class="gallery-item">
-                    <img src="{% static 'images/photo.jpg' %}" alt="">
-                </figure>
-                <figure class="gallery-item">
-                    <img src="{% static 'images/photo.jpg' %}" alt="">
-                </figure>
-            </div>
-        </section>
-
-
-
-
-        <section class="socials">
-
-            <div class="sign-note">
-                <img src="{% static 'images/weinsoc.png' %}" alt="">
-            </div>
-
-            <a href="">@GABRIEL_YUSUBOV</a>
-
-            <div class="socials-container">
-                <ul class="socials-list-main">
-                    <li>
-                        {% if s.instagram %}<a class="social-link" href="{{ s.instagram }}" target="_blank" rel="noopener nofollow"
-                            aria-label="Instagram">
-                            <img src="{% static 'icons/instagram.svg' %}" alt="">
-                        </a>{% endif %}
-                    </li>
-                    <li>
-                        {% if s.vk %}<a class="social-link" href="{{ s.vk }}" target="_blank" rel="noopener nofollow"
-                            aria-label="VK">
-                            <img src="{% static 'icons/vk.svg' %}" alt="">
-                        </a>{% endif %}
-                    </li>
-                    <li>
-                        {% if s.telegram %}<a class="social-link" href="{{ s.telegram }}" target="_blank" rel="noopener nofollow"
-                            aria-label="Telegram">
-                            <img src="{% static 'icons/telegram.svg' %}" alt="">
-                        </a>{% endif %}
-                    </li>
-                    <li>
-                        {% if s.tiktok %}<a class="social-link" href="{{ s.tiktok }}" target="_blank"
-                            rel="noopener nofollow" aria-label="TikTok">
-                            <img src="{% static 'icons/tiktok.svg' %}" alt="">
-                        </a>{% endif %}
-                    </li>
-                    <li>
-                        {% if s.youtube %}<a class="social-link" href="{{ s.youtube }}" target="_blank" rel="noopener nofollow"
-                            aria-label="YouTube">
-                            <img src="{% static 'icons/youtube.svg' %}" alt="">
-                        </a>{% endif %}
-                    </li>
-                </ul>
-
-                <p class="socials-main-note">*проект Meta Platforms Inc., запрещена в РФ</p>
-            </div>
-
-        </section>
-
-    </main>
-
-{% endblock content %}
+        <p class="socials-main-note">*проект Meta Platforms Inc., запрещена в РФ</p>
+      </div>
+    </section>
+  </main>
+{% endblock %}
