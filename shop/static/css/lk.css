@@ -72,7 +72,7 @@ main {
 
 
 
-@media (max-width:720px) {
+@media (max-width:767px) {
     main {
         padding: 30px 20px;
     }
@@ -82,7 +82,7 @@ main {
     }
 
     .lk-section-name p {
-        font-size: 24px;
+        font-size: 16px;
     }
 
     .lk-section-name img {
@@ -96,5 +96,21 @@ main {
 
     .background-logo img {
         width: 590px;
+    }
+}
+
+
+
+@media (min-width: 768px) and (max-width: 1350px) {
+    main {
+        padding: 100px 40px;
+    }
+
+    .lk-section-name img {
+        width: 24px;
+    }
+
+    .lk-section-name p {
+        font-size: 24px;
     }
 }

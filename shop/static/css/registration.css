@@ -263,7 +263,7 @@ body {
 
 
 /* мобильные */
-@media (max-width:480px) {
+@media (max-width:767px) {
     :root {
         --label-w: 110px;
         --gap: 16px;
@@ -289,5 +289,17 @@ body {
     .auth-form input[type="password"] {
         border-radius: 0px;
     }   
+
+}
+
+
+
+@media (min-width: 768px) and (max-width: 1350px) {
+
+    .auth-form input[type="email"],
+    .auth-form input[type="password"],
+    .auth-form input[type="text"] {
+        border-radius: 0px;
+    }
 
 }
