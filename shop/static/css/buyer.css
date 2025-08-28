@@ -272,7 +272,7 @@
 
 
 /* адаптив */
-@media (max-width:720px) {
+@media (max-width:767px) {
     .customer {
         padding: 30px 20px;
     }
@@ -296,12 +296,28 @@
         width: 100%;
     }
 
-    .f-input, .f-textarea, .f-select select {
+    .f-input,
+    .f-textarea,
+    .f-select select {
         border-radius: 0px;
     }
 
     .agree {
         width: unset;
         max-width: unset;
+    }
+}
+
+
+@media (min-width: 768px) and (max-width: 1350px) {
+    .customer {
+        padding: 50px 40px;
+    }
+
+
+    .f-input,
+    .f-textarea,
+    .f-select select {
+        border-radius: 0px;
     }
 }

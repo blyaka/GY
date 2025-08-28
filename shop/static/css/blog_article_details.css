@@ -162,7 +162,7 @@
 }
 
 
-@media (max-width: 720px) {
+@media (max-width: 767px) {
 
     .article-cover {
         height: 250px;
@@ -200,5 +200,34 @@
     .article-inner {
         padding: 0 20px;
         margin: unset;
+    }
+}
+
+
+
+@media (min-width: 768px) and (max-width: 1350px) {
+
+    .article-cover {
+        height: 250px;
+    }
+
+    .article-head {
+        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .article-date {
+        text-align: left;
+        width: 100%;
+    }
+
+    .article-inner {
+        padding: 0 100px;
+    }
+
+    .article-back {
+        left: -50px;
+        top: 45px;
     }
 }

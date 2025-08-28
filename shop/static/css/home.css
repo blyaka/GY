@@ -241,7 +241,7 @@
 
 
 
-@media (max-width:720px) {
+@media (max-width:767px) {
 
     .hero {
         height: 500px;
@@ -275,6 +275,50 @@
     .signature img {
         width: 80%;
         height: 80%;
+        object-fit: cover;
+    }
+}
+
+
+
+@media (min-width: 768px) and (max-width: 1350px) {
+
+    .hero {
+        height: 600px;
+    }
+
+    .hero-bg-ph img {
+        object-position: unset;
+    }
+
+    .logo-overlay {
+        bottom: -130px;
+        right: 20px;
+        width: 400px;
+    }
+
+    .logo-overlay img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .about-signature {
+        padding: 50px 40px;
+    }
+
+    .main-text {
+        max-width: 70%;
+    }
+
+    .signature {
+        width: 100%;
+        margin-top: 40px;
+    }
+
+    .signature img {
+        width: 60%;
+        height: 60%;
         object-fit: cover;
     }
 }

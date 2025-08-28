@@ -241,7 +241,7 @@ h2 {
 
 
 
-@media (max-width:720px) {
+@media (max-width:767px) {
     main {
         padding: 20px 20px;
     }
@@ -279,4 +279,31 @@ h2 {
         margin-left: 20px;
         margin-top: 20px;
     }
+}
+
+@media (min-width: 768px) and (max-width: 1350px) {
+
+    main {
+        padding: 50px 40px;
+    }
+
+
+    .block {
+        padding: 0px 10px;
+    }
+
+    .h4 {
+        margin: 50px 0 10px;
+    }
+
+    .page-contacts {
+        margin-top: 40px;
+        padding: 0 10px;
+    }
+
+    .contacts_stack {
+        margin-left: 20px;
+        margin-top: 20px;
+    }
+
 }

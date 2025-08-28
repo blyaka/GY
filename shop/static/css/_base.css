@@ -426,7 +426,7 @@ body {
 }
 
 
-@media (max-width:720px) {
+@media (max-width:767px) {
 
     .site-header {
         padding: 15px 20px;
@@ -562,6 +562,158 @@ body {
 
     .footer-socials {
         position: unset;
+        padding: 24px 0 0px;
+    }
+}
+
+
+
+
+
+@media (min-width: 768px) and (max-width: 1350px) {
+
+    .site-header {
+        padding: 15px 20px;
+    }
+
+    .burger-menu {
+        width: 20px;
+        height: 20px;
+    }
+
+    .logo-img {
+        width: 150px;
+    }
+
+    .lang-switch {
+        font-size: 16px;
+        font-weight: 400;
+    }
+
+
+
+
+
+
+
+
+    .offcanvas-panel {
+        height: 492px;
+        width: 50%;
+    }
+
+    .offcanvas-top {
+        padding: 25px;
+    }
+
+    .off-lang {
+        font-size: 16px;
+    }
+
+    .off-nav {
+        padding: 20px 50px;
+        gap: 10px;
+    }
+
+    .off-nav a {
+        font-size: 24px;
+    }
+
+    .off-icons {
+        padding: 25px;
+    }
+
+    .off-icons img {
+        height: 20px;
+        display: block;
+        opacity: .9;
+    }
+
+    .off-watermark {
+        left: -110px;
+        top: -150px;
+    }
+
+
+    .off-watermark img {
+        width: 850px;
+    }
+
+
+
+
+    .off-sub {
+        top: 84px;
+        left: 49.9%;
+        width: 350px;
+        height: 408px;
+    }
+
+    .off-sub-head {
+        padding: 15px 20px;
+    }
+
+    .off-sub-back img {
+        width: 15px;
+        height: 15px;
+    }
+
+    .off-sub-body {
+        padding: 40px;
+    }
+
+    .off-sub-text p {
+        color: #000000;
+        font-size: 16px;
+        font-weight: 300;
+    }
+
+
+
+
+
+
+
+    .site-footer {
+        padding: 40px;
+    }
+
+    .footer-blocks {
+        flex-direction: column;
+        gap: 20px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .footer-block-customer h2,
+    .footer-block-about h2 {
+        font-size: 24px;
+        margin: 0px 0px 15px 0px;
+    }
+
+    .customer-links,
+    .about-links {
+        font-size: 16px;
+    }
+
+
+    .logo-overlay-footer {
+        top: -300px;
+        right: 50px;
+        width: 450px;
+    }
+
+    .logo-overlay-footer img {
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .footer-cp-name {
+        margin-top: 20px;
+    }
+
+    .footer-socials {
+        position: absolute;
         padding: 24px 0 0px;
     }
 }

@@ -233,7 +233,7 @@
 
 
 /* адаптив */
-@media (max-width: 720px) {
+@media (max-width: 767px) {
 
     .about-hero,
     .history,
@@ -269,7 +269,7 @@
         width: 350px;
     }
 
-    .sign-note img{
+    .sign-note img {
         width: 100%;
         object-fit: cover;
     }
@@ -290,4 +290,56 @@
         width: 40px;
         height: 40px;
     }
+}
+
+@media (min-width: 768px) and (max-width: 1350px) {
+
+    .about-hero,
+    .history,
+    .values {
+        padding: 50px 40px;
+    }
+
+
+    .about-grid {
+        display: flex;
+    }
+
+    .about-photo--hero,
+    .about-photo--left,
+    .about-photo--right {
+        display: none;
+    }
+
+    .socials {
+        padding: 40px 20px;
+    }
+
+    .sign-note {
+        width: 550px;
+    }
+
+    .sign-note img {
+        width: 100%;
+        object-fit: cover;
+    }
+
+
+    .socials {
+        gap: 10px;
+    }
+
+    .socials a {
+        font-size: 24px
+    }
+
+    .socials-container {
+        padding: 0px;
+    }
+
+    .social-link {
+        width: 40px;
+        height: 40px;
+    }
+
 }
