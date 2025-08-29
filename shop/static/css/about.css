@@ -19,7 +19,7 @@
 
 .about-text p {
     margin: 0 0 28px;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 300;
     line-height: 1.4;
     color: #2e2e2e;
@@ -132,14 +132,13 @@
 .value p {
     width: 100%;
     margin: 18px 0 0;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 300;
     line-height: 1.5;
     color: #000000;
     padding: 0 40px;
     box-sizing: border-box;
 }
-
 
 
 
@@ -180,7 +179,7 @@
 
 
 .history p {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 300;
     padding: 60px 300px;
 }
@@ -223,7 +222,8 @@
 
     .about-hero,
     .mission,
-    .values {
+    .values,
+    .history p {
         padding: 30px 20px;
     }
 
@@ -240,7 +240,8 @@
 
     .about-hero,
     .mission,
-    .values {
+    .values,
+    .history p {
         padding: 50px 40px;
     }
 
