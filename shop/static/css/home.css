@@ -346,6 +346,7 @@
 
     .hero {
         height: 500px;
+        overflow: hidden;
     }
 
     .hero-bg-ph img {
@@ -364,6 +365,10 @@
         object-fit: cover;
     }
 
+    .main-text {
+        max-width: unset;
+    }
+
     .about-signature {
         padding: 30px 20px;
     }
@@ -378,6 +383,37 @@
         height: 80%;
         object-fit: cover;
     }
+
+    .about-quote {
+        margin: 0px;
+        padding: 40px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+    }
+
+    .quote-img {
+        width: 150px;
+    }
+
+
+    .history p {
+        padding: 30px 20px;
+    }
+
+
+    .about-link-btn {
+        padding: 40px 20px;
+    }
+
+    .about-link-btn a {
+        gap: 15px;
+    }
+
+    .divider {
+        width: 90%;
+        margin: 30px auto;
+    }
 }
 
 
@@ -386,6 +422,7 @@
 
     .hero {
         height: 600px;
+        overflow: hidden;
     }
 
     .hero-bg-ph img {
@@ -421,5 +458,36 @@
         width: 60%;
         height: 60%;
         object-fit: cover;
+    }
+
+
+    .about-quote {
+        margin: 50px 0px;
+        padding: 40px 40px;
+        display: flex;
+        gap: 30px;
+    }
+
+    .quote-img {
+        width: 150px;
+        min-width: 200px;
+    }
+
+    .about-quote p {
+        font-size: 24px;
+    }
+
+
+    .history p {
+        padding: 30px 40px;
+    }
+
+    .about-link-btn {
+        padding: 40px;
+    }
+
+    .divider {
+        width: 90%;
+        margin: 30px auto;
     }
 }
