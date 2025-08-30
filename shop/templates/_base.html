@@ -126,7 +126,7 @@
           
             function openSub(key, title) {
               const tpl = document.getElementById('tpl-' + key)
-              subBody.innerHTML = tpl ? tpl.innerHTML : '<div class="off-sub-text"><p>Скоро тут будет контент.</p></div>'
+              subBody.innerHTML = tpl ? tpl.innerHTML : '<div class="off-sub-text"><p>Скоро тут будет контент...</p></div>'
               subTitle.textContent = title || ''
               sub.classList.add('open')
             }
