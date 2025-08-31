@@ -4,8 +4,28 @@ from django.template.loader import render_to_string
 from django.template import TemplateDoesNotExist
 from django.core.mail import EmailMessage
 from django.conf import settings
+from django.contrib.sites.models import Site
+from types import SimpleNamespace
+from email.mime.image import MIMEImage
+from django.contrib.staticfiles import finders
+
 
 class CustomAccountAdapter(DefaultAccountAdapter):
+    def _current_site(self, request):
+        try:
+            if request is not None:
+                return self.get_current_site(request)
+        except Exception:
+            pass
+        try:
+            return Site.objects.get_current()
+        except Exception:
+            pass
+        domain = (request.get_host() if getattr(request, "get_host", None) else
+                  (settings.ALLOWED_HOSTS[0] if getattr(settings, "ALLOWED_HOSTS", None) else "localhost"))
+        name = getattr(settings, "SITE_NAME", domain)
+        return SimpleNamespace(domain=domain, name=name)
+
     def render_mail(self, template_prefix, email, context, headers=None):
         subj = render_to_string(f"{template_prefix}_subject.txt", context).strip()
         subj = self.format_email_subject(subj)
@@ -16,6 +36,13 @@ class CustomAccountAdapter(DefaultAccountAdapter):
         if html:
             msg = EmailMessage(subj, html, settings.DEFAULT_FROM_EMAIL, [email], headers=headers)
             msg.content_subtype = "html"
+            path = finders.find('images/GY.png')
+            if path:
+                with open(path, 'rb') as f:
+                    img = MIMEImage(f.read(), _subtype='png')
+                img.add_header('Content-ID', '<gylogo>')
+                img.add_header('Content-Disposition', 'inline', filename='GY.png')
+                msg.attach(img)
             return msg
         return super().render_mail(template_prefix, email, context, headers=headers)
 
@@ -30,7 +57,7 @@ class CustomAccountAdapter(DefaultAccountAdapter):
 
         ctx = {
             "user": user,
-            "current_site": self.get_current_site(request),
+            "current_site": self._current_site(request),
             "activate_url": activate_url,
             "request": request,
         }
@@ -43,8 +70,6 @@ class CustomAccountAdapter(DefaultAccountAdapter):
 
         msg = EmailMessage(subject, html, settings.DEFAULT_FROM_EMAIL, [email])
         msg.content_subtype = "html"
-        from email.mime.image import MIMEImage
-        from django.contrib.staticfiles import finders
 
         path = finders.find('images/GY.png')
         if path:
@@ -53,4 +78,5 @@ class CustomAccountAdapter(DefaultAccountAdapter):
             img.add_header('Content-ID', '<gylogo>')
             img.add_header('Content-Disposition', 'inline', filename='GY.png')
             msg.attach(img)
+
         msg.send()
