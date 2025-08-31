@@ -209,9 +209,10 @@ body {
 
 .off-sub-list a {
     color: #000000;
+    font-size: 18px;
     text-decoration: none;
     letter-spacing: .06em;
-    font-weight: 300;
+    font-weight: 400;
 }
 
 .off-sub-list a:hover {
