@@ -22,3 +22,11 @@ http://127.0.0.1:8000/blog/kak-vybrat-tkan-na-svoj-pervyj-kostyum/
 
 http://127.0.0.1:8000/shop/
 http://127.0.0.1:8000/shop/1/
+
+
+
+
+
+
+Увеличить шрифт на странице пошива 
+дописать в меню Laboratory
