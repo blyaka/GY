@@ -154,7 +154,7 @@
                     {% csrf_token %}
                     <label>
                         <p>ФИО:</p>
-                        <input type="text" name="full_name" required>
+                        <input type="text" name="full_name" required autocomplete="name">
                     </label>
                     <label>
                         <span>Email:</span>
@@ -162,8 +162,8 @@
                     </label>
                     <label>
                         <span>Телефон:</span>
-                        <input type="tel" name="phone" inputmode="tel" placeholder="+79991234567"
-                            pattern="^\+?\d{10,15}$" title="Формат: +79991234567">
+                        <input type="tel"   name="phone" inputmode="tel" autocomplete="tel"
+                            placeholder="+7 999 123 45 67" maxlength="18">
                     </label>
 
                     <input type="text" name="website" autocomplete="off" tabindex="-1" aria-hidden="true"
@@ -228,6 +228,108 @@
         });
     })();
 </script>
+
+<script>
+(() => {
+  const form = document.getElementById('reqForm');
+  const phone = form.querySelector('input[name=phone]');
+  const fio   = form.querySelector('input[name=full_name]');
+  const msg   = form.querySelector('.req-msg');
+
+  const onlyDigits = (s) => (s || '').replace(/\D+/g, '');
+
+  function formatRuPhone(raw) {
+    let d = onlyDigits(raw);
+
+    if (d.startsWith('8')) d = '7' + d.slice(1);
+    if (!d.startsWith('7')) d = '7' + d;
+
+    d = d.slice(0, 11);
+
+    const p1 = d.slice(1, 4);
+    const p2 = d.slice(4, 7);
+    const p3 = d.slice(7, 9);
+    const p4 = d.slice(9, 11);
+
+    let out = '+7';
+    if (p1) out += ' ' + p1;
+    if (p2) out += ' ' + p2;
+    if (p3) out += ' ' + p3;
+    if (p4) out += ' ' + p4;
+    return out;
+  }
+
+  function cleanRuE164(masked) {
+    const d = onlyDigits(masked);
+    if (d.length >= 11) return '+' + d.slice(0, 11);
+    return '+' + d;
+  }
+
+  function applyPhoneMask(e) {
+    const before = phone.value;
+    const selStart = phone.selectionStart;
+
+    if (e.type === 'keydown') {
+      const k = e.key;
+      const allowed = (
+        k === 'Backspace' || k === 'Delete' || k === 'ArrowLeft' || k === 'ArrowRight' ||
+        k === 'Home' || k === 'End' || k === 'Tab' || k === '+' || k === ' ' ||
+        (k >= '0' && k <= '9')
+      );
+      if (!allowed) e.preventDefault();
+      return;
+    }
+
+    const masked = formatRuPhone(before);
+    phone.value = masked;
+
+    phone.setSelectionRange(phone.value.length, phone.value.length);
+  }
+
+  phone.addEventListener('keydown', applyPhoneMask);
+  phone.addEventListener('input',  applyPhoneMask);
+  phone.addEventListener('paste',  (e) => setTimeout(applyPhoneMask, 0));
+
+  function sanitizeFio(e) {
+    fio.value = fio.value.replace(/[^\p{L}\s\-'’]/gu, '');
+  }
+  fio.addEventListener('input', sanitizeFio);
+
+  function markInvalid(el, bad) {
+    el.style.borderColor = bad ? '#b00020' : '';
+  }
+
+  const origSubmit = form.onsubmit;
+
+  form.addEventListener('submit', (e) => {
+    const email = (form.querySelector('input[name=email]').value || '').trim();
+    const phoneMasked = (phone.value || '').trim();
+    const phoneE164 = cleanRuE164(phoneMasked);
+    const phoneOk = /^\+7\d{10}$/.test(phoneE164) || phoneMasked === '';
+
+    const emailOk = email === '' || /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+
+    markInvalid(phone, !phoneOk);
+    markInvalid(form.querySelector('input[name=email]'), !emailOk);
+
+    if (!email && !phoneMasked) {
+      msg.style.display='block'; msg.style.color='#b00020'; msg.textContent='Укажи телефон или email.';
+      return;
+    }
+    if (!phoneOk) {
+      msg.style.display='block'; msg.style.color='#b00020'; msg.textContent='Неверный телефон. Формат: +7 999 123 45 67';
+      return;
+    }
+    if (!emailOk) {
+      msg.style.display='block'; msg.style.color='#b00020'; msg.textContent='Неверный email.';
+      return;
+    }
+
+    phone.value = phoneE164;
+  }, true);
+})();
+</script>
+
 
 
 <script>
