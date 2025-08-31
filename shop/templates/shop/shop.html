@@ -12,7 +12,9 @@
 {% block content %}
     <div class="status-bar" role="navigation" aria-label="Статус-бар">
         <div class="sb-inner">
-            <img class="sb-logo" src="{% static 'images/GY.svg' %}" alt="GY">
+            <a href="/">
+                <img class="sb-logo" src="{% static 'images/GY.svg' %}" alt="GY">
+            </a>
             <span class="sb-dot" aria-hidden="true"></span>
             <a class="sb-link" href="{% url 'shop' %}">МАГАЗИН</a>
         </div>

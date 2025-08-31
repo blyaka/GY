@@ -7,11 +7,15 @@
 {% block styles %}<link rel="stylesheet" href="{% static 'css/profile_edit.css' %}">{% endblock %}
 
 {% block content %}
-<div class="status-bar"><div class="sb-inner">
-  <img class="sb-logo" src="{% static 'images/GY.svg' %}" alt="GY">
-  <span class="sb-dot"></span><a class="sb-link" href="{% url 'lk' %}">ЛИЧНЫЙ КАБИНЕТ</a>
-  <span class="sb-dot"></span><a class="sb-link" href="{% url 'lk_edit' %}">ПРОФИЛЬ</a>
-</div></div>
+<div class="status-bar">
+  <div class="sb-inner">
+    <a href="/">
+        <img class="sb-logo" src="{% static 'images/GY.svg' %}" alt="GY">
+    </a>
+    <span class="sb-dot"></span><a class="sb-link" href="{% url 'lk' %}">ЛИЧНЫЙ КАБИНЕТ</a>
+    <span class="sb-dot"></span><a class="sb-link" href="{% url 'lk_edit' %}">ПРОФИЛЬ</a>
+  </div>
+</div>
 
 <main>
   <div class="lk-section-name">
