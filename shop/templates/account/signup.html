@@ -94,6 +94,23 @@
     </section>
   </main>
 
+<script>
+  const form = document.querySelector('form');
+  form.addEventListener('submit', (e) => {
+    const agree = form.querySelector('input[name="remember"]');
+    if (!form.checkValidity() || !agree.checked) {
+      e.preventDefault();
+      if (!agree.checked) {
+        agree.setCustomValidity('Нужно согласие на обработку ПДн');
+      }
+      form.reportValidity();
+      agree.setCustomValidity('');
+      return;
+    }
+  });
+
+</script>
+
   <script>
     ;(function () {
       const p1 = document.getElementById('id_password1')
