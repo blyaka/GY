@@ -98,6 +98,7 @@
     cursor: pointer;
     display: grid;
     place-items: center;
+    z-index: 99;
 }
 
 .more-btn img {
@@ -111,11 +112,25 @@
 }
 
 
+
+
 .more-track {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
     gap: 32px;
+    overflow-x: auto;
+    /* вместо hidden */
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    /* плавная фиксация по карточкам */
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
 }
+
+.more-track::-webkit-scrollbar {
+    display: none;
+}
+
+/* по желанию, скрыть полосу */
 
 .more-card {
     display: flex;
@@ -125,7 +140,12 @@
     padding: 16px;
     text-decoration: none;
     background: #fff;
+    flex: 0 0 calc(50% - 16px);
+    min-width: calc(50% - 16px);
+    scroll-snap-align: start;
+    box-sizing: border-box;
 }
+
 
 .more-thumb {
     width: 305px;
@@ -134,25 +154,34 @@
     flex-shrink: 0;
 }
 
+.more-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
 .more-info {
     display: flex;
     flex-direction: column;
     gap: 8px;
     height: 100%;
+    width: 100%;
     justify-content: space-between;
 }
 
 .more-title {
     color: #111;
-    font-size: 38px;
+    font-size: 36px;
     font-weight: 400;
-    line-height: 1.4;
+    line-height: 1;
 }
 
 .more-date {
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 300;
     color: #9a9a9a;
+    text-align: right;
 }
 
 
@@ -169,7 +198,7 @@
     }
 
     .article-head {
-        align-items: center;
+        align-items: flex-start;
         flex-direction: column;
         gap: 10px;
     }
@@ -188,10 +217,6 @@
         width: 100%;
     }
 
-    .more-track {
-        grid-template-columns: 1fr;
-    }
-
     .more-card.is-dimmed {
         opacity: 1;
         pointer-events: auto;
@@ -200,6 +225,33 @@
     .article-inner {
         padding: 0 20px;
         margin: unset;
+    }
+
+    .more-card {
+        flex: 0 0 100%;
+        min-width: 100%;
+        flex-direction: column;
+
+    }
+
+    .more-thumb {
+        width: 100%;
+        height: 170px;
+        /* подгони под дизайн */
+    }
+
+
+    .more-title {
+        font-size: 24px;
+    }
+
+    .more-date {
+        font-size: 16px;
+    }
+
+
+    .article-more {
+        margin: 30px 20px;
     }
 }
 
@@ -212,7 +264,7 @@
     }
 
     .article-head {
-        align-items: center;
+        align-items: flex-start;
         flex-direction: column;
         gap: 10px;
     }
@@ -230,4 +282,28 @@
         left: -50px;
         top: 45px;
     }
+
+
+    .article-more {
+        margin: 50px 40px;
+    }
+
+    .more-thumb {
+        width: 100%;
+        height: 170px;
+    }
+
+    .more-card {
+        flex-direction: column;
+    }
+
+    .more-title {
+        font-size: 24px;
+    }
+
+    .more-date {
+        font-size: 16px;
+    }
+
+
 }

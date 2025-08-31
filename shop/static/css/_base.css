@@ -243,6 +243,12 @@ body {
     color: #000000;
 }
 
+
+.off-sub-text p a {
+    text-decoration: underline;
+    color: black;
+} 
+
 .off-sub {
     pointer-events: none;
 }
