@@ -177,6 +177,8 @@ ACCOUNT_FORMS = {
     'signup': 'accounts.forms.SignupForm', 
 }
 
+ACCOUNT_ADAPTER = "accounts.adapter.CustomAccountAdapter"
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Gabriel Yusubov] "
