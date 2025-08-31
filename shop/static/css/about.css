@@ -3,6 +3,7 @@
 .about-hero {
     padding: 80px 300px;
     position: relative;
+    overflow: hidden;
 }
 
 .hero-name h2 {
@@ -38,17 +39,19 @@
 
 .background-logo-hero {
     position: absolute;
-    left: 0;
-    top: -20%;
-    height: 120%;
+    left: -3%;
+    top: -10%;
+    height: 110%;
     z-index: -1;
     opacity: 0.3;
 }
 
 .background-logo-hero img {
-    width: 100%;
+    display: block;
+    width: auto;
     height: 100%;
-    object-fit: cover;
+    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
 
@@ -313,6 +316,14 @@
         opacity: 0.3;
     }
 
+    .background-logo-hero img {
+        display: block;
+        width: auto;
+        height: 100%;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+    }
+
 
 
     .gallery-inner {
@@ -382,6 +393,23 @@
     .values,
     .history p {
         padding: 50px 40px;
+    }
+
+    .background-logo-hero {
+        position: absolute;
+        left: -20%;
+        top: -10%;
+        height: 110%;
+        z-index: -1;
+        opacity: 0.3;
+    }
+
+    .background-logo-hero img {
+        display: block;
+        width: auto;
+        height: 100%;
+        transform: translateZ(0);
+        backface-visibility: hidden;
     }
 
 
