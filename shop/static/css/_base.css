@@ -531,6 +531,26 @@ body {
         font-weight: 300;
     }
 
+    .off-sub-all {
+        font-weight: 300;
+    }
+
+    .off-sub-list a {
+        color: #000000;
+        font-size: 16px;
+        font-weight: 300;
+    }
+
+    .off-sub-grid p {
+        color: black;
+        font-size: 14px;
+        font-weight: 300;
+    }
+
+
+
+
+
 
 
     .site-footer {

@@ -67,7 +67,7 @@ body {
     border: 1px solid var(--black);
     background: #fff;
     padding: 0 12px;
-    font-size: 14px;
+    font-size: 16px;
     outline: none;
     box-sizing: border-box
 }
