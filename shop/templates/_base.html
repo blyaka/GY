@@ -1,6 +1,7 @@
 {% load static %}
 {% load site_settings %}
 {% get_site_contacts as s %}
+{% load phone_format %}
 <!DOCTYPE html>
 <html lang="ru">
   <head>
@@ -64,9 +65,9 @@
           </nav>
 
           <div class="off-icons">
-            <img src="{% static 'icons/search.svg' %}" alt="Поиск" />
+            <!-- <img src="{% static 'icons/search.svg' %}" alt="Поиск" />
             <img src="{% static 'icons/bookmark-header.svg' %}" alt="Избранное" />
-            <img src="{% static 'icons/bag.svg' %}" alt="Корзина" />
+            <img src="{% static 'icons/bag.svg' %}" alt="Корзина" /> -->
             <a href="{% url 'lk' %}"><img src="{% static 'icons/user.svg' %}" alt="Профиль" /></a>
           </div>
 
@@ -85,7 +86,7 @@
         </div>
 
         <!-- Шаблоны наполняемого контента -->
-        <template id="tpl-shop">
+        <!-- <template id="tpl-shop">
           <div class="off-sub-grid">
             <ul class="off-sub-list">
               <li>
@@ -106,6 +107,13 @@
             </ul>
             <a class="off-sub-all" href="{% url 'shop' %}">СМОТРЕТЬ ВСЕ</a>
           </div>
+        </template> -->
+
+        <template id="tpl-prive-lab">
+          <div class="off-sub-text">
+            <p>Индивидуальный пошив, примерка, консультация по материалам.</p>
+            <a class="off-sub-all" href="{% url 'prive-lab' %}">Перейти в PRIVE</a>
+          </div>
         </template>
 
         <template id="tpl-delivery">
@@ -114,6 +122,62 @@
             <a class="off-sub-all" href="{% url 'delivery' %}">Подробнее</a>
           </div>
         </template>
+
+        <template id="tpl-returns">
+          <div class="off-sub-text">
+            <p>Обмен и возврат в течение 7 дней. Полные условия по ссылке.</p>
+            <a class="off-sub-all" href="{% url 'refund' %}">Узнать условия</a>
+          </div>
+        </template>
+
+        <template id="tpl-contacts">
+          <div class="off-sub-text">
+            {% if s.email %}<p>E-mail: {{ s.email }}</p>{% endif %}
+            {% if s.phone %}<p>Тел.: {{ s.phone|pretty_phone }}</p>{% endif %}
+            <a class="off-sub-all" href="{% url 'contacts' %}">Все контакты</a>
+          </div>
+        </template>
+
+
+        <template id="tpl-blog">
+          <div class="off-sub-text">
+            <p>Новости бренда, истории коллекций, съёмки.</p>
+            <a class="off-sub-all" href="{% url 'blog' %}">Читать блог</a>
+          </div>
+        </template>
+
+        <template id="tpl-social">
+          {% get_site_contacts as s %}
+          <div class="off-sub-grid">
+            <ul class="off-sub-list">
+              {% if s.instagram %}
+              <li><a href="{{ s.instagram }}" target="_blank" rel="noopener nofollow">INSTAGRAM</a></li>
+              {% endif %}
+              {% if s.telegram %}
+              <li><a href="{{ s.telegram }}" target="_blank" rel="noopener nofollow">TELEGRAM</a></li>
+              {% endif %}
+              {% if s.vk %}
+              <li><a href="{{ s.vk }}" target="_blank" rel="noopener nofollow">VK</a></li>
+              {% endif %}
+              {% if s.tiktok %}
+              <li><a href="{{ s.tiktok }}" target="_blank" rel="noopener nofollow">TIKTOK</a></li>
+              {% endif %}
+              {% if s.youtube %}
+              <li><a href="{{ s.youtube }}" target="_blank" rel="noopener nofollow">YOUTUBE</a></li>
+              {% endif %}
+            </ul>
+          </div>
+        </template>
+
+
+
+        <template id="tpl-about">
+          <div class="off-sub-text">
+            <p>Gabriel Yusubov — авторский бренд: дизайн, пошив, капсульные релизы.</p>
+            <a class="off-sub-all" href="{% url 'about' %}">Подробнее о нас</a>
+          </div>
+        </template>
+
 
         <script>
           ;(() => {

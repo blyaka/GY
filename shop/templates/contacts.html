@@ -2,6 +2,7 @@
 {% load static %}
 {% load site_settings %}
 {% get_site_contacts as s %}
+{% load phone_format %}
 
 {% block title %}Контакты{% endblock %}
 
@@ -33,8 +34,8 @@
             </h3>
 
             <div class="phone-stack">
-                {% if s.phone %}<a href="tel:{{ s.phone }}">+7 XXX XXX XX XX</a>{% endif %}
-                {% if s.phone2 %}<a href="tel:{{ s.phone2 }}">+7 XXX XXX XX XX</a>{% endif %}
+                {% if s.phone %}<a href="tel:{{ s.phone }}">{{ s.phone|pretty_phone }}</a>{% endif %}
+                {% if s.phone2 %}<a href="tel:{{ s.phone2 }}">{{ s.phone2|pretty_phone }}</a>{% endif %}
 
                 <p>Ежедневно с XX:XX до ХХ:ХХ</p>
             </div>
@@ -51,7 +52,7 @@
                 </div>
                 <div class="contact-item">
                     <img src="{% static 'icons/phone_icon.svg' %}" alt="Phone">
-                    {% if s.phone %}<a href="tel:{{ s.phone }}">{{ s.phone }}</a>{% endif %}
+                    {% if s.phone %}<a href="tel:{{ s.phone }}">{{ s.phone|pretty_phone }}</a>{% endif %}
                 </div>
                 <div class="contact-item">
                     <img src="{% static 'icons/telegram_icon.svg' %}" alt="Telegram">

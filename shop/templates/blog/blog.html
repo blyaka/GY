@@ -56,29 +56,46 @@
 
 
 
-        <!-- PAGINATION -->
-        <nav class="pager" role="navigation" aria-label="Пагинация">
-            <button class="pg-btn pg-prev" aria-label="Предыдущая" type="button">
-                <img src="{% static 'icons/arrow.svg' %}" alt="">
-            </button>
+<!-- PAGINATION -->
+{% if is_paginated %}
+<nav class="pager" role="navigation" aria-label="Пагинация">
+    <button class="pg-btn pg-prev" aria-label="Предыдущая" type="button"
+            {% if not page_obj.has_previous %}disabled{% endif %}
+            data-url="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% if querystring %}&{{ querystring }}{% endif %}{% endif %}">
+        <img src="{% static 'icons/arrow.svg' %}" alt="">
+    </button>
 
-            <ul class="pg-list">
-                <li><a class="pg-link" href="#">1</a></li>
-                <li><a class="pg-link" href="#">2</a></li>
-                <li><a class="pg-link" href="#">3</a></li>
-                <li><a class="pg-link" href="#">4</a></li>
-                <li><span class="pg-link is-current">5</span></li>
-                <li><a class="pg-link" href="#">6</a></li>
-                <li><a class="pg-link" href="#">7</a></li>
-                <li><a class="pg-link" href="#">8</a></li>
+    <ul class="pg-list">
+        {% for p in page_links %}
+            {% if p == 'ellipsis' %}
                 <li class="pg-ellipsis">…</li>
-                <li><a class="pg-link" href="#">X</a></li>
-            </ul>
+            {% elif p == page_obj.number %}
+                <li><span class="pg-link is-current">{{ p }}</span></li>
+            {% else %}
+                <li><a class="pg-link" href="?page={{ p }}{% if querystring %}&{{ querystring }}{% endif %}">{{ p }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
 
-            <button class="pg-btn pg-next" aria-label="Следующая" type="button">
-                <img src="{% static 'icons/arrow.svg' %}" alt="">
-            </button>
-        </nav>
+    <button class="pg-btn pg-next" aria-label="Следующая" type="button"
+            {% if not page_obj.has_next %}disabled{% endif %}
+            data-url="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% if querystring %}&{{ querystring }}{% endif %}{% endif %}">
+        <img src="{% static 'icons/arrow.svg' %}" alt="">
+    </button>
+</nav>
+
+<script>
+  (function () {
+    document.querySelectorAll('.pg-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var url = btn.getAttribute('data-url');
+        if (url) window.location = url;
+      });
+    });
+  })();
+</script>
+{% endif %}
+
 
     </main>
 
