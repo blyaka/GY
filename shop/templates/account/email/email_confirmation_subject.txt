@@ -1,1 +1,1 @@
-{{ current_site.name }} — подтверждение e-mail
+{{ current_site.name|default:"Gabriel Yusubov" }} — подтверждение e-mail
