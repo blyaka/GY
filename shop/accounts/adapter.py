@@ -43,4 +43,14 @@ class CustomAccountAdapter(DefaultAccountAdapter):
 
         msg = EmailMessage(subject, html, settings.DEFAULT_FROM_EMAIL, [email])
         msg.content_subtype = "html"
+        from email.mime.image import MIMEImage
+        from django.contrib.staticfiles import finders
+
+        path = finders.find('images/GY.png')
+        if path:
+            with open(path, 'rb') as f:
+                img = MIMEImage(f.read(), _subtype='png')
+            img.add_header('Content-ID', '<gylogo>')
+            img.add_header('Content-Disposition', 'inline', filename='GY.png')
+            msg.attach(img)
         msg.send()

@@ -1,0 +1,22 @@
+{% extends '_base.html' %}
+{% load i18n account %}
+{% block title %}{% trans "Подтверждение e-mail" %}{% endblock %}
+{% block content %}
+<main class="auth">
+  <section class="auth-card">
+    <h1>Подтверждение e-mail</h1>
+
+    {% if confirmation %}
+      {% user_display confirmation.email_address.user as user_display %}
+      <p>Подтвердить адрес: <strong>{{ confirmation.email_address.email }}</strong> для пользователя <strong>{{ user_display }}</strong>?</p>
+
+      <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+        {% csrf_token %}
+        <button type="submit" class="btn">Подтвердить</button>
+      </form>
+    {% else %}
+      <p>Ссылка подтверждения недействительна или устарела.</p>
+    {% endif %}
+  </section>
+</main>
+{% endblock %}
