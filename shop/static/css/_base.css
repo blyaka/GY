@@ -247,7 +247,7 @@ body {
 .off-sub-text p a {
     text-decoration: underline;
     color: black;
-} 
+}
 
 .off-sub {
     pointer-events: none;
@@ -255,6 +255,13 @@ body {
 
 .offcanvas.open .off-sub.open {
     pointer-events: auto;
+}
+
+
+.off-sub-grid p {
+    color: black;
+    font-size: 14px;
+    font-weight: 300;
 }
 
 
