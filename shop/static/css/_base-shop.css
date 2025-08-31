@@ -33,6 +33,10 @@ body {
     padding: 20px 40px;
 }
 
+.sb-inner a {
+    display: flex;
+}
+
 
 .sb-logo {
     width: 38px;
