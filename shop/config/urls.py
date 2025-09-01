@@ -23,11 +23,31 @@ urlpatterns += i18n_patterns(
     prefix_default_language=True,
 )
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+
+from django.contrib.sitemaps.views import sitemap
+from .sitemaps import SITEMAPS
+
+urlpatterns += [
+    path("sitemap.xml", sitemap, {"sitemaps": SITEMAPS}, name="sitemap"),
+]
+
+
+
+from django.views.generic import TemplateView
+
+urlpatterns += [
+    path("robots.txt", TemplateView.as_view(
+        template_name="robots.txt", content_type="text/plain"
+    )),
+]
 
 
 
 from django.http import HttpResponse
 urlpatterns += [ path("healthz", lambda r: HttpResponse("ok")) ]
+
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
