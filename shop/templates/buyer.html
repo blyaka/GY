@@ -75,21 +75,23 @@
                 {% trans "Если у вас остались вопросы, вы можете заполнить форму обратной связи, и мы вам обязательно ответим!" %}
             </p>
 
-<form class="customer-form" action="{% url 'reqs:contact_submit' %}" method="post">
+<form class="customer-form" action="{% url 'reqs:contact_submit' %}" method="post" novalidate>
   {% csrf_token %}
-  <input type="hidden" name="ts" value="{{ now_ts|default:0 }}">   <!-- см. ниже JS -->
-  <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off"> <!-- honeypot -->
+  <input type="hidden" name="ts" value="{{ now_ts|default:0 }}">
+  <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
 
   <label class="f-label">{% trans "Имя" %}:
-    <input class="f-input" type="text" name="name" placeholder="{% trans 'ГАБРИЭЛЬ' %}" required>
+    <input class="f-input" type="text" name="name" placeholder="{% trans 'ГАБРИЭЛЬ' %}" required autocomplete="name">
   </label>
 
   <label class="f-label">Email:
-    <input class="f-input" type="email" name="email" placeholder="NAME@GMAIL.COM">
+    <input class="f-input" type="email" name="email" placeholder="NAME@GMAIL.COM" autocomplete="email">
   </label>
 
   <label class="f-label">{% trans "Телефон" %}:
-    <input class="f-input" type="tel" name="phone" placeholder="+7 XXX XXX XX XX">
+    <input class="f-input" type="tel" name="phone"
+           inputmode="tel" autocomplete="tel"
+           placeholder="+7 999 123 45 67" maxlength="18">
   </label>
 
   <label class="f-label">{% trans "Тематика обращения" %}:
@@ -109,27 +111,177 @@
     <textarea class="f-textarea" name="message" placeholder="{% trans 'НАПИШИТЕ ЗДЕСЬ ЧТО-НИБУДЬ…' %}"></textarea>
   </label>
 
-<div class="agree"> <label class="remember"> <input type="checkbox" name="policy" required> <span class="check"></span> <span> {% blocktrans trimmed with offer_url=offer_url privacy_url=privacy_url %} Нажимая кнопку «Отправить», я даю своё согласие на обработку моих персональных данных в соответствии с Федеральным законом от 27.07.2006 №152-ФЗ «О персональных данных», с условиями <a href="{{ offer_url }}" target="_blank">публичной оферты</a> и <a href="{{ privacy_url }}" target="_blank">политикой конфиденциальности</a>. {% endblocktrans %} </span> </label> <label class="remember"> <input type="checkbox" name="marketing"> <span class="check"></span> <span> {% blocktrans trimmed %} Я согласен(на) на получение рекламной информации, новостей, предложений и опросов на e-mail/телефон, указанные при отправке формы. {% endblocktrans %} </span> </label> </div>
+  <div class="agree">
+    <label class="remember">
+      <input type="checkbox" name="policy" required>
+      <span class="check"></span>
+      <span>
+        {% blocktrans trimmed with offer_url=offer_url privacy_url=privacy_url %}
+          Нажимая кнопку «Отправить», я даю своё согласие на обработку моих персональных данных в соответствии с Федеральным
+          законом от 27.07.2006 №152-ФЗ «О персональных данных», с условиями
+          <a href="{{ offer_url }}" target="_blank">публичной оферты</a> и
+          <a href="{{ privacy_url }}" target="_blank">политикой конфиденциальности</a>.
+        {% endblocktrans %}
+      </span>
+    </label>
+    <label class="remember">
+      <input type="checkbox" name="marketing">
+      <span class="check"></span>
+      <span>
+        {% blocktrans trimmed %}
+          Я согласен(на) на получение рекламной информации, новостей, предложений и опросов на e-mail/телефон,
+          указанные при отправке формы.
+        {% endblocktrans %}
+      </span>
+    </label>
+  </div>
+
   <div class="f-actions">
     <button class="f-submit" type="submit">{% trans "ОТПРАВИТЬ" %}</button>
   </div>
+
+  <p class="form-msg" aria-live="polite" style="display:none;"></p>
 </form>
 
 <script>
-  // простейший ts для антиспама
+  // ts для антиспама
   document.addEventListener('DOMContentLoaded', () => {
     const f = document.querySelector('.customer-form');
     if (!f) return;
-    let ts = f.querySelector('input[name="ts"]');
-    if (!ts) {
-      ts = document.createElement('input');
-      ts.type = 'hidden';
-      ts.name = 'ts';
-      f.appendChild(ts);
-    }
-    ts.value = Math.floor(Date.now() / 1000);
+    const ts = f.querySelector('input[name="ts"]');
+    if (ts) ts.value = Math.floor(Date.now() / 1000);
   });
 </script>
+
+<script>
+(() => {
+  const form  = document.querySelector('.customer-form');
+  if (!form) return;
+
+  const msgEl = form.querySelector('.form-msg');
+  const phone = form.querySelector('input[name=phone]');
+  const email = form.querySelector('input[name=email]');
+  const nameI = form.querySelector('input[name=name]');
+  const submitBtn = form.querySelector('.f-submit');
+
+  const t = {
+    needContact: "{% trans 'Укажи телефон или email.' %}",
+    badPhone: "{% trans 'Неверный телефон. Формат: +7 999 123 45 67' %}",
+    badEmail: "{% trans 'Неверный email.' %}",
+    netErr: "{% trans 'Сеть недоступна. Попробуй ещё раз.' %}",
+    ok: "{% trans 'Заявка отправлена. Мы свяжемся с тобой!' %}",
+    sendErr: "{% trans 'Ошибка отправки.' %}",
+  };
+
+  function show(text, ok=false) {
+    msgEl.style.display = 'block';
+    msgEl.textContent = text;
+    msgEl.style.color = ok ? '#2e7d32' : '#b00020';
+  }
+  function markInvalid(el, bad) { el && (el.style.borderColor = bad ? '#b00020' : ''); }
+  const onlyDigits = s => (s || '').replace(/\D+/g, '');
+
+  function formatRuPhone(raw) {
+    let d = onlyDigits(raw);
+    if (d.startsWith('8')) d = '7' + d.slice(1);
+    if (!d.startsWith('7')) d = d ? ('7' + d) : '';
+    d = d.slice(0, 11);
+    const p1 = d.slice(1,4), p2 = d.slice(4,7), p3 = d.slice(7,9), p4 = d.slice(9,11);
+    let out = d ? '+7' : '';
+    if (p1) out += ' ' + p1;
+    if (p2) out += ' ' + p2;
+    if (p3) out += ' ' + p3;
+    if (p4) out += ' ' + p4;
+    return out;
+  }
+  function cleanRuE164(masked) {
+    const d = onlyDigits(masked);
+    if (!d) return '';
+    const v = (d.startsWith('8') ? '7' + d.slice(1) : (d.startsWith('7') ? d : '7' + d)).slice(0,11);
+    return '+' + v;
+  }
+  function applyPhoneMask(e) {
+    if (!phone) return;
+    if (e && e.type === 'keydown') {
+      const k = e.key;
+      const allowed = ['Backspace','Delete','ArrowLeft','ArrowRight','Home','End','Tab','+',' '].includes(k) || /[0-9]/.test(k);
+      if (!allowed) e.preventDefault();
+      return;
+    }
+    const masked = formatRuPhone(phone.value);
+    const pos = phone.selectionStart;
+    phone.value = masked;
+    try { phone.setSelectionRange(masked.length, masked.length); } catch {}
+  }
+  if (phone) {
+    phone.addEventListener('keydown', applyPhoneMask);
+    phone.addEventListener('input',  applyPhoneMask);
+    phone.addEventListener('paste',  () => setTimeout(applyPhoneMask, 0));
+  }
+
+  function getCSRF() {
+    const inp = form.querySelector('input[name=csrfmiddlewaretoken]');
+    if (inp) return inp.value;
+    const m = document.cookie.match(/csrftoken=([^;]+)/);
+    return m ? m[1] : '';
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    msgEl.style.display = 'none';
+
+    const fd = new FormData(form);
+    const payload = {
+      name: (fd.get('name') || '').trim(),
+      email: (fd.get('email') || '').trim(),
+      phone: cleanRuE164((fd.get('phone') || '').trim()),
+      topic: (fd.get('topic') || 'other'),
+      message: (fd.get('message') || '').trim(),
+      policy: !!fd.get('policy'),
+      marketing: !!fd.get('marketing'),
+      ts: form.querySelector('input[name=ts]')?.value || '',
+      website: form.querySelector('input[name=website]')?.value || '',
+      page_url: window.location.href,
+      locale: document.documentElement.lang || '',
+    };
+
+    const emailOk = !payload.email || /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(payload.email);
+    const phoneOk = !payload.phone || /^\+7\d{10}$/.test(payload.phone);
+
+    if (!payload.email && !payload.phone) {
+      show(t.needContact); return;
+    }
+    if (!emailOk) { markInvalid(email, true); show(t.badEmail); return; }
+    if (!phoneOk) { markInvalid(phone, true); show(t.badPhone); return; }
+    markInvalid(email, false); markInvalid(phone, false);
+
+    submitBtn.disabled = true;
+    try {
+      const r = await fetch("{% url 'reqs:contact_submit' %}", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCSRF(),
+        },
+        credentials: 'same-origin',
+        body: JSON.stringify(payload),
+      });
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok || data.ok === false) {
+        const err = data.errors ? Object.values(data.errors).flat().join(' ') : (data.message || t.sendErr);
+        show(err); return;
+      }
+      show(data.message || t.ok, true);
+      form.reset();
+    } catch (e) {
+      show(t.netErr);
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+})();
+</script>
+
 
         </section>
     </main>

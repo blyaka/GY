@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-01 23:36+0300\n"
+"POT-Creation-Date: 2025-09-02 00:09+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -89,7 +89,7 @@ msgstr "PRIVE Laboratory"
 msgid "ДОСТАВКА И ОПЛАТА"
 msgstr "DELIVERY AND PAYMENT"
 
-#: templates/_base.html:143 templates/buyer.html:69 templates/buyer.html:97
+#: templates/_base.html:143 templates/buyer.html:69 templates/buyer.html:103
 #: templates/refund_exchange.html:44 templates/refund_exchange.html:49
 msgid "ВОЗВРАТ И ОБМЕН"
 msgstr "REFUND AND EXCHANGE"
@@ -426,7 +426,7 @@ msgid "Пароль"
 msgstr "Password"
 
 #: templates/account/login.html:51 templates/account/signup.html:62
-#: templates/account/signup.html:75
+#: templates/account/signup.html:79
 msgid "Показать пароль"
 msgstr "Show password"
 
@@ -473,7 +473,7 @@ msgstr "Password updated"
 msgid "ФИО"
 msgstr "Full name"
 
-#: templates/account/profile_edit.html:54 templates/buyer.html:87
+#: templates/account/profile_edit.html:54 templates/buyer.html:91
 #: templates/prive_lab.html:180
 msgid "Телефон"
 msgstr "Phone"
@@ -498,11 +498,11 @@ msgstr "REGISTRATION"
 msgid "Регистрационная форма"
 msgstr "Registration form"
 
-#: templates/account/signup.html:72
+#: templates/account/signup.html:76
 msgid "Повторите пароль"
 msgstr "Repeat password"
 
-#: templates/account/signup.html:89
+#: templates/account/signup.html:97
 msgid ""
 "Нажимая кнопку «Зарегистрироваться», я даю своё согласие на обработку "
 "персональных данных в соответствии с Федеральным законом от 27.07.2006 № 152-"
@@ -512,11 +512,11 @@ msgstr ""
 "personal data in accordance with Federal Law No. 152-FZ of 27.07.2006 “On "
 "Personal Data”."
 
-#: templates/account/signup.html:97
+#: templates/account/signup.html:105
 msgid "ЗАРЕГИСТРИРОВАТЬСЯ"
 msgstr "REGISTER"
 
-#: templates/account/signup.html:102
+#: templates/account/signup.html:110
 #, python-format
 msgid ""
 "Если у вас уже есть аккаунт, то просто <br> <a class=\"reg-link\" "
@@ -645,43 +645,43 @@ msgstr ""
 "If you still have questions, you can fill out the feedback form, and we will "
 "definitely get back to you!"
 
-#: templates/buyer.html:79
+#: templates/buyer.html:83
 msgid "Имя"
 msgstr "Name"
 
-#: templates/buyer.html:80
+#: templates/buyer.html:84
 msgid "ГАБРИЭЛЬ"
 msgstr "GABRIEL"
 
-#: templates/buyer.html:91
+#: templates/buyer.html:97
 msgid "Тематика обращения"
 msgstr "Subject of inquiry"
 
-#: templates/buyer.html:94
+#: templates/buyer.html:100
 msgid "ОФОРМЛЕНИЕ ЗАКАЗА"
 msgstr "ORDER PROCESSING"
 
-#: templates/buyer.html:95 templates/delivery.html:53
+#: templates/buyer.html:101 templates/delivery.html:53
 msgid "ОПЛАТА"
 msgstr "PAYMENT"
 
-#: templates/buyer.html:96 templates/delivery.html:78
+#: templates/buyer.html:102 templates/delivery.html:78
 msgid "ДОСТАВКА"
 msgstr "DELIVERY"
 
-#: templates/buyer.html:98
+#: templates/buyer.html:104
 msgid "ДРУГОЕ"
 msgstr "OTHER"
 
-#: templates/buyer.html:104
+#: templates/buyer.html:110
 msgid "Комментарий"
 msgstr "Comment"
 
-#: templates/buyer.html:105
+#: templates/buyer.html:111
 msgid "НАПИШИТЕ ЗДЕСЬ ЧТО-НИБУДЬ…"
 msgstr "WRITE HERE SOMETHING…"
 
-#: templates/buyer.html:113
+#: templates/buyer.html:119
 #, python-format
 msgid ""
 "Нажимая кнопку «Отправить», я даю своё согласие на обработку моих "
@@ -696,7 +696,7 @@ msgstr ""
 "target=\"_blank\">public offer</a> and the <a href=\"%(privacy_url)s\" "
 "target=\"_blank\">privacy policy</a>."
 
-#: templates/buyer.html:127
+#: templates/buyer.html:131
 msgid ""
 "Я согласен(на) на получение рекламной информации, новостей, предложений и "
 "опросов на e-mail/телефон, указанные при отправке формы."
@@ -704,9 +704,37 @@ msgstr ""
 "I agree to receive promotional information, news, offers, and surveys to the "
 "e-mail/phone provided in the form."
 
-#: templates/buyer.html:138
+#: templates/buyer.html:140
 msgid "ОТПРАВИТЬ"
 msgstr "SEND"
+
+#: templates/buyer.html:168
+msgid "Укажи телефон или email."
+msgstr "Enter phone or e-mail address"
+
+#: templates/buyer.html:169
+msgid "Неверный телефон. Формат: +7 999 123 45 67"
+msgstr "Wrong phone. Example: +7 999 123 45 67"
+
+#: templates/buyer.html:170
+#, fuzzy
+#| msgid "Подтверждение e-mail"
+msgid "Неверный email."
+msgstr "E-mail confirmation"
+
+#: templates/buyer.html:171
+msgid "Сеть недоступна. Попробуй ещё раз."
+msgstr "Network error. Try again later"
+
+#: templates/buyer.html:172
+msgid "Заявка отправлена. Мы свяжемся с тобой!"
+msgstr "The request has been sent. We will contact you!"
+
+#: templates/buyer.html:173
+#, fuzzy
+#| msgid "Письмо отправлено"
+msgid "Ошибка отправки."
+msgstr "E-mail sent"
 
 #: templates/contacts.html:16
 msgid ""
