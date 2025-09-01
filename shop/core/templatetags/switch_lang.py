@@ -1,41 +1,46 @@
 from django import template
 from django.conf import settings
-from django.urls import resolve, reverse, NoReverseMatch, Resolver404
-from django.utils import translation
 
 register = template.Library()
 
+# конфиги языка
+LANG_SET = {code.split('-')[0] for code, _ in getattr(settings, 'LANGUAGES', [])}
+DEFAULT_LANG = (getattr(settings, 'LANGUAGE_CODE', 'ru').split('-')[0])
+
+# у тебя i18n_patterns(..., prefix_default_language=True)
+PREFIX_DEFAULT = True
+
 @register.simple_tag(takes_context=True)
 def switch_language_url(context, lang_code: str):
+    """Без resolve/reverse: просто подменяем префикс языка безопасно."""
     request = context.get("request")
-    if not request:
-        return f"/{lang_code}/"
 
-    path = request.path
-    query = request.META.get("QUERY_STRING", "")
+    # нормализуем код
+    lang = (lang_code or DEFAULT_LANG).split('-')[0]
+    if lang not in LANG_SET:
+        lang = DEFAULT_LANG
 
-    url = None
-    try:
-        match = resolve(path)
-        with translation.override(lang_code):
-            try:
-                url = reverse(match.view_name, args=match.args, kwargs=match.kwargs)
-            except NoReverseMatch:
-                pass
-    except Resolver404:
-        pass
+    # путь и query
+    path = getattr(request, "path", "/") or "/"
+    qs = getattr(request, "META", {}).get("QUERY_STRING", "")
 
-    # fallback
-    if not url:
-        langs = {code for code, _ in getattr(settings, "LANGUAGES", [])}
-        parts = path.lstrip("/").split("/", 1)
-        if parts and parts[0] in langs:
-            rest = "/" + parts[1] if len(parts) > 1 else "/"
-            url = f"/{lang_code}{rest}"
+    # разбор текущего пути
+    parts = path.lstrip("/").split("/", 1)
+    has_prefix = parts and parts[0] in LANG_SET
+    rest = "/" + (parts[1] if len(parts) > 1 else "")
+
+    if PREFIX_DEFAULT:
+        # всегда префиксуем (и для дефолтного тоже)
+        new_path = f"/{lang}{rest}"
+    else:
+        # если дефолтный — без префикса
+        if lang == DEFAULT_LANG:
+            new_path = rest or "/"
         else:
-            url = f"/{lang_code}{path}"
+            new_path = f"/{lang}{rest}"
 
-    if query:
-        url = f"{url}?{query}"
+    # приклеим query если был
+    if qs:
+        new_path = f"{new_path}?{qs}"
 
-    return url
+    return new_path
