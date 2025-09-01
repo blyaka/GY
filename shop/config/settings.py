@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'products',
     'blog',
     'reqs',
-    'core',
+    'core.apps.CoreConfig',
 ]
 
 

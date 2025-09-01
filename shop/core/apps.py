@@ -10,7 +10,12 @@ class CoreConfig(AppConfig):
         from .models import SiteContacts
 
         def clear_cache(*a, **kw):
+            # если ключ один:
             cache.delete("site_contacts")
+            # если кешируешь по языкам, раскомментируй:
+            # cache.delete("site_contacts:ru")
+            # cache.delete("site_contacts:en")
 
-        post_save.connect(clear_cache, sender=SiteContacts)
-        post_delete.connect(clear_cache, sender=SiteContacts)
+        # ВАЖНО: weak=False, чтобы обработчик не «потерялся»
+        post_save.connect(clear_cache, sender=SiteContacts, weak=False)
+        post_delete.connect(clear_cache, sender=SiteContacts, weak=False)
