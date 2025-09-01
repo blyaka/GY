@@ -2,23 +2,44 @@
 {% load static %}
 {% load site_settings %}
 {% get_site_contacts as s %}
+{% load i18n %}
 
-{% block title %}ЛИЧНЫЙ КАБИНЕТ{% endblock %}
+{% block title %}{% trans "Личный кабинет" %} | Gabriel Yusubov{% endblock %}
 
 {% block styles %}
     <link rel="stylesheet" href="{% static 'css/lk.css' %}">
 {% endblock %}
+
+{% block meta %}
+  <meta name="description" content="{% trans 'Личный кабинет покупателя Gabriel Yusubov: управление профилем, заказами и избранным.' %}">
+  <meta name="keywords" content="{% trans 'Gabriel Yusubov, личный кабинет, профиль, заказы, избранное, учетная запись' %}">
+  <meta name="author" content="Gabriel Yusubov">
+  <meta name="robots" content="noindex, nofollow">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Gabriel Yusubov">
+  <meta property="og:title" content="{% trans 'Личный кабинет — Gabriel Yusubov' %}">
+  <meta property="og:description" content="{% trans 'Вход в личный кабинет бренда Gabriel Yusubov: управление заказами, профилем и избранными товарами.' %}">
+  <meta property="og:url" content="{% firstof canonical_url request.build_absolute_uri %}">
+  <meta property="og:image" content="{{ request.build_absolute_uri|cut:request.path }}{% static 'images/GY.png' %}">
+  <meta property="og:locale" content="{{ CURR|default:'ru' }}_{% if CURR == 'ru' %}RU{% else %}US{% endif %}">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% trans 'Личный кабинет — Gabriel Yusubov' %}">
+  <meta name="twitter:description" content="{% trans 'Управление заказами и профилем в личном кабинете Gabriel Yusubov.' %}">
+  <meta name="twitter:image" content="{{ request.build_absolute_uri|cut:request.path }}{% static 'images/GY.png' %}">
+{% endblock meta %}
 
 
 {% block content %}
 
     <div class="status-bar" role="navigation" aria-label="Статус-бар">
         <div class="sb-inner">
-            <a href="/">
+            <a href="{% url 'home' %}">
                 <img class="sb-logo" src="{% static 'images/GY.svg' %}" alt="GY">
             </a>
             <span class="sb-dot" aria-hidden="true"></span>
-            <a class="sb-link" href="{% url 'lk' %}">ЛИЧНЫЙ КАБИНЕТ</a>
+            <a class="sb-link" href="{% url 'lk' %}">{% trans "ЛИЧНЫЙ КАБИНЕТ" %}</a>
         </div>
     </div>
 
@@ -34,8 +55,8 @@
                 <!-- <a href="">МОИ ЗАКАЗЫ</a>
                 <a href="{% url 'favorites' %}">ИЗБРАННОЕ</a>
                 <a href="">КОРЗИНА</a> -->
-                <a href="{% url 'lk_edit' %}">ПРОФИЛЬ</a>
-                <a href="{% url 'account_logout' %}" class="logout">ВЫЙТИ</a>
+                <a href="{% url 'lk_edit' %}">{% trans "ПРОФИЛЬ" %}</a>
+                <a href="{% url 'account_logout' %}" class="logout">{% trans "ВЫЙТИ" %}</a>
             </section>
     
             <div class="background-logo">
@@ -46,12 +67,12 @@
         {% else %}
         <div class="lk-section-name">
             <img src="{% static 'icons/user.svg' %}" alt="">
-            <p>ЛИЧНЫЙ КАБИНЕТ</p>
+            <p>{% trans "ЛИЧНЫЙ КАБИНЕТ" %}</p>
         </div>
 
         <section class="unauthorized">
 
-            <a href="{% url 'account_login' %}"class="login-btn">Войти</a>
+            <a href="{% url 'account_login' %}"class="login-btn">{% trans "Войти" %}</a>
 
         </section>
         {% endif %}

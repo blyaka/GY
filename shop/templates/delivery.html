@@ -3,87 +3,122 @@
 {% load site_settings %}
 {% get_site_contacts as s %}
 {% load phone_format %}
+{% load i18n %}
 
-{% block title %}Доставка и оплата{% endblock %}
+{% block title %}{% trans "Доставка и оплата" %} | Gabriel Yusubov{% endblock %}
 
 {% block styles %}
     <link rel="stylesheet" href="{% static 'css/delivery.css' %}">
 {% endblock %}
 
 
+{% block meta %}
+  <meta name="description" content="{% trans 'Информация о доставке и оплате в бренде Gabriel Yusubov: доставка по РФ, удобные способы оплаты, сроки и условия.' %}">
+  <meta name="keywords" content="{% trans 'Gabriel Yusubov, доставка, оплата, условия доставки, способы оплаты, сроки доставки' %}">
+  <meta name="author" content="Gabriel Yusubov">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Gabriel Yusubov">
+  <meta property="og:title" content="{% trans 'Доставка и оплата — Gabriel Yusubov' %}">
+  <meta property="og:description" content="{% trans 'Подробная информация о доставке и оплате заказов бренда Gabriel Yusubov: курьер, пункты выдачи, онлайн и офлайн-оплата.' %}">
+  <meta property="og:url" content="{% firstof canonical_url request.build_absolute_uri %}">
+  <meta property="og:image" content="{{ request.build_absolute_uri|cut:request.path }}{% static 'images/GY.png' %}">
+  <meta property="og:locale" content="{{ CURR|default:'ru' }}_{% if CURR == 'ru' %}RU{% else %}US{% endif %}">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% trans 'Доставка и оплата — Gabriel Yusubov' %}">
+  <meta name="twitter:description" content="{% trans 'Условия доставки и оплаты: доставка по всей России, курьер, пункты выдачи, удобные способы оплаты.' %}">
+  <meta name="twitter:image" content="{{ request.build_absolute_uri|cut:request.path }}{% static 'images/GY.png' %}">
+{% endblock meta %}
+
+
 {% block content %}
 
     <div class="status-bar" role="navigation" aria-label="Статус-бар">
         <div class="sb-inner">
-            <a href="/">
+            <a href="{% url 'home' %}">
                 <img class="sb-logo" src="{% static 'images/GY.svg' %}" alt="GY">
             </a>
             <span class="sb-dot" aria-hidden="true"></span>
-            <a class="sb-link" href="{% url 'delivery' %}">ДОСТАВКА И ОПЛАТА</a>
+            <a class="sb-link" href="{% url 'delivery' %}">{% trans "ДОСТАВКА И ОПЛАТА" %}</a>
         </div>
     </div>
 
     <main class="dlv">
-        <h2 class="page_name">ДОСТАВКА И ОПЛАТА</h2>
+        <h2 class="page_name">{% trans "ДОСТАВКА И ОПЛАТА" %}</h2>
 
         <!-- ОПЛАТА -->
         <section class="block">
-            <h3 class="h3">ОПЛАТА</h3>
+            <h3 class="h3">{% trans "ОПЛАТА" %}</h3>
 
             <p class="lead">
+                {% blocktrans trimmed %}
                 Услуга оплаты через интернет осуществляется в соответствии с Правилами международных платежных систем
                 <strong>Visa</strong>, <strong>MasterCard</strong> и <strong>Платёжной системы МИР</strong> на принципах
-                соблюдения
-                конфиденциальности и безопасности совершения платежа.
+                соблюдения конфиденциальности и безопасности совершения платежа.
+                {% endblocktrans %}
             </p>
 
-            <div class="h4">Способы оплаты:</div>
+
+            <div class="h4">{% trans "Способы оплаты" %}:</div>
 
             <ol class="numlist">
                 <li>
-                    <p>Банковской картой МИР, MasterCard или Visa;</p>
+                    <p>{% trans "Банковской картой МИР, MasterCard или Visa" %};</p>
                 </li>
                 <li>
-                    <p>Наличными курьеру при получении, либо по ссылке банковской картой (при условии курьерской
-                        доставки по Москве).</div>
+                    <p>{% trans "Наличными курьеру при получении, либо по ссылке банковской картой (при условии курьерской доставки по Москве)" %}.</div>
                 </li>
             </ol>
         </section>
 
         <!-- ДОСТАВКА -->
         <section class="block">
-            <h3 class="h3">ДОСТАВКА</h3>
+            <h3 class="h3">{% trans "ДОСТАВКА" %}</h3>
 
             <div class="tabs">
                 <div class="tab">
                     <button class="tab-head" type="button">
-                        <span>ПО РОССИИ</span>
+                        <span>{% trans "ПО РОССИИ" %}</span>
                         <svg class="chev" width="39" height="54" viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" />
                         </svg>
                     </button>
                     <div class="tab-body">
-                        <p>В регионы мы отправляем заказ по 100% оплате. Стоимость доставки рассчитывается
-                            индивидуально,
-                            согласно предложенным тарифам транспортной компании СДЕК.</p>
-                        <p>Сроки могут увеличиваться в связи с объективными причинами (удалённость населённого пункта,
-                            изменение расписания авиарейсов, праздничные дни, погодные условия, дорожная ситуация и
-                            пр.).
-                            В период распродаж и акций сроки доставки также могут быть увеличены.</p>
-                        <p>Курьерская доставка осуществляется только по г. Москва.</p>
+                        <p>
+                            {% blocktrans trimmed %}
+                            В регионы мы отправляем заказ по 100% оплате. Стоимость доставки рассчитывается индивидуально,
+                            согласно предложенным тарифам транспортной компании СДЕК.
+                            {% endblocktrans %}
+                        </p>
+
+                        <p>
+                            {% blocktrans trimmed %}
+                            Сроки могут увеличиваться в связи с объективными причинами (удалённость населённого пункта,
+                            изменение расписания авиарейсов, праздничные дни, погодные условия, дорожная ситуация и пр.).
+                            В период распродаж и акций сроки доставки также могут быть увеличены.
+                            {% endblocktrans %}
+                        </p>
+
+                        <p>
+                            {% blocktrans trimmed %}
+                            Курьерская доставка осуществляется только по г. Москва.
+                            {% endblocktrans %}
+                        </p>
                     </div>
+
                 </div>
 
                 <div class="tab">
                     <button class="tab-head" type="button">
-                        <span>ПО МИРУ</span>
+                        <span>{% trans "ПО МИРУ" %}</span>
                         <svg class="chev" width="39" height="54" viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" />
                         </svg>
                     </button>
                     <div class="tab-body">
-                        <p>Доставка может быть осуществлена в любую страну мира по предварительно согласованному условию
-                            с менеджером.</p>
+                        <p>{% trans "Доставка может быть осуществлена в любую страну мира по предварительно согласованному условию с менеджером" %}.</p>
                     </div>
                 </div>
             </div>
@@ -91,8 +126,7 @@
 
         <!-- КОНТАКТЫ -->
         <div class="page-contacts">
-            <h2>Для уточнения об альтернативных способах оплаты заказа и условий доставки вы можете связаться с нами:
-            </h2>
+            <h2>{% trans "Для уточнения об альтернативных способах оплаты заказа и условий доставки вы можете связаться с нами" %}:</h2>
 
             <div class="contacts_stack">
                 <div class="contact-item">

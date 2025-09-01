@@ -6,3 +6,4 @@ gunicorn
 django-ckeditor-5
 requests
 django-redis
+django-modeltranslation

@@ -2,6 +2,7 @@
 {% load static %}
 {% load site_settings %}
 {% get_site_contacts as s %}
+{% load i18n %}
 
 {% block title %}ПРОФИЛЬ{% endblock %}
 {% block styles %}<link rel="stylesheet" href="{% static 'css/profile_edit.css' %}">{% endblock %}
@@ -9,18 +10,18 @@
 {% block content %}
 <div class="status-bar">
   <div class="sb-inner">
-    <a href="/">
+    <a href="{% url 'home' %}">
         <img class="sb-logo" src="{% static 'images/GY.svg' %}" alt="GY">
     </a>
-    <span class="sb-dot"></span><a class="sb-link" href="{% url 'lk' %}">ЛИЧНЫЙ КАБИНЕТ</a>
-    <span class="sb-dot"></span><a class="sb-link" href="{% url 'lk_edit' %}">ПРОФИЛЬ</a>
+    <span class="sb-dot"></span><a class="sb-link" href="{% url 'lk' %}">{% trans "ЛИЧНЫЙ КАБИНЕТ" %}</a>
+    <span class="sb-dot"></span><a class="sb-link" href="{% url 'lk_edit' %}">{% trans "ПРОФИЛЬ" %}</a>
   </div>
 </div>
 
 <main>
   <div class="lk-section-name">
     <div class="left-side">
-      <img src="{% static 'icons/user.svg' %}" alt=""><p>ПРОФИЛЬ</p>
+      <img src="{% static 'icons/user.svg' %}" alt=""><p>{% trans "ПРОФИЛЬ" %}</p>
     </div>
     <div class="right-side"><button class="profile-close" type="button" aria-label="Закрыть">×</button></div>
     <script>
@@ -38,7 +39,7 @@
       {% csrf_token %}
 
       <label class="pf-row">
-        <span class="pf-label">ФИО:</span>
+        <span class="pf-label">{% trans "ФИО" %}:</span>
         {{ pform.full_name }}
         {% for e in pform.full_name.errors %}<div class="err">{{ e }}</div>{% endfor %}
       </label>
@@ -50,20 +51,19 @@
       </label>
 
       <label class="pf-row">
-        <span class="pf-label">Телефон:</span>
+        <span class="pf-label">{% trans "Телефон" %}:</span>
         {{ pform.phone }}
         {% for e in pform.phone.errors %}<div class="err">{{ e }}</div>{% endfor %}
       </label>
 
       <label class="pf-row">
-        <span class="pf-label">Постоянный адрес доставки:</span>
+        <span class="pf-label">{% trans "Постоянный адрес доставки" %}:</span>
         {{ pform.address }}
         {% for e in pform.address.errors %}<div class="err">{{ e }}</div>{% endfor %}
       </label>
 
-      {# карту не храним. если нужно — только masked + last4 и без POST в базу #}
 
-      <button class="pf-submit" type="submit">СОХРАНИТЬ ИЗМЕНЕНИЯ</button>
+      <button class="pf-submit" type="submit">{% trans "СОХРАНИТЬ ИЗМЕНЕНИЯ" %}</button>
     </form>
   </section>
 

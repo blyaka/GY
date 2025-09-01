@@ -3,47 +3,69 @@
 {% load site_settings %}
 {% get_site_contacts as s %}
 {% load phone_format %}
+{% load i18n %}
 
-{% block title %}Контакты{% endblock %}
+{% block title %}{% trans "Контакты" %} | Gabriel Yusubov{% endblock %}
 
 {% block styles %}
   <link rel="stylesheet" href="{% static 'css/contacts.css' %}" />
 {% endblock %}
 
 
+{% block meta %}
+  <meta name="description" content="{% trans 'Контактная информация бренда Gabriel Yusubov: адрес, телефон, e-mail, социальные сети.' %}">
+  <meta name="keywords" content="{% trans 'Gabriel Yusubov, контакты, адрес, телефон, e-mail, социальные сети' %}">
+  <meta name="author" content="Gabriel Yusubov">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Gabriel Yusubov">
+  <meta property="og:title" content="{% trans 'Контакты — Gabriel Yusubov' %}">
+  <meta property="og:description" content="{% trans 'Свяжитесь с брендом Gabriel Yusubov: адрес, телефон, электронная почта и ссылки на социальные сети.' %}">
+  <meta property="og:url" content="{% firstof canonical_url request.build_absolute_uri %}">
+  <meta property="og:image" content="{{ request.build_absolute_uri|cut:request.path }}{% static 'images/GY.png' %}">
+  <meta property="og:locale" content="{{ CURR|default:'ru' }}_{% if CURR == 'ru' %}RU{% else %}US{% endif %}">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% trans 'Контакты — Gabriel Yusubov' %}">
+  <meta name="twitter:description" content="{% trans 'Контактная страница бренда Gabriel Yusubov: адрес, телефон, e-mail и соцсети.' %}">
+  <meta name="twitter:image" content="{{ request.build_absolute_uri|cut:request.path }}{% static 'images/GY.png' %}">
+{% endblock meta %}
+
+
 {% block content %}
 
     <div class="status-bar" role="navigation" aria-label="Статус-бар">
         <div class="sb-inner">
-            <a href="/">
+            <a href="{% url 'home' %}">
                 <img class="sb-logo" src="{% static 'images/GY.svg' %}" alt="GY">
             </a>
             <span class="sb-dot" aria-hidden="true"></span>
-            <a class="sb-link" href="{% url 'contacts' %}">КОНТАКТЫ</a>
+            <a class="sb-link" href="{% url 'contacts' %}">{% trans "КОНТАКТЫ" %}</a>
         </div>
     </div>
 
     <main>
 
-        <h2>КОНТАКТЫ</h2>
+        <h2>{% trans "КОНТАКТЫ" %}</h2>
 
         <div class="phones">
 
             <h3>
-                ТЕЛЕФОН
+                {% trans "ТЕЛЕФОН" %}
             </h3>
 
             <div class="phone-stack">
                 {% if s.phone %}<a href="tel:{{ s.phone }}">{{ s.phone|pretty_phone }}</a>{% endif %}
                 {% if s.phone2 %}<a href="tel:{{ s.phone2 }}">{{ s.phone2|pretty_phone }}</a>{% endif %}
 
-                <p>Ежедневно с XX:XX до ХХ:ХХ</p>
+                <p>{% trans "Ежедневно с XX:XX до ХХ:ХХ" %}</p>
             </div>
         </div>
 
 
         <div class="page-contacts">
-            <h2>Нужна помощь с оформлением заказа?</h2>
+            <h2>{% trans "Нужна помощь с оформлением заказа?" %}</h2>
 
             <div class="contacts_stack">
                 <div class="contact-item">
@@ -63,15 +85,15 @@
         </div>
         <div class="company-info">
             <p>
-                ИП Юсубов Габриэль Яшарович
+                {% trans "ИП Юсубов Габриэль Яшарович" %}
             </p>
 
             <p>
-                ИНН XXXXXXXXXXXX
+                {% trans "ИНН XXXXXXXXXXXX" %}
             </p>
 
             <p>
-                ОРГН
+                {% trans "ОРГН" %}
             </p>
         </div>
 

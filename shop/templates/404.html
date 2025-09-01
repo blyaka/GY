@@ -1,111 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends '_base.html' %}
+{% load static %}
+{% load i18n %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Магазин</title>
-    <link rel="stylesheet" href="static/css/404.css">
-    <link rel="stylesheet" href="static/css/_base.css">
-    <link rel="stylesheet" href="static/css/_base-shop.css">
+{% block title %}404 | Gabriel Yusubov{% endblock %}
 
-
-    <!-- FONTS -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
-
-</head>
-
-<body>
-
-    <header class="site-header">
-        <div class="burger-menu">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <line x1="0" y1="6" x2="25" y2="6" stroke="black" stroke-width="2" />
-                <line x1="0" y1="13" x2="15" y2="13" stroke="black" stroke-width="2" />
-                <line x1="0" y1="20" x2="25" y2="20" stroke="black" stroke-width="2" />
-            </svg>
-        </div>
-
-        <!-- OFFCANVAS MENU -->
-        <div class="offcanvas" id="offcanvas" aria-hidden="true">
-            <div class="offcanvas-panel" role="dialog" aria-modal="true" aria-label="Меню">
-                <div class="offcanvas-top">
-                    <button class="off-close" aria-label="Закрыть">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <line x1="0" y1="6" x2="25" y2="6" stroke="black" stroke-width="2" />
-                            <line x1="0" y1="13" x2="25" y2="13" stroke="black" stroke-width="2" />
-                            <line x1="0" y1="20" x2="25" y2="20" stroke="black" stroke-width="2" />
-                        </svg>
-                    </button>
-                    <a href="#" class="off-lang">ENG</a>
-                </div>
-
-                <nav class="off-nav">
-                    <a href="#">МАГАЗИН</a>
-                    <a href="#">КОЛЛЕКЦИИ</a>
-                    <a href="#">ДОСТАВКА И ОПЛАТА</a>
-                    <a href="#">ВОЗВРАТ И ОБМЕН</a>
-                    <a href="#">КОНТАКТЫ</a>
-                    <a href="#">БЛОГ</a>
-                    <a href="#">НАШИ СОЦСЕТИ</a>
-                    <a href="#">О НАС</a>
-                </nav>
-
-                <div class="off-icons">
-                    <img src="static/icons/search.svg" alt="Поиск">
-                    <img src="static/icons/bookmark-header.svg" alt="Избранное">
-                    <img src="static/icons/bag.svg" alt="Корзина">
-                    <img src="static/icons/user.svg" alt="Профиль">
-                </div>
-
-                <div class="off-watermark">
-                    <img src="static/images/logo_overlay_black.png" alt="">
-                </div>
-
-            </div>
-        </div>
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/404.css' %}">
+{% endblock %}
+{% block meta %}<meta name="robots" content="noindex, nofollow">{% endblock %}
 
 
-        <script>
-            const burger = document.querySelector('.burger-menu');
-            const panel = document.getElementById('offcanvas');
-            const closeBtn = document.querySelector('.off-close');
-
-            function openMenu() {
-                panel.classList.add('open');
-                document.body.style.overflow = 'hidden';
-            }
-            function closeMenu() {
-                panel.classList.remove('open');
-                document.body.style.overflow = '';
-            }
-
-            burger?.addEventListener('click', openMenu);
-            closeBtn?.addEventListener('click', closeMenu);
-            panel?.addEventListener('click', (e) => { if (e.target === panel) closeMenu(); });
-            document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
-        </script>
-
-
-
-        <div class="logo">
-            <img src="static/images/GY_header_logo_black.svg" alt="Gabriel Yusubov" class="logo-img">
-        </div>
-
-        <div class="lang-switch" id="langSwitch">
-            <a href="">ENG</a>
-        </div>
-    </header>
-
-
+{% block content %}
     <div class="status-bar" role="navigation" aria-label="Статус-бар">
         <div class="sb-inner">
             <img class="sb-logo" src="static/images/GY.svg" alt="GY">
             <span class="sb-dot" aria-hidden="true"></span>
-            <a class="sb-link" href="/shop/">404</a>
+            <a class="sb-link" href="/">404</a>
         </div>
     </div>
 
@@ -115,93 +25,10 @@
         </div>
 
         <div class="page-info">
-            <p>Такой страницы не существует!</p>
+            <p>{% trans "Такой страницы не существует!" %}</p>
 
-            <a href="home.html">ВЕРНУТЬСЯ НА ГЛАВНУЮ СТРАНИЦУ</a>
+            <a href="{% url 'home' %}">{% trans "ВЕРНУТЬСЯ НА ГЛАВНУЮ СТРАНИЦУ" %}</a>
         </div>
     </main>
 
-
-    <footer class="site-footer">
-
-        <div class="footer-blocks">
-            <div class="footer-block-customer">
-                <h2>Покупателю:</h2>
-
-                <div class="customer-links">
-                    <a href="">Магазин</a>
-                    <a href="">Избранное</a>
-                    <a href="">Корзина</a>
-                    <a href="">Личный кабинет</a>
-                    <a href="">Возвраат и обмен</a>
-                    <a href="">Доставка и оплата</a>
-                    <a href="">Публичная оферта</a>
-                    <a href="">Политиа конфиденциальности</a>
-                </div>
-
-                <div class="footer-cp-name">
-                    <p>© 2025 Gabriel Yusubov </p>
-                </div>
-            </div>
-
-            <div class="footer-block-about">
-                <h2>О нас:</h2>
-
-                <div class="about-links">
-                    <a href="">Контакты</a>
-                    <a href="">Блог</a>
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="footer-socials">
-            <ul class="socials-list">
-                <li>
-                    <a class="social" href="https://instagram.com/username" target="_blank" rel="noopener nofollow"
-                        aria-label="Instagram">
-                        <img src="static/icons/instagram.svg" alt="">
-                    </a>
-                </li>
-                <li>
-                    <a class="social" href="https://vk.com/username" target="_blank" rel="noopener nofollow"
-                        aria-label="VK">
-                        <img src="static/icons/vk.svg" alt="">
-                    </a>
-                </li>
-                <li>
-                    <a class="social" href="https://t.me/username" target="_blank" rel="noopener nofollow"
-                        aria-label="Telegram">
-                        <img src="static/icons/telegram.svg" alt="">
-                    </a>
-                </li>
-                <li>
-                    <a class="social" href="https://www.tiktok.com/@username" target="_blank" rel="noopener nofollow"
-                        aria-label="TikTok">
-                        <img src="static/icons/tiktok.svg" alt="">
-                    </a>
-                </li>
-                <li>
-                    <a class="social" href="https://youtube.com/@username" target="_blank" rel="noopener nofollow"
-                        aria-label="YouTube">
-                        <img src="static/icons/youtube.svg" alt="">
-                    </a>
-                </li>
-            </ul>
-
-            <p class="socials-note">*проект Meta Platforms Inc., запрещена в РФ</p>
-        </div>
-
-
-
-
-        <div class="logo-overlay-footer">
-            <img src="static/images/logo_overlay.svg" alt="">
-        </div>
-    </footer>
-
-
-</body>
-
-</html>
+{% endblock content %}

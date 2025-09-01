@@ -2,14 +2,14 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}{% trans "Письмо отправлено" %}{% endblock %}
+{% block title %}{% trans "Письмо отправлено" %} | Gabriel Yusubov{% endblock %}
 {% block styles %}<link rel="stylesheet" href="{% static 'css/lk_add.css' %}">{% endblock %}
 
 {% block content %}
 <main class="auth">
   <section class="auth-card">
-    <h1>Проверьте почту</h1>
-    <p>Мы отправили письмо с ссылкой для подтверждения. Если письма нет, проверьте папку «Спам».</p>
+    <h1>{% trans "Проверьте почту" %}</h1>
+    <p>{% trans "Мы отправили письмо с ссылкой для подтверждения. Если письма нет, проверьте папку «Спам»." %}</p>
   </section>
 </main>
 {% endblock %}

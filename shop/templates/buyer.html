@@ -2,12 +2,35 @@
 {% load static %}
 {% load site_settings %}
 {% get_site_contacts as s %}
+{% load i18n %}
 
-{% block title %}О нас{% endblock %}
+{% block title %}{% trans "Покупателю" %} | Gabriel Yusubov{% endblock %}
 
 {% block styles %}
     <link rel="stylesheet" href="{% static 'css/buyer.css' %}">
 {% endblock %}
+
+
+{% block meta %}
+  <meta name="description" content="{% trans 'Информация для покупателей Gabriel Yusubov: доставка, оплата, возврат и обмен, условия обслуживания.' %}">
+  <meta name="keywords" content="{% trans 'Gabriel Yusubov, покупателю, доставка, оплата, возврат, обмен, условия покупки, клиентский сервис' %}">
+  <meta name="author" content="Gabriel Yusubov">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Gabriel Yusubov">
+  <meta property="og:title" content="{% trans 'Покупателю — Gabriel Yusubov' %}">
+  <meta property="og:description" content="{% trans 'Все для покупателей бренда Gabriel Yusubov: доставка по РФ, оплата любым способом, правила возврата и обмена.' %}">
+  <meta property="og:url" content="{% firstof canonical_url request.build_absolute_uri %}">
+  <meta property="og:image" content="{{ request.build_absolute_uri|cut:request.path }}{% static 'images/GY.png' %}">
+  <meta property="og:locale" content="{{ CURR|default:'ru' }}_{% if CURR == 'ru' %}RU{% else %}US{% endif %}">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% trans 'Покупателю — Gabriel Yusubov' %}">
+  <meta name="twitter:description" content="{% trans 'Информация для покупателей: доставка, оплата, возврат и обмен в бренде Gabriel Yusubov.' %}">
+  <meta name="twitter:image" content="{{ request.build_absolute_uri|cut:request.path }}{% static 'images/GY.png' %}">
+{% endblock meta %}
+
 
 
 {% block content %}
@@ -16,11 +39,11 @@
 
     <div class="status-bar" role="navigation" aria-label="Статус-бар">
         <div class="sb-inner">
-            <a href="/">
+            <a href="{% url 'home' %}">
                 <img class="sb-logo" src="{% static 'images/GY.svg' %}" alt="GY">
             </a>
             <span class="sb-dot" aria-hidden="true"></span>
-            <a class="sb-link" href="{% url 'buyer' %}">ПОКУПАТЕЛЮ</a>
+            <a class="sb-link" href="{% url 'buyer' %}">{% trans "ПОКУПАТЕЛЮ" %}</a>
         </div>
     </div>
 
@@ -30,31 +53,30 @@
 
     <main class="customer">
         <div class="customer__head">
-            <h1 class="customer__title">ПОКУПАТЕЛЮ</h1>
+            <h1 class="customer__title">{% trans "ПОКУПАТЕЛЮ" %}</h1>
 
             <p class="customer__lead">
-                Мы стремимся к тому, чтобы каждый человек нашёл свою вещь и ответ на свой вопрос, поэтому стараемся
-                сделать доступной навигацию на нашем сайте.
+                {% trans "Мы стремимся к тому, чтобы каждый человек нашёл свою вещь и ответ на свой вопрос, поэтому стараемся сделать доступной навигацию на нашем сайте" %}.
             </p>
         </div>
 
         <section class="customer__links">
-            <h2>Здесь вы найдете все самое необходимое:</h2>
+            <h2>{% trans "Здесь вы найдете все самое необходимое" %}:</h2>
             <p><a href="{% url 'prive-lab' %}">PRIVE Labaratory</a></p>
-            <p><a href="{% url 'lk' %}">ЛИЧНЫЙ КАБИНЕТ</a></p>
-            <p><a href="{% url 'favorites' %}">ИЗБРАННОЕ</a></p>
+            <p><a href="{% url 'lk' %}">{% trans "ЛИЧНЫЙ КАБИНЕТ" %}</a></p>
+            <!-- <p><a href="{% url 'favorites' %}">ИЗБРАННОЕ</a></p> -->
             <!-- <p><a href="/cart/">КОРЗИНА</a></p> -->
-            <p><a href="{% url 'refund' %}">ВОЗВРАТ И ОБМЕН</a></p>
-            <p><a href="{% url 'delivery' %}">ДОСТАВКА И ОПЛАТА</a></p>
+            <p><a href="{% url 'refund' %}">{% trans "ВОЗВРАТ И ОБМЕН" %}</a></p>
+            <p><a href="{% url 'delivery' %}">{% trans "ДОСТАВКА И ОПЛАТА" %}</a></p>
         </section>
 
         <section class="customer__form-block">
             <p class="customer__note">
-                Если у вас остались вопросы, вы можете заполнить форму обратной связи, и мы вам обязательно ответим!
+                {% trans "Если у вас остались вопросы, вы можете заполнить форму обратной связи, и мы вам обязательно ответим!" %}
             </p>
 
             <form class="customer-form" action="#" method="post">
-                <label class="f-label">Имя:
+                <label class="f-label">{% trans "Имя" %}:
                     <input class="f-input" type="text" name="name" placeholder="ГАБРИЭЛЬ" required>
                 </label>
 
@@ -62,24 +84,24 @@
                     <input class="f-input" type="email" name="email" placeholder="NAME@GMAIL.COM" required>
                 </label>
 
-                <label class="f-label">Телефон:
+                <label class="f-label">{% trans "Телефон" %}:
                     <input class="f-input" type="tel" name="phone" placeholder="+7 XXX XXX XX XX">
                 </label>
 
-                <label class="f-label">Тематика обращения:
+                <label class="f-label">{% trans "Тематика обращения" %}:
                     <div class="f-select">
                         <select name="topic" aria-label="Тематика обращения">
-                            <option value="order">ОФОРМЛЕНИЕ ЗАКАЗА</option>
-                            <option value="payment">ОПЛАТА</option>
-                            <option value="delivery">ДОСТАВКА</option>
-                            <option value="exchange">ВОЗВРАТ И ОБМЕН</option>
-                            <option value="other">ДРУГОЕ</option>
+                            <option value="order">{% trans "ОФОРМЛЕНИЕ ЗАКАЗА" %}</option>
+                            <option value="payment">{% trans "ОПЛАТА" %}</option>
+                            <option value="delivery">{% trans "ДОСТАВКА" %}</option>
+                            <option value="exchange">{% trans "ВОЗВРАТ И ОБМЕН" %}</option>
+                            <option value="other">{% trans "ДРУГОЕ" %}</option>
                         </select>
                         <span class="f-caret" aria-hidden="true">▾</span>
                     </div>
                 </label>
 
-                <label class="f-label">Комментарий:
+                <label class="f-label">{% trans "Комментарий" %}:
                     <textarea class="f-textarea" name="message" placeholder="НАПИШИТЕ ЗДЕСЬ ЧТО-НИБУДЬ…"></textarea>
                 </label>
 
@@ -88,28 +110,32 @@
                         <input type="checkbox" name="policy" required>
                         <span class="check"></span>
                         <span>
-                            Нажимая кнопку «Отправить», я даю своё согласие на обработку моих персональных данных в
-                            соответствии с Федеральным законом
-                            от 27.07.2006 №152-ФЗ «О персональных данных», с условиями
-                            <a href="{% url 'offer' %}" target="_blank">публичной оферты</a> и
-                            <a href="{% url 'privacy' %}" target="_blank">политикой конфиденциальности</a>.
+                            {% blocktrans trimmed with offer_url=offer_url privacy_url=privacy_url %}
+                                Нажимая кнопку «Отправить», я даю своё согласие на обработку моих персональных данных в соответствии с Федеральным законом
+                                от 27.07.2006 №152-ФЗ «О персональных данных», с условиями
+                                <a href="{{ offer_url }}" target="_blank">публичной оферты</a> и
+                                <a href="{{ privacy_url }}" target="_blank">политикой конфиденциальности</a>.
+                            {% endblocktrans %}
                         </span>
+
                     </label>
 
                     <label class="remember">
                         <input type="checkbox" name="marketing">
                         <span class="check"></span>
                         <span>
-                            Я согласен(на) на получение рекламной информации, новостей, предложений и опросов на
-                            e-mail/телефон,
-                            указанные при отправке формы.
+                            {% blocktrans trimmed %}
+                                Я согласен(на) на получение рекламной информации, новостей, предложений и опросов на e-mail/телефон,
+                                указанные при отправке формы.
+                            {% endblocktrans %}
                         </span>
+
                     </label>
                 </div>
 
 
                 <div class="f-actions">
-                    <button class="f-submit" type="submit">ОТПРАВИТЬ</button>
+                    <button class="f-submit" type="submit">{% trans "ОТПРАВИТЬ" %}</button>
                 </div>
             </form>
         </section>

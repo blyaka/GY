@@ -1,11 +1,10 @@
-
-
 {% extends '_base.html' %}
 {% load static %}
 {% load site_settings %}
 {% get_site_contacts as s %}
+{% load i18n %}
 
-{% block title %}Возврат и обмен{% endblock %}
+{% block title %}{% trans "Публичная оферта" %} | Gabriel Yusubov{% endblock %}
 
 {% block styles %}
     <link rel="stylesheet" href="{% static 'css/offer.css' %}">
@@ -17,16 +16,16 @@
 
     <div class="status-bar" role="navigation" aria-label="Статус-бар">
         <div class="sb-inner">
-            <a href="/">
+            <a href="{% url 'home' %}">
                 <img class="sb-logo" src="{% static 'images/GY.svg' %}" alt="GY">
             </a>
             <span class="sb-dot" aria-hidden="true"></span>
-            <a class="sb-link" href="{% url 'offer' %}">ДОГОВОР ОФЕРТЫ</a>
+            <a class="sb-link" href="{% url 'offer' %}">{% trans "ДОГОВОР ОФЕРТЫ" %}</a>
         </div>
     </div>
 
     <main>
-        <h2 class="page_name">ДОГОВОР ОФЕРТЫ</h2>
+        <h2 class="page_name">{% trans "ДОГОВОР ОФЕРТЫ" %}</h2>
 
 
         <div class="offer-info">
@@ -213,7 +212,7 @@
                     БИК банка __________________,<br>
                     Корреспондентский счет банка ____________________________,<br>
                     Юридический адрес банка:________________________________<br>
-                    Адрес электронной почты: yusubov-gabriel@mail.ru.
+                    Адрес электронной почты: gabrielyusubov@yandex.ru.
                 </p>
             </div>
 

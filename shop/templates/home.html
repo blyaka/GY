@@ -2,18 +2,38 @@
 {% load static %}
 {% load site_settings %}
 {% get_site_contacts as s %}
+{% load i18n %}
 
 {% block title %}
-  Главная Gabriel Yusubov
+  {% trans "Главная" %} | Gabriel Yusubov
 {% endblock %}
 
 {% block styles %}
   <link rel="stylesheet" href="{% static 'css/home.css' %}" />
 {% endblock %}
 
-{% block shop_css %}
 
-{% endblock %}
+
+    {% block meta %}
+          <meta name="description" content="{% trans 'Авторский бренд: дизайн, пошив, капсульные релизы' %}.">
+          <meta name="keywords" content="{% trans 'Gabriel Yusubov, одежда, fashion, couture, магазин' %}">
+          <meta name="author" content="Gabriel Yusubov">
+          <meta name="robots" content="index, follow">
+
+          <meta property="og:type" content="website">
+          <meta property="og:site_name" content="Gabriel Yusubov">
+          <meta property="og:title" content="Gabriel Yusubov">
+          <meta property="og:description" content="{% trans 'Авторский бренд: дизайн, пошив, капсульные релизы' %}.">
+          <meta property="og:url" content="{% firstof canonical_url request.build_absolute_uri %}">
+          <meta property="og:image" content="{{ request.build_absolute_uri|cut:request.path }}{% static 'images/GY.png' %}">
+          <meta property="og:locale" content="{{ CURR|default:'ru' }}_{% if CURR == 'ru' %}RU{% else %}US{% endif %}">
+
+          <meta name="twitter:card" content="summary_large_image">
+          <meta name="twitter:title" content="Gabriel Yusubov">
+          <meta name="twitter:description" content="{% trans 'Авторский бренд: дизайн, пошив, капсульные релизы' %}.">
+          <meta name="twitter:image" content="{{ request.build_absolute_uri|cut:request.path }}{% static 'images/GY.png' %}">
+    {% endblock meta %}
+
 
 {% block content %}
   <main>
@@ -34,9 +54,10 @@
     <div class="about-signature">
       <div class="main-text">
         <p>
-          Gabriel Yusubov — это я и моё творчество, а в мире моды — молодой fashion-бренд моего имени. <br /><br />
-
-          Идея создать свой бренд — это всегда выход мысли в масштаб, что находит продолжение в тех вещах, которые создаются мной и моей командой. Думаю, что все должно называться «своими именами» и оставаться честным с собой и миром, где нет масок.
+          {% blocktrans trimmed %}
+          Gabriel Yusubov — это я и моё творчество, а в мире моды — молодой fashion-бренд моего имени. <br><br>
+          Идея создать свой бренд — это всегда выход мысли в масштаб, что находит продолжение в тех вещах, которые создаются мной и моей командой. Думаю, что всё должно называться «своими именами» и оставаться честным с собой и миром, где нет масок.
+          {% endblocktrans %}
         </p>
       </div>
 
@@ -53,22 +74,23 @@
         <img src="{% static 'icons/quote.svg' %}" alt="" />
       </div>
 
-      <p>ЭТА МЕЧТА ПОЯВИЛАСЬ У МЕНЯ, ГЛЯДЯ НА РАБОТЫ ЗАКОНОДАТЕЛЕЙ ВЫСОКОЙ МОДЫ И ИХ ТИТАНИЧЕСКИЙ ТРУД, КОТОРЫЙ ПРИВЕЛ К ПРИЗНАНИЮ В FASHION-СРЕДЕ.</p>
+      <p>{% trans "ЭТА МЕЧТА ПОЯВИЛАСЬ У МЕНЯ, ГЛЯДЯ НА РАБОТЫ ЗАКОНОДАТЕЛЕЙ ВЫСОКОЙ МОДЫ И ИХ ТИТАНИЧЕСКИЙ ТРУД, КОТОРЫЙ ПРИВЕЛ К ПРИЗНАНИЮ В FASHION-СРЕДЕ" %}.</p>
     </section>
 
 
     <section class="history">
-      <p>История моего бренда только начинается. <br><br>
-
-        Мы тщательно анализируем рынок, чтобы быть в курсе новейших тенденций и задавать в этом поле свой вектор, который встроен в общую систему координат.<br><br>
-
-        Для нас важно чувствовать контакт с мировыми тенденциями и с нашими покупателями. Только такая синергия дает нам силы и виденье будущего моды.
+      <p>
+        {% blocktrans trimmed %}
+        История моего бренда только начинается. <br><br>
+        Мы тщательно анализируем рынок, чтобы быть в курсе новейших тенденций и задавать в этом поле свой вектор, который встроен в общую систему координат. <br><br>
+        Для нас важно чувствовать контакт с мировыми тенденциями и с нашими покупателями. Только такая синергия даёт нам силы и виденье будущего моды.
+        {% endblocktrans %}
       </p>
     </section>
 
     <div class="about-link-btn">
       <a href="/about">
-        <p> УЗНАТЬ БОЛЬШЕ О НАС</p>
+        <p> {% trans "УЗНАТЬ БОЛЬШЕ О НАС" %}</p>
         <img src="{% static 'icons/arrow_back.svg' %}" alt="Назад">
       </a>
     </div>

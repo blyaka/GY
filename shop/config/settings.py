@@ -19,6 +19,7 @@ CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",")
 
 INSTALLED_APPS = [
     'accounts',
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -117,6 +119,18 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru-ru'
 
+LANGUAGES = (
+    ('ru', 'Русский'),
+    ('en', 'English'),
+)
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+]
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'ru'
+
+
 TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
@@ -149,6 +163,7 @@ CKEDITOR_5_CONFIGS = {
     }
 }
 
+MODELTRANSLATION_CUSTOM_FIELDS = ('CKEditor5Field',)
 
 
 

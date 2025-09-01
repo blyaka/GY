@@ -15,4 +15,7 @@ urlpatterns = [
 
     path('prive-labaratory/', PrivaLabPage, name='prive-lab')
 ]
+
+handler404 = 'pages.views.custom_404'
+
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -2,9 +2,10 @@
 {% load static %}
 {% load site_settings %}
 {% get_site_contacts as s %}
+{% load i18n %}
 
 {% block title %}
-  Вход
+  {% trans "Вход" %} | Gabriel Yusubov
 {% endblock %}
 
 {% block styles %}
@@ -12,13 +13,13 @@
 {% endblock %}
 
 {% block content %}
-  <div class="status-bar" role="navigation" aria-label="Статус-бар">
+  <div class="status-bar" role="navigation" aria-label="{% trans 'Статус-бар' %}">
     <div class="sb-inner">
-      <a href="/">
+      <a href="{% url 'home' %}">
           <img class="sb-logo" src="{% static 'images/GY.svg' %}" alt="GY">
       </a>
       <span class="sb-dot" aria-hidden="true"></span>
-      <a class="sb-link" href="{% url 'account_login' %}">Вход</a>
+      <a class="sb-link" href="{% url 'account_login' %}">{% trans "Вход" %}</a>
     </div>
   </div>
 
@@ -26,10 +27,10 @@
     <section class="auth">
       <div class="auth-wrap">
         <img class="auth-logo" src="{% static 'images/GY.svg' %}" alt="GY" />
-        <h1 class="auth-title">Вход в личный кабинет</h1>
+        <h1 class="auth-title">{% trans "Вход в личный кабинет" %}</h1>
         {% if form.errors %}
           <div class="auth-error">
-            Неверные данные входа.
+            {% trans "Неверные данные входа." %}
           </div>
         {% endif %}
 
@@ -42,12 +43,12 @@
           </div>
 
           <div class="form-row password-row">
-            <label for="id_password">Пароль:</label>
+            <label for="id_password">{% trans "Пароль" %}:</label>
             <div class="password-wrapper">
               <input type="password" id="id_password" name="password" required />
 
               <!-- Глаз-переключатель -->
-              <label class="pw-toggle" aria-label="Показать пароль">
+              <label class="pw-toggle" aria-label="{% trans 'Показать пароль' %}">
                 <input type="checkbox" id="pw_eye" />
                 <svg class="eye" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                   <path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z" />
@@ -60,25 +61,29 @@
           </div>
 
           <div class="forgot-wrap">
-            <a class="forgot" href="{% url 'account_reset_password' %}">Забыли пароль?</a>
+            <a class="forgot" href="{% url 'account_reset_password' %}">{% trans "Забыли пароль?" %}</a>
           </div>
 
           <div class="remember-row">
             <label class="remember">
               <input type="checkbox" name="remember" checked />
               <span class="check"></span>
-              <span>Запомнить меня</span>
+              <span>{% trans "Запомнить меня" %}</span>
             </label>
           </div>
 
           <div class="btn-row">
-            <button type="submit" class="auth-btn">ВОЙТИ</button>
+            <button type="submit" class="auth-btn">{% trans "ВОЙТИ" %}</button>
           </div>
 
+          {% url 'account_signup' as signup_url %}
           <p class="auth-note">
+            {% blocktrans trimmed %}
             Если вы впервые на сайте — заполните <br>
-            <a class="reg-link" href="{% url 'account_signup' %}">регистрационную форму</a>.
+            <a class="reg-link" href="{{ signup_url }}">регистрационную форму</a>.
+            {% endblocktrans %}
           </p>
+
         </form>
       </div>
     </section>
@@ -88,11 +93,10 @@
     ;(function () {
       const pwd = document.getElementById('id_password')
       const eye = document.getElementById('pw_eye')
-    
-      // начальное состояние: скрыт (unchecked)
+
       eye.checked = false
       pwd.type = 'password'
-    
+
       eye.addEventListener('change', () => {
         pwd.type = eye.checked ? 'text' : 'password'
       })

@@ -2,9 +2,10 @@
 {% load static %}
 {% load site_settings %}
 {% get_site_contacts as s %}
+{% load i18n %}
 
 {% block title %}
-  Возврат и обмен
+  {% trans "Политика конфиденциальности" %} | Gabriel Yusubov
 {% endblock %}
 
 {% block styles %}
@@ -14,14 +15,14 @@
 {% block content %}
   <div class="status-bar" role="navigation" aria-label="Статус-бар">
     <div class="sb-inner">
-      <a href="/"><img class="sb-logo" src="{% static 'images/GY.svg' %}" alt="GY" /></a>
+      <a href="{% url 'home' %}"><img class="sb-logo" src="{% static 'images/GY.svg' %}" alt="GY" /></a>
       <span class="sb-dot" aria-hidden="true"></span>
-      <a class="sb-link" href="{% url 'privacy' %}">ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</a>
+      <a class="sb-link" href="{% url 'privacy' %}">{% trans "ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ" %}</a>
     </div>
   </div>
 
   <main>
-    <h2 class="page_name">ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</h2>
+    <h2 class="page_name">{% trans "ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ" %}</h2>
 
     <div class="privacy-info">
       <h3>1. ОСНОВНЫЕ ПОЛОЖЕНИЯ</h3>

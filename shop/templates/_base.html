@@ -2,16 +2,73 @@
 {% load site_settings %}
 {% get_site_contacts as s %}
 {% load phone_format %}
+{% load i18n %}
+{% get_current_language as CURR %}
+{% load switch_lang %}
+
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="{{ CURR|default:'ru' }}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
       {% block title %}
-        Магазин
+        Gabriel Yusubov
       {% endblock %}
     </title>
+
+    {% block canonical %}
+      <link rel="canonical" href="{% firstof canonical_url request.build_absolute_uri %}">
+    {% endblock %}
+
+    {% switch_language_url 'ru' as url_ru %}
+    {% switch_language_url 'en' as url_en %}
+    <link rel="alternate" href="{{ url_ru }}" hreflang="ru">
+    <link rel="alternate" href="{{ url_en }}" hreflang="en">
+    <link rel="alternate" href="{% firstof canonical_url request.build_absolute_uri %}" hreflang="x-default">
+
+
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicons/favicon-16x16.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicons/apple-touch-icon.png' %}">
+    <link rel="manifest" href="{% static 'favicons/site.webmanifest' %}">
+    <link rel="mask-icon" href="{% static 'favicons/safari-pinned-tab.svg' %}" color="#FFFFFF">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta name="theme-color" content="#FFFFFF">
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "{% block schema_type %}WebSite{% endblock %}",
+        "name": "Gabriel Yusubov",
+        "url": "{% firstof canonical_url request.build_absolute_uri %}",
+        "inLanguage": "{{ CURR }}",
+        {% block schema_extra %}"potentialAction":{"@type":"SearchAction","target":"{{ request.scheme }}://{{ request.get_host }}/search/?q={search_term_string}","query-input":"required name=search_term_string"}{% endblock %}
+      }
+    </script>
+
+
+    {% block meta %}
+          <meta name="description" content="{% trans 'Авторский бренд: дизайн, пошив, капсульные релизы' %}.">
+          <meta name="keywords" content="{% trans 'Gabriel Yusubov, одежда, fashion, couture, магазин' %}">
+          <meta name="author" content="Gabriel Yusubov">
+          <meta name="robots" content="index, follow">
+
+          <meta property="og:type" content="website">
+          <meta property="og:site_name" content="Gabriel Yusubov">
+          <meta property="og:title" content="Gabriel Yusubov">
+          <meta property="og:description" content="{% trans 'Авторский бренд: дизайн, пошив, капсульные релизы' %}.">
+          <meta property="og:url" content="{% firstof canonical_url request.build_absolute_uri %}">
+          <meta property="og:image" content="{{ request.build_absolute_uri|cut:request.path }}{% static 'images/GY.png' %}">
+          <meta property="og:locale" content="{{ CURR|default:'ru' }}_{% if CURR == 'ru' %}RU{% else %}US{% endif %}">
+
+          <meta name="twitter:card" content="summary_large_image">
+          <meta name="twitter:title" content="Gabriel Yusubov">
+          <meta name="twitter:description" content="{% trans 'Авторский бренд: дизайн, пошив, капсульные релизы' %}.">
+          <meta name="twitter:image" content="{{ request.build_absolute_uri|cut:request.path }}{% static 'images/GY.png' %}">
+    {% endblock meta %}
+
+
     <link rel="stylesheet" href="{% static 'css/_base.css' %}" />
 
     {% block shop_css %}
@@ -49,19 +106,28 @@
                 <line x1="0" y1="20" x2="25" y2="20" stroke="black" stroke-width="2" />
               </svg>
             </button>
-            <a href="#" class="off-lang">ENG</a>
+            {% with cur=CURR|lower|cut:"-"|cut:"_" %}
+              {% if cur == 'ru' %}
+                {% switch_language_url 'en' as target_url %}
+                  <a href="{{ target_url }}" class="off-lang">ENG</a>
+              {% else %}
+                {% switch_language_url 'ru' as target_url %}
+                  <a href="{{ target_url }}" class="off-lang">РУС</a>
+              {% endif %}
+            {% endwith %}
           </div>
 
           <nav class="off-nav">
-            <!-- <a href="#" data-sub="shop">МАГАЗИН</a> -->
-            <!-- <a href="#" data-sub="collections">КОЛЛЕКЦИИ</a> -->
-            <a href="{% url 'prive-lab' %}" data-sub="prive-lab">PRIVE Labaratory</a>
-            <a href="{% url 'delivery' %}" data-sub="delivery">ДОСТАВКА И ОПЛАТА</a>
-            <a href="{% url 'refund' %}" data-sub="returns">ВОЗВРАТ И ОБМЕН</a>
-            <a href="{% url 'contacts' %}" data-sub="contacts">КОНТАКТЫ</a>
-            <a href="{% url 'blog' %}" data-sub="blog">БЛОГ</a>
-            <a href="#" data-sub="social">НАШИ СОЦСЕТИ</a>
-            <a href="#" data-sub="about">О НАС</a>
+            {# <a href="#" data-sub="shop">{% trans "МАГАЗИН" %}</a> #}
+            {# <a href="#" data-sub="collections">{% trans "КОЛЛЕКЦИИ" %}</a> #}
+
+            <a href="{% url 'prive-lab' %}" data-sub="prive-lab">{% trans "PRIVE Laboratory" %}</a>
+            <a href="{% url 'delivery' %}" data-sub="delivery">{% trans "ДОСТАВКА И ОПЛАТА" %}</a>
+            <a href="{% url 'refund' %}" data-sub="returns">{% trans "ВОЗВРАТ И ОБМЕН" %}</a>
+            <a href="{% url 'contacts' %}" data-sub="contacts">{% trans "КОНТАКТЫ" %}</a>
+            <a href="{% url 'blog' %}" data-sub="blog">{% trans "БЛОГ" %}</a>
+            <a href="#" data-sub="social">{% trans "НАШИ СОЦСЕТИ" %}</a>
+            <a href="#" data-sub="about">{% trans "О НАС" %}</a>
           </nav>
 
           <div class="off-icons">
@@ -112,38 +178,39 @@
         <template id="tpl-prive-lab">
           <div class="off-sub-text">
             <p>
-              <a href="{% url 'prive-lab' %}">Индивидуальный пошив</a>, примерка, консультация по материалам.</p>
-            <a class="off-sub-all" href="{% url 'prive-lab' %}">Перейти в PRIVE Laboratory</a>
+              <a href="{% url 'prive-lab' %}">{% trans "Индивидуальный пошив" %}</a>, {% trans "примерка, консультация по материалам." %}
+            </p>
+            <a class="off-sub-all" href="{% url 'prive-lab' %}">{% trans "Перейти в PRIVE Laboratory" %}</a>
           </div>
         </template>
 
         <template id="tpl-delivery">
           <div class="off-sub-text">
-            <p>Доставка по РФ: курьером и в пункты выдачи. Оплата: картой онлайн/при получении.</p>
-            <a class="off-sub-all" href="{% url 'delivery' %}">Подробнее</a>
+            <p>{% trans "Доставка по РФ: курьером и в пункты выдачи. Оплата: картой онлайн/при получении" %}.</p>
+            <a class="off-sub-all" href="{% url 'delivery' %}">{% trans "Подробнее" %}</a>
           </div>
         </template>
 
         <template id="tpl-returns">
           <div class="off-sub-text">
-            <p>Обмен и возврат в течение 7 дней. Полные условия по ссылке.</p>
-            <a class="off-sub-all" href="{% url 'refund' %}">Узнать условия</a>
+            <p>{% trans "Обмен и возврат в течение 7 дней. Полные условия по ссылке" %}.</p>
+            <a class="off-sub-all" href="{% url 'refund' %}">{% trans "Узнать условия" %}</a>
           </div>
         </template>
 
         <template id="tpl-contacts">
           <div class="off-sub-text">
             {% if s.email %}<p>E-mail: {{ s.email }}</p>{% endif %}
-            {% if s.phone %}<p>Тел.: {{ s.phone|pretty_phone }}</p>{% endif %}
-            <a class="off-sub-all" href="{% url 'contacts' %}">Все контакты</a>
+            {% if s.phone %}<p>{% trans "Тел." %}: {{ s.phone|pretty_phone }}</p>{% endif %}
+            <a class="off-sub-all" href="{% url 'contacts' %}">{% trans "Все контакты" %}</a>
           </div>
         </template>
 
 
         <template id="tpl-blog">
           <div class="off-sub-text">
-            <p>Новости бренда, истории коллекций, съёмки.</p>
-            <a class="off-sub-all" href="{% url 'blog' %}">Читать блог</a>
+            <p>{% trans "Новости бренда, истории коллекций, съёмки" %}.</p>
+            <a class="off-sub-all" href="{% url 'blog' %}">{% trans "Читать блог" %}</a>
           </div>
         </template>
 
@@ -168,7 +235,7 @@
               {% endif %}
             </ul>
 
-            <p>*проект Meta Platforms Inc., запрещена в РФ</p>
+            <p>*{% trans "проект Meta Platforms Inc., запрещена в РФ" %}</p>
           </div>
         </template>
 
@@ -176,8 +243,8 @@
 
         <template id="tpl-about">
           <div class="off-sub-text">
-            <p>Gabriel Yusubov — авторский бренд: дизайн, пошив, капсульные релизы.</p>
-            <a class="off-sub-all" href="{% url 'about' %}">Подробнее о нас</a>
+            <p>Gabriel Yusubov — {% trans "авторский бренд: дизайн, пошив, капсульные релизы" %}.</p>
+            <a class="off-sub-all" href="{% url 'about' %}">{% trans "Подробнее о нас" %}</a>
           </div>
         </template>
 
@@ -270,11 +337,26 @@
         </a>
       </div>
 
+      {% with cur=CURR|lower|cut:"-"|cut:"_" %}
+
       <div class="lang-switch" id="langSwitch">
-        <a href="">ENG</a>
+        {% if cur == 'ru' %}
+          {% switch_language_url 'en' as target_url %}
+          <a href="{{ target_url }}">ENG</a>
+        {% else %}
+          {% switch_language_url 'ru' as target_url %}
+          <a href="{{ target_url }}">РУС</a>
+        {% endif %}
       </div>
+
+      {% endwith %}
     </header>
 
+
+
+
+    <script src="{% url 'javascript-catalog' %}"></script>
+    
     {% block content %}
 
     {% endblock %}
@@ -282,27 +364,27 @@
     <footer class="site-footer">
       <div class="footer-blocks">
         <div class="footer-block-customer">
-          <h2><a href="{% url 'buyer' %}">Покупателю:</a></h2>
+          <h2><a href="{% url 'buyer' %}">{% trans "Покупателю" %}:</a></h2>
 
           <div class="customer-links">
-            <!-- <a href="{% url 'shop' %}">Магазин</a> -->
-            <a href="{% url 'prive-lab' %}">PRIVE Labaratory</a>
-            <!-- <a href="{% url 'favorites' %}">Избранное</a> -->
-            <!-- <a href="">Корзина</a> -->
-            <a href="{% url 'lk' %}">Личный кабинет</a>
-            <a href="{% url 'refund' %}">Возврат и обмен</a>
-            <a href="{% url 'delivery' %}">Доставка и оплата</a>
-            <a href="{% url 'offer' %}">Публичная оферта</a>
-            <a href="{% url 'privacy' %}">Политика конфиденциальности</a>
+            {# <a href="{% url 'shop' %}">{% trans "Магазин" %}</a> #}
+            <a href="{% url 'prive-lab' %}">{% trans "PRIVE Laboratory" %}</a>
+            {# <a href="{% url 'favorites' %}">{% trans "Избранное" %}</a> #}
+            {# <a href="">{% trans "Корзина" %}</a> #}
+            <a href="{% url 'lk' %}">{% trans "Личный кабинет" %}</a>
+            <a href="{% url 'refund' %}">{% trans "Возврат и обмен" %}</a>
+            <a href="{% url 'delivery' %}">{% trans "Доставка и оплата" %}</a>
+            <a href="{% url 'offer' %}">{% trans "Публичная оферта" %}</a>
+            <a href="{% url 'privacy' %}">{% trans "Политика конфиденциальности" %}</a>
           </div>
         </div>
 
         <div class="footer-block-about">
-          <h2><a href="{% url 'about' %}">О нас:</a></h2>
+          <h2><a href="{% url 'about' %}">{% trans "О нас" %}:</a></h2>
 
           <div class="about-links">
-            <a href="{% url 'contacts' %}">Контакты</a>
-            <a href="{% url 'blog' %}">Блог</a>
+            <a href="{% url 'contacts' %}">{% trans "Контакты" %}</a>
+            <a href="{% url 'blog' %}">{% trans "Блог" %}</a>
           </div>
         </div>
       </div>
@@ -326,7 +408,7 @@
           </li>
         </ul>
 
-        <p class="socials-note">*проект Meta Platforms Inc., запрещена в РФ</p>
+        <p class="socials-note">*{% trans "проект Meta Platforms Inc., запрещена в РФ" %}</p>
       </div>
 
       <div class="footer-cp-name">
