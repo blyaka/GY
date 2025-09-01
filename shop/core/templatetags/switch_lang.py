@@ -9,33 +9,33 @@ register = template.Library()
 def switch_language_url(context, lang_code: str):
     request = context.get("request")
     if not request:
-        return "/"
+        return f"/{lang_code}/"
 
     path = request.path
     query = request.META.get("QUERY_STRING", "")
 
+    url = None
     try:
         match = resolve(path)
         with translation.override(lang_code):
             try:
                 url = reverse(match.view_name, args=match.args, kwargs=match.kwargs)
             except NoReverseMatch:
-                url = None
-        if url:
-            if query:
-                url = f"{url}?{query}"
-            return url
+                pass
     except Resolver404:
         pass
 
-    langs = {code for code, _ in getattr(settings, "LANGUAGES", [])}
-    parts = path.lstrip("/").split("/", 1)
-    if parts and parts[0] in langs:
-        rest = "/" + parts[1] if len(parts) > 1 else "/"
-        url = f"/{lang_code}{rest}"
-    else:
-        url = f"/{lang_code}{path}"
+    # fallback
+    if not url:
+        langs = {code for code, _ in getattr(settings, "LANGUAGES", [])}
+        parts = path.lstrip("/").split("/", 1)
+        if parts and parts[0] in langs:
+            rest = "/" + parts[1] if len(parts) > 1 else "/"
+            url = f"/{lang_code}{rest}"
+        else:
+            url = f"/{lang_code}{path}"
 
     if query:
         url = f"{url}?{query}"
+
     return url
