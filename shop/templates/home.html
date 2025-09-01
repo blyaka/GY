@@ -152,14 +152,14 @@
           header.style.backgroundColor = '#fff'
           header.style.color = '#000'
           lines.forEach((l) => l.setAttribute('stroke', '#000'))
-          if (logo) logo.style.filter = 'invert(1)' // ← инвертим ниже hero
+          if (logo) logo.style.filter = 'invert(0)'
           langLinks.forEach((a) => (a.style.color = '#000'))
         } else {
           // НАД hero
           header.style.background = 'transparent'
           header.style.color = '#000000ff'
           lines.forEach((l) => l.setAttribute('stroke', '#000000ff'))
-          if (logo) logo.style.filter = 'invert(1)' // ← без инверта над hero
+          if (logo) logo.style.filter = 'invert(0)'
           langLinks.forEach((a) => (a.style.color = '#000000ff'))
         }
       }
