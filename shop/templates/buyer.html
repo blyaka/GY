@@ -77,7 +77,7 @@
 
             <form class="customer-form" action="#" method="post">
                 <label class="f-label">{% trans "Имя" %}:
-                    <input class="f-input" type="text" name="name" placeholder="ГАБРИЭЛЬ" required>
+                    <input class="f-input" type="text" name="name" placeholder="{% trans 'ГАБРИЭЛЬ' %}" required>
                 </label>
 
                 <label class="f-label">Email:
@@ -102,7 +102,7 @@
                 </label>
 
                 <label class="f-label">{% trans "Комментарий" %}:
-                    <textarea class="f-textarea" name="message" placeholder="НАПИШИТЕ ЗДЕСЬ ЧТО-НИБУДЬ…"></textarea>
+                    <textarea class="f-textarea" name="message" placeholder="{% trans 'НАПИШИТЕ ЗДЕСЬ ЧТО-НИБУДЬ…' %}"></textarea>
                 </label>
 
                 <div class="agree">
