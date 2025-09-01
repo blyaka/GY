@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-01 23:25+0300\n"
+"POT-Creation-Date: 2025-09-01 23:36+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -760,7 +760,7 @@ msgid "ИНН 771983392928"
 msgstr ""
 
 #: templates/contacts.html:96
-msgid "ОРГН"
+msgid "ОГРН"
 msgstr "OGRN"
 
 #: templates/delivery.html:16
@@ -1142,6 +1142,9 @@ msgid ""
 "нами"
 msgstr ""
 "For consultation on product return and exchange issues, please contact us"
+
+#~ msgid "ОРГН"
+#~ msgstr "OGRN"
 
 #~ msgid "ИНН XXXXXXXXXXXX"
 #~ msgstr "TIN XXXXXXXXXXXX"

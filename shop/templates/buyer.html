@@ -75,69 +75,62 @@
                 {% trans "Если у вас остались вопросы, вы можете заполнить форму обратной связи, и мы вам обязательно ответим!" %}
             </p>
 
-            <form class="customer-form" action="#" method="post">
-                <label class="f-label">{% trans "Имя" %}:
-                    <input class="f-input" type="text" name="name" placeholder="{% trans 'ГАБРИЭЛЬ' %}" required>
-                </label>
+<form class="customer-form" action="{% url 'reqs:contact_submit' %}" method="post">
+  {% csrf_token %}
+  <input type="hidden" name="ts" value="{{ now_ts|default:0 }}">   <!-- см. ниже JS -->
+  <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off"> <!-- honeypot -->
 
-                <label class="f-label">Email:
-                    <input class="f-input" type="email" name="email" placeholder="NAME@GMAIL.COM" required>
-                </label>
+  <label class="f-label">{% trans "Имя" %}:
+    <input class="f-input" type="text" name="name" placeholder="{% trans 'ГАБРИЭЛЬ' %}" required>
+  </label>
 
-                <label class="f-label">{% trans "Телефон" %}:
-                    <input class="f-input" type="tel" name="phone" placeholder="+7 XXX XXX XX XX">
-                </label>
+  <label class="f-label">Email:
+    <input class="f-input" type="email" name="email" placeholder="NAME@GMAIL.COM">
+  </label>
 
-                <label class="f-label">{% trans "Тематика обращения" %}:
-                    <div class="f-select">
-                        <select name="topic" aria-label="Тематика обращения">
-                            <option value="order">{% trans "ОФОРМЛЕНИЕ ЗАКАЗА" %}</option>
-                            <option value="payment">{% trans "ОПЛАТА" %}</option>
-                            <option value="delivery">{% trans "ДОСТАВКА" %}</option>
-                            <option value="exchange">{% trans "ВОЗВРАТ И ОБМЕН" %}</option>
-                            <option value="other">{% trans "ДРУГОЕ" %}</option>
-                        </select>
-                        <span class="f-caret" aria-hidden="true">▾</span>
-                    </div>
-                </label>
+  <label class="f-label">{% trans "Телефон" %}:
+    <input class="f-input" type="tel" name="phone" placeholder="+7 XXX XXX XX XX">
+  </label>
 
-                <label class="f-label">{% trans "Комментарий" %}:
-                    <textarea class="f-textarea" name="message" placeholder="{% trans 'НАПИШИТЕ ЗДЕСЬ ЧТО-НИБУДЬ…' %}"></textarea>
-                </label>
+  <label class="f-label">{% trans "Тематика обращения" %}:
+    <div class="f-select">
+      <select name="topic" aria-label="Тематика обращения">
+        <option value="order">{% trans "ОФОРМЛЕНИЕ ЗАКАЗА" %}</option>
+        <option value="payment">{% trans "ОПЛАТА" %}</option>
+        <option value="delivery">{% trans "ДОСТАВКА" %}</option>
+        <option value="exchange">{% trans "ВОЗВРАТ И ОБМЕН" %}</option>
+        <option value="other">{% trans "ДРУГОЕ" %}</option>
+      </select>
+      <span class="f-caret" aria-hidden="true">▾</span>
+    </div>
+  </label>
 
-                <div class="agree">
-                    <label class="remember">
-                        <input type="checkbox" name="policy" required>
-                        <span class="check"></span>
-                        <span>
-                            {% blocktrans trimmed with offer_url=offer_url privacy_url=privacy_url %}
-                                Нажимая кнопку «Отправить», я даю своё согласие на обработку моих персональных данных в соответствии с Федеральным законом
-                                от 27.07.2006 №152-ФЗ «О персональных данных», с условиями
-                                <a href="{{ offer_url }}" target="_blank">публичной оферты</a> и
-                                <a href="{{ privacy_url }}" target="_blank">политикой конфиденциальности</a>.
-                            {% endblocktrans %}
-                        </span>
+  <label class="f-label">{% trans "Комментарий" %}:
+    <textarea class="f-textarea" name="message" placeholder="{% trans 'НАПИШИТЕ ЗДЕСЬ ЧТО-НИБУДЬ…' %}"></textarea>
+  </label>
 
-                    </label>
+<div class="agree"> <label class="remember"> <input type="checkbox" name="policy" required> <span class="check"></span> <span> {% blocktrans trimmed with offer_url=offer_url privacy_url=privacy_url %} Нажимая кнопку «Отправить», я даю своё согласие на обработку моих персональных данных в соответствии с Федеральным законом от 27.07.2006 №152-ФЗ «О персональных данных», с условиями <a href="{{ offer_url }}" target="_blank">публичной оферты</a> и <a href="{{ privacy_url }}" target="_blank">политикой конфиденциальности</a>. {% endblocktrans %} </span> </label> <label class="remember"> <input type="checkbox" name="marketing"> <span class="check"></span> <span> {% blocktrans trimmed %} Я согласен(на) на получение рекламной информации, новостей, предложений и опросов на e-mail/телефон, указанные при отправке формы. {% endblocktrans %} </span> </label> </div>
+  <div class="f-actions">
+    <button class="f-submit" type="submit">{% trans "ОТПРАВИТЬ" %}</button>
+  </div>
+</form>
 
-                    <label class="remember">
-                        <input type="checkbox" name="marketing">
-                        <span class="check"></span>
-                        <span>
-                            {% blocktrans trimmed %}
-                                Я согласен(на) на получение рекламной информации, новостей, предложений и опросов на e-mail/телефон,
-                                указанные при отправке формы.
-                            {% endblocktrans %}
-                        </span>
+<script>
+  // простейший ts для антиспама
+  document.addEventListener('DOMContentLoaded', () => {
+    const f = document.querySelector('.customer-form');
+    if (!f) return;
+    let ts = f.querySelector('input[name="ts"]');
+    if (!ts) {
+      ts = document.createElement('input');
+      ts.type = 'hidden';
+      ts.name = 'ts';
+      f.appendChild(ts);
+    }
+    ts.value = Math.floor(Date.now() / 1000);
+  });
+</script>
 
-                    </label>
-                </div>
-
-
-                <div class="f-actions">
-                    <button class="f-submit" type="submit">{% trans "ОТПРАВИТЬ" %}</button>
-                </div>
-            </form>
         </section>
     </main>
 {% endblock content %}

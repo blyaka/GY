@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import RegexValidator, EmailValidator
 from django.core.exceptions import ValidationError
 
+
 phone_validator = RegexValidator(
     regex=r'^\+?\d{10,15}$',
     message="Телефон должен быть в формате +79991234567 (10–15 цифр)."
@@ -50,3 +51,53 @@ class TelegramRecipient(models.Model):
 
     def __str__(self):
         return self.title or str(self.chat_id)
+
+
+
+
+
+phone_validator = RegexValidator(
+    regex=r'^\+?\d{10,15}$',
+    message="Телефон должен быть в формате +79991234567 (10–15 цифр)."
+)
+
+TOPIC_CHOICES = [
+    ("order",   "Оформление заказа"),
+    ("payment", "Оплата"),
+    ("delivery","Доставка"),
+    ("exchange","Возврат и обмен"),
+    ("other",   "Другое"),
+]
+
+class ContactRequest(models.Model):
+    full_name = models.CharField("ФИО", max_length=150)
+    email = models.EmailField("Email", blank=True, validators=[EmailValidator()])
+    phone = models.CharField("Телефон", max_length=16, blank=True, validators=[phone_validator])
+
+    topic = models.CharField("Тематика обращения", max_length=20, choices=TOPIC_CHOICES)
+    message = models.TextField("Комментарий", blank=True)
+
+    policy_agreed = models.BooleanField("Согласие с офертой/политикой", default=False)
+    marketing_agreed = models.BooleanField("Согласие на рассылку", default=False)
+
+    page_url = models.URLField("Страница отправки", blank=True)
+    locale = models.CharField("Язык", max_length=10, blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    user_ip = models.GenericIPAddressField(null=True, blank=True, editable=False)
+    user_agent = models.TextField(blank=True, editable=False)
+
+    class Meta:
+        ordering = ("-created_at",)
+        verbose_name = "Контактная заявка"
+        verbose_name_plural = "Контактные заявки"
+
+    def clean(self):
+        if not self.email and not self.phone:
+            raise ValidationError("Нужно указать телефон или email.")
+        if not self.policy_agreed:
+            raise ValidationError("Нужно согласиться с офертой и политикой.")
+
+    def __str__(self):
+        ident = self.email or self.phone or "—"
+        return f"{self.full_name} [{ident}] {self.topic}"
