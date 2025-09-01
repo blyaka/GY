@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-01 23:20+0300\n"
+"POT-Creation-Date: 2025-09-01 23:25+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -744,10 +744,8 @@ msgid "ТЕЛЕФОН"
 msgstr "PHONE"
 
 #: templates/contacts.html:62
-#, fuzzy
-#| msgid "Ежедневно с XX:XX до ХХ:ХХ"
 msgid "Ежедневно с 11:00 до 20:00"
-msgstr "Daily from XX:XX to XX:XX"
+msgstr "Daily from 11:00 to 20:00"
 
 #: templates/contacts.html:68
 msgid "Нужна помощь с оформлением заказа?"
