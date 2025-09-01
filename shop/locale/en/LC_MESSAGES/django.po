@@ -87,12 +87,12 @@ msgstr "PRIVE Laboratory"
 #: templates/_base.html:142 templates/buyer.html:70 templates/delivery.html:44
 #: templates/delivery.html:49
 msgid "ДОСТАВКА И ОПЛАТА"
-msgstr "DELIVERY AND PAYMENT"
+msgstr "DELIVERY & PAYMENT"
 
 #: templates/_base.html:143 templates/buyer.html:69 templates/buyer.html:103
 #: templates/refund_exchange.html:44 templates/refund_exchange.html:49
 msgid "ВОЗВРАТ И ОБМЕН"
-msgstr "REFUND AND EXCHANGE"
+msgstr "REFUND & EXCHANGE"
 
 #: templates/_base.html:144 templates/contacts.html:44
 #: templates/contacts.html:50
@@ -785,7 +785,7 @@ msgstr "Sole proprietor Yusubov Gabriel Yasharovich"
 
 #: templates/contacts.html:92
 msgid "ИНН 771983392928"
-msgstr ""
+msgstr "TIN 771983392928"
 
 #: templates/contacts.html:96
 msgid "ОГРН"
