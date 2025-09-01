@@ -6,9 +6,6 @@
 {% get_current_language as CURR %}
 {% load switch_lang %}
 
-{% load lang_urls %}
-
-
 <!DOCTYPE html>
 <html lang="{{ CURR|default:'ru' }}">
   <head>
@@ -41,8 +38,8 @@
       <link rel="canonical" href="{% firstof canonical_url request.build_absolute_uri %}">
     {% endblock %}
 
-    {% lang_switch 'ru' as url_ru %}
-    {% lang_switch 'en' as url_en %}
+    {% switch_language_url 'ru' as url_ru %}
+    {% switch_language_url 'en' as url_en %}
     <link rel="alternate" href="{{ url_ru }}" hreflang="ru">
     <link rel="alternate" href="{{ url_en }}" hreflang="en">
     <link rel="alternate" href="{% firstof canonical_url request.build_absolute_uri %}" hreflang="x-default">
@@ -128,10 +125,10 @@
             </button>
             {% with cur=CURR|lower|cut:"-"|cut:"_" %}
               {% if cur == 'ru' %}
-                {% lang_switch 'en' as target_url %}
+                {% switch_language_url 'en' as target_url %}
                   <a href="{{ target_url }}" class="off-lang">ENG</a>
               {% else %}
-                {% lang_switch 'ru' as target_url %}
+                {% switch_language_url 'ru' as target_url %}
                   <a href="{{ target_url }}" class="off-lang">РУС</a>
               {% endif %}
             {% endwith %}
@@ -361,10 +358,10 @@
 
       <div class="lang-switch" id="langSwitch">
         {% if cur == 'ru' %}
-          {% lang_switch 'en' as target_url %}
+          {% switch_language_url 'en' as target_url %}
           <a href="{{ target_url }}">ENG</a>
         {% else %}
-          {% lang_switch 'ru' as target_url %}
+          {% switch_language_url 'ru' as target_url %}
           <a href="{{ target_url }}">РУС</a>
         {% endif %}
       </div>
