@@ -22,7 +22,7 @@ urlpatterns += i18n_patterns(
     path("reqs/", include("reqs.urls", namespace="reqs")),
     path('', include('pages.urls')),
 
-    prefix_default_language=True,
+    prefix_default_language=False,
 )
 
 
