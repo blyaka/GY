@@ -4,12 +4,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
 from django.views.i18n import JavaScriptCatalog
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("ckeditor5/", include("django_ckeditor_5.urls")),
     path('i18n/', include('django.conf.urls.i18n')),
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
+    path('', RedirectView.as_view(url='/ru/', permanent=True)),
 ]
 
 urlpatterns += i18n_patterns(
