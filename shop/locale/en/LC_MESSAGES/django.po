@@ -1176,3 +1176,6 @@ msgstr ""
 
 #~ msgid "ИНН XXXXXXXXXXXX"
 #~ msgstr "TIN XXXXXXXXXXXX"
+
+msgid "This password is too short. It must contain at least %(min_length)d characters."
+msgstr "Пароль слишком короткий. Минимальная длина — %(min_length)d символов."
