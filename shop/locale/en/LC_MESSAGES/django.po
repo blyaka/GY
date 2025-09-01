@@ -1,0 +1,901 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-01 20:16+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: accounts/validators.py:22
+#, python-format
+msgid "Введённый пароль слишком похож на поле «%(verbose_name)s»."
+msgstr ""
+
+#: accounts/validators.py:28
+msgid "Пароль не должен быть слишком похож на ваши персональные данные."
+msgstr ""
+
+#: accounts/validators.py:42
+#, python-format
+msgid "Пароль слишком короткий. Минимальная длина — %(min_length)d символов."
+msgstr ""
+
+#: accounts/validators.py:48
+#, python-format
+msgid "Пароль должен содержать не менее %(min_length)d символов."
+msgstr ""
+
+#: accounts/validators.py:63
+msgid "Введённый пароль слишком широко распространён."
+msgstr ""
+
+#: accounts/validators.py:68
+msgid "Пароль не должен быть слишком простым и распространённым."
+msgstr ""
+
+#: accounts/validators.py:79
+msgid "Пароль не может состоять только из цифр."
+msgstr ""
+
+#: accounts/validators.py:84
+msgid "Пароль не должен состоять только из цифр."
+msgstr ""
+
+#: blog/models.py:8
+msgid "Заголовок"
+msgstr ""
+
+#: blog/models.py:11
+msgid "Контент"
+msgstr ""
+
+#: templates/404.html:28
+msgid "Такой страницы не существует!"
+msgstr ""
+
+#: templates/404.html:30
+msgid "ВЕРНУТЬСЯ НА ГЛАВНУЮ СТРАНИЦУ"
+msgstr ""
+
+#: templates/_base.html:52 templates/_base.html:60 templates/_base.html:67
+#: templates/home.html:18 templates/home.html:26 templates/home.html:33
+msgid "Авторский бренд: дизайн, пошив, капсульные релизы"
+msgstr ""
+
+#: templates/_base.html:53 templates/home.html:19
+msgid "Gabriel Yusubov, одежда, fashion, couture, магазин"
+msgstr ""
+
+#: templates/_base.html:124 templates/_base.html:371
+msgid "PRIVE Laboratory"
+msgstr ""
+
+#: templates/_base.html:125 templates/buyer.html:70 templates/delivery.html:44
+#: templates/delivery.html:49
+msgid "ДОСТАВКА И ОПЛАТА"
+msgstr ""
+
+#: templates/_base.html:126 templates/buyer.html:69 templates/buyer.html:97
+#: templates/refund_exchange.html:44
+msgid "ВОЗВРАТ И ОБМЕН"
+msgstr ""
+
+#: templates/_base.html:127 templates/contacts.html:44
+#: templates/contacts.html:50
+msgid "КОНТАКТЫ"
+msgstr ""
+
+#: templates/_base.html:128 templates/blog/blog.html:48
+#: templates/blog/blog_article_details.html:69
+msgid "БЛОГ"
+msgstr ""
+
+#: templates/_base.html:129
+msgid "НАШИ СОЦСЕТИ"
+msgstr ""
+
+#: templates/_base.html:130 templates/about.html:46 templates/about.html:53
+msgid "О НАС"
+msgstr ""
+
+#: templates/_base.html:181
+msgid "Индивидуальный пошив"
+msgstr ""
+
+#: templates/_base.html:181
+msgid "примерка, консультация по материалам."
+msgstr ""
+
+#: templates/_base.html:183
+msgid "Перейти в PRIVE Laboratory"
+msgstr ""
+
+#: templates/_base.html:189
+msgid ""
+"Доставка по РФ: курьером и в пункты выдачи. Оплата: картой онлайн/при "
+"получении"
+msgstr ""
+
+#: templates/_base.html:190
+msgid "Подробнее"
+msgstr ""
+
+#: templates/_base.html:196
+msgid "Обмен и возврат в течение 7 дней. Полные условия по ссылке"
+msgstr ""
+
+#: templates/_base.html:197
+msgid "Узнать условия"
+msgstr ""
+
+#: templates/_base.html:204
+msgid "Тел."
+msgstr ""
+
+#: templates/_base.html:205
+msgid "Все контакты"
+msgstr ""
+
+#: templates/_base.html:212
+msgid "Новости бренда, истории коллекций, съёмки"
+msgstr ""
+
+#: templates/_base.html:213
+msgid "Читать блог"
+msgstr ""
+
+#: templates/_base.html:238 templates/_base.html:411
+msgid "проект Meta Platforms Inc., запрещена в РФ"
+msgstr ""
+
+#: templates/_base.html:246
+msgid "авторский бренд: дизайн, пошив, капсульные релизы"
+msgstr ""
+
+#: templates/_base.html:247
+msgid "Подробнее о нас"
+msgstr ""
+
+#: templates/_base.html:367 templates/buyer.html:7
+msgid "Покупателю"
+msgstr ""
+
+#: templates/_base.html:374 templates/account/lk.html:7
+msgid "Личный кабинет"
+msgstr ""
+
+#: templates/_base.html:375 templates/refund_exchange.html:9
+msgid "Возврат и обмен"
+msgstr ""
+
+#: templates/_base.html:376 templates/delivery.html:8
+msgid "Доставка и оплата"
+msgstr ""
+
+#: templates/_base.html:377 templates/offer.html:7
+msgid "Публичная оферта"
+msgstr ""
+
+#: templates/_base.html:378 templates/privacy_policy.html:8
+msgid "Политика конфиденциальности"
+msgstr ""
+
+#: templates/_base.html:383 templates/about.html:8
+msgid "О нас"
+msgstr ""
+
+#: templates/_base.html:386 templates/contacts.html:8
+msgid "Контакты"
+msgstr ""
+
+#: templates/_base.html:387 templates/blog/blog.html:5
+msgid "Блог"
+msgstr ""
+
+#: templates/about.html:18
+msgid ""
+"Официальная страница о бренде Gabriel Yusubov. Мы создаём авторский дизайн, "
+"индивидуальный пошив и капсульные коллекции, сохраняя честность и стиль в "
+"каждой детали."
+msgstr ""
+
+#: templates/about.html:19
+msgid ""
+"Gabriel Yusubov, о бренде, история бренда, дизайнерская одежда, "
+"индивидуальный пошив, капсульные коллекции, авторский стиль"
+msgstr ""
+
+#: templates/about.html:25 templates/about.html:32
+msgid "О нас — Gabriel Yusubov"
+msgstr ""
+
+#: templates/about.html:26
+msgid ""
+"Узнайте больше о бренде Gabriel Yusubov: философия дизайна, пошив на заказ, "
+"ценности и капсульные релизы."
+msgstr ""
+
+#: templates/about.html:33
+msgid ""
+"Страница о бренде Gabriel Yusubov. Индивидуальный пошив, капсулы и авторский "
+"стиль."
+msgstr ""
+
+#: templates/about.html:58 templates/home.html:57
+msgid ""
+"Gabriel Yusubov — это я и моё творчество, а в мире моды — молодой fashion-"
+"бренд моего имени. <br><br> Идея создать свой бренд — это всегда выход мысли "
+"в масштаб, что находит продолжение в тех вещах, которые создаются мной и "
+"моей командой. Думаю, что всё должно называться «своими именами» и "
+"оставаться честным с собой и миром, где нет масок."
+msgstr ""
+
+#: templates/about.html:127 templates/home.html:83
+msgid ""
+"История моего бренда только начинается. <br><br> Мы тщательно анализируем "
+"рынок, чтобы быть в курсе новейших тенденций и задавать в этом поле свой "
+"вектор, который встроен в общую систему координат. <br><br> Для нас важно "
+"чувствовать контакт с мировыми тенденциями и с нашими покупателями. Только "
+"такая синергия даёт нам силы и виденье будущего моды."
+msgstr ""
+
+#: templates/account/email_confirm.html:5
+msgid "Подтверждение e-mail"
+msgstr ""
+
+#: templates/account/lk.html:14
+msgid ""
+"Личный кабинет покупателя Gabriel Yusubov: управление профилем, заказами и "
+"избранным."
+msgstr ""
+
+#: templates/account/lk.html:15
+msgid ""
+"Gabriel Yusubov, личный кабинет, профиль, заказы, избранное, учетная запись"
+msgstr ""
+
+#: templates/account/lk.html:21 templates/account/lk.html:28
+msgid "Личный кабинет — Gabriel Yusubov"
+msgstr ""
+
+#: templates/account/lk.html:22
+msgid ""
+"Вход в личный кабинет бренда Gabriel Yusubov: управление заказами, профилем "
+"и избранными товарами."
+msgstr ""
+
+#: templates/account/lk.html:29
+msgid "Управление заказами и профилем в личном кабинете Gabriel Yusubov."
+msgstr ""
+
+#: templates/account/lk.html:42 templates/account/lk.html:70
+#: templates/account/profile_edit.html:16 templates/buyer.html:66
+msgid "ЛИЧНЫЙ КАБИНЕТ"
+msgstr ""
+
+#: templates/account/lk.html:58 templates/account/profile_edit.html:17
+#: templates/account/profile_edit.html:24
+msgid "ПРОФИЛЬ"
+msgstr ""
+
+#: templates/account/lk.html:59
+msgid "ВЫЙТИ"
+msgstr ""
+
+#: templates/account/lk.html:75
+msgid "Войти"
+msgstr ""
+
+#: templates/account/login.html:8 templates/account/login.html:22
+msgid "Вход"
+msgstr ""
+
+#: templates/account/login.html:16 templates/account/signup.html:14
+#: templates/blog/blog_article_details.html:65
+msgid "Статус-бар"
+msgstr ""
+
+#: templates/account/login.html:30
+msgid "Вход в личный кабинет"
+msgstr ""
+
+#: templates/account/login.html:33
+msgid "Неверные данные входа."
+msgstr ""
+
+#: templates/account/login.html:46 templates/account/signup.html:59
+msgid "Пароль"
+msgstr ""
+
+#: templates/account/login.html:51 templates/account/signup.html:62
+#: templates/account/signup.html:75
+msgid "Показать пароль"
+msgstr ""
+
+#: templates/account/login.html:64
+msgid "Забыли пароль?"
+msgstr ""
+
+#: templates/account/login.html:71
+msgid "Запомнить меня"
+msgstr ""
+
+#: templates/account/login.html:76
+msgid "ВОЙТИ"
+msgstr ""
+
+#: templates/account/login.html:81
+#, python-format
+msgid ""
+"Если вы впервые на сайте — заполните <br> <a class=\"reg-link\" "
+"href=\"%(signup_url)s\">регистрационную форму</a>."
+msgstr ""
+
+#: templates/account/password_reset.html:6
+msgid "Сброс пароля"
+msgstr ""
+
+#: templates/account/password_reset_done.html:5
+#: templates/account/verification_sent.html:5
+msgid "Письмо отправлено"
+msgstr ""
+
+#: templates/account/password_reset_from_key.html:5
+msgid "Новый пароль"
+msgstr ""
+
+#: templates/account/password_reset_from_key_done.html:5
+msgid "Пароль обновлён"
+msgstr ""
+
+#: templates/account/profile_edit.html:42 templates/account/signup.html:49
+#: templates/prive_lab.html:172
+msgid "ФИО"
+msgstr ""
+
+#: templates/account/profile_edit.html:54 templates/buyer.html:87
+#: templates/prive_lab.html:180
+msgid "Телефон"
+msgstr ""
+
+#: templates/account/profile_edit.html:60
+msgid "Постоянный адрес доставки"
+msgstr ""
+
+#: templates/account/profile_edit.html:66
+msgid "СОХРАНИТЬ ИЗМЕНЕНИЯ"
+msgstr ""
+
+#: templates/account/signup.html:7
+msgid "Регистрация"
+msgstr ""
+
+#: templates/account/signup.html:20
+msgid "РЕГИСТРАЦИЯ"
+msgstr ""
+
+#: templates/account/signup.html:28
+msgid "Регистрационная форма"
+msgstr ""
+
+#: templates/account/signup.html:72
+msgid "Повторите пароль"
+msgstr ""
+
+#: templates/account/signup.html:89
+msgid ""
+"Нажимая кнопку «Зарегистрироваться», я даю своё согласие на обработку "
+"персональных данных в соответствии с Федеральным законом от 27.07.2006 № 152-"
+"ФЗ «О персональных данных»."
+msgstr ""
+
+#: templates/account/signup.html:97
+msgid "ЗАРЕГИСТРИРОВАТЬСЯ"
+msgstr ""
+
+#: templates/account/signup.html:102
+#, python-format
+msgid ""
+"Если у вас уже есть аккаунт, то просто <br> <a class=\"reg-link\" "
+"href=\"%(login_url)s\">авторизуйтесь на сайте</a>."
+msgstr ""
+
+#: templates/account/verification_sent.html:11
+msgid "Проверьте почту"
+msgstr ""
+
+#: templates/account/verification_sent.html:12
+msgid ""
+"Мы отправили письмо с ссылкой для подтверждения. Если письма нет, проверьте "
+"папку «Спам»."
+msgstr ""
+
+#: templates/blog/blog.html:12
+msgid "Блог бренда Gabriel Yusubov: новости, истории коллекций и съёмки."
+msgstr ""
+
+#: templates/blog/blog.html:13
+msgid "Gabriel Yusubov, блог, новости, коллекции, съёмки, статьи"
+msgstr ""
+
+#: templates/blog/blog.html:19 templates/blog/blog.html:26
+#: templates/blog/blog.html:33
+msgid "Блог — Gabriel Yusubov"
+msgstr ""
+
+#: templates/blog/blog.html:20
+msgid ""
+"Читайте новости бренда, истории создания коллекций и материалы со съёмок."
+msgstr ""
+
+#: templates/blog/blog.html:27
+msgid "Новости бренда, истории коллекций и закулисье съёмок."
+msgstr ""
+
+#: templates/blog/blog.html:34
+msgid "Блог бренда: новости, истории коллекций и съёмки."
+msgstr ""
+
+#: templates/blog/blog.html:86
+msgid "Пагинация"
+msgstr ""
+
+#: templates/blog/blog.html:87 templates/blog/blog_article_details.html:97
+msgid "Предыдущая"
+msgstr ""
+
+#: templates/blog/blog.html:105 templates/blog/blog_article_details.html:117
+msgid "Следующая"
+msgstr ""
+
+#: templates/blog/blog_article_details.html:17
+msgid "Gabriel Yusubov, блог, статья, коллекции, мода, дизайн"
+msgstr ""
+
+#: templates/blog/blog_article_details.html:113
+msgid "Других постов пока нет"
+msgstr ""
+
+#: templates/buyer.html:15
+msgid ""
+"Информация для покупателей Gabriel Yusubov: доставка, оплата, возврат и "
+"обмен, условия обслуживания."
+msgstr ""
+
+#: templates/buyer.html:16
+msgid ""
+"Gabriel Yusubov, покупателю, доставка, оплата, возврат, обмен, условия "
+"покупки, клиентский сервис"
+msgstr ""
+
+#: templates/buyer.html:22 templates/buyer.html:29
+msgid "Покупателю — Gabriel Yusubov"
+msgstr ""
+
+#: templates/buyer.html:23
+msgid ""
+"Все для покупателей бренда Gabriel Yusubov: доставка по РФ, оплата любым "
+"способом, правила возврата и обмена."
+msgstr ""
+
+#: templates/buyer.html:30
+msgid ""
+"Информация для покупателей: доставка, оплата, возврат и обмен в бренде "
+"Gabriel Yusubov."
+msgstr ""
+
+#: templates/buyer.html:46 templates/buyer.html:56
+msgid "ПОКУПАТЕЛЮ"
+msgstr ""
+
+#: templates/buyer.html:59
+msgid ""
+"Мы стремимся к тому, чтобы каждый человек нашёл свою вещь и ответ на свой "
+"вопрос, поэтому стараемся сделать доступной навигацию на нашем сайте"
+msgstr ""
+
+#: templates/buyer.html:64
+msgid "Здесь вы найдете все самое необходимое"
+msgstr ""
+
+#: templates/buyer.html:75
+msgid ""
+"Если у вас остались вопросы, вы можете заполнить форму обратной связи, и мы "
+"вам обязательно ответим!"
+msgstr ""
+
+#: templates/buyer.html:79
+msgid "Имя"
+msgstr ""
+
+#: templates/buyer.html:91
+msgid "Тематика обращения"
+msgstr ""
+
+#: templates/buyer.html:94
+msgid "ОФОРМЛЕНИЕ ЗАКАЗА"
+msgstr ""
+
+#: templates/buyer.html:95 templates/delivery.html:53
+msgid "ОПЛАТА"
+msgstr ""
+
+#: templates/buyer.html:96 templates/delivery.html:78
+msgid "ДОСТАВКА"
+msgstr ""
+
+#: templates/buyer.html:98
+msgid "ДРУГОЕ"
+msgstr ""
+
+#: templates/buyer.html:104
+msgid "Комментарий"
+msgstr ""
+
+#: templates/buyer.html:113
+#, python-format
+msgid ""
+"Нажимая кнопку «Отправить», я даю своё согласие на обработку моих "
+"персональных данных в соответствии с Федеральным законом от 27.07.2006 №152-"
+"ФЗ «О персональных данных», с условиями <a href=\"%(offer_url)s\" "
+"target=\"_blank\">публичной оферты</a> и <a href=\"%(privacy_url)s\" "
+"target=\"_blank\">политикой конфиденциальности</a>."
+msgstr ""
+
+#: templates/buyer.html:127
+msgid ""
+"Я согласен(на) на получение рекламной информации, новостей, предложений и "
+"опросов на e-mail/телефон, указанные при отправке формы."
+msgstr ""
+
+#: templates/buyer.html:138
+msgid "ОТПРАВИТЬ"
+msgstr ""
+
+#: templates/contacts.html:16
+msgid ""
+"Контактная информация бренда Gabriel Yusubov: адрес, телефон, e-mail, "
+"социальные сети."
+msgstr ""
+
+#: templates/contacts.html:17
+msgid "Gabriel Yusubov, контакты, адрес, телефон, e-mail, социальные сети"
+msgstr ""
+
+#: templates/contacts.html:23 templates/contacts.html:30
+msgid "Контакты — Gabriel Yusubov"
+msgstr ""
+
+#: templates/contacts.html:24
+msgid ""
+"Свяжитесь с брендом Gabriel Yusubov: адрес, телефон, электронная почта и "
+"ссылки на социальные сети."
+msgstr ""
+
+#: templates/contacts.html:31
+msgid ""
+"Контактная страница бренда Gabriel Yusubov: адрес, телефон, e-mail и соцсети."
+msgstr ""
+
+#: templates/contacts.html:55
+msgid "ТЕЛЕФОН"
+msgstr ""
+
+#: templates/contacts.html:62
+msgid "Ежедневно с XX:XX до ХХ:ХХ"
+msgstr ""
+
+#: templates/contacts.html:68
+msgid "Нужна помощь с оформлением заказа?"
+msgstr ""
+
+#: templates/contacts.html:88
+msgid "ИП Юсубов Габриэль Яшарович"
+msgstr ""
+
+#: templates/contacts.html:92
+msgid "ИНН XXXXXXXXXXXX"
+msgstr ""
+
+#: templates/contacts.html:96
+msgid "ОРГН"
+msgstr ""
+
+#: templates/delivery.html:16
+msgid ""
+"Информация о доставке и оплате в бренде Gabriel Yusubov: доставка по РФ, "
+"удобные способы оплаты, сроки и условия."
+msgstr ""
+
+#: templates/delivery.html:17
+msgid ""
+"Gabriel Yusubov, доставка, оплата, условия доставки, способы оплаты, сроки "
+"доставки"
+msgstr ""
+
+#: templates/delivery.html:23 templates/delivery.html:30
+msgid "Доставка и оплата — Gabriel Yusubov"
+msgstr ""
+
+#: templates/delivery.html:24
+msgid ""
+"Подробная информация о доставке и оплате заказов бренда Gabriel Yusubov: "
+"курьер, пункты выдачи, онлайн и офлайн-оплата."
+msgstr ""
+
+#: templates/delivery.html:31
+msgid ""
+"Условия доставки и оплаты: доставка по всей России, курьер, пункты выдачи, "
+"удобные способы оплаты."
+msgstr ""
+
+#: templates/delivery.html:56
+msgid ""
+"Услуга оплаты через интернет осуществляется в соответствии с Правилами "
+"международных платежных систем <strong>Visa</strong>, <strong>MasterCard</"
+"strong> и <strong>Платёжной системы МИР</strong> на принципах соблюдения "
+"конфиденциальности и безопасности совершения платежа."
+msgstr ""
+
+#: templates/delivery.html:64
+msgid "Способы оплаты"
+msgstr ""
+
+#: templates/delivery.html:68
+msgid "Банковской картой МИР, MasterCard или Visa"
+msgstr ""
+
+#: templates/delivery.html:71
+msgid ""
+"Наличными курьеру при получении, либо по ссылке банковской картой (при "
+"условии курьерской доставки по Москве)"
+msgstr ""
+
+#: templates/delivery.html:83
+msgid "ПО РОССИИ"
+msgstr ""
+
+#: templates/delivery.html:90
+#, python-format
+msgid ""
+"В регионы мы отправляем заказ по 100%% оплате. Стоимость доставки "
+"рассчитывается индивидуально, согласно предложенным тарифам транспортной "
+"компании СДЕК."
+msgstr ""
+
+#: templates/delivery.html:97
+msgid ""
+"Сроки могут увеличиваться в связи с объективными причинами (удалённость "
+"населённого пункта, изменение расписания авиарейсов, праздничные дни, "
+"погодные условия, дорожная ситуация и пр.). В период распродаж и акций сроки "
+"доставки также могут быть увеличены."
+msgstr ""
+
+#: templates/delivery.html:105
+msgid "Курьерская доставка осуществляется только по г. Москва."
+msgstr ""
+
+#: templates/delivery.html:115
+msgid "ПО МИРУ"
+msgstr ""
+
+#: templates/delivery.html:121
+msgid ""
+"Доставка может быть осуществлена в любую страну мира по предварительно "
+"согласованному условию с менеджером"
+msgstr ""
+
+#: templates/delivery.html:129
+msgid ""
+"Для уточнения об альтернативных способах оплаты заказа и условий доставки вы "
+"можете связаться с нами"
+msgstr ""
+
+#: templates/home.html:8
+msgid "Главная"
+msgstr ""
+
+#: templates/home.html:77
+msgid ""
+"ЭТА МЕЧТА ПОЯВИЛАСЬ У МЕНЯ, ГЛЯДЯ НА РАБОТЫ ЗАКОНОДАТЕЛЕЙ ВЫСОКОЙ МОДЫ И ИХ "
+"ТИТАНИЧЕСКИЙ ТРУД, КОТОРЫЙ ПРИВЕЛ К ПРИЗНАНИЮ В FASHION-СРЕДЕ"
+msgstr ""
+
+#: templates/home.html:93
+msgid "УЗНАТЬ БОЛЬШЕ О НАС"
+msgstr ""
+
+#: templates/offer.html:23 templates/offer.html:28
+msgid "ДОГОВОР ОФЕРТЫ"
+msgstr ""
+
+#: templates/privacy_policy.html:20 templates/privacy_policy.html:25
+msgid "ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ"
+msgstr ""
+
+#: templates/prive_lab.html:14
+msgid ""
+"PRIVE Laboratory от Gabriel Yusubov — индивидуальный пошив одежды, примерка "
+"и консультации по материалам. Эксклюзивные услуги премиального уровня."
+msgstr ""
+
+#: templates/prive_lab.html:15
+msgid ""
+"Gabriel Yusubov, PRIVE Laboratory, индивидуальный пошив, пошив одежды, "
+"премиальный сервис, консультация по материалам, эксклюзив"
+msgstr ""
+
+#: templates/prive_lab.html:21 templates/prive_lab.html:28
+msgid "PRIVE Laboratory — индивидуальный пошив от Gabriel Yusubov"
+msgstr ""
+
+#: templates/prive_lab.html:22
+msgid ""
+"Услуги PRIVE Laboratory: индивидуальный пошив, примерка и консультация по "
+"выбору материалов. Эксклюзивность и внимание к деталям."
+msgstr ""
+
+#: templates/prive_lab.html:29
+msgid ""
+"PRIVE Laboratory: премиальный индивидуальный пошив одежды, примерка и "
+"консультации по материалам."
+msgstr ""
+
+#: templates/prive_lab.html:57
+msgid "Услуга премиального и индивидуального пошива под заказ"
+msgstr ""
+
+#: templates/prive_lab.html:68
+msgid ""
+"Творчество моей линии Prive laboratory имеет свое начало в пошиве одежды по "
+"индивидуальным меркам. Со временем мы перейдем к изготовлению других "
+"предметов, которые будут участвовать в уточнении вашего комфортного образа"
+msgstr ""
+
+#: templates/prive_lab.html:78
+msgid ""
+"Все, что мы выпускаем в <strong>Prive laboratory</strong>, создается "
+"совместно с вами и с учетом вашего видения. <br><br> Мы даем гарантию, что "
+"изготовленные <strong>изделия производятся в единственном экземпляре.</"
+"strong> Повторное воспроизведение вещи исключено, а также все заказы, "
+"полученные в рамках услуги индивидуального пошива, не будут представлены в "
+"качестве моделей, доступных для приобретения в нашем магазине, открытие "
+"которого вы также будете наблюдать в скором времени."
+msgstr ""
+
+#: templates/prive_lab.html:89
+msgid ""
+"Индивидуальный пошив изделия на заказ — это комплексный процесс, требующий "
+"особого внимания к деталям на каждом этапе. <br><br> Расскажем, как мы "
+"строим совместную работу с вами."
+msgstr ""
+
+#: templates/prive_lab.html:101
+msgid "ЭТАПЫ ВЗАИМОДЕЙСТВИЯ С КЛИЕНТОМ"
+msgstr ""
+
+#: templates/prive_lab.html:105
+msgid "СОГЛАСОВАНИЕ С КЛИЕНТОМ"
+msgstr ""
+
+#: templates/prive_lab.html:110
+msgid ""
+"На первом этапе дизайнер обсуждает с клиентом его пожелания: фасон, стиль, "
+"особенности фигуры и цель изделия. Выбираются подходящие ткани и фурнитура. "
+"На основе пожеланий клиента и предложений дизайнера создаётся эскиз. Это "
+"визуализация будущего изделия, где учитываются его общий вид, силуэт и "
+"основные элементы. Эскиз позволяет представить, каким будет конечный "
+"результат."
+msgstr ""
+
+#: templates/prive_lab.html:121
+msgid "СНЯТИЕ МЕРОК"
+msgstr ""
+
+#: templates/prive_lab.html:125
+msgid ""
+"Снятие точных мерок — важный этап, обеспечивающий идеальную посадку. Портной-"
+"закройщик учитывает все параметры фигуры клиента, и другие нюансы, чтобы "
+"учесть все особенности клиента."
+msgstr ""
+
+#: templates/prive_lab.html:131
+msgid "ПРОМЕЖУТОЧНЫЕ ПРИМЕРКИ"
+msgstr ""
+
+#: templates/prive_lab.html:135
+msgid ""
+"Клиент приглашается на промежуточные примерки для корректировки изделия. На "
+"первой примерке клиент надевает полуготовое изделие, и портной-закройщик "
+"вносит корректировки по посадке и длине. Самая главная задача — добиться "
+"идеального соответствия фигуре"
+msgstr ""
+
+#: templates/prive_lab.html:141
+msgid "ФИНАЛЬНАЯ ПРИМЕРКА"
+msgstr ""
+
+#: templates/prive_lab.html:145
+msgid ""
+"На финальной примерке клиент проверяет готовое изделие. При необходимости "
+"вносятся последние правки, после чего портной-закройщик завершает "
+"окончательную отделку"
+msgstr ""
+
+#: templates/prive_lab.html:151
+msgid "ПЕРЕДАЧА ИЗДЕЛИЯ ЗАКАЗЧИКУ"
+msgstr ""
+
+#: templates/prive_lab.html:155
+msgid ""
+"На этом этапе мы сообщаем клиенту о готовности изделия и договариваемся о "
+"способе получения изделия"
+msgstr ""
+
+#: templates/prive_lab.html:164
+msgid "ОСТАВИТЬ ЗАЯВКУ"
+msgstr ""
+
+#: templates/prive_lab.html:189
+msgid "Отправить"
+msgstr ""
+
+#: templates/refund_exchange.html:18
+msgid ""
+"Условия возврата и обмена товаров бренда Gabriel Yusubov: сроки, правила и "
+"гарантии качества."
+msgstr ""
+
+#: templates/refund_exchange.html:19
+msgid ""
+"Gabriel Yusubov, возврат, обмен, возврат товара, правила возврата, обмен "
+"одежды, гарантия качества"
+msgstr ""
+
+#: templates/refund_exchange.html:25 templates/refund_exchange.html:32
+msgid "Возврат и обмен — Gabriel Yusubov"
+msgstr ""
+
+#: templates/refund_exchange.html:26
+msgid ""
+"Информация о возврате и обмене товаров: сроки возврата, условия и гарантии "
+"бренда Gabriel Yusubov."
+msgstr ""
+
+#: templates/refund_exchange.html:33
+msgid ""
+"Правила возврата и обмена товаров Gabriel Yusubov: сроки, условия и гарантии."
+msgstr ""
+
+#: templates/refund_exchange.html:55
+msgid ""
+"У вас есть возможность вернуть изделие в том случае, если вещь сохранила "
+"товарный вид, потребительские свойства и фабричные ярлыки.<br /><br /> Важно "
+"понимать, что советы консультантов при выборе изделия носят рекомендательный "
+"характер, поэтому не могут послужить причиной возврата средств. Потребитель "
+"не вправе отказаться от товара надлежащего качества, имеющего индивидуально-"
+"определенные свойства, если указанный товар может быть использован "
+"исключительно приобретающим его потребителем. <br /><br /> Возврат может "
+"быть произведен в течение 7 дней, в соответствии с пунктом 21 Постановления "
+"Правительства РФ от 27.09.2007 N 612 «Об утверждении Правил продажи товаров "
+"дистанционным способом».<br /><br /> Интернет-магазин имеет право отказать в "
+"возврате в случаях обнаружения нарушений условий сохранения товарного вида. "
+"В таком случае все затраты на пересылку возврата возлагаются на потребителя. "
+"При приобретении товаров лицами, находящимися за пределами РФ, осуществление "
+"возврата временно невозможно, просим учесть это при оформлении заказов.<br /"
+"><br /> В случае, если доставленный покупателю товар оказался ненадлежащего "
+"качества вследствие производственного брака, покупатель вправе вернуть его, "
+"либо обменять на аналогичный товар надлежащего качества, при условии его "
+"наличия."
+msgstr ""
