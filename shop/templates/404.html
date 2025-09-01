@@ -2,33 +2,39 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}404 | Gabriel Yusubov{% endblock %}
+{% block title %}
+  404 | Gabriel Yusubov
+{% endblock %}
 
 {% block styles %}
-    <link rel="stylesheet" href="{% static 'css/404.css' %}">
+  <link rel="stylesheet" href="{% static 'css/404.css' %}" />
 {% endblock %}
-{% block meta %}<meta name="robots" content="noindex, nofollow">{% endblock %}
-
+{% block meta %}
+  <meta name="robots" content="noindex, nofollow" />
+{% endblock %}
 
 {% block content %}
     <div class="status-bar" role="navigation" aria-label="Статус-бар">
         <div class="sb-inner">
-            <img class="sb-logo" src="static/images/GY.svg" alt="GY">
+            <a href="{% url 'home' %}">
+                <img class="sb-logo" src="{% static 'images/GY.svg' %}" alt="GY">
+            </a>
             <span class="sb-dot" aria-hidden="true"></span>
-            <a class="sb-link" href="/">404</a>
+            <a class="sb-link" href="{% url 'buyer' %}">{% trans "404" %}</a>
         </div>
     </div>
 
-    <main>
-        <div class="background-status">
-            <h1>404</h1>
-        </div>
+  <main>
+    <div class="background-status">
+      <h1>404</h1>
+    </div>
 
-        <div class="page-info">
-            <p>{% trans "Такой страницы не существует!" %}</p>
+    <div class="page-info">
+      <p>
+        {% trans 'Такой страницы не существует!' %}
+      </p>
 
-            <a href="{% url 'home' %}">{% trans "ВЕРНУТЬСЯ НА ГЛАВНУЮ СТРАНИЦУ" %}</a>
-        </div>
-    </main>
-
-{% endblock content %}
+      <a href="{% url 'home' %}">{% trans 'ВЕРНУТЬСЯ НА ГЛАВНУЮ СТРАНИЦУ' %}</a>
+    </div>
+  </main>
+{% endblock %}

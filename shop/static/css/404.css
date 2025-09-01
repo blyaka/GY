@@ -4,7 +4,9 @@ main {
     align-items: center;
     min-height: 750px;
     position: relative;
+    overflow: hidden;
 }
+
 
 .background-status {
     position: absolute;
@@ -14,7 +16,7 @@ main {
     z-index: -10;
 }
 
-.background-status h1{
+.background-status h1 {
     font-size: 800px;
     font-weight: 500;
 }
@@ -39,5 +41,45 @@ main {
     text-decoration: none;
     background-color: black;
     padding: 10px 50px;
+}
 
+
+@media (max-width:767px) {
+
+    main {
+        min-height: 450px;
+    }
+
+    .background-status {
+        bottom: -120px;
+        left: -100px;
+    }
+
+    .background-status h1 {
+        font-size: 300px;
+    }
+
+    .page-info p {
+        font-size: 24px;
+    }
+
+    .page-info a {
+        font-size: 16px;
+    }
+
+
+}
+
+
+
+
+@media (min-width: 768px) and (max-width: 1350px) {
+
+    .background-status h1 {
+        font-size: 600px;
+    }
+
+    .background-status {
+        bottom: -240px;
+    }
 }

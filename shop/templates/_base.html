@@ -9,22 +9,40 @@
 <!DOCTYPE html>
 <html lang="{{ CURR|default:'ru' }}">
   <head>
-
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=103973609', 'ym');
-
-    ym(103973609, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/103973609" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
-
-
+    <!-- Consent-based Yandex.Metrika loader -->
+    <script>
+      window.loadMetrika = function () {
+        if (window._ym_loaded) return
+        ;(function (m, e, t, r, i, k, a) {
+          m[i] =
+            m[i] ||
+            function () {
+              ;(m[i].a = m[i].a || []).push(arguments)
+            }
+          m[i].l = 1 * new Date()
+          ;(k = e.createElement(t)), (a = e.getElementsByTagName(t)[0]), (k.async = 1), (k.src = r), a.parentNode.insertBefore(k, a)
+        })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym')
+      
+        ym(103973609, 'init', {
+          ssr: true,
+          webvisor: true,
+          clickmap: true,
+          ecommerce: 'dataLayer',
+          accurateTrackBounce: true,
+          trackLinks: true
+        })
+        window._ym_loaded = true
+      }
+      
+      if (localStorage.getItem('cookie_consent') === 'yes') {
+        window.loadMetrika()
+      }
+    </script>
+    <noscript>
+      <div>
+        <img src="https://mc.yandex.ru/watch/103973609" style="position:absolute; left:-9999px;" alt="" />
+      </div>
+    </noscript>
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -35,23 +53,22 @@
     </title>
 
     {% block canonical %}
-      <link rel="canonical" href="{% firstof canonical_url request.build_absolute_uri %}">
+      <link rel="canonical" href="{% firstof canonical_url request.build_absolute_uri %}" />
     {% endblock %}
 
     {% switch_language_url 'ru' as url_ru %}
     {% switch_language_url 'en' as url_en %}
-    <link rel="alternate" href="{{ url_ru }}" hreflang="ru">
-    <link rel="alternate" href="{{ url_en }}" hreflang="en">
-    <link rel="alternate" href="{% firstof canonical_url request.build_absolute_uri %}" hreflang="x-default">
+    <link rel="alternate" href="{{ url_ru }}" hreflang="ru" />
+    <link rel="alternate" href="{{ url_en }}" hreflang="en" />
+    <link rel="alternate" href="{% firstof canonical_url request.build_absolute_uri %}" hreflang="x-default" />
 
-
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicons/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicons/favicon-16x16.png' %}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicons/apple-touch-icon.png' %}">
-    <link rel="manifest" href="{% static 'favicons/site.webmanifest' %}">
-    <link rel="mask-icon" href="{% static 'favicons/safari-pinned-tab.svg' %}" color="#FFFFFF">
-    <meta name="msapplication-TileColor" content="#FFFFFF">
-    <meta name="theme-color" content="#FFFFFF">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicons/favicon-32x32.png' %}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicons/favicon-16x16.png' %}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicons/apple-touch-icon.png' %}" />
+    <link rel="manifest" href="{% static 'favicons/site.webmanifest' %}" />
+    <link rel="mask-icon" href="{% static 'favicons/safari-pinned-tab.svg' %}" color="#FFFFFF" />
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="theme-color" content="#FFFFFF" />
 
     <script type="application/ld+json">
       {
@@ -64,27 +81,34 @@
       }
     </script>
 
-
     {% block meta %}
-          <meta name="description" content="{% trans 'Авторский бренд: дизайн, пошив, капсульные релизы' %}.">
-          <meta name="keywords" content="{% trans 'Gabriel Yusubov, одежда, fashion, couture, магазин' %}">
-          <meta name="author" content="Gabriel Yusubov">
-          <meta name="robots" content="index, follow">
+      <meta name="description" content="{% trans 'Авторский бренд: дизайн, пошив, капсульные релизы' %}." />
+      <meta name="keywords" content="{% trans 'Gabriel Yusubov, одежда, fashion, couture, магазин' %}" />
+      <meta name="author" content="Gabriel Yusubov" />
+      <meta name="robots" content="index, follow" />
 
-          <meta property="og:type" content="website">
-          <meta property="og:site_name" content="Gabriel Yusubov">
-          <meta property="og:title" content="Gabriel Yusubov">
-          <meta property="og:description" content="{% trans 'Авторский бренд: дизайн, пошив, капсульные релизы' %}.">
-          <meta property="og:url" content="{% firstof canonical_url request.build_absolute_uri %}">
-          <meta property="og:image" content="{{ request.build_absolute_uri|cut:request.path }}{% static 'images/GY.png' %}">
-          <meta property="og:locale" content="{{ CURR|default:'ru' }}_{% if CURR == 'ru' %}RU{% else %}US{% endif %}">
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="Gabriel Yusubov" />
+      <meta property="og:title" content="Gabriel Yusubov" />
+      <meta property="og:description" content="{% trans 'Авторский бренд: дизайн, пошив, капсульные релизы' %}." />
+      <meta property="og:url" content="{% firstof canonical_url request.build_absolute_uri %}" />
+      <meta property="og:image" content="{{ request.build_absolute_uri|cut:request.path }}{% static 'images/GY.png' %}" />
+      <meta property="og:locale"
+        content="{{ CURR|default:'ru' }}_{% if CURR == 'ru' %}
+          
+          RU
 
-          <meta name="twitter:card" content="summary_large_image">
-          <meta name="twitter:title" content="Gabriel Yusubov">
-          <meta name="twitter:description" content="{% trans 'Авторский бренд: дизайн, пошив, капсульные релизы' %}.">
-          <meta name="twitter:image" content="{{ request.build_absolute_uri|cut:request.path }}{% static 'images/GY.png' %}">
-    {% endblock meta %}
+        {% else %}
+          
+          US
 
+        {% endif %}" />
+
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="Gabriel Yusubov" />
+      <meta name="twitter:description" content="{% trans 'Авторский бренд: дизайн, пошив, капсульные релизы' %}." />
+      <meta name="twitter:image" content="{{ request.build_absolute_uri|cut:request.path }}{% static 'images/GY.png' %}" />
+    {% endblock %}
 
     <link rel="stylesheet" href="{% static 'css/_base.css' %}" />
 
@@ -123,13 +147,13 @@
                 <line x1="0" y1="20" x2="25" y2="20" stroke="black" stroke-width="2" />
               </svg>
             </button>
-            {% with cur=CURR|lower|cut:"-"|cut:"_" %}
+            {% with cur=CURR|lower|cut:'-'|cut:'_' %}
               {% if cur == 'ru' %}
                 {% switch_language_url 'en' as target_url %}
-                  <a href="{{ target_url }}" class="off-lang">ENG</a>
+                <a href="{{ target_url }}" class="off-lang">ENG</a>
               {% else %}
                 {% switch_language_url 'ru' as target_url %}
-                  <a href="{{ target_url }}" class="off-lang">РУС</a>
+                <a href="{{ target_url }}" class="off-lang">РУС</a>
               {% endif %}
             {% endwith %}
           </div>
@@ -138,19 +162,19 @@
             {# <a href="#" data-sub="shop">{% trans "МАГАЗИН" %}</a> #}
             {# <a href="#" data-sub="collections">{% trans "КОЛЛЕКЦИИ" %}</a> #}
 
-            <a href="{% url 'prive-lab' %}" data-sub="prive-lab">{% trans "PRIVE Laboratory" %}</a>
-            <a href="{% url 'delivery' %}" data-sub="delivery">{% trans "ДОСТАВКА И ОПЛАТА" %}</a>
-            <a href="{% url 'refund' %}" data-sub="returns">{% trans "ВОЗВРАТ И ОБМЕН" %}</a>
-            <a href="{% url 'contacts' %}" data-sub="contacts">{% trans "КОНТАКТЫ" %}</a>
-            <a href="{% url 'blog' %}" data-sub="blog">{% trans "БЛОГ" %}</a>
-            <a href="#" data-sub="social">{% trans "НАШИ СОЦСЕТИ" %}</a>
-            <a href="#" data-sub="about">{% trans "О НАС" %}</a>
+            <a href="{% url 'prive-lab' %}" data-sub="prive-lab">{% trans 'PRIVE Laboratory' %}</a>
+            <a href="{% url 'delivery' %}" data-sub="delivery">{% trans 'ДОСТАВКА И ОПЛАТА' %}</a>
+            <a href="{% url 'refund' %}" data-sub="returns">{% trans 'ВОЗВРАТ И ОБМЕН' %}</a>
+            <a href="{% url 'contacts' %}" data-sub="contacts">{% trans 'КОНТАКТЫ' %}</a>
+            <a href="{% url 'blog' %}" data-sub="blog">{% trans 'БЛОГ' %}</a>
+            <a href="#" data-sub="social">{% trans 'НАШИ СОЦСЕТИ' %}</a>
+            <a href="#" data-sub="about">{% trans 'О НАС' %}</a>
           </nav>
 
           <div class="off-icons">
-            <!-- <img src="{% static 'icons/search.svg' %}" alt="Поиск" />
+            <!--   <img src="{% static 'icons/search.svg' %}" alt="Поиск" />
             <img src="{% static 'icons/bookmark-header.svg' %}" alt="Избранное" />
-            <img src="{% static 'icons/bag.svg' %}" alt="Корзина" /> -->
+            <img src="{% static 'icons/bag.svg' %}" alt="Корзина" />   -->
             <a href="{% url 'lk' %}"><img src="{% static 'icons/user.svg' %}" alt="Профиль" /></a>
           </div>
 
@@ -169,7 +193,7 @@
         </div>
 
         <!-- Шаблоны наполняемого контента -->
-        <!-- <template id="tpl-shop">
+        <!--   <template id="tpl-shop">
           <div class="off-sub-grid">
             <ul class="off-sub-list">
               <li>
@@ -190,44 +214,55 @@
             </ul>
             <a class="off-sub-all" href="{% url 'shop' %}">СМОТРЕТЬ ВСЕ</a>
           </div>
-        </template> -->
+        </template>   -->
 
         <template id="tpl-prive-lab">
           <div class="off-sub-text">
             <p>
-              <a href="{% url 'prive-lab' %}">{% trans "Индивидуальный пошив" %}</a>, {% trans "примерка, консультация по материалам." %}
+              <a href="{% url 'prive-lab' %}">{% trans 'Индивидуальный пошив' %}</a>,{% trans 'примерка, консультация по материалам.' %}
             </p>
-            <a class="off-sub-all" href="{% url 'prive-lab' %}">{% trans "Перейти в PRIVE Laboratory" %}</a>
+            <a class="off-sub-all" href="{% url 'prive-lab' %}">{% trans 'Перейти в PRIVE Laboratory' %}</a>
           </div>
         </template>
 
         <template id="tpl-delivery">
           <div class="off-sub-text">
-            <p>{% trans "Доставка по РФ: курьером и в пункты выдачи. Оплата: картой онлайн/при получении" %}.</p>
-            <a class="off-sub-all" href="{% url 'delivery' %}">{% trans "Подробнее" %}</a>
+            <p>
+              {% trans 'Доставка по РФ: курьером и в пункты выдачи. Оплата: картой онлайн/при получении' %}.
+            </p>
+            <a class="off-sub-all" href="{% url 'delivery' %}">{% trans 'Подробнее' %}</a>
           </div>
         </template>
 
         <template id="tpl-returns">
           <div class="off-sub-text">
-            <p>{% trans "Обмен и возврат в течение 7 дней. Полные условия по ссылке" %}.</p>
-            <a class="off-sub-all" href="{% url 'refund' %}">{% trans "Узнать условия" %}</a>
+            <p>
+              {% trans 'Обмен и возврат в течение 7 дней. Полные условия по ссылке' %}.
+            </p>
+            <a class="off-sub-all" href="{% url 'refund' %}">{% trans 'Узнать условия' %}</a>
           </div>
         </template>
 
         <template id="tpl-contacts">
           <div class="off-sub-text">
-            {% if s.email %}<p>E-mail: {{ s.email }}</p>{% endif %}
-            {% if s.phone %}<p>{% trans "Тел." %}: {{ s.phone|pretty_phone }}</p>{% endif %}
-            <a class="off-sub-all" href="{% url 'contacts' %}">{% trans "Все контакты" %}</a>
+            {% if s.email %}
+              <p>E-mail: {{ s.email }}</p>
+            {% endif %}
+            {% if s.phone %}
+              <p>
+                {% trans 'Тел.' %}: {{ s.phone|pretty_phone }}
+              </p>
+            {% endif %}
+            <a class="off-sub-all" href="{% url 'contacts' %}">{% trans 'Все контакты' %}</a>
           </div>
         </template>
 
-
         <template id="tpl-blog">
           <div class="off-sub-text">
-            <p>{% trans "Новости бренда, истории коллекций, съёмки" %}.</p>
-            <a class="off-sub-all" href="{% url 'blog' %}">{% trans "Читать блог" %}</a>
+            <p>
+              {% trans 'Новости бренда, истории коллекций, съёмки' %}.
+            </p>
+            <a class="off-sub-all" href="{% url 'blog' %}">{% trans 'Читать блог' %}</a>
           </div>
         </template>
 
@@ -236,35 +271,46 @@
           <div class="off-sub-grid">
             <ul class="off-sub-list">
               {% if s.instagram %}
-              <li><a href="{{ s.instagram }}" target="_blank" rel="noopener nofollow">INSTAGRAM *</a></li>
+                <li>
+                  <a href="{{ s.instagram }}" target="_blank" rel="noopener nofollow">INSTAGRAM *</a>
+                </li>
               {% endif %}
               {% if s.telegram %}
-              <li><a href="{{ s.telegram }}" target="_blank" rel="noopener nofollow">TELEGRAM</a></li>
+                <li>
+                  <a href="{{ s.telegram }}" target="_blank" rel="noopener nofollow">TELEGRAM</a>
+                </li>
               {% endif %}
               {% if s.vk %}
-              <li><a href="{{ s.vk }}" target="_blank" rel="noopener nofollow">VK</a></li>
+                <li>
+                  <a href="{{ s.vk }}" target="_blank" rel="noopener nofollow">VK</a>
+                </li>
               {% endif %}
               {% if s.tiktok %}
-              <li><a href="{{ s.tiktok }}" target="_blank" rel="noopener nofollow">TIKTOK</a></li>
+                <li>
+                  <a href="{{ s.tiktok }}" target="_blank" rel="noopener nofollow">TIKTOK</a>
+                </li>
               {% endif %}
               {% if s.youtube %}
-              <li><a href="{{ s.youtube }}" target="_blank" rel="noopener nofollow">YOUTUBE</a></li>
+                <li>
+                  <a href="{{ s.youtube }}" target="_blank" rel="noopener nofollow">YOUTUBE</a>
+                </li>
               {% endif %}
             </ul>
 
-            <p>*{% trans "проект Meta Platforms Inc., запрещена в РФ" %}</p>
+            <p>
+              *{% trans 'проект Meta Platforms Inc., запрещена в РФ' %}
+            </p>
           </div>
         </template>
-
-
 
         <template id="tpl-about">
           <div class="off-sub-text">
-            <p>Gabriel Yusubov — {% trans "авторский бренд: дизайн, пошив, капсульные релизы" %}.</p>
-            <a class="off-sub-all" href="{% url 'about' %}">{% trans "Подробнее о нас" %}</a>
+            <p>
+              Gabriel Yusubov —{% trans 'авторский бренд: дизайн, пошив, капсульные релизы' %}.
+            </p>
+            <a class="off-sub-all" href="{% url 'about' %}">{% trans 'Подробнее о нас' %}</a>
           </div>
         </template>
-
 
         <script>
           ;(() => {
@@ -349,31 +395,24 @@
       </script>
 
       <div class="logo">
-        <a href="{% url 'home' %}">
-          <img src="{% static 'images/GY_header_logo_black.svg' %}" alt="Gabriel Yusubov" class="logo-img" />
-        </a>
+        <a href="{% url 'home' %}"><img src="{% static 'images/GY_header_logo_black.svg' %}" alt="Gabriel Yusubov" class="logo-img" /></a>
       </div>
 
-      {% with cur=CURR|lower|cut:"-"|cut:"_" %}
-
-      <div class="lang-switch" id="langSwitch">
-        {% if cur == 'ru' %}
-          {% switch_language_url 'en' as target_url %}
-          <a href="{{ target_url }}">ENG</a>
-        {% else %}
-          {% switch_language_url 'ru' as target_url %}
-          <a href="{{ target_url }}">РУС</a>
-        {% endif %}
-      </div>
-
+      {% with cur=CURR|lower|cut:'-'|cut:'_' %}
+        <div class="lang-switch" id="langSwitch">
+          {% if cur == 'ru' %}
+            {% switch_language_url 'en' as target_url %}
+            <a href="{{ target_url }}">ENG</a>
+          {% else %}
+            {% switch_language_url 'ru' as target_url %}
+            <a href="{{ target_url }}">РУС</a>
+          {% endif %}
+        </div>
       {% endwith %}
     </header>
 
-
-
-
     <script src="{% url 'javascript-catalog' %}"></script>
-    
+
     {% block content %}
 
     {% endblock %}
@@ -381,27 +420,27 @@
     <footer class="site-footer">
       <div class="footer-blocks">
         <div class="footer-block-customer">
-          <h2><a href="{% url 'buyer' %}">{% trans "Покупателю" %}:</a></h2>
+          <h2><a href="{% url 'buyer' %}">{% trans 'Покупателю' %}:</a></h2>
 
           <div class="customer-links">
             {# <a href="{% url 'shop' %}">{% trans "Магазин" %}</a> #}
-            <a href="{% url 'prive-lab' %}">{% trans "PRIVE Laboratory" %}</a>
+            <a href="{% url 'prive-lab' %}">{% trans 'PRIVE Laboratory' %}</a>
             {# <a href="{% url 'favorites' %}">{% trans "Избранное" %}</a> #}
             {# <a href="">{% trans "Корзина" %}</a> #}
-            <a href="{% url 'lk' %}">{% trans "Личный кабинет" %}</a>
-            <a href="{% url 'refund' %}">{% trans "Возврат и обмен" %}</a>
-            <a href="{% url 'delivery' %}">{% trans "Доставка и оплата" %}</a>
-            <a href="{% url 'offer' %}">{% trans "Публичная оферта" %}</a>
-            <a href="{% url 'privacy' %}">{% trans "Политика конфиденциальности" %}</a>
+            <a href="{% url 'lk' %}">{% trans 'Личный кабинет' %}</a>
+            <a href="{% url 'refund' %}">{% trans 'Возврат и обмен' %}</a>
+            <a href="{% url 'delivery' %}">{% trans 'Доставка и оплата' %}</a>
+            <a href="{% url 'offer' %}">{% trans 'Публичная оферта' %}</a>
+            <a href="{% url 'privacy' %}">{% trans 'Политика конфиденциальности' %}</a>
           </div>
         </div>
 
         <div class="footer-block-about">
-          <h2><a href="{% url 'about' %}">{% trans "О нас" %}:</a></h2>
+          <h2><a href="{% url 'about' %}">{% trans 'О нас' %}:</a></h2>
 
           <div class="about-links">
-            <a href="{% url 'contacts' %}">{% trans "Контакты" %}</a>
-            <a href="{% url 'blog' %}">{% trans "Блог" %}</a>
+            <a href="{% url 'contacts' %}">{% trans 'Контакты' %}</a>
+            <a href="{% url 'blog' %}">{% trans 'Блог' %}</a>
           </div>
         </div>
       </div>
@@ -409,23 +448,35 @@
       <div class="footer-socials">
         <ul class="socials-list">
           <li>
-            {% if s.instagram %}<a class="social" href="{{ s.instagram }}" target="_blank" rel="noopener nofollow" aria-label="Instagram"><img src="{% static 'icons/instagram.svg' %}" alt="" /></a>{% endif %}
+            {% if s.instagram %}
+              <a class="social" href="{{ s.instagram }}" target="_blank" rel="noopener nofollow" aria-label="Instagram"><img src="{% static 'icons/instagram.svg' %}" alt="" /></a>
+            {% endif %}
           </li>
           <li>
-            {% if s.vk %}<a class="social" href="{{ s.vk }}" target="_blank" rel="noopener nofollow" aria-label="VK"><img src="{% static 'icons/vk.svg' %}" alt="" /></a>{% endif %}
+            {% if s.vk %}
+              <a class="social" href="{{ s.vk }}" target="_blank" rel="noopener nofollow" aria-label="VK"><img src="{% static 'icons/vk.svg' %}" alt="" /></a>
+            {% endif %}
           </li>
           <li>
-            {% if s.telegram %}<a class="social" href="{{ s.telegram }}" target="_blank" rel="noopener nofollow" aria-label="Telegram"><img src="{% static 'icons/telegram.svg' %}" alt="" /></a>{% endif %}
+            {% if s.telegram %}
+              <a class="social" href="{{ s.telegram }}" target="_blank" rel="noopener nofollow" aria-label="Telegram"><img src="{% static 'icons/telegram.svg' %}" alt="" /></a>
+            {% endif %}
           </li>
           <li>
-            {% if s.tiktok %}<a class="social" href="{{ s.tiktok }}" target="_blank" rel="noopener nofollow" aria-label="TikTok"><img src="{% static 'icons/tiktok.svg' %}" alt="" /></a>{% endif %}
+            {% if s.tiktok %}
+              <a class="social" href="{{ s.tiktok }}" target="_blank" rel="noopener nofollow" aria-label="TikTok"><img src="{% static 'icons/tiktok.svg' %}" alt="" /></a>
+            {% endif %}
           </li>
           <li>
-            {% if s.youtube %}<a class="social" href="{{ s.youtube }}" target="_blank" rel="noopener nofollow" aria-label="YouTube"><img src="{% static 'icons/youtube.svg' %}" alt="" /></a>{% endif %}
+            {% if s.youtube %}
+              <a class="social" href="{{ s.youtube }}" target="_blank" rel="noopener nofollow" aria-label="YouTube"><img src="{% static 'icons/youtube.svg' %}" alt="" /></a>
+            {% endif %}
           </li>
         </ul>
 
-        <p class="socials-note">*{% trans "проект Meta Platforms Inc., запрещена в РФ" %}</p>
+        <p class="socials-note">
+          *{% trans 'проект Meta Platforms Inc., запрещена в РФ' %}
+        </p>
       </div>
 
       <div class="footer-cp-name">
@@ -436,5 +487,39 @@
         <img src="{% static 'images/logo_overlay.svg' %}" alt="" />
       </div>
     </footer>
+
+    <!-- Cookie banner (GY) -->
+    <div id="cookieBanner" class="cookie-banner" aria-live="polite">
+      <div class="cookie-inner">
+        {% with cur=CURR|lower|cut:'-'|cut:'_' %}
+          {% if cur == 'ru' %}
+            <p>
+              Мы используем <a href="https://metrika.yandex.ru/" target="_blank" rel="noopener">Яндекс&nbsp;Метрику</a> и cookie, чтобы сайт был удобнее. Вы можете запретить cookie в настройках браузера. Подробнее — в <a href="{% url 'privacy' %}">Политике конфиденциальности</a>.
+            </p>
+            <button class="cookie-accept" type="button">Я согласен</button>
+          {% else %}
+            <p>
+              We use <a href="https://metrika.yandex.com/" target="_blank" rel="noopener">Yandex&nbsp;Metrica</a> and cookies to improve your experience. You can block cookies in your browser settings. Learn more in our <a href="{% url 'privacy' %}">Privacy Policy</a>.
+            </p>
+            <button class="cookie-accept" type="button">I agree</button>
+          {% endif %}
+        {% endwith %}
+      </div>
+    </div>
+
+    <script>
+  (function () {
+    var b = document.getElementById('cookieBanner');
+    if (!b) return;
+    var accepted = localStorage.getItem('cookie_consent') === 'yes';
+    if (!accepted) b.setAttribute('data-show', '1');
+    var btn = b.querySelector('.cookie-accept');
+    if (btn) btn.addEventListener('click', function () {
+      localStorage.setItem('cookie_consent', 'yes');
+      b.removeAttribute('data-show');
+      if (typeof window.loadMetrika === 'function') window.loadMetrika();
+    });
+  })();
+</script>
   </body>
 </html>
