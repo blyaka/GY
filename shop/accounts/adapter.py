@@ -13,8 +13,23 @@ from django.contrib.staticfiles import finders
 class CustomAccountAdapter(DefaultAccountAdapter):
 
     def get_user_display(self, user):
-        full = getattr(user, "full_name", None) or getattr(user, "get_full_name", lambda: "")()
-        return full or user.get_username()
+        try:
+            prof = user.profile
+        except Exception:
+            prof = None
+        if prof and prof.full_name:
+            return prof.full_name.strip()
+
+        if getattr(user, "full_name", None):
+            return user.full_name.strip()
+
+        if user.get_full_name():
+            return user.get_full_name().strip()
+
+        if user.email:
+            return user.email.strip()
+
+        return user.get_username()
     
     
     def _current_site(self, request):

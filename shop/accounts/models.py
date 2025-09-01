@@ -22,7 +22,7 @@ class Profile(models.Model):
         verbose_name_plural = 'Профили'
 
     def __str__(self):
-        return self.full_name or self.user.email
+        return self.full_name.strip() if self.full_name else (self.user.email or self.user.username)
     
     def is_favorite(self, product) -> bool:
         return Favorite.objects.filter(profile=self, product=product).exists()
