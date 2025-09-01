@@ -261,6 +261,24 @@ body {
     opacity: .75;
 }
 
+.auth-error-list {
+  color: #c00;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.auth-error-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.auth-error-list li {
+  margin-bottom: 5px;
+}
+
+
 
 /* мобильные */
 @media (max-width:767px) {

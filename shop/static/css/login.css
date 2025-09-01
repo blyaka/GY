@@ -268,6 +268,13 @@ body {
 }
 
 
+.auth-error {
+  color: #c00;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: 500;
+}
+
 
 
 /* мобильные */

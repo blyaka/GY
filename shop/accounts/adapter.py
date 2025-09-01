@@ -11,6 +11,12 @@ from django.contrib.staticfiles import finders
 
 
 class CustomAccountAdapter(DefaultAccountAdapter):
+
+    def get_user_display(self, user):
+        full = getattr(user, "full_name", None) or getattr(user, "get_full_name", lambda: "")()
+        return full or user.get_username()
+    
+    
     def _current_site(self, request):
         try:
             if request is not None:
@@ -29,6 +35,11 @@ class CustomAccountAdapter(DefaultAccountAdapter):
     def render_mail(self, template_prefix, email, context, headers=None):
         subj = render_to_string(f"{template_prefix}_subject.txt", context).strip()
         subj = self.format_email_subject(subj)
+
+        u = context.get("user")
+        if u and "user_display" not in context:
+            context["user_display"] = self.get_user_display(u)
+
         try:
             html = render_to_string(f"{template_prefix}_message.html", context)
         except TemplateDoesNotExist:
@@ -59,6 +70,7 @@ class CustomAccountAdapter(DefaultAccountAdapter):
             "user": user,
             "current_site": self._current_site(request),
             "activate_url": activate_url,
+            "user_display": self.get_user_display(user),
             "request": request,
         }
 

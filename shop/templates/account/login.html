@@ -27,6 +27,11 @@
       <div class="auth-wrap">
         <img class="auth-logo" src="{% static 'images/GY.svg' %}" alt="GY" />
         <h1 class="auth-title">Вход в личный кабинет</h1>
+        {% if form.errors %}
+          <div class="auth-error">
+            Неверные данные входа.
+          </div>
+        {% endif %}
 
         <form class="auth-form" method="post" action="{% url 'account_login' %}" novalidate>
           {% csrf_token %}
