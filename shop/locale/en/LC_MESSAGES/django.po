@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-01 20:53+0300\n"
+"POT-Creation-Date: 2025-09-01 23:20+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -71,60 +71,60 @@ msgstr "This page does not exist!"
 msgid "ВЕРНУТЬСЯ НА ГЛАВНУЮ СТРАНИЦУ"
 msgstr "RETURN TO THE HOMEPAGE"
 
-#: templates/_base.html:52 templates/_base.html:60 templates/_base.html:67
+#: templates/_base.html:69 templates/_base.html:77 templates/_base.html:84
 #: templates/home.html:18 templates/home.html:26 templates/home.html:33
 msgid "Авторский бренд: дизайн, пошив, капсульные релизы"
 msgstr "Author’s brand: design, tailoring, capsule releases"
 
-#: templates/_base.html:53 templates/home.html:19
+#: templates/_base.html:70 templates/home.html:19
 msgid "Gabriel Yusubov, одежда, fashion, couture, магазин"
 msgstr "Gabriel Yusubov, clothing, fashion, couture, store"
 
-#: templates/_base.html:124 templates/_base.html:371
+#: templates/_base.html:141 templates/_base.html:388
 msgid "PRIVE Laboratory"
 msgstr "PRIVE Laboratory"
 
-#: templates/_base.html:125 templates/buyer.html:70 templates/delivery.html:44
+#: templates/_base.html:142 templates/buyer.html:70 templates/delivery.html:44
 #: templates/delivery.html:49
 msgid "ДОСТАВКА И ОПЛАТА"
 msgstr "DELIVERY AND PAYMENT"
 
-#: templates/_base.html:126 templates/buyer.html:69 templates/buyer.html:97
+#: templates/_base.html:143 templates/buyer.html:69 templates/buyer.html:97
 #: templates/refund_exchange.html:44 templates/refund_exchange.html:49
 msgid "ВОЗВРАТ И ОБМЕН"
 msgstr "REFUND AND EXCHANGE"
 
-#: templates/_base.html:127 templates/contacts.html:44
+#: templates/_base.html:144 templates/contacts.html:44
 #: templates/contacts.html:50
 msgid "КОНТАКТЫ"
 msgstr "CONTACTS"
 
-#: templates/_base.html:128 templates/blog/blog.html:48
+#: templates/_base.html:145 templates/blog/blog.html:48
 #: templates/blog/blog_article_details.html:69
 msgid "БЛОГ"
 msgstr "BLOG"
 
-#: templates/_base.html:129
+#: templates/_base.html:146
 msgid "НАШИ СОЦСЕТИ"
 msgstr "OUR SOCIAL MEDIA"
 
-#: templates/_base.html:130 templates/about.html:46 templates/about.html:53
+#: templates/_base.html:147 templates/about.html:46 templates/about.html:53
 msgid "О НАС"
 msgstr "ABOUT US"
 
-#: templates/_base.html:181
+#: templates/_base.html:198
 msgid "Индивидуальный пошив"
 msgstr "Custom tailoring"
 
-#: templates/_base.html:181
+#: templates/_base.html:198
 msgid "примерка, консультация по материалам."
 msgstr "fitting, consultation on materials."
 
-#: templates/_base.html:183
+#: templates/_base.html:200
 msgid "Перейти в PRIVE Laboratory"
 msgstr "Go to PRIVE Laboratory"
 
-#: templates/_base.html:189
+#: templates/_base.html:206
 msgid ""
 "Доставка по РФ: курьером и в пункты выдачи. Оплата: картой онлайн/при "
 "получении"
@@ -132,79 +132,79 @@ msgstr ""
 "Delivery across Russia: by courier or to pick-up points. Payment: online "
 "card / upon receipt"
 
-#: templates/_base.html:190
+#: templates/_base.html:207
 msgid "Подробнее"
 msgstr "Learn more"
 
-#: templates/_base.html:196
+#: templates/_base.html:213
 msgid "Обмен и возврат в течение 7 дней. Полные условия по ссылке"
 msgstr "Exchange and return within 7 days. Full terms at the link"
 
-#: templates/_base.html:197
+#: templates/_base.html:214
 msgid "Узнать условия"
 msgstr "Check conditions"
 
-#: templates/_base.html:204
+#: templates/_base.html:221
 msgid "Тел."
 msgstr "Tel."
 
-#: templates/_base.html:205
+#: templates/_base.html:222
 msgid "Все контакты"
 msgstr "All contacts"
 
-#: templates/_base.html:212
+#: templates/_base.html:229
 msgid "Новости бренда, истории коллекций, съёмки"
 msgstr "Brand news, collection stories, shootings"
 
-#: templates/_base.html:213
+#: templates/_base.html:230
 msgid "Читать блог"
 msgstr "Read blog"
 
-#: templates/_base.html:238 templates/_base.html:411 templates/about.html:176
+#: templates/_base.html:255 templates/_base.html:428 templates/about.html:176
 msgid "проект Meta Platforms Inc., запрещена в РФ"
 msgstr "a project of Meta Platforms Inc., banned in Russia"
 
-#: templates/_base.html:246
+#: templates/_base.html:263
 msgid "авторский бренд: дизайн, пошив, капсульные релизы"
 msgstr "author’s brand: design, tailoring, capsule releases"
 
-#: templates/_base.html:247
+#: templates/_base.html:264
 msgid "Подробнее о нас"
 msgstr "More about us"
 
-#: templates/_base.html:367 templates/buyer.html:7
+#: templates/_base.html:384 templates/buyer.html:7
 msgid "Покупателю"
 msgstr "For customers"
 
-#: templates/_base.html:374 templates/account/lk.html:7
+#: templates/_base.html:391 templates/account/lk.html:7
 msgid "Личный кабинет"
 msgstr "Personal account"
 
-#: templates/_base.html:375 templates/refund_exchange.html:9
+#: templates/_base.html:392 templates/refund_exchange.html:9
 msgid "Возврат и обмен"
 msgstr "Refund and exchange"
 
-#: templates/_base.html:376 templates/delivery.html:8
+#: templates/_base.html:393 templates/delivery.html:8
 msgid "Доставка и оплата"
 msgstr "Delivery and payment"
 
-#: templates/_base.html:377 templates/offer.html:7
+#: templates/_base.html:394 templates/offer.html:7
 msgid "Публичная оферта"
 msgstr "Public offer"
 
-#: templates/_base.html:378 templates/privacy_policy.html:8
+#: templates/_base.html:395 templates/privacy_policy.html:8
 msgid "Политика конфиденциальности"
 msgstr "Privacy policy"
 
-#: templates/_base.html:383 templates/about.html:8
+#: templates/_base.html:400 templates/about.html:8
 msgid "О нас"
 msgstr "About us"
 
-#: templates/_base.html:386 templates/contacts.html:8
+#: templates/_base.html:403 templates/contacts.html:8
 msgid "Контакты"
 msgstr "Contacts"
 
-#: templates/_base.html:387 templates/blog/blog.html:5
+#: templates/_base.html:404 templates/blog/blog.html:5
 #: templates/blog/blog.html:56
 msgid "Блог"
 msgstr "Blog"
@@ -744,7 +744,9 @@ msgid "ТЕЛЕФОН"
 msgstr "PHONE"
 
 #: templates/contacts.html:62
-msgid "Ежедневно с XX:XX до ХХ:ХХ"
+#, fuzzy
+#| msgid "Ежедневно с XX:XX до ХХ:ХХ"
+msgid "Ежедневно с 11:00 до 20:00"
 msgstr "Daily from XX:XX to XX:XX"
 
 #: templates/contacts.html:68
@@ -756,8 +758,8 @@ msgid "ИП Юсубов Габриэль Яшарович"
 msgstr "Sole proprietor Yusubov Gabriel Yasharovich"
 
 #: templates/contacts.html:92
-msgid "ИНН XXXXXXXXXXXX"
-msgstr "TIN XXXXXXXXXXXX"
+msgid "ИНН 771983392928"
+msgstr ""
 
 #: templates/contacts.html:96
 msgid "ОРГН"
@@ -1142,3 +1144,6 @@ msgid ""
 "нами"
 msgstr ""
 "For consultation on product return and exchange issues, please contact us"
+
+#~ msgid "ИНН XXXXXXXXXXXX"
+#~ msgstr "TIN XXXXXXXXXXXX"
