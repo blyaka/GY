@@ -149,6 +149,7 @@
 .about-link-btn p {
     font-size: 24px;
     font-weight: 300;
+    flex-shrink: 0;
 }
 
 .about-link-btn img {
