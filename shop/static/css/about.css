@@ -246,11 +246,23 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Miama';
+    src: url('fonts/Miama-Regular.ttf') format('truetype');
+    font-weight: bold; /* Указываешь что это жирный вес */
+    font-style: normal;
+}
+
 .sign-note h2{
     font-family: 'Miama Nueva', sans-serif;
     font-weight: bold;
     font-size: 36px;
 }
+
+.sign-note h2 span{
+    font-family: 'Miama', sans-serif;
+}
+
 
 .socials-container {
     color: #000000;
