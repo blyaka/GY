@@ -82,16 +82,18 @@
     display: flex;
     flex-direction: row;
     gap: 60px;
+    align-items: center;
 }
 
 
 .quote-img {
     width: 450px;
+    min-width: 250px;
 }
 
 .quote-img img {
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
     object-fit: cover;
 }
 
@@ -232,34 +234,40 @@
 }
 
 @font-face {
-    font-family: 'Miama Nueva'; /* Называешь как хочешь */
-    src: url('fonts/ofont.ru_Miama\ Nueva.ttf') format('truetype'); /* Путь к файлу */
-    font-weight: normal; /* Если шрифт обычный */
-    font-style: normal; /* Если не курсив */
+    font-family: 'Miama Nueva';
+    /* Называешь как хочешь */
+    src: url('fonts/ofont.ru_Miama\ Nueva.ttf') format('truetype');
+    /* Путь к файлу */
+    font-weight: normal;
+    /* Если шрифт обычный */
+    font-style: normal;
+    /* Если не курсив */
 }
 
 /* Если есть еще жирная версия (bold), подключи ее отдельно */
 @font-face {
     font-family: 'Miama Nueva';
     src: url('fonts/ofont.ru_Miama\ Nueva.ttf') format('truetype');
-    font-weight: bold; /* Указываешь что это жирный вес */
+    font-weight: bold;
+    /* Указываешь что это жирный вес */
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Miama';
     src: url('fonts/Miama-Regular.ttf') format('truetype');
-    font-weight: bold; /* Указываешь что это жирный вес */
+    font-weight: bold;
+    /* Указываешь что это жирный вес */
     font-style: normal;
 }
 
-.sign-note h2{
+.sign-note h2 {
     font-family: 'Miama Nueva', sans-serif;
     font-weight: bold;
     font-size: 36px;
 }
 
-.sign-note h2 span{
+.sign-note h2 span {
     font-family: 'Miama', sans-serif;
 }
 
@@ -370,6 +378,7 @@
         display: flex;
         flex-direction: column;
         gap: 60px;
+        align-items: unset;
     }
 
     .quote-img {

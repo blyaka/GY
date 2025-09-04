@@ -95,11 +95,12 @@
 
 .quote-img {
     width: 450px;
+    min-width: 250px;
 }
 
 .quote-img img {
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
     object-fit: cover;
 }
 
