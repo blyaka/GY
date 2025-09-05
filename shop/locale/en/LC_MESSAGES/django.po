@@ -1022,7 +1022,7 @@ msgid ""
 msgstr ""
 "Taking precise measurements is an important step ensuring a perfect fit. The "
 "tailor considers all body parameters and nuances to capture every client’s "
-"feature"
+"feature."
 
 #: templates/prive_lab.html:131
 msgid "ПРОМЕЖУТОЧНЫЕ ПРИМЕРКИ"
@@ -1064,7 +1064,7 @@ msgid ""
 "способе получения изделия"
 msgstr ""
 "At this stage, we notify the client that the piece is ready and agree on the "
-"delivery method."
+"delivery method"
 
 #: templates/prive_lab.html:164
 msgid "ОСТАВИТЬ ЗАЯВКУ"
